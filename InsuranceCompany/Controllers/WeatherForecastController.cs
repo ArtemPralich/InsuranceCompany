@@ -1,4 +1,4 @@
-using InsuranceCompany.Infrastructure;
+//using InsuranceCompany.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsuranceCompany.Controllers
@@ -13,11 +13,10 @@ namespace InsuranceCompany.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IRepositoryManager _repositoryManager;
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepositoryManager repositoryManager)
+        //private readonly IRepositoryManager _repositoryManager;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
-            _repositoryManager = repositoryManager;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
@@ -27,7 +26,7 @@ namespace InsuranceCompany.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = _repositoryManager.Client.GetAll(false).FirstOrDefault()?.Id.ToString()
+                Summary = "123" //_repositoryManager.Client.GetAll(false).FirstOrDefault()?.Id.ToString()
             })
             .ToArray();
         }

@@ -7,9 +7,9 @@ public partial class Client
 {
     public Guid Id { get; set; }
 
-    public decimal? BasePayment { get; set; }
+    public string? Name { get; set; }
 
-    public decimal? UnitPayment { get; set; }
+    public string? Surname { get; set; }
 
     public bool? Gender { get; set; }
 

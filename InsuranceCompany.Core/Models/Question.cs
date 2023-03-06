@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InsuranceCompany.Core;
 
@@ -11,6 +12,7 @@ public partial class Question
 
     public bool? IsMandatory { get; set; }
 
+    [ForeignKey(nameof(QuestionType))]
     public Guid? QuestionTypeId { get; set; }
 
     public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();

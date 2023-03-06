@@ -145,3 +145,5 @@ CREATE TABLE InsuranceTypeSurvey(
 )
 
 DROP TABLE InsuranceTypeSurvey;
+
+Scaffold-DbContext "Server=(localdb)\MSSQLLocalDB;Database=InsuranceCompany;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer

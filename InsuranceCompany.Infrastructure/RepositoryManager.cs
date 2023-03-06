@@ -9,14 +9,14 @@ namespace InsuranceCompany.Infrastructure
 {
     public class RepositoryManager : IRepositoryManager
     {
-        private IGenericRepository _agentRepository;
-        private IGenericRepository _clientRepository;
+        private IGenericRepository<Agent> _agentRepository;
+        private IGenericRepository<Client> _clientRepository;
         private InsuranceCompanyContext _repositoryContext;
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }
-        public IGenericRepository Agent
+        public IGenericRepository<Agent> Agent
         {
             get
             {
@@ -25,7 +25,7 @@ namespace InsuranceCompany.Infrastructure
                 return _agentRepository;
             }
         }
-        public IGenericRepository Client
+        public IGenericRepository<Client> Client
         {
             get
             {

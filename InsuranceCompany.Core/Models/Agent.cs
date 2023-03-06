@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InsuranceCompany.Core;
 
@@ -15,6 +17,7 @@ public partial class Agent
 
     public DateTime? DateOfStart { get; set; }
 
+    [ForeignKey(nameof(Position))]
     public Guid? PositionId { get; set; }
 
     public virtual ICollection<InsuranceRequest> InsuranceRequests { get; } = new List<InsuranceRequest>();
