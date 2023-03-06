@@ -5,5 +5,6 @@ namespace InsuranceCompany.Infrastructure
     public interface IGenericRepository<T>
     {
         IEnumerable<T> GetAll(bool trackChanges);
+        void Create(T t);
     }
 }

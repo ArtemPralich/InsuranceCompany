@@ -18,5 +18,10 @@ namespace InsuranceCompany.Infrastructure
         {
             return FindAll(trackChanges).ToList();
         }
+        
+        void Create(T t)
+        {
+            base.Create(t);
+        }
     }
 }

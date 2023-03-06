@@ -1,5 +1,5 @@
 using InsuranceCompany.Core;
-//using InsuranceCompany.Infrastructure;
+using InsuranceCompany.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -10,7 +10,7 @@ builder.Services.AddDbContext<InsuranceCompanyContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"), b =>
     b.MigrationsAssembly("InsuranceCompany.Core")));
 
-//builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
