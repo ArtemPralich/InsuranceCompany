@@ -21,8 +21,8 @@ CREATE TABLE InsuranceRate(
 
 CREATE TABLE Client(	
 	Id UNIQUEIDENTIFIER  NOT NULL PRIMARY KEY,
-	BasePayment MONEY,
-	UnitPayment MONEY,
+	Name VARCHAR(255),
+	Surname VARCHAR(255),
 	Gender BIT, 
 	DateOfBirth DATETIME,
 )

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCompany", "InsuranceCompany\InsuranceCompany.csproj", "{19CE1AA5-2528-49AE-B6DD-6194CD9E871E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsuranceCompany", "InsuranceCompany\InsuranceCompany.csproj", "{19CE1AA5-2528-49AE-B6DD-6194CD9E871E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCompany.Core", "InsuranceCompany.Core\InsuranceCompany.Core.csproj", "{6539E322-1B49-4526-9AF2-7B42D82D4B06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsuranceCompany.Core", "InsuranceCompany.Core\InsuranceCompany.Core.csproj", "{6539E322-1B49-4526-9AF2-7B42D82D4B06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCompany.Shared", "InsuranceCompany.Shared\InsuranceCompany.Shared.csproj", "{AEB3C6DA-0E26-41E1-9386-3A26071B9AEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsuranceCompany.Shared", "InsuranceCompany.Shared\InsuranceCompany.Shared.csproj", "{AEB3C6DA-0E26-41E1-9386-3A26071B9AEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCompany.Infrastructure", "InsuranceCompany.Infrastructure\InsuranceCompany.Infrastructure.csproj", "{0DC3E658-8D06-43B7-82C3-9E564A2BBDBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsuranceCompany.Infrastructure", "InsuranceCompany.Infrastructure\InsuranceCompany.Infrastructure.csproj", "{0DC3E658-8D06-43B7-82C3-9E564A2BBDBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsuranceCompany.Cqrs", "InsuranceCompany.Cqrs\InsuranceCompany.Cqrs.csproj", "{04A35EB1-6A2A-4774-9D10-E57CA18CAEB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0DC3E658-8D06-43B7-82C3-9E564A2BBDBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DC3E658-8D06-43B7-82C3-9E564A2BBDBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DC3E658-8D06-43B7-82C3-9E564A2BBDBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04A35EB1-6A2A-4774-9D10-E57CA18CAEB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A35EB1-6A2A-4774-9D10-E57CA18CAEB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A35EB1-6A2A-4774-9D10-E57CA18CAEB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A35EB1-6A2A-4774-9D10-E57CA18CAEB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
