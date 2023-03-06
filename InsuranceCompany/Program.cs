@@ -1,5 +1,7 @@
 using InsuranceCompany.Core;
+using InsuranceCompany.Core.Models;
 using InsuranceCompany.Infrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -9,6 +11,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<InsuranceCompanyContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"), b =>
     b.MigrationsAssembly("InsuranceCompany.Core")));
+
+builder.Services.AddAuthentication();
+var builder1 = builder.Services.AddIdentityCore<User>(o =>
+{
+    o.Password.RequireDigit = true;
+    o.Password.RequireLowercase = false;
+    o.Password.RequireUppercase = false;
+    o.Password.RequireNonAlphanumeric = false;
+    o.Password.RequiredLength = 10;
+    o.User.RequireUniqueEmail = true;
+});
+
+builder1 = new IdentityBuilder(builder1.UserType, typeof(IdentityRole), builder.Services);
+builder1.AddEntityFrameworkStores<InsuranceCompanyContext>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddControllers();
@@ -27,8 +44,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+

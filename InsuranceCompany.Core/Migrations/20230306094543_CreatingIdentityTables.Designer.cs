@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230306094543_CreatingIdentityTables")]
+    partial class CreatingIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -541,29 +544,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "855ebd85-a883-4d7a-bce0-f8c81327f180",
-                            ConcurrencyStamp = "c67add17-69b8-41ff-ae07-dbc1f2a46569",
-                            Name = "Agent",
-                            NormalizedName = "AGENT"
-                        },
-                        new
-                        {
-                            Id = "21f4b85a-2c18-4088-8101-f8ec6faeb8e4",
-                            ConcurrencyStamp = "6eac07e4-9bd7-4c14-8320-35c8635140d5",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "f7837fbd-7e0d-46e5-aa8e-21435cc4d702",
-                            ConcurrencyStamp = "b961a22f-b8d3-4fd9-b96e-621755209c2b",
-                            Name = "Client",
-                            NormalizedName = "CLIENT"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

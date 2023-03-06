@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using InsuranceCompany.Core.Configuration;
+using InsuranceCompany.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace InsuranceCompany.Core;
 
-public partial class InsuranceCompanyContext : DbContext
+public partial class InsuranceCompanyContext : IdentityDbContext<User>
 {
     public InsuranceCompanyContext()
     {
@@ -58,6 +59,9 @@ public partial class InsuranceCompanyContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
+
         modelBuilder.Entity<Agent>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Agent__3214EC075B5E885F");
