@@ -1,4 +1,5 @@
 ﻿using InsuranceCompany.Core.Models;
+using InsuranceCompany.Infrastructure;
 using InsuranceCompany.Shared.ModelDto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -11,9 +12,11 @@ namespace InsuranceCompany.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
-        public AuthenticationController(UserManager<User> userManager)
+        private readonly IAuthenticationManager _authManager;
+        public AuthenticationController(UserManager<User> userManager, IAuthenticationManager authManager)
         {
             _userManager = userManager;
+            _authManager = authManager;
         }
 
         [HttpPost]
@@ -39,5 +42,16 @@ namespace InsuranceCompany.Controllers
             await _userManager.AddToRolesAsync(user, userForRegistration.Roles);
             return StatusCode(201);
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        {
+            if (!await _authManager.ValidateUser(user))
+            {
+                return Unauthorized();
+            }
+            return Ok(new { Token = await _authManager.CreateToken() });
+        }
+
     }
 }

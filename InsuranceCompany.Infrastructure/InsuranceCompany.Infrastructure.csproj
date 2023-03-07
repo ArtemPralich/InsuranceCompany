@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\InsuranceCompany.Core\InsuranceCompany.Core.csproj" />
+    <ProjectReference Include="..\InsuranceCompany.Shared\InsuranceCompany.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,13 @@
 using InsuranceCompany.Core;
 using InsuranceCompany.Core.Models;
 using InsuranceCompany.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,28 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<InsuranceCompanyContext>(opts =>
     opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"), b =>
     b.MigrationsAssembly("InsuranceCompany.Core")));
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = "aaaaaaaaaaaaaaaa";
+
+builder.Services.AddAuthentication(opt => {
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+ .AddJwtBearer(options =>
+ {
+     options.TokenValidationParameters = new TokenValidationParameters
+     {
+         ValidateIssuer = true,
+         ValidateAudience = true,
+         ValidateLifetime = true,
+         ValidateIssuerSigningKey = true,
+         ValidIssuer = jwtSettings.GetSection("validIssuer").Value,
+         ValidAudience = jwtSettings.GetSection("validAudience").Value,
+         IssuerSigningKey = new
+    SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+     };
+ });
 
 builder.Services.AddAuthentication();
 var builder1 = builder.Services.AddIdentityCore<User>(o =>
@@ -28,10 +54,38 @@ builder1.AddEntityFrameworkStores<InsuranceCompanyContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(s =>
+{
+    s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Place to add JWT with Bearer",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                    Name = "Bearer",
+                },
+            new List<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
