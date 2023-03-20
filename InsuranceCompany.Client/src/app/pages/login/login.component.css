@@ -24,6 +24,7 @@
   input.example-right-align {
     -moz-appearance: textfield;
   }
+
   .example-button-row button,
 .example-button-row a {
   margin-right: 8px;
@@ -32,9 +33,3 @@
 .example-disabled {
   display: inline-block;
 }
-
-.mat-button.primary {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
