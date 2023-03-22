@@ -1,14 +1,70 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Email</mat-label>
-    <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
-    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-</form>
+<div class="header">
+  <div class="container-line">
+    <div class="container">
+      <div class="header-line">
 
-<router-outlet></router-outlet>
+        <div class="menu">
+          <a class="menu-item" href="@">ГЛАВНАЯ</a>
+          <a class="menu-item" href="@">ГЛАВНАЯ2</a>
+          <a class="menu-item" href="@">ГЛАВНАЯ3</a>
+          <a class="menu-item" href="@">ГЛАВНАЯ4</a>
+        </div>
+        <button mat-raised-button>Basic</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="header-down container">
+    <div class="header-title">
+      Health
+      <div class="header-subtitle">
+          Страховая компания
+      </div>
+      <div class="text-down">
+        Мы - страховая компания, которая предлагает надежную защиту для вас и ваших близких. С нами ваше будущее в надежных руках!
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="container">
+    <div class="cards-container">
+      <div class="card">
+        <div class="card-image">
+          <img class="card-img" width="100" height="100" src="v1033-bb-075.jpg">
+        </div>
+        <div class="card-title">
+          Индивидуальная
+        </div>
+        <div class="card-description">
+          Что-то очень интересное
+        </div>
+      </div>
+  
+      <div class="card">
+        <div class="card-image">
+          <img class="card-img" src="">
+        </div>
+        <div class="card-title">
+          Ctvtqyfz
+        </div>
+        <div class="card-description">
+          Что-то очень интересное
+        </div>
+      </div>
+  
+      <div class="card">
+        <div class="card-image">
+          <img class="card-img" src="pngwing.com.png">
+        </div>
+        <div class="card-title">
+          Индивидуальная
+        </div>
+        <div class="card-description">
+          Что-то очень интересное
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
