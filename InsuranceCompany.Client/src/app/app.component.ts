@@ -10,6 +10,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/form
 
 
 export class AppComponent {
+  hide = true;
   title = 'InsuranceCompany.Client';
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 }
