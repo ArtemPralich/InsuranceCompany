@@ -9,7 +9,7 @@
 } 
 
 .header {
-    background: url(pictures/back.jpg) no-repeat center center;
+    background: url(src/assets/pictures/back.jpg) no-repeat center center;
     background-size: cover;
     height: 100vh; 
     /*background-repeat: no-repeat;
@@ -71,15 +71,23 @@
     color: #fff;
     font-size: 18px;
     margin-top: 60px;
+    font-family: 'Open Sans', sans-serif;     
 }
 
 .cards-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
+    margin-top: 20px;
+}
+
+.card-info {
+    margin-top: 20px;
+    font-size: 40px;
+    font-weight: 100;
 }
 
 .card {
-    width: 30%;
+    width: 31%;
     box-shadow: 10px 10px 40px 20px #0000001A;
 }
 
@@ -88,12 +96,24 @@
     justify-content: center;
 }
 
+.card-img {
+    width: 100px;
+    height: auto;
+    margin-top: 30px;
+}
+
 .card-title {
     display: flex;
     justify-content: center;
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 .card-description {
     display: flex;
     justify-content: center;
+    text-align: center;
+    margin: 30px 40px 30px 40px;
+    font-size: 16px;
 } 
