@@ -2,6 +2,7 @@ using InsuranceCompany.Core;
 using InsuranceCompany.Core.Models;
 using InsuranceCompany.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -53,10 +54,21 @@ builder1 = new IdentityBuilder(builder1.UserType, typeof(IdentityRole), builder.
 builder1.AddEntityFrameworkStores<InsuranceCompanyContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("*", "*")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 builder.Services.AddScoped<IAuthenticationManager, AuthenticationManager>();
-
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(Program));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(s =>
@@ -88,6 +100,14 @@ builder.Services.AddSwaggerGen(s =>
 });
 
 var app = builder.Build();
+
+app.UseCors(builder =>
+{
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

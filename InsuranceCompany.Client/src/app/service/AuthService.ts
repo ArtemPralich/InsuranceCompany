@@ -44,7 +44,7 @@ export class AuthService {
           "Access-Control-Allow-Methods": "GET, PATCH, PUT, POST, DELETE, OPTIONS"
          
         });
-      return this.http.post<string>(`https://localhost:5001/Authentication/login`, 
+      return this.http.post<string>(`https://localhost:7046/api/authentication/login`, 
           JSON.stringify({
               userName: (<HTMLInputElement>document.getElementById("username")).value,
               password: (<HTMLInputElement>document.getElementById("password")).value
@@ -52,7 +52,7 @@ export class AuthService {
 
     }
     register(user: any):Observable<HttpResponse<string>>{
-      return this.http.post<string>(`https://localhost:5001/Authentication`, user , { observe: 'response'});
+      return this.http.post<string>(`https://localhost:7046/api/authentication/`, user , { observe: 'response'});
       
     }    
 }

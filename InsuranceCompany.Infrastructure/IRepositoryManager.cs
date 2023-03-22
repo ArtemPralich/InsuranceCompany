@@ -1,4 +1,5 @@
 ﻿using InsuranceCompany.Core;
+using InsuranceCompany.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace InsuranceCompany.Infrastructure
     {
         void Save();
         IGenericRepository<Agent> Agent { get; }
-        IGenericRepository<Client> Client { get; }
+        ClientRepository Client { get; }
     }
 }

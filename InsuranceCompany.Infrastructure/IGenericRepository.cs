@@ -6,5 +6,7 @@ namespace InsuranceCompany.Infrastructure
     {
         IEnumerable<T> GetAll(bool trackChanges);
         void Create(T t);
+        void Update(T t);
+        void Delete(T t);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using InsuranceCompany.Core;
+using InsuranceCompany.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace InsuranceCompany.Infrastructure
     public class RepositoryManager : IRepositoryManager
     {
         private IGenericRepository<Agent> _agentRepository;
-        private IGenericRepository<Client> _clientRepository;
+        private ClientRepository _clientRepository;
         private InsuranceCompanyContext _repositoryContext;
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
@@ -25,12 +26,12 @@ namespace InsuranceCompany.Infrastructure
                 return _agentRepository;
             }
         }
-        public IGenericRepository<Client> Client
+        public ClientRepository Client
         {
             get
             {
                 if (_clientRepository == null)
-                    _clientRepository = new GenericRepository<Client>(_repositoryContext);
+                    _clientRepository = new ClientRepository(_repositoryContext);
                 return _clientRepository;
             }
         }
