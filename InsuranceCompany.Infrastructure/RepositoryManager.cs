@@ -13,8 +13,11 @@ namespace InsuranceCompany.Infrastructure
         private IGenericRepository<Agent> _agentRepository;
         private ClientRepository _clientRepository;
         private InsuranceRequestRepository _insuranceRequest;
+        private InsuranceRateRepository _insuranceRateRepository;
 
         private InsuranceCompanyContext _repositoryContext;
+        private QuestionRepository _questionRepository;
+
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
@@ -45,6 +48,26 @@ namespace InsuranceCompany.Infrastructure
                 if (_insuranceRequest == null)
                     _insuranceRequest = new InsuranceRequestRepository(_repositoryContext);
                 return _insuranceRequest;
+            }
+        }
+
+        public InsuranceRateRepository InsuranceRate
+        {
+            get
+            {
+                if (_insuranceRateRepository == null)
+                    _insuranceRateRepository = new InsuranceRateRepository(_repositoryContext);
+                return _insuranceRateRepository;
+            }
+        }
+        
+        public QuestionRepository Question 
+        {
+            get
+            {
+                if (_questionRepository == null)
+                    _questionRepository = new QuestionRepository(_repositoryContext);
+                return _questionRepository;
             }
         }
 

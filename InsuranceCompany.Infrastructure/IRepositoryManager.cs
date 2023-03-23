@@ -14,5 +14,7 @@ namespace InsuranceCompany.Infrastructure
         IGenericRepository<Agent> Agent { get; }
         ClientRepository Client { get; }
         InsuranceRequestRepository InsuranceRequest { get; }
+        InsuranceRateRepository InsuranceRate { get; }
+        QuestionRepository Question { get; }
     }
 }

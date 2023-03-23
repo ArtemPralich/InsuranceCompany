@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/service/AuthService';
+import { ClientService } from 'src/app/service/ClientService';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ActivatedRoute, Router} from '@angular/router';
+import { Client } from 'src/app/models/Client';
+
 
 @Component({
   selector: 'app-login',
@@ -10,12 +13,14 @@ import { ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  clients: Client[] = [];
   hide = true;
   title = 'InsuranceCompany.Client';
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   public statusAuth: boolean = true;
 
-  constructor(private http:HttpClient, private router: Router, public auth: AuthService){
+  constructor(private http:HttpClient, private router: Router, public auth: AuthService, 
+    public clientService: ClientService){
       
   }
   login(){
@@ -35,6 +40,16 @@ export class LoginComponent {
     }, error =>{
         this.statusAuth = false;
     });
+    
     (<HTMLInputElement>document.getElementById("password")).value = "";
-}    
+  }    
+  downloadFile(){
+    this.auth.downloadFile();
+  }
+
+  GetClients(){
+    this.clientService.GetAllClients().subscribe(res => {
+      this.clients = res;
+    });;
+  }
 }

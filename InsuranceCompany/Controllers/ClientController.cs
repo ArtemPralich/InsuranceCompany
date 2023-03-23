@@ -1,6 +1,7 @@
 //using InsuranceCompany.Infrastructure;
 using InsuranceCompany.Core;
 using InsuranceCompany.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsuranceCompany.Controllers
@@ -24,7 +25,7 @@ namespace InsuranceCompany.Controllers
             return Ok(clients);
         }
 
-        [HttpPost(Name = "CreateClient")]
+        [HttpPost(Name = "CreateClient"), Authorize]
         public IActionResult Create(Client client)
         {
             client.Id = Guid.NewGuid();

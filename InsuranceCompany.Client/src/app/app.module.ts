@@ -13,7 +13,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { MainComponent } from './pages/main/main.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthService } from './service/AuthService';
+import { ClientService } from './service/ClientService';
 import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     HttpClientModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    ClientService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

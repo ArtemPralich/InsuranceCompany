@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
-
+import { saveAs } from 'file-saver';
 
 @Injectable()
 export class AuthService {
@@ -54,5 +54,13 @@ export class AuthService {
     register(user: any):Observable<HttpResponse<string>>{
       return this.http.post<string>(`https://localhost:7046/api/authentication/`, user , { observe: 'response'});
       
-    }    
+    }  
+    
+    downloadFile() {
+        const url = 'https://localhost:7046/Document/GetPDF/'; // Replace with your MVC controller URL
+        this.http.get(url, { responseType: 'blob' }).subscribe((blob: Blob) => {
+          const filename = 'file.pdf';
+          saveAs(blob, filename);
+        });
+      }
 }
