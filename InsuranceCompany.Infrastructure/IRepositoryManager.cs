@@ -13,5 +13,6 @@ namespace InsuranceCompany.Infrastructure
         void Save();
         IGenericRepository<Agent> Agent { get; }
         ClientRepository Client { get; }
+        InsuranceRequestRepository InsuranceRequest { get; }
     }
 }

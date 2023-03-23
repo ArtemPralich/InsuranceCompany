@@ -1,4 +1,7 @@
-﻿using InsuranceCompany.Infrastructure;
+﻿using AutoMapper;
+using InsuranceCompany.Core;
+using InsuranceCompany.Infrastructure;
+using InsuranceCompany.Shared.ModelDto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,17 +13,55 @@ namespace InsuranceCompany.Controllers
     {
         private readonly ILogger<InsuranceRequestController> _logger;
         private readonly IRepositoryManager _repositoryManager;
-        public InsuranceRequestController(ILogger<InsuranceRequestController> logger, IRepositoryManager repositoryManager)
+        private readonly IMapper _mapper;
+
+        public InsuranceRequestController(ILogger<InsuranceRequestController> logger, IRepositoryManager repositoryManager, 
+            IMapper mapper)
         {
             _logger = logger;
             _repositoryManager = repositoryManager;
+            _mapper = mapper;
         }
-        
+
         [HttpGet(Name = "GetInsuranceRequest")]
         public IActionResult Get()
         {
-            var clients = _repositoryManager.Client.GetAll(false).ToList();
-            return Ok(clients);
+            var insuranceRequests = _repositoryManager.InsuranceRequest.GetAll(false);
+            var insuranceRequestsDto = _mapper.Map<List<InsuranceRequestDto>>(insuranceRequests);
+            return Ok(insuranceRequestsDto);
+        }
+
+        [HttpPost(Name = "CreateInsuranceRequest")]
+        public IActionResult Create(InsuranceRequest insuranceRequest)
+        {
+            insuranceRequest.Id = Guid.NewGuid();
+            _repositoryManager.InsuranceRequest.Create(insuranceRequest);
+            _repositoryManager.Save();
+
+            return NoContent();
+        }
+
+        [HttpPut(Name = "UpdateInsuranceRequest")]
+        public IActionResult Update(InsuranceRequest insuranceRequest)
+        {
+            _repositoryManager.InsuranceRequest.Update(insuranceRequest);
+            _repositoryManager.Save();
+            return NoContent();
+        }
+
+        [HttpDelete(Name = "DeleteInsuranceRequest")]
+        public IActionResult Delete(Guid insuranceRequestId)
+        {
+            var insuranceRequest = _repositoryManager.InsuranceRequest.GetById(insuranceRequestId, true);
+
+            if (insuranceRequest == null)
+            {
+                return BadRequest();
+            }
+
+            _repositoryManager.InsuranceRequest.Delete(insuranceRequest);
+            _repositoryManager.Save();
+            return NoContent();
         }
     }
 }
