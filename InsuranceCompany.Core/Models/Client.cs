@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InsuranceCompany.Core.Models;
+using System;
 using System.Collections.Generic;
 
 namespace InsuranceCompany.Core;
@@ -16,6 +17,6 @@ public partial class Client
     public DateTime? DateOfBirth { get; set; }
 
     public virtual ICollection<ClientaChild> ClientaChildren { get; } = new List<ClientaChild>();
-
+    public virtual ICollection<InsuredPerson> InsuredPersons { get; } = new List<InsuredPerson>();
     public virtual ICollection<PositionClient> PositionClients { get; } = new List<PositionClient>();
 }

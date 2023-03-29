@@ -16,5 +16,6 @@ namespace InsuranceCompany.Infrastructure
         InsuranceRequestRepository InsuranceRequest { get; }
         InsuranceRateRepository InsuranceRate { get; }
         QuestionRepository Question { get; }
+        InsuranceStatusRepository InsuranceStatus { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InsuranceCompany.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,6 +25,7 @@ public partial class InsuranceRequest
     public virtual Agent? Agent { get; set; }
 
     public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
+    public virtual ICollection<InsuredPerson> InsuredPersons { get; } = new List<InsuredPerson>();
 
     public virtual InsuranceRate? InsuranceRate { get; set; }
 

@@ -17,6 +17,7 @@ namespace InsuranceCompany.Infrastructure
 
         private InsuranceCompanyContext _repositoryContext;
         private QuestionRepository _questionRepository;
+        private InsuranceStatusRepository _insuranceStatusRepositoryRepository;
 
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
@@ -68,6 +69,16 @@ namespace InsuranceCompany.Infrastructure
                 if (_questionRepository == null)
                     _questionRepository = new QuestionRepository(_repositoryContext);
                 return _questionRepository;
+            }
+        }
+
+        public InsuranceStatusRepository InsuranceStatus
+        {
+            get
+            {
+                if (_insuranceStatusRepositoryRepository == null)
+                    _insuranceStatusRepositoryRepository = new InsuranceStatusRepository(_repositoryContext);
+                return _insuranceStatusRepositoryRepository;
             }
         }
 

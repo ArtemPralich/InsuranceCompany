@@ -1,4 +1,5 @@
 ﻿using InsuranceCompany.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace InsuranceCompany.Infrastructure.Repositories
 
         public IEnumerable<InsuranceRequest> GetAll(bool trackChanges)
         {
-            return FindAll(trackChanges).ToList();
+            return FindAll(trackChanges).Include(i => i.InsuranceStatus).ToList();
         }
 
         public InsuranceRequest GetById(Guid Id, bool trackChanges)

@@ -35,6 +35,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
     public virtual DbSet<InsuranceStatus> InsuranceStatuses { get; set; }
 
     public virtual DbSet<InsuranceSurvey> InsuranceSurveys { get; set; }
+    public virtual DbSet<InsuredPerson> InsuredPersons { get; set; }
 
     public virtual DbSet<InsuranceTypeSurvey> InsuranceTypeSurveys { get; set; }
 
@@ -55,7 +56,8 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
     public virtual DbSet<TypeRequest> TypeRequests { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-         => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany;Trusted_Connection=True;");
+         => optionsBuilder
+        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany;Trusted_Connection=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
