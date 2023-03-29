@@ -1,3 +1,6 @@
+import { InsuranceStatus } from 'src/app/models/InsuranceStatus';
+import { Client } from 'src/app/models/Client';
+
 export class InsuranceRequest {
     id : string;
     dateOfStart : Date;
@@ -5,22 +8,24 @@ export class InsuranceRequest {
     agentId : string;
     insuranceRateId : string;
     insuranceStatusId : string;
-
+    mainClient : Client;
+    insuranceStatus: InsuranceStatus;
     // public virtual Agent? Agent { get; set; }
 
     // public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
 
     // public virtual InsuranceRate? InsuranceRate { get; set; }
 
-    // public virtual InsuranceStatus? InsuranceStatus { get; set; }
-
-  
-    constructor(id: string, dateOfStart: Date, dateOfEnd: Date, agentId: string, insuranceRateId: string, insuranceStatusId: string) {
+    constructor(id: string, dateOfStart: Date, dateOfEnd: Date, agentId: string, 
+        insuranceRateId: string, insuranceStatusId: string, insuranceStatus: InsuranceStatus, mainClient : Client) 
+    {
         this.id = id;
         this.dateOfStart = dateOfStart;
         this.dateOfEnd = dateOfEnd;
         this.agentId = agentId;
         this.insuranceRateId = insuranceRateId;
         this.insuranceStatusId = insuranceStatusId;
+        this.insuranceStatus = insuranceStatus;
+        this.mainClient = mainClient;
     }
-  }
+}

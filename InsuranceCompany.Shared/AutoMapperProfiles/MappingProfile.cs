@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using InsuranceCompany.Core;
+using InsuranceCompany.Core.Models;
 using InsuranceCompany.Shared.ModelDto;
 
 namespace InsuranceCompany.Shared.AutoMapperProfiles
@@ -10,6 +11,29 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
         {
             CreateMap<InsuranceRequest, InsuranceRequestDto>();
 
+            CreateMap<ClientDto, Client>();
+            CreateMap<ClientDto, Client>().ReverseMap();
+
+            CreateMap<InsuranceStatus, InsuranceStatusDto>();
+            CreateMap<InsuranceStatus, InsuranceStatusDto>().ReverseMap();
+
+
+            CreateMap<InsuredPersonDto, InsuredPerson>()
+                .ForMember(dest => dest.Client, opt => opt.MapFrom(src => src.Client));
+            CreateMap<InsuredPersonDto, InsuredPerson>()
+                .ForMember(dest => dest.Client, opt => opt.MapFrom(src => src.Client)).ReverseMap();
+
+            CreateMap<InsuranceRequestDto, InsuranceRequest>()
+                .ForMember(dest => dest.InsuredPersons, opt => opt.MapFrom(src => src.InsuredPersons));  
+            CreateMap<InsuranceRequestDto, InsuranceRequest>()
+                .ForMember(dest => dest.InsuredPersons, opt => opt.MapFrom(src => src.InsuredPersons)).ReverseMap();
+
+            CreateMap<InsuranceRequestDto, InsuranceRequest>()
+                .ForMember(dest => dest.InsuranceStatus, opt => opt.MapFrom(src => src.InsuranceStatus));
+
+            CreateMap<InsuranceRequest, InsuranceRequestDto>()
+                .ForMember(dest => dest.MainClient, opt => opt.MapFrom(src => src.InsuredPersons.FirstOrDefault(i => i.IsMainInsuredPerson) != null ? src.InsuredPersons.FirstOrDefault(i => i.IsMainInsuredPerson).Client : null))
+                .ForMember(dest => dest.InsuranceStatus, opt => opt.MapFrom(src => src.InsuranceStatus));
         }
     }
 }

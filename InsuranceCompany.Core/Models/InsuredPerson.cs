@@ -15,11 +15,11 @@ namespace InsuranceCompany.Core.Models
         [ForeignKey(nameof(Client))]
         public Guid? ClientId { get; set; }
 
-        [ForeignKey(nameof(TypeRequest))]
-        public Guid? TypeRequestId { get; set; }
+        [ForeignKey(nameof(InsuranceRequest))]
+        public Guid? InsuranceRequestId { get; set; }
 
         public virtual Client? Client { get; set; }
 
-        public virtual TypeRequest? TypeRequest { get; set; }
+        public virtual InsuranceRequest? InsuranceRequest { get; set; }
     }
 }

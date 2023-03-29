@@ -28,6 +28,10 @@ namespace InsuranceCompany.Controllers
         {
             var insuranceRequests = _repositoryManager.InsuranceRequest.GetAll(false);
             var insuranceRequestsDto = _mapper.Map<List<InsuranceRequestDto>>(insuranceRequests);
+            //foreach(var i in insuranceRequestsDto)
+            //{
+            //    i.MainClient = i.InsuredPersons.FirstOrDefault(ip => ip.IsMainInsuredPerson)?.Client;
+            //}
             return Ok(insuranceRequestsDto);
         }
 

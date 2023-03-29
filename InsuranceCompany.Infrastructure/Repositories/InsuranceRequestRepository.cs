@@ -17,7 +17,8 @@ namespace InsuranceCompany.Infrastructure.Repositories
 
         public IEnumerable<InsuranceRequest> GetAll(bool trackChanges)
         {
-            return FindAll(trackChanges).Include(i => i.InsuranceStatus).ToList();
+            return FindAll(trackChanges).Include(i => i.InsuranceStatus)
+                .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).ToList();
         }
 
         public InsuranceRequest GetById(Guid Id, bool trackChanges)

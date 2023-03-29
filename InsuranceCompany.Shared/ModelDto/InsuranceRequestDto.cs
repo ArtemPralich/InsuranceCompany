@@ -1,4 +1,5 @@
 ﻿using InsuranceCompany.Core;
+using InsuranceCompany.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,7 +28,8 @@ namespace InsuranceCompany.Shared.ModelDto
         public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
 
         public virtual InsuranceRate? InsuranceRate { get; set; }
-
-        public virtual InsuranceStatus? InsuranceStatus { get; set; }
+        public virtual InsuranceStatusDto? InsuranceStatus { get; set; }
+        public virtual ICollection<InsuredPersonDto> InsuredPersons { get; } = new List<InsuredPersonDto>();
+        public ClientDto MainClient { get;set; }
     }
 }

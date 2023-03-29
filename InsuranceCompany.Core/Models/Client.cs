@@ -11,6 +11,7 @@ public partial class Client
     public string? Name { get; set; }
 
     public string? Surname { get; set; }
+    public string PersonalCode { get; set; }
 
     public bool? Gender { get; set; }
 

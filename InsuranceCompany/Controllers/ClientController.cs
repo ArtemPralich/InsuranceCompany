@@ -1,4 +1,3 @@
-//using InsuranceCompany.Infrastructure;
 using InsuranceCompany.Core;
 using InsuranceCompany.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
