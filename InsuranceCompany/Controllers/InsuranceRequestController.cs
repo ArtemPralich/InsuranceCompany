@@ -2,6 +2,7 @@
 using InsuranceCompany.Core;
 using InsuranceCompany.Infrastructure;
 using InsuranceCompany.Shared.ModelDto;
+using InsuranceCompany.Shared.ModelDto.Create;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,17 +29,22 @@ namespace InsuranceCompany.Controllers
         {
             var insuranceRequests = _repositoryManager.InsuranceRequest.GetAll(false);
             var insuranceRequestsDto = _mapper.Map<List<InsuranceRequestDto>>(insuranceRequests);
-            //foreach(var i in insuranceRequestsDto)
-            //{
-            //    i.MainClient = i.InsuredPersons.FirstOrDefault(ip => ip.IsMainInsuredPerson)?.Client;
-            //}
+
             return Ok(insuranceRequestsDto);
         }
 
         [HttpPost(Name = "CreateInsuranceRequest")]
-        public IActionResult Create(InsuranceRequest insuranceRequest)
+        public IActionResult Create(CreateInsuranceRequestDto insuranceRequestDto)
         {
-            insuranceRequest.Id = Guid.NewGuid();
+            var insuranceRequest = _mapper.Map<InsuranceRequest>(insuranceRequestDto);
+            var client = _mapper.Map<Client>(insuranceRequestDto.Client);
+            insuranceRequest.InsuredPersons.Add(new Core.Models.InsuredPerson()
+            {
+                InsuranceRequest = insuranceRequest,
+                Client = client,
+                IsMainInsuredPerson = true
+            });
+            insuranceRequest.InsuranceStatus = _repositoryManager.InsuranceStatus.GetByStatus("Создано", true);
             _repositoryManager.InsuranceRequest.Create(insuranceRequest);
             _repositoryManager.Save();
 
@@ -50,6 +56,7 @@ namespace InsuranceCompany.Controllers
         {
             _repositoryManager.InsuranceRequest.Update(insuranceRequest);
             _repositoryManager.Save();
+
             return NoContent();
         }
 
@@ -57,7 +64,6 @@ namespace InsuranceCompany.Controllers
         public IActionResult Delete(Guid insuranceRequestId)
         {
             var insuranceRequest = _repositoryManager.InsuranceRequest.GetById(insuranceRequestId, true);
-
             if (insuranceRequest == null)
             {
                 return BadRequest();

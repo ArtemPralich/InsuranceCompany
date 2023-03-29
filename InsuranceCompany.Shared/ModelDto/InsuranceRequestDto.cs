@@ -21,6 +21,7 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public Guid? InsuranceRateId { get; set; }
 
+        public decimal Cost { get; set; }
         public Guid? InsuranceStatusId { get; set; }
 
         public virtual Agent? Agent { get; set; }

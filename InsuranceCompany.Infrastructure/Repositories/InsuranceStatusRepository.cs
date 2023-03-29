@@ -24,5 +24,11 @@ namespace InsuranceCompany.Infrastructure.Repositories
             return FindByCondition(x => x.Id == Id,
                 trackChanges).FirstOrDefault();
         }
+
+        public InsuranceStatus GetByStatus(string status, bool trackChanges)
+        {
+            return FindByCondition(x => x.Status == status,
+                trackChanges).FirstOrDefault();
+        }
     }
 }

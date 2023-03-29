@@ -13,6 +13,8 @@ public partial class TypeRequest
 
     public short? CountYears { get; set; }
 
+    public decimal? Cost { get; set; }
+    
     public virtual ICollection<InsuranceTypeSurvey> InsuranceTypeSurveys { get; } = new List<InsuranceTypeSurvey>();
 
     public virtual ICollection<RuleTypeRequest> RuleTypeRequests { get; } = new List<RuleTypeRequest>();

@@ -12,7 +12,7 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class InsuranceListComponent implements OnInit {
   insuranceRequests:  InsuranceRequest[] = [];
-  displayedColumns: string[] = ['name', 'personalCode', 'date', 'status'];
+  displayedColumns: string[] = ['name', 'personalCode', 'date', 'cost' , 'status'];
   dataSource = new MatTableDataSource<InsuranceRequest>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

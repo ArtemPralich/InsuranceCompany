@@ -14,3 +14,13 @@
     justify-content: center;
     align-items: center;
   }
+
+.text-font{
+  font-style: bimini;
+  color: #808080;
+}
+
+.text-padding{
+  padding-left: 0%;
+  margin-left: 0;
+}

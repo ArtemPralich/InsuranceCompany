@@ -2,6 +2,7 @@
 using InsuranceCompany.Core;
 using InsuranceCompany.Core.Models;
 using InsuranceCompany.Shared.ModelDto;
+using InsuranceCompany.Shared.ModelDto.Create;
 
 namespace InsuranceCompany.Shared.AutoMapperProfiles
 {
@@ -34,6 +35,10 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
             CreateMap<InsuranceRequest, InsuranceRequestDto>()
                 .ForMember(dest => dest.MainClient, opt => opt.MapFrom(src => src.InsuredPersons.FirstOrDefault(i => i.IsMainInsuredPerson) != null ? src.InsuredPersons.FirstOrDefault(i => i.IsMainInsuredPerson).Client : null))
                 .ForMember(dest => dest.InsuranceStatus, opt => opt.MapFrom(src => src.InsuranceStatus));
+
+            CreateMap<CreateClientDto, Client>();
+            CreateMap<CreateInsuranceRateDto, InsuranceRate>();
+            CreateMap<CreateInsuranceRequestDto, InsuranceRequest>();
         }
     }
 }

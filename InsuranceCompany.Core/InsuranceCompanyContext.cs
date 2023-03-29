@@ -57,7 +57,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
          => optionsBuilder
-        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany;Trusted_Connection=True;");
+        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany1;Trusted_Connection=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -140,10 +140,9 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
         modelBuilder.Entity<Client>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Client__3214EC075E2227B5");
-
             entity.ToTable("Client");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
         });
 
@@ -165,10 +164,9 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
         modelBuilder.Entity<InsuranceRate>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Insuranc__3214EC07497406FD");
-
             entity.ToTable("InsuranceRate");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.BasePayment).HasColumnType("money");
             entity.Property(e => e.UnitPayment).HasColumnType("money");
         });
@@ -178,8 +176,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.HasKey(e => e.Id).HasName("PK__Insuranc__3214EC070023678D");
 
             entity.ToTable("InsuranceRequest");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.DateOfEnd).HasColumnType("datetime");
             entity.Property(e => e.DateOfStart).HasColumnType("datetime");
 
@@ -202,7 +199,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
             entity.ToTable("InsuranceStatus");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Color)
                 .HasMaxLength(10)
                 .IsUnicode(false);
@@ -224,6 +221,11 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<InsuredPerson>(entity =>
+        {
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
         });
 
         modelBuilder.Entity<InsuranceTypeSurvey>(entity =>

@@ -7,6 +7,7 @@ namespace InsuranceCompany.Core;
 
 public partial class InsuranceRequest
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     public DateTime? DateOfStart { get; set; }
@@ -23,6 +24,8 @@ public partial class InsuranceRequest
     public Guid? InsuranceStatusId { get; set; }
 
     public virtual Agent? Agent { get; set; }
+
+    public decimal Cost { get; set; }
 
     public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
     public virtual ICollection<InsuredPerson> InsuredPersons { get; } = new List<InsuredPerson>();
