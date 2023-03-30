@@ -2,3 +2,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.popup-content{
+    padding: 20px;
+    width: 600px !important;
+}
+
+.popup-label{
+    width: 600px !important;
+}
+
+.div-right{
+    text-align: right;
+}

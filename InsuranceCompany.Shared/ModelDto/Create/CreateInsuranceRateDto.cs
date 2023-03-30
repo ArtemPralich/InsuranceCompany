@@ -10,5 +10,11 @@ namespace InsuranceCompany.Shared.ModelDto.Create
     {
         public decimal? BasePayment { get; set; }
         public decimal? UnitPayment { get; set; }
+        public short? CountPaymentsInYear { get; set; }
+
+        public short? CountYears { get; set; }
+
+        public decimal? Cost { get; set; }
+
     }
 }

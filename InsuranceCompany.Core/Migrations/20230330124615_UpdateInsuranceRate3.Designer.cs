@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230330124615_UpdateInsuranceRate3")]
+    partial class UpdateInsuranceRate3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,9 +184,6 @@ namespace InsuranceCompany.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal?>("BaseCoefficient")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<short?>("CountPaymentsInYear")
                         .HasColumnType("smallint");
 
@@ -220,9 +220,6 @@ namespace InsuranceCompany.Core.Migrations
 
                     b.Property<decimal?>("BasePayment")
                         .HasColumnType("money");
-
-                    b.Property<decimal?>("Coefficient")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
@@ -608,22 +605,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "64f15c0d-7bd4-4a2d-a41c-d0e247ea39b0",
-                            ConcurrencyStamp = "c48da86a-006d-4d63-bff2-4f1a54f73d4f",
+                            Id = "c3eac066-06b8-4512-af85-6036bd40f3bd",
+                            ConcurrencyStamp = "7fab7d13-a37c-42b6-9839-81e6065e3985",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "82c06cdc-b0d6-4959-b055-92454737e2b5",
-                            ConcurrencyStamp = "64cb8e4f-a3b5-467a-b3b1-fb9cb55a8e5c",
+                            Id = "25c8331e-c5cc-4133-a808-d2c4e2dcf97d",
+                            ConcurrencyStamp = "6e2f33a7-0107-4a22-ad91-749a93894a4b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "77941c5c-8364-4171-8e70-51118c72b15b",
-                            ConcurrencyStamp = "80140682-a055-49d7-bafa-0897ead37337",
+                            Id = "6eb87755-9da9-4ec0-b66d-2f0e16adf32a",
+                            ConcurrencyStamp = "39e3e71d-aa4b-49d3-b448-a7f32ca517e8",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

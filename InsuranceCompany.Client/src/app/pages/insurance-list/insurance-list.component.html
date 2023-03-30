@@ -1,26 +1,4 @@
-<!-- <div *ngFor="let item of insuranceRequests">
-  <mat-divider/>
-  
-  <mat-list>
-    <mat-list-item>
-      <span matListItemTitle>{{item.agentId}}</span>
-    </mat-list-item>
-
-    <mat-list-item>
-      <span matListItemTitle>{{item.dateOfStart | date: 'dd-MM-yyyy' }}</span>
-      <span matListItemTitle> - </span>
-      <span matListItemTitle>{{item.dateOfEnd | date: 'dd-MM-yyyy' }}</span>
-    </mat-list-item>
-
-    <mat-list-item>
-      <span matListItemTitle>Title</span>
-      Second line
-    </mat-list-item>
-
-  </mat-list>
-
-  <mat-divider/>
-</div> -->
+<button mat-button (click)="openDialog()">Open dialog</button>
 
 <div class="custom-table">
   <table mat-table [dataSource]="insuranceRequests" class="mat-elevation-z8">   
@@ -42,11 +20,9 @@
         Personal Code 
       </th>
       <td mat-cell *matCellDef="let element"> 
-
         <mat-list-item class="text-padding" >
           <span class="text-font" matListItemTitle>{{element.mainClient.personalCode }}</span>
         </mat-list-item>
-
       </td>
     </ng-container>
   
@@ -72,7 +48,7 @@
         <mat-list>
           <mat-list-item class="text-padding">
             <span class="text-font" matListItemTitle>
-              <span class="text-font" matListItemTitle> 10 000$</span>
+              <span class="text-font" matListItemTitle> {{element.cost}}$</span>
             </span>
           </mat-list-item>
         </mat-list>
@@ -88,23 +64,18 @@
             <mat-icon [style.background-color]="element.insuranceStatus.color" class="circle-icon">
   
             </mat-icon>
-            <span class="text-font" matListItemTitle>   {{element.insuranceStatus.status}}</span>
-         
+            <span class="text-font" matListItemTitle>  {{element.insuranceStatus.status}}</span>
           </label>
-        </span>
-        
+        </span> 
       </td>
     </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row fxLayout="row" *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   
   <mat-divider/>
-
   <mat-paginator [pageSizeOptions]="[5, 10, 20]"
     showFirstLastButtons
     aria-label="Select page of periodic elements">
   </mat-paginator>
-
 </div>

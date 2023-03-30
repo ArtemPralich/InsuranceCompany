@@ -14,7 +14,7 @@ namespace InsuranceCompany.Shared.ModelDto.Create
         public DateTime? DateOfStart { get; set; }
 
         public DateTime? DateOfEnd { get; set; }
-
+        public Guid? InsuranceStatusId { get; set; }
         public decimal Cost { get; set; }
 
         public virtual CreateClientDto Client { get; set; }

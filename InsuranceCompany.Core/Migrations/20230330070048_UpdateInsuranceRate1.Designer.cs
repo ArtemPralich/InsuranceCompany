@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230330070048_UpdateInsuranceRate1")]
+    partial class UpdateInsuranceRate1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,7 +184,10 @@ namespace InsuranceCompany.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal?>("BaseCoefficient")
+                    b.Property<decimal?>("BasePayment")
+                        .HasColumnType("money");
+
+                    b.Property<decimal?>("Cost")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<short?>("CountPaymentsInYear")
@@ -190,18 +196,8 @@ namespace InsuranceCompany.Core.Migrations
                     b.Property<short?>("CountYears")
                         .HasColumnType("smallint");
 
-                    b.Property<bool?>("IsFamily")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsOldman")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsPersonal")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal?>("UnitPayment")
+                        .HasColumnType("money");
 
                     b.HasKey("Id")
                         .HasName("PK__Insuranc__3214EC07497406FD");
@@ -218,12 +214,6 @@ namespace InsuranceCompany.Core.Migrations
                     b.Property<Guid?>("AgentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal?>("BasePayment")
-                        .HasColumnType("money");
-
-                    b.Property<decimal?>("Coefficient")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
@@ -238,9 +228,6 @@ namespace InsuranceCompany.Core.Migrations
 
                     b.Property<Guid?>("InsuranceStatusId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("UnitPayment")
-                        .HasColumnType("money");
 
                     b.HasKey("Id")
                         .HasName("PK__Insuranc__3214EC070023678D");
@@ -608,22 +595,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "64f15c0d-7bd4-4a2d-a41c-d0e247ea39b0",
-                            ConcurrencyStamp = "c48da86a-006d-4d63-bff2-4f1a54f73d4f",
+                            Id = "20cd0793-5166-4db1-8d43-d67b4bec8d70",
+                            ConcurrencyStamp = "46daf703-0264-4e6d-9221-c3a6a6c67ea1",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "82c06cdc-b0d6-4959-b055-92454737e2b5",
-                            ConcurrencyStamp = "64cb8e4f-a3b5-467a-b3b1-fb9cb55a8e5c",
+                            Id = "e82e90dd-1de2-4aa2-bb84-feec68c21e0b",
+                            ConcurrencyStamp = "60a5cc53-38c5-4e68-b66c-aa6933ada3e9",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "77941c5c-8364-4171-8e70-51118c72b15b",
-                            ConcurrencyStamp = "80140682-a055-49d7-bafa-0897ead37337",
+                            Id = "0855dcb0-1a5b-4221-90e1-cc467db58a6c",
+                            ConcurrencyStamp = "eae1e340-13f4-45c2-879d-91074da258d7",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

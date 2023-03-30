@@ -34,7 +34,8 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
 
             CreateMap<InsuranceRequest, InsuranceRequestDto>()
                 .ForMember(dest => dest.MainClient, opt => opt.MapFrom(src => src.InsuredPersons.FirstOrDefault(i => i.IsMainInsuredPerson) != null ? src.InsuredPersons.FirstOrDefault(i => i.IsMainInsuredPerson).Client : null))
-                .ForMember(dest => dest.InsuranceStatus, opt => opt.MapFrom(src => src.InsuranceStatus));
+                .ForMember(dest => dest.InsuranceStatus, opt => opt.MapFrom(src => src.InsuranceStatus))
+                .ForMember(dest => dest.Cost, opt => opt.MapFrom(src => src.Cost));
 
             CreateMap<CreateClientDto, Client>();
             CreateMap<CreateInsuranceRateDto, InsuranceRate>();

@@ -167,8 +167,6 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.ToTable("InsuranceRate");
 
             entity.Property(x => x.Id).ValueGeneratedOnAdd();
-            entity.Property(e => e.BasePayment).HasColumnType("money");
-            entity.Property(e => e.UnitPayment).HasColumnType("money");
         });
 
         modelBuilder.Entity<InsuranceRequest>(entity =>
@@ -180,6 +178,8 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.Property(e => e.DateOfEnd).HasColumnType("datetime");
             entity.Property(e => e.DateOfStart).HasColumnType("datetime");
 
+            entity.Property(e => e.BasePayment).HasColumnType("money");
+            entity.Property(e => e.UnitPayment).HasColumnType("money");
             entity.HasOne(d => d.Agent).WithMany(p => p.InsuranceRequests)
                 .HasForeignKey(d => d.AgentId)
                 .HasConstraintName("FK__Insurance__Agent__2E1BDC42");

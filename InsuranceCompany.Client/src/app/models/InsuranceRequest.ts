@@ -10,6 +10,8 @@ export class InsuranceRequest {
     insuranceStatusId : string;
     mainClient : Client;
     insuranceStatus: InsuranceStatus;
+    cost: number;
+    сoefficient: number;
     // public virtual Agent? Agent { get; set; }
 
     // public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
@@ -17,7 +19,8 @@ export class InsuranceRequest {
     // public virtual InsuranceRate? InsuranceRate { get; set; }
 
     constructor(id: string, dateOfStart: Date, dateOfEnd: Date, agentId: string, 
-        insuranceRateId: string, insuranceStatusId: string, insuranceStatus: InsuranceStatus, mainClient : Client) 
+        insuranceRateId: string, insuranceStatusId: string, insuranceStatus: InsuranceStatus, mainClient : Client,
+        cost: number) 
     {
         this.id = id;
         this.dateOfStart = dateOfStart;
@@ -27,5 +30,6 @@ export class InsuranceRequest {
         this.insuranceStatusId = insuranceStatusId;
         this.insuranceStatus = insuranceStatus;
         this.mainClient = mainClient;
+        this.cost = cost;
     }
 }

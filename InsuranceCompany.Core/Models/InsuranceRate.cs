@@ -9,9 +9,12 @@ public partial class InsuranceRate
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
-    public decimal? BasePayment { get; set; }
-
-    public decimal? UnitPayment { get; set; }
-
+    public string Title { get; set; }
+    public short? CountPaymentsInYear { get; set; }
+    public short? CountYears { get; set; }
+    public bool? IsFamily { get; set; }
+    public bool? IsOldman { get; set; }
+    public decimal? BaseCoefficient { get; set; }
+    public bool? IsPersonal { get; set; }
     public virtual ICollection<InsuranceRequest> InsuranceRequests { get; } = new List<InsuranceRequest>();
 }
