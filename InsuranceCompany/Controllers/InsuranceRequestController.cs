@@ -24,11 +24,21 @@ namespace InsuranceCompany.Controllers
             _mapper = mapper;
         }
 
+        
         [HttpGet(Name = "GetInsuranceRequest")]
         public IActionResult Get()
         {
             var insuranceRequests = _repositoryManager.InsuranceRequest.GetAll(false);
             var insuranceRequestsDto = _mapper.Map<List<InsuranceRequestDto>>(insuranceRequests);
+
+            return Ok(insuranceRequestsDto);
+        }
+
+        [HttpGet("{id}", Name = "GetInsuranceRequestById")]
+        public IActionResult GetById(Guid id)
+        {
+            var insuranceRequest = _repositoryManager.InsuranceRequest.GetById(id, false);
+            var insuranceRequestsDto = _mapper.Map<InsuranceRequestDto>(insuranceRequest);
 
             return Ok(insuranceRequestsDto);
         }
@@ -48,7 +58,7 @@ namespace InsuranceCompany.Controllers
             _repositoryManager.InsuranceRequest.Create(insuranceRequest);
             _repositoryManager.Save();
 
-            return NoContent();
+            return Ok(insuranceRequest.Id);
         }
 
         [HttpPut(Name = "UpdateInsuranceRequest")]

@@ -11,6 +11,7 @@ namespace InsuranceCompany.Shared.ModelDto
 {
     public class InsuranceRequestDto
     {
+        public Guid? Id { get; set; }
         public DateTime? DateOfStart { get; set; }
 
         public DateTime? DateOfEnd { get; set; }

@@ -15,9 +15,11 @@ namespace InsuranceCompany.Shared.ModelDto.Create
 
         public DateTime? DateOfEnd { get; set; }
         public Guid? InsuranceStatusId { get; set; }
+        public Guid? InsuranceRateId { get; set; }
         public decimal Cost { get; set; }
-
+        public decimal? BasePayment { get; set; }
+        public decimal? UnitPayment { get; set; }
+        public decimal? Coefficient { get; set; }
         public virtual CreateClientDto Client { get; set; }
-        public virtual CreateInsuranceRateDto? InsuranceRate { get; set; }
     }
 }

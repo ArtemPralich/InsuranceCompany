@@ -1,6 +1,7 @@
 import { HttpClient} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { CreateInsuranceRequestDto } from "../models/createModels/CreateInsuranceRequestDto";
 import { InsuranceRequest } from "../models/InsuranceRequest";
 
 @Injectable()
@@ -19,9 +20,9 @@ export class InsuranceRequestService {
         return this.http.get<InsuranceRequest>(`${this.pathBase}`+ "/" + id);
     }
 
-    public CreateInsuranceRequest(insuranceRequest : InsuranceRequest):Observable<InsuranceRequest> { 
+    public CreateInsuranceRequest(insuranceRequest : CreateInsuranceRequestDto):Observable<string> { 
 
-        return this.http.post<InsuranceRequest>(`${this.pathBase}`, insuranceRequest);
+        return this.http.post<string>(`${this.pathBase}`, insuranceRequest);
     }
 
     public UpdateInsuranceRequest(insuranceRequest : InsuranceRequest):Observable<any>{

@@ -29,6 +29,15 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { FormGroup, FormControl } from '@angular/forms';
 import { DialogElementsExampleDialog } from './pages/insurance-list/insurance-list.component';
 import { InsuranceComponent } from './pages/insurance/insurance.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { InsuranceClientInfoComponent } from './pages/insurance-pages/insurance-client-info/insurance-client-info.component';
+import { InsuranceSuraveysComponent } from './pages/insurance-pages/insurance-suraveys/insurance-suraveys.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { InsuredPersonsComponent } from './pages/insurance-pages/insured-persons/insured-persons.component';
+import { InsuranceBankDataComponent } from './pages/insurance-pages/insurance-bank-data/insurance-bank-data.component';
+import { InsuranceDocumentsComponent } from './pages/insurance-pages/insurance-documents/insurance-documents.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +48,11 @@ import { InsuranceComponent } from './pages/insurance/insurance.component';
     InsuranceListComponent,
     DialogElementsExampleDialog,
     InsuranceComponent,
+    InsuranceClientInfoComponent,
+    InsuranceSuraveysComponent,
+    InsuredPersonsComponent,
+    InsuranceBankDataComponent,
+    InsuranceDocumentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +71,11 @@ import { InsuranceComponent } from './pages/insurance/insurance.component';
     MatDialogModule,
     MatSelectModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     AuthService,

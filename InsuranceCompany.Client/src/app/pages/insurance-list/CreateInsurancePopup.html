@@ -3,8 +3,8 @@
 
   <mat-form-field appearance="fill" class="popup-label">
     <mat-label>Выберите тип страхового запроса</mat-label>
-    <mat-select [(value)]="selected">
-      <mat-option *ngFor="let rate of insuranceRates" [value]="rate.baseCoefficient">
+    <mat-select [(value)]="selectedInsuranceRate">
+      <mat-option *ngFor="let rate of insuranceRates" [value]="rate">
         {{rate.title}}
       </mat-option>
     </mat-select>
@@ -12,21 +12,21 @@
 
   <mat-form-field class="example-full-width"  class="popup-label">
     <mat-label>Введите общую сумму страховых взносов</mat-label>
-    <input matInput placeholder="1000">
+    <input matInput type="number" placeholder="0" [(ngModel)]="insuranceAmount">
   </mat-form-field>
   <mat-form-field class="example-full-width"  class="popup-label">
     <mat-label>Коэффициент страхового запроса</mat-label>
-    <input matInput placeholder="50" value= {{selected}} disabled>
+    <input matInput placeholder="50" [value]="selectedInsuranceRate?.baseCoefficient || ''" disabled>
   </mat-form-field>
   <mat-form-field class="example-full-width"  class="popup-label">
     <mat-label>Страховые выплаты</mat-label>
-    <input matInput placeholder="" value= {{selected}} disabled>
+    <input matInput placeholder="" [value]="insuranceAmount * (selectedInsuranceRate?.baseCoefficient || 0)" disabled>
   </mat-form-field>
   <section class="example-section">
     <mat-checkbox class="example-margin" color="primary">Разрешие обрабатывать пользовательские данные</mat-checkbox>
   </section>
   <div class="div-right">
     <button mat-button (click)= "close()">Отмена</button>
-    <button mat-button color="primary" (click)="create()"  >Создать</button>
+    <button mat-button color="primary" (click)="create()" >Создать</button>
   </div>
 </div>

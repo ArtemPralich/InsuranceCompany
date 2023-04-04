@@ -20,6 +20,11 @@
   color: #808080;
 }
 
+.text-font:hover{
+  font-style: bimini;
+  color: black;
+}
+
 .text-padding{
   padding-left: 0%;
   margin-left: 0;
