@@ -24,7 +24,8 @@ namespace InsuranceCompany.Infrastructure.Repositories
         public InsuranceRequest GetById(Guid Id, bool trackChanges)
         {
             return FindByCondition(x => x.Id == Id,
-                trackChanges).FirstOrDefault();
+                trackChanges).Include(i => i.InsuranceStatus).Include(i => i.InsuranceRate)
+                .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).FirstOrDefault();
         }
     }
 }

@@ -12,6 +12,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 })
 export class InsuranceComponent implements OnInit  {
   insuranceRequest:  InsuranceRequest;
+  parentProp = 'Hello, child!';
+
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });

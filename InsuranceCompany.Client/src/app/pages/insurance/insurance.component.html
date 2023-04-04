@@ -3,7 +3,7 @@
 </div>
 <mat-tab-group animationDuration="0ms" class="insuranse-part">
     <mat-tab label="Информация о слиенте">
-      <app-insurance-client-info>
+      <app-insurance-client-info *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest" [childProp]="parentProp" >
 
       </app-insurance-client-info>
     </mat-tab>
