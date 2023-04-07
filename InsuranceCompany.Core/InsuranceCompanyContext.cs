@@ -240,8 +240,8 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
                 .HasForeignKey(d => d.InsuranceSurveyId)
                 .HasConstraintName("FK__Insurance__Insur__6C190EBB");
 
-            entity.HasOne(d => d.TypeRequest).WithMany(p => p.InsuranceTypeSurveys)
-                .HasForeignKey(d => d.TypeRequestId)
+            entity.HasOne(d => d.InsuranceRate).WithMany(p => p.InsuranceTypeSurveys)
+                .HasForeignKey(d => d.InsuranceRateId)
                 .HasConstraintName("FK__Insurance__TypeR__6D0D32F4");
         });
 

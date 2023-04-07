@@ -11,10 +11,10 @@ public partial class InsuranceTypeSurvey
     [ForeignKey(nameof(InsuranceSurvey))]
     public Guid? InsuranceSurveyId { get; set; }
 
-    [ForeignKey(nameof(TypeRequest))]
-    public Guid? TypeRequestId { get; set; }
+    [ForeignKey(nameof(InsuranceRate))]
+    public Guid? InsuranceRateId { get; set; }
 
     public virtual InsuranceSurvey? InsuranceSurvey { get; set; }
 
-    public virtual TypeRequest? TypeRequest { get; set; }
+    public virtual InsuranceRate? InsuranceRate { get; set; }
 }

@@ -17,4 +17,5 @@ public partial class InsuranceRate
     public decimal? BaseCoefficient { get; set; }
     public bool? IsPersonal { get; set; }
     public virtual ICollection<InsuranceRequest> InsuranceRequests { get; } = new List<InsuranceRequest>();
+    public virtual ICollection<InsuranceTypeSurvey> InsuranceTypeSurveys { get; } = new List<InsuranceTypeSurvey>();
 }

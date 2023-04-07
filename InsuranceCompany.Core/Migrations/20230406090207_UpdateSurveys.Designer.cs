@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230406090207_UpdateSurveys")]
+    partial class UpdateSurveys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -613,22 +616,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9dd15bc6-0b3c-4215-9fc6-a65b1b352160",
-                            ConcurrencyStamp = "e746c2b2-aa75-45b6-a5b8-732b0845c96c",
+                            Id = "eddd40f8-900a-4816-88b8-6d2f6af1574a",
+                            ConcurrencyStamp = "cea804ca-072f-4d88-9fa4-50642c9cddaa",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "92625d13-362f-4f83-bcc6-46731c184008",
-                            ConcurrencyStamp = "da55274a-29b8-4203-9c31-c035a4271fc0",
+                            Id = "1bec3edd-9143-409b-a1e4-a060f1fce344",
+                            ConcurrencyStamp = "624293aa-1a8c-4cd3-b8fe-e9a87040a20d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "bd01b34f-eff8-4761-a9d6-e8bd5d138b31",
-                            ConcurrencyStamp = "ffe62eb4-a766-4599-9a41-4820b0fa3d41",
+                            Id = "ded6cc8d-37e8-47e5-9784-7e5ee4dc4f22",
+                            ConcurrencyStamp = "11e927bf-aa17-4769-94d2-32f939c9eb8f",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

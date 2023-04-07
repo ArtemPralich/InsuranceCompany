@@ -40,6 +40,12 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
             CreateMap<CreateClientDto, Client>();
             CreateMap<CreateInsuranceRateDto, InsuranceRate>();
             CreateMap<CreateInsuranceRequestDto, InsuranceRequest>();
+
+            CreateMap<CreateAnswerDto, Answer>();
+            CreateMap<CreateAnswerDto, Answer>().ReverseMap();
+
+            CreateMap<CreateQuestionDto, Question>();
+            CreateMap<CreateQuestionDto, Question>().ReverseMap();
         }
     }
 }
