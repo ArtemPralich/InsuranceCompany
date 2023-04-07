@@ -129,6 +129,7 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.Client", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DateOfBirth")
@@ -138,6 +139,10 @@ namespace InsuranceCompany.Core.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
@@ -173,13 +178,30 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal?>("BasePayment")
-                        .HasColumnType("money");
+                    b.Property<decimal?>("BaseCoefficient")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("UnitPayment")
-                        .HasColumnType("money");
+                    b.Property<short?>("CountPaymentsInYear")
+                        .HasColumnType("smallint");
+
+                    b.Property<short?>("CountYears")
+                        .HasColumnType("smallint");
+
+                    b.Property<bool?>("IsFamily")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsOldman")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsPersonal")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id")
                         .HasName("PK__Insuranc__3214EC07497406FD");
@@ -190,10 +212,20 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("AgentId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("BasePayment")
+                        .HasColumnType("money");
+
+                    b.Property<decimal?>("Coefficient")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("DateOfEnd")
                         .HasColumnType("datetime");
@@ -206,6 +238,9 @@ namespace InsuranceCompany.Core.Migrations
 
                     b.Property<Guid?>("InsuranceStatusId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("UnitPayment")
+                        .HasColumnType("money");
 
                     b.HasKey("Id")
                         .HasName("PK__Insuranc__3214EC070023678D");
@@ -222,6 +257,7 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceStatus", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Color")
@@ -266,6 +302,9 @@ namespace InsuranceCompany.Core.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("InsuranceRateId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("InsuranceSurveyId")
                         .HasColumnType("uniqueidentifier");
 
@@ -275,11 +314,37 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasKey("Id")
                         .HasName("PK__Insuranc__3214EC07877F6247");
 
+                    b.HasIndex("InsuranceRateId");
+
                     b.HasIndex("InsuranceSurveyId");
 
                     b.HasIndex("TypeRequestId");
 
                     b.ToTable("InsuranceTypeSurvey", (string)null);
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.Models.InsuredPerson", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ClientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("InsuranceRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsMainInsuredPerson")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("InsuranceRequestId");
+
+                    b.ToTable("InsuredPersons");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Models.User", b =>
@@ -499,6 +564,9 @@ namespace InsuranceCompany.Core.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<decimal?>("Cost")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<short?>("CountPaymentsInYear")
                         .HasColumnType("smallint");
 
@@ -545,22 +613,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "855ebd85-a883-4d7a-bce0-f8c81327f180",
-                            ConcurrencyStamp = "c67add17-69b8-41ff-ae07-dbc1f2a46569",
+                            Id = "9dd15bc6-0b3c-4215-9fc6-a65b1b352160",
+                            ConcurrencyStamp = "e746c2b2-aa75-45b6-a5b8-732b0845c96c",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "21f4b85a-2c18-4088-8101-f8ec6faeb8e4",
-                            ConcurrencyStamp = "6eac07e4-9bd7-4c14-8320-35c8635140d5",
+                            Id = "92625d13-362f-4f83-bcc6-46731c184008",
+                            ConcurrencyStamp = "da55274a-29b8-4203-9c31-c035a4271fc0",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "f7837fbd-7e0d-46e5-aa8e-21435cc4d702",
-                            ConcurrencyStamp = "b961a22f-b8d3-4fd9-b96e-621755209c2b",
+                            Id = "bd01b34f-eff8-4761-a9d6-e8bd5d138b31",
+                            ConcurrencyStamp = "ffe62eb4-a766-4599-9a41-4820b0fa3d41",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -752,19 +820,38 @@ namespace InsuranceCompany.Core.Migrations
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceTypeSurvey", b =>
                 {
+                    b.HasOne("InsuranceCompany.Core.InsuranceRate", "InsuranceRate")
+                        .WithMany("InsuranceTypeSurveys")
+                        .HasForeignKey("InsuranceRateId")
+                        .HasConstraintName("FK__Insurance__TypeR__6D0D32F4");
+
                     b.HasOne("InsuranceCompany.Core.InsuranceSurvey", "InsuranceSurvey")
                         .WithMany("InsuranceTypeSurveys")
                         .HasForeignKey("InsuranceSurveyId")
                         .HasConstraintName("FK__Insurance__Insur__6C190EBB");
 
-                    b.HasOne("InsuranceCompany.Core.TypeRequest", "TypeRequest")
+                    b.HasOne("InsuranceCompany.Core.TypeRequest", null)
                         .WithMany("InsuranceTypeSurveys")
-                        .HasForeignKey("TypeRequestId")
-                        .HasConstraintName("FK__Insurance__TypeR__6D0D32F4");
+                        .HasForeignKey("TypeRequestId");
+
+                    b.Navigation("InsuranceRate");
 
                     b.Navigation("InsuranceSurvey");
+                });
 
-                    b.Navigation("TypeRequest");
+            modelBuilder.Entity("InsuranceCompany.Core.Models.InsuredPerson", b =>
+                {
+                    b.HasOne("InsuranceCompany.Core.Client", "Client")
+                        .WithMany("InsuredPersons")
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("InsuranceCompany.Core.InsuranceRequest", "InsuranceRequest")
+                        .WithMany("InsuredPersons")
+                        .HasForeignKey("InsuranceRequestId");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("InsuranceRequest");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.PositionClient", b =>
@@ -893,17 +980,23 @@ namespace InsuranceCompany.Core.Migrations
                 {
                     b.Navigation("ClientaChildren");
 
+                    b.Navigation("InsuredPersons");
+
                     b.Navigation("PositionClients");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
                 {
                     b.Navigation("InsuranceRequests");
+
+                    b.Navigation("InsuranceTypeSurveys");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
                 {
                     b.Navigation("AnswerValues");
+
+                    b.Navigation("InsuredPersons");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceStatus", b =>

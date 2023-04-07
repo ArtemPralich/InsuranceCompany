@@ -1,0 +1,31 @@
+.custom-table {
+    width: 80% !important;
+    margin: 0 auto;
+  }
+
+  .circle-icon {
+    background-color: #42a5f5; /* цвет фона */
+    border-radius: 50%; /* радиус скругления */
+    color: #fff; /* цвет иконки */
+    font-size: 48px; /* размер иконки */
+    height: 16px; /* высота */
+    width: 16px; /* ширина */
+    margin-bottom: -2px;
+    justify-content: center;
+    align-items: center;
+  }
+
+.text-font{
+  font-style: bimini;
+  color: #808080;
+}
+
+.text-font:hover{
+  font-style: bimini;
+  color: black;
+}
+
+.text-padding{
+  padding-left: 0%;
+  margin-left: 0;
+}

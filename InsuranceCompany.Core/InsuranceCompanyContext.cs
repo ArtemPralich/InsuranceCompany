@@ -35,6 +35,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
     public virtual DbSet<InsuranceStatus> InsuranceStatuses { get; set; }
 
     public virtual DbSet<InsuranceSurvey> InsuranceSurveys { get; set; }
+    public virtual DbSet<InsuredPerson> InsuredPersons { get; set; }
 
     public virtual DbSet<InsuranceTypeSurvey> InsuranceTypeSurveys { get; set; }
 
@@ -55,7 +56,8 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
     public virtual DbSet<TypeRequest> TypeRequests { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-         => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany;Trusted_Connection=True;");
+         => optionsBuilder
+        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany1;Trusted_Connection=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -138,10 +140,9 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
         modelBuilder.Entity<Client>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Client__3214EC075E2227B5");
-
             entity.ToTable("Client");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
         });
 
@@ -163,12 +164,9 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
         modelBuilder.Entity<InsuranceRate>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Insuranc__3214EC07497406FD");
-
             entity.ToTable("InsuranceRate");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.BasePayment).HasColumnType("money");
-            entity.Property(e => e.UnitPayment).HasColumnType("money");
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
         });
 
         modelBuilder.Entity<InsuranceRequest>(entity =>
@@ -176,11 +174,12 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.HasKey(e => e.Id).HasName("PK__Insuranc__3214EC070023678D");
 
             entity.ToTable("InsuranceRequest");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.DateOfEnd).HasColumnType("datetime");
             entity.Property(e => e.DateOfStart).HasColumnType("datetime");
 
+            entity.Property(e => e.BasePayment).HasColumnType("money");
+            entity.Property(e => e.UnitPayment).HasColumnType("money");
             entity.HasOne(d => d.Agent).WithMany(p => p.InsuranceRequests)
                 .HasForeignKey(d => d.AgentId)
                 .HasConstraintName("FK__Insurance__Agent__2E1BDC42");
@@ -200,7 +199,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
             entity.ToTable("InsuranceStatus");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Color)
                 .HasMaxLength(10)
                 .IsUnicode(false);
@@ -224,6 +223,11 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
                 .IsUnicode(false);
         });
 
+        modelBuilder.Entity<InsuredPerson>(entity =>
+        {
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
+        });
+
         modelBuilder.Entity<InsuranceTypeSurvey>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Insuranc__3214EC07877F6247");
@@ -236,8 +240,8 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
                 .HasForeignKey(d => d.InsuranceSurveyId)
                 .HasConstraintName("FK__Insurance__Insur__6C190EBB");
 
-            entity.HasOne(d => d.TypeRequest).WithMany(p => p.InsuranceTypeSurveys)
-                .HasForeignKey(d => d.TypeRequestId)
+            entity.HasOne(d => d.InsuranceRate).WithMany(p => p.InsuranceTypeSurveys)
+                .HasForeignKey(d => d.InsuranceRateId)
                 .HasConstraintName("FK__Insurance__TypeR__6D0D32F4");
         });
 

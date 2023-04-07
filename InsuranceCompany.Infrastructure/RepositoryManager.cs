@@ -1,4 +1,5 @@
 ﻿using InsuranceCompany.Core;
+using InsuranceCompany.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,15 @@ namespace InsuranceCompany.Infrastructure
     public class RepositoryManager : IRepositoryManager
     {
         private IGenericRepository<Agent> _agentRepository;
-        private IGenericRepository<Client> _clientRepository;
+        private ClientRepository _clientRepository;
+        private InsuranceRequestRepository _insuranceRequest;
+        private InsuranceRateRepository _insuranceRateRepository;
+
         private InsuranceCompanyContext _repositoryContext;
+        private QuestionRepository _questionRepository;
+        private SurveyRepository _insuranceSurveyRepository;
+        private InsuranceStatusRepository _insuranceStatusRepositoryRepository;
+
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
@@ -25,13 +33,63 @@ namespace InsuranceCompany.Infrastructure
                 return _agentRepository;
             }
         }
-        public IGenericRepository<Client> Client
+        public ClientRepository Client
         {
             get
             {
                 if (_clientRepository == null)
-                    _clientRepository = new GenericRepository<Client>(_repositoryContext);
+                    _clientRepository = new ClientRepository(_repositoryContext);
                 return _clientRepository;
+            }
+        }
+
+        public InsuranceRequestRepository InsuranceRequest
+        {
+            get
+            {
+                if (_insuranceRequest == null)
+                    _insuranceRequest = new InsuranceRequestRepository(_repositoryContext);
+                return _insuranceRequest;
+            }
+        }
+
+        public InsuranceRateRepository InsuranceRate
+        {
+            get
+            {
+                if (_insuranceRateRepository == null)
+                    _insuranceRateRepository = new InsuranceRateRepository(_repositoryContext);
+                return _insuranceRateRepository;
+            }
+        }
+        
+        public QuestionRepository Question 
+        {
+            get
+            {
+                if (_questionRepository == null)
+                    _questionRepository = new QuestionRepository(_repositoryContext);
+                return _questionRepository;
+            }
+        }
+
+        public InsuranceStatusRepository InsuranceStatus
+        {
+            get
+            {
+                if (_insuranceStatusRepositoryRepository == null)
+                    _insuranceStatusRepositoryRepository = new InsuranceStatusRepository(_repositoryContext);
+                return _insuranceStatusRepositoryRepository;
+            }
+        }
+
+        public SurveyRepository InsuranceSurvey
+        {
+            get
+            {
+                if (_insuranceSurveyRepository == null)
+                    _insuranceSurveyRepository = new SurveyRepository(_repositoryContext);
+                return _insuranceSurveyRepository;
             }
         }
 

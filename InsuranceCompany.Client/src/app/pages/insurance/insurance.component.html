@@ -1,0 +1,30 @@
+<div class="common-info"> 
+  
+</div>
+<mat-tab-group animationDuration="0ms" class="insuranse-part">
+    <mat-tab label="Информация о слиенте">
+      <app-insurance-client-info *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest" [childProp]="parentProp" >
+
+      </app-insurance-client-info>
+    </mat-tab>
+    <mat-tab label="Страховые опросы">
+      <app-insurance-suraveys>
+
+      </app-insurance-suraveys>
+    </mat-tab>
+    <mat-tab label="Застраховынные лица">
+      <app-insured-persons>
+
+      </app-insured-persons>
+    </mat-tab>
+    <mat-tab label="Документы">
+      <app-insurance-documents>
+        
+      </app-insurance-documents>
+    </mat-tab>
+    <mat-tab label="Банковские данные">
+      <app-insurance-bank-data>
+
+      </app-insurance-bank-data>
+    </mat-tab>
+</mat-tab-group>
