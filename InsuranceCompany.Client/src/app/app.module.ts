@@ -15,13 +15,15 @@ import { AuthService } from './service/AuthService';
 import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
+import { RegistrationComponent } from './pages/registration/registration.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,

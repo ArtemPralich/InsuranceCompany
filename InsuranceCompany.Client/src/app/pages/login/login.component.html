@@ -1,4 +1,22 @@
-<form class="example-form">
+<div class="form-authorization">
+  <div class="form-container">
+    <img class="big-img" src="assets/pictures/auth-big-img.png">
+    <form class="form-auth">
+      <img class="user-img" src="assets/pictures/user.png">
+      <div class="title-form">
+        Авторизация
+      </div>
+      <input type="text" name="" placeholder="Почта">
+      <input type="password" name="" placeholder="Пароль" (click)="this.login()">
+      <input type="submit" name="" value="Войти">
+      <a href="#" class="forgot-link">Забыли пароль?</a>
+      <a href="#" class="forgot-link">Регистрация</a>
+    </form>
+  </div>
+</div>
+
+
+<!-- <form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
       <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" id="username">
@@ -19,4 +37,4 @@
       </mat-form-field>
     </div>
     <button mat-button color="primary" (click)="this.login()" >Primary</button>
-  </form>
+  </form> -->
