@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230407122147_UpdateInsuranceSurvey")]
+    partial class UpdateInsuranceSurvey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,7 +282,6 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceSurvey", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -511,7 +513,6 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.QuestionType", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
@@ -620,22 +621,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "297a11ad-cf46-4dc5-9bb9-e4af9eeef182",
-                            ConcurrencyStamp = "340a19b6-8bc6-4e5a-b149-6c274373ac26",
+                            Id = "6e06f1cf-29a8-4d7e-ab36-f12e007116e0",
+                            ConcurrencyStamp = "c49f1013-8e88-4501-adf2-bd846a1a6df1",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "bf846a24-d43a-4ca0-adab-59c3bb9a7f5e",
-                            ConcurrencyStamp = "3c8c6987-fcbb-456f-8da0-bb47bc048e8c",
+                            Id = "7256ba30-656f-4ea3-9f9e-6027fb39ef0e",
+                            ConcurrencyStamp = "4066b0f8-06e7-4c98-bbb5-97cb6685ad76",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "cd51b1aa-d268-4349-926c-7c0e6e428e9d",
-                            ConcurrencyStamp = "c5a9a9dd-1fb7-49fa-b3fa-26ee1b0c7055",
+                            Id = "9ea2a451-7a24-4917-8fe8-62008360e18c",
+                            ConcurrencyStamp = "a2530838-be98-40e3-bef9-13e74f01ec3c",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -891,9 +892,8 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.QuestionSurvey", b =>
                 {
                     b.HasOne("InsuranceCompany.Core.InsuranceSurvey", "InsuranceSurvey")
-                        .WithMany("QuestionSurveys")
-                        .HasForeignKey("InsuranceSurveyId")
-                        .HasConstraintName("FK__QuestionSurvey__InsuranceSurvey__6C190EBB");
+                        .WithMany()
+                        .HasForeignKey("InsuranceSurveyId");
 
                     b.HasOne("InsuranceCompany.Core.Question", "Question")
                         .WithMany("QuestionSurveys")
@@ -1018,8 +1018,6 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceSurvey", b =>
                 {
                     b.Navigation("InsuranceTypeSurveys");
-
-                    b.Navigation("QuestionSurveys");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Position", b =>

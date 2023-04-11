@@ -214,7 +214,6 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
             entity.ToTable("InsuranceSurvey");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Description)
                 .HasMaxLength(1024)
                 .IsUnicode(false);
@@ -233,8 +232,6 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.HasKey(e => e.Id).HasName("PK__Insuranc__3214EC07877F6247");
 
             entity.ToTable("InsuranceTypeSurvey");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.InsuranceSurvey).WithMany(p => p.InsuranceTypeSurveys)
                 .HasForeignKey(d => d.InsuranceSurveyId)
@@ -302,9 +299,9 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
                 .HasForeignKey(d => d.QuestionId)
                 .HasConstraintName("FK__QuestionS__Quest__4D94879B");
 
-            entity.HasOne(d => d.Survey).WithMany(p => p.QuestionSurveys)
-                .HasForeignKey(d => d.SurveyId)
-                .HasConstraintName("FK__QuestionS__Surve__4CA06362");
+            entity.HasOne(d => d.InsuranceSurvey).WithMany(p => p.QuestionSurveys)
+                .HasForeignKey(d => d.InsuranceSurveyId)
+                .HasConstraintName("FK__QuestionSurvey__InsuranceSurvey__6C190EBB");
         });
 
         modelBuilder.Entity<QuestionType>(entity =>
@@ -312,8 +309,6 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.HasKey(e => e.Id).HasName("PK__Question__3214EC072C41760D");
 
             entity.ToTable("QuestionType");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Text)
                 .HasMaxLength(1024)
                 .IsUnicode(false);

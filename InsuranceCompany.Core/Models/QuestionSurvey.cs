@@ -8,13 +8,13 @@ public partial class QuestionSurvey
 {
     public Guid Id { get; set; }
 
-    [ForeignKey(nameof(Survey))]
-    public Guid? SurveyId { get; set; }
+    [ForeignKey(nameof(InsuranceSurvey))]
+    public Guid? InsuranceSurveyId { get; set; }
 
     [ForeignKey(nameof(Question))]
     public Guid? QuestionId { get; set; }
 
     public virtual Question? Question { get; set; }
 
-    public virtual RuleRequest? Survey { get; set; }
+    public virtual InsuranceSurvey? InsuranceSurvey { get; set; }
 }
