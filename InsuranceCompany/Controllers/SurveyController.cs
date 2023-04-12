@@ -31,11 +31,13 @@ namespace InsuranceCompany.Controllers
             return Ok(insuranceRequests);
         }
 
-        [HttpPost("question",Name = "CreateQuestion")]
-        public IActionResult CreateQuestion(CreateQuestionDto answerDto)
+        [HttpPost("CreateQuestion", Name = "CreateQuestion")]
+        public IActionResult CreateQuestion(CreateQuestionDto questionDto)
         {
-            var answer = _mapper.Map<Question>(answerDto);
-            _repositoryManager.Question.Create(answer);
+            var question = _mapper.Map<Question>(questionDto);
+
+            var questionSurvey = new QuestionSurvey() { InsuranceSurveyId = questionDto.SyrveyId, Question = question };
+            _repositoryManager.QuestionSurvey.Create(questionSurvey);
             _repositoryManager.Save();
 
             return NoContent();

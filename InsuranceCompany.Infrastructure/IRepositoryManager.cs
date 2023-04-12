@@ -20,5 +20,6 @@ namespace InsuranceCompany.Infrastructure
         SurveyRepository InsuranceSurvey { get; }
         QuestionTypeRepository QuestionType { get; }
         InsuranceTypeSurveyRepository InsuranceTypeSurvey { get; }
+        public QuestionSurveyRepository QuestionSurvey { get; }
     }
 }

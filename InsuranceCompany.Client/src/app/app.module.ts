@@ -39,6 +39,9 @@ import { InsuredPersonsComponent } from './pages/insurance-pages/insured-persons
 import { InsuranceBankDataComponent } from './pages/insurance-pages/insurance-bank-data/insurance-bank-data.component';
 import { InsuranceDocumentsComponent } from './pages/insurance-pages/insurance-documents/insurance-documents.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -78,6 +81,9 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTreeModule,
+    MatExpansionModule,
+    MatRadioModule,
   ],
   providers: [
     AuthService,

@@ -8,7 +8,7 @@
       </app-insurance-client-info>
     </mat-tab>
     <mat-tab label="Страховые опросы">
-      <app-insurance-suraveys>
+      <app-insurance-suraveys *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest">
 
       </app-insurance-suraveys>
     </mat-tab>

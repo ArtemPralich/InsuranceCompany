@@ -6,6 +6,7 @@ namespace InsuranceCompany.Core;
 
 public partial class QuestionSurvey
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     [ForeignKey(nameof(InsuranceSurvey))]
