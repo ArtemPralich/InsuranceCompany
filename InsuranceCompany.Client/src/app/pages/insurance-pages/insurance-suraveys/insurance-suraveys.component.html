@@ -13,7 +13,7 @@
             <div *ngFor="let question of item.insuranceSurvey.questions">
                 <label id="example-radio-group-label">{{question.text}}</label>
                 <div *ngIf="question.questionType.text=='checkbox'">
-                    <mat-checkbox color="primary"  class="example-margin">Check me!</mat-checkbox>
+                    <mat-checkbox color="primary" class="example-margin">Check me!</mat-checkbox>
                 </div>
                 <div *ngIf="question.questionType.text=='radiobutton'">
                     <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"> 
@@ -29,12 +29,16 @@
                         </mat-form-field>
                       </form>
                 </div>
-                <div *ngIf="question.questionType.text=='input'">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width">
-                          <input matInput #message maxlength="256" placeholder="Answer">
-                        </mat-form-field>
-                      </form>
+                <div *ngIf="question.questionType.text=='input'" >
+                    <div *ngFor="let answer of insuranceRequest.answerValues">
+                        <form class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
+                            <mat-form-field class="example-full-width">
+                              <input matInput #message maxlength="256" placeholder="Answer" 
+                                [(ngModel)]="answer.value" 
+                                [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                          </form>
+                    </div>
                 </div>
             </div>
         </mat-expansion-panel>

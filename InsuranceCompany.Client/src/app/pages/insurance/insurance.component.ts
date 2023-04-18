@@ -43,4 +43,10 @@ export class InsuranceComponent implements OnInit  {
       console.log(this.insuranceRequest);
     });
   }
+
+  save(){
+    this.insuranceRequestService.UpdateInsuranceRequest(this.insuranceRequest).subscribe(res => {
+      console.log("updated");
+    });
+  }
 }

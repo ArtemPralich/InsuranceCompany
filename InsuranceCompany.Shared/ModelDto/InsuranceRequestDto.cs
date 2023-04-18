@@ -27,7 +27,7 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public virtual Agent? Agent { get; set; }
 
-        public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
+        public virtual ICollection<AnswerValueDto> AnswerValues { get; } = new List<AnswerValueDto>();
 
         public virtual InsuranceRateDto? InsuranceRate { get; set; }
         public virtual InsuranceStatusDto? InsuranceStatus { get; set; }

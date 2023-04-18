@@ -29,7 +29,14 @@ namespace InsuranceCompany.Infrastructure.Repositories
                 trackChanges).Include(i => i.InsuranceStatus).Include(i => i.InsuranceRate)
                 .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
                 .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.QuestionType)
-                .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).FirstOrDefault();
+                .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).Include(i => i.AnswerValues).FirstOrDefault();
+        }
+
+        public InsuranceRequest GetByIdForCreate(Guid Id, bool trackChanges)
+        {
+            return FindByCondition(x => x.Id == Id,
+                trackChanges).Include(i => i.InsuranceStatus)
+                .Include(i => i.InsuredPersons).FirstOrDefault();
         }
     }
 }

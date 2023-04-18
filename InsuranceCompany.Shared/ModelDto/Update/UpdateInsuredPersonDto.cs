@@ -2,21 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsuranceCompany.Shared.ModelDto
+namespace InsuranceCompany.Shared.ModelDto.Update
 {
-    public class InsuredPersonDto
+    public class UpdateInsuredPersonDto
     {
-        public Guid? Id { get; set; }
+        public Guid Id { get; set; }
         public bool IsMainInsuredPerson { get; set; }
-
-        public Guid? ClientId { get; set; }
-        public Guid? InsuranceRequestId { get; set; }
-
-        public virtual ClientDto? Client { get; set; }
+        public virtual UpdateClientDto? Client { get; set; }
 
     }
 }

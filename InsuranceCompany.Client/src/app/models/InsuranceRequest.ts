@@ -1,6 +1,8 @@
 import { InsuranceStatus } from 'src/app/models/InsuranceStatus';
 import { Client } from 'src/app/models/Client';
 import { InsuranceRate } from 'src/app/models/InsuranceRate';
+import { InsuredPerson } from 'src/app/models/InsuredPerson';
+import { AnswerValues } from 'src/app/models/AnswerValue';
 
 export class InsuranceRequest {
     id : string;
@@ -14,9 +16,8 @@ export class InsuranceRequest {
     cost: number;
     сoefficient: number;
     insuranceRate: InsuranceRate;
-    // public virtual Agent? Agent { get; set; }
-
-    // public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
+    insuredPersons: InsuredPerson[];
+    answerValues: AnswerValues[];
 
 
     constructor(id: string, dateOfStart: Date, dateOfEnd: Date, agentId: string, 

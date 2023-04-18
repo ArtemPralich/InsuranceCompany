@@ -12,4 +12,8 @@ import { InsuranceTypeSurvey } from 'src/app/models/InsuranceTypeSurvey';
 export class InsuranceSuraveysComponent {
   @Input() insuranceRequest:  InsuranceRequest;
   panelOpenState = false;
+
+  print(){
+    console.log(this.insuranceRequest.answerValues[0].value)
+  }
 }

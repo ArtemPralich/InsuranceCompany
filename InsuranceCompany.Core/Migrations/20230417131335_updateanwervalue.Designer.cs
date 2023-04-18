@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230417131335_updateanwervalue")]
+    partial class updateanwervalue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,9 +86,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("InsuranceRequestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("InsuranceSurveyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("QuestionId")
@@ -351,24 +351,6 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasIndex("InsuranceRequestId");
 
                     b.ToTable("InsuredPersons");
-                });
-
-            modelBuilder.Entity("InsuranceCompany.Core.Models.Template", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id")
-                        .HasName("PK__Template__3214EC0715E303CD");
-
-                    b.ToTable("Template", (string)null);
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Models.User", b =>
@@ -645,22 +627,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8568126d-89c6-41fc-a92c-d2ee37f4e218",
-                            ConcurrencyStamp = "e1f0488c-1294-4561-bb69-0d647f43535f",
+                            Id = "e47c5cd1-d4a5-46b8-bd9f-4d08c48645d6",
+                            ConcurrencyStamp = "bee71ef5-13e5-4cd8-8bf6-5b22a040a1ea",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "80fceda2-807c-49dd-8862-afeb38331360",
-                            ConcurrencyStamp = "6f7d3d8e-82de-44ea-9d36-1a6862bf190b",
+                            Id = "f0b607b9-1998-4eff-afb9-639dced0bc51",
+                            ConcurrencyStamp = "8e09cc95-83e8-4500-b6f7-8baf2b97fb39",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "401c8922-0e44-48c8-8d9a-ca91029ffe25",
-                            ConcurrencyStamp = "eccc8510-908f-4391-9699-eda4aa11e607",
+                            Id = "99d94e09-4f4c-4dea-842a-63c4965bdec3",
+                            ConcurrencyStamp = "d66033ec-5064-483b-b678-de9d7d46443f",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

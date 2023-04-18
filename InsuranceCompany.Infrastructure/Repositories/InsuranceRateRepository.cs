@@ -22,8 +22,9 @@ namespace InsuranceCompany.Infrastructure.Repositories
 
         public InsuranceRate GetById(Guid Id, bool trackChanges)
         {
-            return FindByCondition(x => x.Id == Id,
-                trackChanges).FirstOrDefault();
+            return FindByCondition(x => x.Id == Id, trackChanges).Include(i => i.InsuranceTypeSurveys)
+                .ThenInclude(its => its.InsuranceSurvey).ThenInclude(its => its.QuestionSurveys)
+                .ThenInclude(its => its.Question).FirstOrDefault();
         }
     }
 }

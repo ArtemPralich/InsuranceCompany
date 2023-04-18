@@ -6,12 +6,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { MainComponent } from './pages/main/main.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
   { path: 'login', component: LoginComponent},
   { path: 'insurances', component: InsuranceListComponent},
   { path: 'insurance/:id', component: InsuranceComponent,},
+  { path: 'documents', component: DocumentTemplatesComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: '**', component: NotFoundComponent},];
 

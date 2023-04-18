@@ -1,7 +1,7 @@
 <button mat-button (click)="openDialog()">Open dialog</button>
 
 <div class="custom-table">
-  <table mat-table [dataSource]="insuranceRequests" class="mat-elevation-z8">   
+  <table mat-table [dataSource]="insuranceRequests.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize)" class="mat-elevation-z8">   
     <div>
     
       <ng-container matColumnDef="name" >
@@ -76,7 +76,12 @@
   </table>
   
   <mat-divider/>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+  <mat-paginator #paginator 
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
     showFirstLastButtons
     aria-label="Select page of periodic elements">
   </mat-paginator>

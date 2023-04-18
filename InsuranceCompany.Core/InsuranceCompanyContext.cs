@@ -42,6 +42,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
     public virtual DbSet<Position> Positions { get; set; }
 
     public virtual DbSet<PositionClient> PositionClients { get; set; }
+    public virtual DbSet<Template> Templates { get; set; }
 
     public virtual DbSet<Question> Questions { get; set; }
 
@@ -108,7 +109,6 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
             entity.ToTable("AnswerValue");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Value)
                 .HasMaxLength(1024)
                 .IsUnicode(false);
@@ -269,6 +269,14 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.HasOne(d => d.Position).WithMany(p => p.PositionClients)
                 .HasForeignKey(d => d.PositionId)
                 .HasConstraintName("FK__PositionC__Posit__32E0915F");
+        });
+
+        modelBuilder.Entity<Template>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Template__3214EC0715E303CD");
+
+            entity.ToTable("Template");
+
         });
 
         modelBuilder.Entity<Question>(entity =>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -15,8 +16,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddDbContext<InsuranceCompanyContext>(opts =>
+{
     opts.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"), b =>
-    b.MigrationsAssembly("InsuranceCompany.Core")));
+        b.MigrationsAssembly("InsuranceCompany.Core"));
+    opts.EnableSensitiveDataLogging();
+});
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = "aaaaaaaaaaaaaaaa";

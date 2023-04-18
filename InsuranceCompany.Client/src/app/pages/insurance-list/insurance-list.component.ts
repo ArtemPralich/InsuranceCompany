@@ -13,6 +13,7 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Client } from 'src/app/models/Client';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-insurance-list',
@@ -23,6 +24,9 @@ export class InsuranceListComponent implements OnInit {
   insuranceRequests:  InsuranceRequest[] = [];
   displayedColumns: string[] = ['name', 'personalCode', 'date', 'cost' , 'status'];
   dataSource = new MatTableDataSource<InsuranceRequest>();
+  pageSize:number = 10;
+  pageIndex:number = 0;
+  length:number = 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public insuranceRequestService: InsuranceRequestService, public dialog: MatDialog, 
@@ -41,9 +45,20 @@ export class InsuranceListComponent implements OnInit {
     this.dialog.open(DialogElementsExampleDialog);
   }
 
+  pageEvent: PageEvent;
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+  }
+
   ngOnInit(){
     this.insuranceRequestService.GetAllInsuranceRequests().subscribe(res => {
       this.insuranceRequests = res;
+      this.length = this.insuranceRequests.length;
+      console.log(this.length)
       console.log(this.insuranceRequests);
     });
   }

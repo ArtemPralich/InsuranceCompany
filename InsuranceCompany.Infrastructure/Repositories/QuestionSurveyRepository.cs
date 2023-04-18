@@ -24,5 +24,11 @@ namespace InsuranceCompany.Infrastructure.Repositories
             return FindByCondition(x => x.Id == Id,
                 trackChanges).FirstOrDefault();
         }
+
+        public QuestionSurvey GetBySurveyId(Guid Id, bool trackChanges)
+        {
+            return FindByCondition(x => x.InsuranceSurveyId == Id,
+                trackChanges).FirstOrDefault();
+        }
     }
 }

@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230417131708_updateanwervalue1")]
+    partial class updateanwervalue1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -353,24 +356,6 @@ namespace InsuranceCompany.Core.Migrations
                     b.ToTable("InsuredPersons");
                 });
 
-            modelBuilder.Entity("InsuranceCompany.Core.Models.Template", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id")
-                        .HasName("PK__Template__3214EC0715E303CD");
-
-                    b.ToTable("Template", (string)null);
-                });
-
             modelBuilder.Entity("InsuranceCompany.Core.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -645,22 +630,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "8568126d-89c6-41fc-a92c-d2ee37f4e218",
-                            ConcurrencyStamp = "e1f0488c-1294-4561-bb69-0d647f43535f",
+                            Id = "932d2f10-65a3-4a78-af75-439538e7b529",
+                            ConcurrencyStamp = "7409b612-c066-4ea2-8cac-2b8a73d01469",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "80fceda2-807c-49dd-8862-afeb38331360",
-                            ConcurrencyStamp = "6f7d3d8e-82de-44ea-9d36-1a6862bf190b",
+                            Id = "a81ba068-c219-41c5-a972-d64b02a5e8db",
+                            ConcurrencyStamp = "fa0e7647-ffcb-443c-b875-442ed69d4c09",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "401c8922-0e44-48c8-8d9a-ca91029ffe25",
-                            ConcurrencyStamp = "eccc8510-908f-4391-9699-eda4aa11e607",
+                            Id = "bc4e890a-4f38-4ef1-811d-9e97e1272438",
+                            ConcurrencyStamp = "c12ce802-da20-4300-b6ab-505800254a6f",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

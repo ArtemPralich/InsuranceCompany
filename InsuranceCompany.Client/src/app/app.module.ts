@@ -16,6 +16,7 @@ import { MainComponent } from './pages/main/main.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthService } from './service/AuthService';
 import { ClientService } from './service/ClientService';
+import { DocumentService } from './service/DocumentService';
 import { InsuranceRequestService } from './service/InsuranceRequestService';
 import { InsuranceRateService } from './service/InsuranceRateService';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,6 +43,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import {MatTreeModule} from '@angular/material/tree';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
+import { NgxEditorModule } from 'ngx-editor';
+import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import {MatRadioModule} from '@angular/material/radio';
     InsuredPersonsComponent,
     InsuranceBankDataComponent,
     InsuranceDocumentsComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DocumentTemplatesComponent
   ],
   imports: [
     BrowserModule,
@@ -84,12 +88,14 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTreeModule,
     MatExpansionModule,
     MatRadioModule,
+    NgxEditorModule
   ],
   providers: [
     AuthService,
     ClientService,
     InsuranceRequestService,
     InsuranceRateService,
+    DocumentService,
   ],
   bootstrap: [AppComponent],
   schemas: [

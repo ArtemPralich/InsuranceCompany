@@ -22,6 +22,8 @@ namespace InsuranceCompany.Infrastructure
         private QuestionTypeRepository _questionTypeRepository;
         private InsuranceTypeSurveyRepository _insuranceTypeSurvey;
         private QuestionSurveyRepository _questionSurvey;
+        private InsuredPersonRepository _insuredPerson;
+        private TemplateRepository _template;
 
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
@@ -123,6 +125,26 @@ namespace InsuranceCompany.Infrastructure
                 if (_questionSurvey == null)
                     _questionSurvey = new QuestionSurveyRepository(_repositoryContext);
                 return _questionSurvey;
+            }
+        }
+
+        public InsuredPersonRepository InsuredPerson
+        {
+            get
+            {
+                if (_insuredPerson == null)
+                    _insuredPerson = new InsuredPersonRepository(_repositoryContext);
+                return _insuredPerson;
+            }
+        }
+        
+        public TemplateRepository Template
+        {
+            get
+            {
+                if (_template == null)
+                    _template = new TemplateRepository(_repositoryContext);
+                return _template;
             }
         }
 
