@@ -11,7 +11,7 @@ namespace InsuranceCompany.Shared.ModelDto.Update
 {
     public class UpdateInsuredPersonDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
         public bool IsMainInsuredPerson { get; set; }
         public virtual UpdateClientDto? Client { get; set; }
 

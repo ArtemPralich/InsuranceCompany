@@ -32,10 +32,17 @@ namespace InsuranceCompany.Infrastructure.Repositories
             return FindByCondition(x => guids.Contains(x.Id),
                 trackChanges).Include(i => i.Client).ToList();
         }
-
+        public void CreateRange(List<InsuredPerson> insuredPersons)
+        {
+            RepositoryContext.InsuredPersons.AddRange(insuredPersons);
+        }
         public void UpdateRange(List<InsuredPerson> insuredPersons)
         {
             RepositoryContext.InsuredPersons.UpdateRange(insuredPersons);
+        }
+        public void DeleteRange(List<InsuredPerson> insuredPersons)
+        {
+            RepositoryContext.InsuredPersons.RemoveRange(insuredPersons);
         }
     }
 }

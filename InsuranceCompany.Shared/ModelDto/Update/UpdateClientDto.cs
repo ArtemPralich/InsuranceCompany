@@ -8,7 +8,7 @@ namespace InsuranceCompany.Shared.ModelDto.Update
 {
     public class UpdateClientDto
     {
-        public Guid Id { get; set; }
+        public Guid? Id { get; set; }
 
         public string? Name { get; set; }
 

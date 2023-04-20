@@ -1,1 +1,76 @@
-<p>insured-persons works!</p>
+<div class="content">
+
+    <mat-panel-description>
+        <button mat-fab color="basic" class="icon-button" (click)="addInsuredPerson()">
+            <mat-icon>add</mat-icon>
+        </button>
+        Добавить нового человека в страховой запрос
+    </mat-panel-description>
+    <mat-accordion сlass="example-headers-align">
+        <div *ngFor="let person of insuranceRequest.insuredPersons">
+            <mat-expansion-panel (opened)="person.isAccoridionOpen = true"
+                (closed)="person.isAccoridionOpen = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span *ngIf="(person.client.name == undefined || person.client.name == '') && (person.client.surname == undefined || person.client.surname == '')" class="red-text">*Необходино заполнить данные</span>
+                        {{person.client.name ?? "" }} {{person.client.surname ?? ""}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <!-- <button mat-fab color="basic" class="icon-button">
+                            <mat-icon>delete</mat-icon>
+                        </button> -->
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                    <ng-template matStepLabel>
+                        Заполните информацию о клиенте
+                    </ng-template>
+                    <p>
+                        <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Введите имя</mat-label>
+                            <input matInput placeholder="Имя" [(ngModel)]="person.client.name" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Введите фамилию</mat-label>
+                            <input matInput placeholder="Фамилия"  [(ngModel)]="person.client.surname" [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="fill" class="margin-form-field width-form-field-300">
+                            <mat-label>Введите персональный код</mat-label>
+                            <input matInput placeholder="Персональный код" type="text" [(ngModel)]="person.client.personalCode" 
+                            [ngModelOptions]="{standalone: true}" maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()">
+                        </mat-form-field>
+                        
+                        <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Введите дату рождения</mat-label>
+                            <input matInput [matDatepicker]="picker"  [(ngModel)]="person.client.dateOfBirth" [ngModelOptions]="{standalone: true}">
+                            <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                            <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Выберите тип страхового запроса</mat-label>
+                            <mat-select [(ngModel)]="person.client.gender" [ngModelOptions]="{standalone: true}">
+                            <mat-option [value]="true">
+                                Мужчина
+                            </mat-option>
+            
+                            <mat-option [value]="false">
+                                Женщина
+                            </mat-option>
+                            </mat-select>
+                        </mat-form-field>        
+                    </p>
+                </div>
+                 <mat-action-row *ngIf="!person.isMainInsuredPerson">
+                    <button mat-button color="primary" (click)="delete(person)">Удалить</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </div>
+    </mat-accordion>
+    
+</div>

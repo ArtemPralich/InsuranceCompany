@@ -13,7 +13,7 @@ namespace InsuranceCompany.Shared.ModelDto.Update
         public Guid Id { get; set; }
         [JsonProperty("text")]
         public string? Text { get; set; }
-        [JsonProperty("title")]
+
         public string? Title { get; set; }
     }
 }

@@ -112,13 +112,28 @@ namespace InsuranceCompany.Controllers
             _repositoryManager.InsuranceRequest.Update(insuranceRequest);
             _repositoryManager.Save();
 
+            var insuredPersonForCreate = insuranceRequestDto.InsuredPersons.Where(p => Guid.Empty.Equals(p.Id) || p.Id == null).ToList();
+            foreach(var person in insuredPersonForCreate)
+            {
+                if(person.Client.PersonalCode == null)
+                {
+                    person.Client.PersonalCode = "";
+                }
+            }
+            var insuredPersonForDelete = insuranceRequest.InsuredPersons.Where(p => !insuranceRequestDto.InsuredPersons.Select(pr => pr.Id).Contains(p.Id)).ToList();
             var insuredPersonForUpdate = _repositoryManager.InsuredPerson.GetRangeByIds(insuranceRequest.InsuredPersons.Select(x => x.Id).ToList(), true);
 
             foreach(var insuredPerson in insuredPersonForUpdate)
             {
                 _mapper.Map(insuranceRequestDto.InsuredPersons.Where(i => i.Id.Equals(insuredPerson.Id)).FirstOrDefault(), insuredPerson);
             }
+
+            var newPersons = _mapper.Map<List<InsuredPerson>>(insuredPersonForCreate);
             _repositoryManager.InsuredPerson.UpdateRange(insuredPersonForUpdate);
+            _repositoryManager.InsuredPerson.CreateRange(newPersons);
+            _repositoryManager.InsuredPerson.DeleteRange(insuredPersonForDelete);
+
+            
             _repositoryManager.Save();
 
             return NoContent();

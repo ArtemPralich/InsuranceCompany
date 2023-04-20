@@ -6,3 +6,21 @@
     margin: 0 auto;
     width: 90%;
 }
+
+.save-button {
+    position: fixed;
+    bottom: 70px;
+    right: 0px;
+    z-index: 9999;
+    width: 150px;
+    height: 60px;
+    color:aliceblue !important;
+    background-color: #303030;
+    opacity: 0.7;
+    border: solid 0px #303030 !important;
+    transition: all 0.2s ease-in-out;
+}
+.save-button:hover {
+    transform: translateX(5px); /* смещаем кнопку на 5 пикселей вправо */
+    background-color: #202020;
+}
