@@ -32,6 +32,15 @@ namespace InsuranceCompany.Controllers
             return Ok(insuranceRate);
         }
 
+        [HttpPost("AddSurvey", Name = "AddSurvey")]
+        public IActionResult AddSurvey(AddSurveyToRateDto survey)
+        {
+            var insSurvey = _mapper.Map<InsuranceTypeSurvey>(survey);
+            _repositoryManager.InsuranceTypeSurvey.Create(insSurvey);
+            _repositoryManager.Save();
+            return NoContent();
+        }
+
         [HttpPost(Name = "CreateInsuranceRate")]
         public IActionResult Create(CreateInsuranceRateDto insuranceRateDto)
         {

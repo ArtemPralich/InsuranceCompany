@@ -31,8 +31,8 @@ namespace InsuranceCompany.Controllers
             return Ok(insuranceRequests);
         }
 
-        [HttpPost(Name = "CreateQuestion")]
-        public IActionResult Create(CreateQuestionDto answerDto)
+        [HttpPost("question",Name = "CreateQuestion")]
+        public IActionResult CreateQuestion(CreateQuestionDto answerDto)
         {
             var answer = _mapper.Map<Question>(answerDto);
             _repositoryManager.Question.Create(answer);
@@ -41,14 +41,15 @@ namespace InsuranceCompany.Controllers
             return NoContent();
         }
 
-        //[HttpPost(Name = "CreateQuestion")]
-        //public IActionResult CreateQuestion(CreateQuestionDto questionDto)
-        //{
-        //    _repositoryManager.InsuranceSurvey.Create(insuranceSurvey);
-        //    _repositoryManager.Save();
+        [HttpPost(Name = "CreateSurvey")]
+        public IActionResult CreateSurvey(CreateSurveyDto surveyDto)
+        {
+            var survey = _mapper.Map<InsuranceSurvey>(surveyDto);
+            _repositoryManager.InsuranceSurvey.Create(survey);
+            _repositoryManager.Save();
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
         [HttpPut(Name = "UpdateInsuranceSurvey")]
         public IActionResult Update(InsuranceSurvey insuranceSurvey)

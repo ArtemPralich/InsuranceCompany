@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230410132407_updateinsSurvey")]
+    partial class updateinsSurvey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -620,22 +623,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "297a11ad-cf46-4dc5-9bb9-e4af9eeef182",
-                            ConcurrencyStamp = "340a19b6-8bc6-4e5a-b149-6c274373ac26",
+                            Id = "cd4b3525-bf24-4fd2-a957-49e837014a08",
+                            ConcurrencyStamp = "9d97d6e2-3005-470d-9e85-aa63b7c2ae4b",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "bf846a24-d43a-4ca0-adab-59c3bb9a7f5e",
-                            ConcurrencyStamp = "3c8c6987-fcbb-456f-8da0-bb47bc048e8c",
+                            Id = "85f2c4a4-4a6a-460e-829d-617edd453283",
+                            ConcurrencyStamp = "0f1fcf70-3f60-4d39-9449-ab4cf02d259b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "cd51b1aa-d268-4349-926c-7c0e6e428e9d",
-                            ConcurrencyStamp = "c5a9a9dd-1fb7-49fa-b3fa-26ee1b0c7055",
+                            Id = "19c32ba4-e2ba-4e10-bc6c-4a68c383d64c",
+                            ConcurrencyStamp = "c55f0b44-80c5-47d1-b9c0-4fbb0bf48ce2",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -892,8 +895,7 @@ namespace InsuranceCompany.Core.Migrations
                 {
                     b.HasOne("InsuranceCompany.Core.InsuranceSurvey", "InsuranceSurvey")
                         .WithMany("QuestionSurveys")
-                        .HasForeignKey("InsuranceSurveyId")
-                        .HasConstraintName("FK__QuestionSurvey__InsuranceSurvey__6C190EBB");
+                        .HasForeignKey("InsuranceSurveyId");
 
                     b.HasOne("InsuranceCompany.Core.Question", "Question")
                         .WithMany("QuestionSurveys")

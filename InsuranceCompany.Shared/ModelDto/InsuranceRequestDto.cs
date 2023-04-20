@@ -29,7 +29,7 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
 
-        public virtual InsuranceRate? InsuranceRate { get; set; }
+        public virtual InsuranceRateDto? InsuranceRate { get; set; }
         public virtual InsuranceStatusDto? InsuranceStatus { get; set; }
         public virtual ICollection<InsuredPersonDto> InsuredPersons { get; } = new List<InsuredPersonDto>();
         public ClientDto MainClient { get;set; }

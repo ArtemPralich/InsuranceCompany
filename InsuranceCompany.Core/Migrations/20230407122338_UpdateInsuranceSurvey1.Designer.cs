@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230407122338_UpdateInsuranceSurvey1")]
+    partial class UpdateInsuranceSurvey1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -511,7 +514,6 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.QuestionType", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Text")
@@ -620,22 +622,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "297a11ad-cf46-4dc5-9bb9-e4af9eeef182",
-                            ConcurrencyStamp = "340a19b6-8bc6-4e5a-b149-6c274373ac26",
+                            Id = "554fabd3-9316-436d-bc21-78021e18fb2b",
+                            ConcurrencyStamp = "c3a4b195-99c0-41b5-9e59-ba42bd997b6b",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "bf846a24-d43a-4ca0-adab-59c3bb9a7f5e",
-                            ConcurrencyStamp = "3c8c6987-fcbb-456f-8da0-bb47bc048e8c",
+                            Id = "f92c278a-ed31-48e0-97a5-0b76ecea083d",
+                            ConcurrencyStamp = "1b37cebe-a19b-40db-a832-e72e93a26d32",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "cd51b1aa-d268-4349-926c-7c0e6e428e9d",
-                            ConcurrencyStamp = "c5a9a9dd-1fb7-49fa-b3fa-26ee1b0c7055",
+                            Id = "d45432cf-6d8e-40d6-82ca-cdf9f2d33c20",
+                            ConcurrencyStamp = "5182df21-b5d6-4974-bd38-a2e423c0fc66",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -891,9 +893,8 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.QuestionSurvey", b =>
                 {
                     b.HasOne("InsuranceCompany.Core.InsuranceSurvey", "InsuranceSurvey")
-                        .WithMany("QuestionSurveys")
-                        .HasForeignKey("InsuranceSurveyId")
-                        .HasConstraintName("FK__QuestionSurvey__InsuranceSurvey__6C190EBB");
+                        .WithMany()
+                        .HasForeignKey("InsuranceSurveyId");
 
                     b.HasOne("InsuranceCompany.Core.Question", "Question")
                         .WithMany("QuestionSurveys")
@@ -1018,8 +1019,6 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceSurvey", b =>
                 {
                     b.Navigation("InsuranceTypeSurveys");
-
-                    b.Navigation("QuestionSurveys");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Position", b =>

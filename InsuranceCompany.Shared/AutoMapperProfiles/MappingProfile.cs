@@ -46,6 +46,21 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
 
             CreateMap<CreateQuestionDto, Question>();
             CreateMap<CreateQuestionDto, Question>().ReverseMap();
+
+            CreateMap<CreateSurveyDto, InsuranceSurvey>();
+            CreateMap<CreateSurveyDto, InsuranceSurvey>().ReverseMap();
+
+            CreateMap<InsuranceRateDto, InsuranceRate>();
+            CreateMap<InsuranceRateDto, InsuranceRate>().ReverseMap();
+
+            CreateMap<AddSurveyToRateDto, InsuranceTypeSurvey>();
+            CreateMap<AddSurveyToRateDto, InsuranceTypeSurvey>().ReverseMap();
+
+            CreateMap<InsuranceTypeSurveyDto, InsuranceTypeSurvey>();
+            CreateMap<InsuranceTypeSurveyDto, InsuranceTypeSurvey>().ReverseMap();
+
+            CreateMap<InsuranceSurvey, InsuranceSurveyDto>()
+                .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.QuestionSurveys.Select(i => i.Question).ToList()));
         }
     }
 }
