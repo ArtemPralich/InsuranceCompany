@@ -1,1 +1,46 @@
-<p>insurance-suraveys works!</p>
+<div class="content">
+    <mat-accordion *ngFor="let item of insuranceRequest.insuranceRate.insuranceTypeSurveys">
+        <mat-expansion-panel (opened)="panelOpenState = true"
+         (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{item.insuranceSurvey.title}}
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+                    Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <div *ngFor="let question of item.insuranceSurvey.questions">
+                <label id="example-radio-group-label">{{question.text}}</label>
+                <div *ngIf="question.questionType.text=='checkbox'">
+                    <mat-checkbox color="primary" class="example-margin">Check me!</mat-checkbox>
+                </div>
+                <div *ngIf="question.questionType.text=='radiobutton'">
+                    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"> 
+                    <mat-radio-button class="example-radio-button" *ngFor="let ans of question.answer" [value]="ans">
+                        {{ans}} 123
+                    </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div *ngIf="question.questionType.text=='textarea'">
+                    <form class="example-form">                    
+                        <mat-form-field class="example-full-width">
+                          <textarea matInput placeholder="Answer"></textarea>
+                        </mat-form-field>
+                      </form>
+                </div>
+                <div *ngIf="question.questionType.text=='input'" >
+                    <div *ngFor="let answer of insuranceRequest.answerValues">
+                        <form class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
+                            <mat-form-field class="example-full-width">
+                              <input matInput #message maxlength="256" placeholder="Answer" 
+                                [(ngModel)]="answer.value" 
+                                [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

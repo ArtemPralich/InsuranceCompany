@@ -15,6 +15,6 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public string? Description { get; set; }
 
-       public virtual ICollection<Question> Questions { get; } = new List<Question>();
+       public virtual ICollection<QuestionDto> Questions { get; } = new List<QuestionDto>();
     }
 }

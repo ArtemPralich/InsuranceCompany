@@ -1,0 +1,24 @@
+.icon-button{
+    width: 50px;
+    height: 50px;
+    box-shadow: none;
+}
+
+.content{
+    margin-top: 40px;
+}
+
+.margin-form-field{
+    margin-left: 40px;
+}
+
+.content{
+    margin-top: 40px;
+}
+
+.width-form-field-300{
+    width: 300px;
+}
+.red-text{
+    color: rgb(249, 48, 48);
+}

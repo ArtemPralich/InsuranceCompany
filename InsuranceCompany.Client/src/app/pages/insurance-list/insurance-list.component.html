@@ -29,85 +29,89 @@
     </div>
   </div>
   
-  <div class="custom-table">
-    <table mat-table [dataSource]="insuranceRequests" class="mat-elevation-z8">   
-      <div>
-      
-        <ng-container matColumnDef="name" >
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td  *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
-            {{element.symbol}} 
-            <mat-list>
-              <mat-list-item>
-                <span class="text-font" >{{element.mainClient.name}} {{element.mainClient.surname}}</span>
-              </mat-list-item>
-            </mat-list>
-          </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="personalCode">
-          <th mat-header-cell *matHeaderCellDef > 
-            Personal Code 
-          </th>
-          <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
-            <mat-list-item class="text-padding" >
-              <span class="text-font" >{{element.mainClient.personalCode }}</span>
-            </mat-list-item>
-          </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef> Date </th>
-          <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
-            <mat-list>
-              <mat-list-item class="text-padding">
-                <span class="text-font" >
-                  <span class="text-font" >{{element.dateOfStart | date: 'dd-MM-yyyy' }}</span>
-                  <span class="text-font" > - </span><br/>
-                  <span class="text-font" >{{element.dateOfEnd | date: 'dd-MM-yyyy' }}</span>
-                </span>
-              </mat-list-item>
-            </mat-list>
-            
-          </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="cost">
-          <th mat-header-cell *matHeaderCellDef> Cost </th>
-          <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
-            <mat-list>
-              <mat-list-item class="text-padding">
-                <span class="text-font" >
-                  <span class="text-font" > {{element.cost}}$</span>
-                </span>
-              </mat-list-item>
-            </mat-list>
-            
-          </td>
-        </ng-container>
-  
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
-            <span >
-              <label> 
-                <mat-icon [style.background-color]="element.insuranceStatus.color" class="circle-icon">
-      
-                </mat-icon>
-                <span class="text-font" >  {{element.insuranceStatus.status}}</span>
-              </label>
-            </span> 
-          </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row fxLayout="row" *matRowDef="let row; columns: displayedColumns;"></tr>      
-      </div>
-    </table>
+<div class="custom-table">
+  <table mat-table [dataSource]="insuranceRequests.slice(pageSize * pageIndex, pageSize * pageIndex + pageSize)" class="mat-elevation-z8">   
+    <div>
     
-    <mat-divider/>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-      showFirstLastButtons
-      aria-label="Select page of periodic elements">
-    </mat-paginator>
-  </div>
+      <ng-container matColumnDef="name" >
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td  *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
+          {{element.symbol}} 
+          <mat-list>
+            <mat-list-item>
+              <span class="text-font" >{{element.mainClient.name}} {{element.mainClient.surname}}</span>
+            </mat-list-item>
+          </mat-list>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="personalCode">
+        <th mat-header-cell *matHeaderCellDef > 
+          Personal Code 
+        </th>
+        <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
+          <mat-list-item class="text-padding" >
+            <span class="text-font" >{{element.mainClient.personalCode }}</span>
+          </mat-list-item>
+        </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
+          <mat-list>
+            <mat-list-item class="text-padding">
+              <span class="text-font" >
+                <span class="text-font" >{{element.dateOfStart | date: 'dd-MM-yyyy' }}</span>
+                <span class="text-font" > - </span><br/>
+                <span class="text-font" >{{element.dateOfEnd | date: 'dd-MM-yyyy' }}</span>
+              </span>
+            </mat-list-item>
+          </mat-list>
+          
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cost">
+        <th mat-header-cell *matHeaderCellDef> Cost </th>
+        <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
+          <mat-list>
+            <mat-list-item class="text-padding">
+              <span class="text-font" >
+                <span class="text-font" > {{element.cost}}$</span>
+              </span>
+            </mat-list-item>
+          </mat-list>
+          
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element" (click)="navigateToUrl(element.id)"> 
+          <span >
+            <label> 
+              <mat-icon [style.background-color]="element.insuranceStatus.color" class="circle-icon">
+    
+              </mat-icon>
+              <span class="text-font" >  {{element.insuranceStatus.status}}</span>
+            </label>
+          </span> 
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row fxLayout="row" *matRowDef="let row; columns: displayedColumns;"></tr>      
+    </div>
+  </table>
+  
+  <mat-divider/>
+  <mat-paginator #paginator 
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSizeOptions]="[5, 10, 20]"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    showFirstLastButtons
+    aria-label="Select page of periodic elements">
+  </mat-paginator>
 </div>

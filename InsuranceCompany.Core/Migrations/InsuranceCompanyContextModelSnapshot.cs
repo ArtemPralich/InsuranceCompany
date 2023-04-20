@@ -79,9 +79,13 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.AnswerValue", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("InsuranceRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("InsuranceSurveyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("QuestionId")
@@ -301,6 +305,7 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceTypeSurvey", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("InsuranceRateId")
@@ -346,6 +351,24 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasIndex("InsuranceRequestId");
 
                     b.ToTable("InsuredPersons");
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.Models.Template", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK__Template__3214EC0715E303CD");
+
+                    b.ToTable("Template", (string)null);
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Models.User", b =>
@@ -461,6 +484,7 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.Question", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool?>("IsMandatory")
@@ -485,6 +509,7 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.QuestionSurvey", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("InsuranceSurveyId")
@@ -620,22 +645,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "297a11ad-cf46-4dc5-9bb9-e4af9eeef182",
-                            ConcurrencyStamp = "340a19b6-8bc6-4e5a-b149-6c274373ac26",
+                            Id = "8568126d-89c6-41fc-a92c-d2ee37f4e218",
+                            ConcurrencyStamp = "e1f0488c-1294-4561-bb69-0d647f43535f",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "bf846a24-d43a-4ca0-adab-59c3bb9a7f5e",
-                            ConcurrencyStamp = "3c8c6987-fcbb-456f-8da0-bb47bc048e8c",
+                            Id = "80fceda2-807c-49dd-8862-afeb38331360",
+                            ConcurrencyStamp = "6f7d3d8e-82de-44ea-9d36-1a6862bf190b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "cd51b1aa-d268-4349-926c-7c0e6e428e9d",
-                            ConcurrencyStamp = "c5a9a9dd-1fb7-49fa-b3fa-26ee1b0c7055",
+                            Id = "401c8922-0e44-48c8-8d9a-ca91029ffe25",
+                            ConcurrencyStamp = "eccc8510-908f-4391-9699-eda4aa11e607",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

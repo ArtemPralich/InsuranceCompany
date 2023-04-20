@@ -6,6 +6,7 @@ namespace InsuranceCompany.Core;
 
 public partial class AnswerValue
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     public string? Value { get; set; }
@@ -15,7 +16,7 @@ public partial class AnswerValue
 
     [ForeignKey(nameof(Question))]
     public Guid? QuestionId { get; set; }
-
+    public Guid? InsuranceSurveyId { get; set; }
     public virtual InsuranceRequest? InsuranceRequest { get; set; }
 
     public virtual Question? Question { get; set; }
