@@ -24,7 +24,6 @@
     transform: translateX(5px); /* смещаем кнопку на 5 пикселей вправо */
     background-color: #202020;
 }
-}
 
 .container {
     margin: 0px 70px;
