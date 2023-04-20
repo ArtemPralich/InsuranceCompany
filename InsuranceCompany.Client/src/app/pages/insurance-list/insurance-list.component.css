@@ -1,3 +1,58 @@
+.insurances {
+  background-color: rgb(237,238,240);;
+  min-height: 100vh;
+}
+
+.container {
+  margin: 0px 70px;
+}
+
+.header {
+  background: #324e88;
+  height: 120px;
+  position: relative; 
+} 
+
+.header-line {
+  padding-top: 10px; 
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.line-items {
+  display: flex;
+  color: #fff;
+  align-items: center;
+  font-weight: 100;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.right-item {
+  margin-left: 50px;
+  text-align: right;
+}
+
+.button-plus {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.count-item {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.select-money {
+  background-color: #324e88;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+}
+
 .custom-table {
     width: 80% !important;
     margin: 0 auto;

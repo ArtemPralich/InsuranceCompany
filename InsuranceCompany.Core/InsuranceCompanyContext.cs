@@ -57,7 +57,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
          => optionsBuilder
-        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany1;Trusted_Connection=True;");
+        .UseSqlServer("Server=LAPTOP-U48V0IAA\\SQLEXPRESS;Database=InsuranceCompany1;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

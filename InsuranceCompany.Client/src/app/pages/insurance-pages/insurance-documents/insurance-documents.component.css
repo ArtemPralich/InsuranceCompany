@@ -1,0 +1,14 @@
+.mat-mdc-list-item-icon {
+    color: rgba(0, 0, 0, 0.54);
+    text-decoration: none;
+}
+
+.item-doc {
+    color: black;
+    text-decoration: none;
+    transition: color 0.2s linear;
+}
+
+.item-doc:hover {
+    color: #89aacc;
+}

@@ -1,8 +1,37 @@
-<div class="common-info"> 
-  
+<div class="header">
+  <div class="container">
+    <div class="header-line">
+      <div class="left-items">
+        <a class="left-item reference-item">Reference ID: 81785</a>
+        <a class="left-item draft-item">
+          <mat-icon class="circle-icon">
+          </mat-icon>Draft</a>
+        <a class="left-item">a minute ago</a>
+        <a class="left-item" href="aaa">View aaaaa</a>
+        <a class="left-item" href="aaa"><img class="img-left-item img-help" src="assets/pictures/help.svg">Help</a>
+      </div>
+
+      <div>
+        <button class="button-dup"><img class="img-left-item" src="assets/pictures/duplicate.svg">Duplicate</button>
+        <button class="button-sign">Sign</button>
+      </div>
+    </div>
+
+    <div class="header-title">
+      Test test
+    </div>
+
+    <div class="center-items">
+      <a class="center-item">Tel: +375292917093</a>
+      <a class="center-item">Email: natasha@gmail.com</a>
+      <a class="center-item">Unit-linked Life Insurance PLUS</a>
+      <a class="left-item" href="aaa">Change</a>
+    </div>
+  </div>
 </div>
+
 <mat-tab-group animationDuration="0ms" class="insuranse-part">
-    <mat-tab label="Информация о слиенте">
+    <mat-tab label="Информация о клиенте">
       <app-insurance-client-info *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest" [childProp]="parentProp" >
 
       </app-insurance-client-info>

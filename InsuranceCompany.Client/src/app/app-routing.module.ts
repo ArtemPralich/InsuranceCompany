@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { MainComponent } from './pages/main/main.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { RequestComponent } from './pages/request/request.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'insurances', component: InsuranceListComponent},
   { path: 'insurance/:id', component: InsuranceComponent,},
   { path: 'registration', component: RegistrationComponent},
+  { path: 'request', component: RequestComponent},
   { path: '**', component: NotFoundComponent},];
 
 @NgModule({

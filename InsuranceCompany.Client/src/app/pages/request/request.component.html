@@ -1,0 +1,198 @@
+<div class="request">
+  <div class="request-container">
+    <div class="request-title">
+      Форма заполнения
+      <hr class="hr-shadow">
+    </div>
+
+
+    <div class="request-form" class="request-info-user" *ngIf="condition">
+      <div>
+        <mat-form-field appearance="fill" class="margin-form-field">
+          <mat-label>Введите фамилию</mat-label>
+          <input matInput placeholder="Фамилия" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="margin-form-field">
+          <mat-label>Введите имя</mat-label>
+          <input matInput placeholder="Имя" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="margin-form-field width-form-field">
+          <mat-label>Введите персональный код</mat-label>
+          <input matInput placeholder="Персональный код" type="text"
+             maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="margin-form-field">
+          <mat-label>Введите дату рождения</mat-label>
+          <input matInput [matDatepicker]="picker" required>
+          <mat-hint  matListItemLine>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="margin-form-field">
+          <mat-label>Выберите пол</mat-label>
+          <mat-select [ngModelOptions]="{standalone: true}" required>
+            <mat-option [value]="true">
+              Мужчина
+            </mat-option>
+            <mat-option [value]="false">
+              Женщина
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+
+        <mat-form-field appearance="fill" class="margin-form-field">
+          <mat-label>Введите адрес</mat-label>
+          <input matInput placeholder="Адрес" required>
+        </mat-form-field>
+      </div>
+        <button mat-raised-button color="primary" class="button-form" (click)="toggle()">Далее</button>
+    </div>
+
+    <div class="request-form" *ngIf="!condition">
+      <mat-form-field appearance="fill" class="popup-label">
+        <mat-label>Выберите тип страхового запроса</mat-label>
+        <mat-select>
+          <mat-option>
+            
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width"  class="popup-label">
+        <mat-label>Введите общую сумму страховых взносов</mat-label>
+        <input matInput type="number" placeholder="0">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width"  class="popup-label">
+        <mat-label>Коэффициент страхового запроса</mat-label>
+        <input matInput placeholder="50"  disabled>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width"  class="popup-label">
+        <mat-label>Страховые выплаты</mat-label>
+        <input matInput placeholder=""  disabled>
+      </mat-form-field>
+
+      <section class="example-section">
+        <mat-checkbox class="example-margin" color="primary">Разрешие обрабатывать пользовательские данные</mat-checkbox>
+      </section>
+
+      <div class="buttons-form">
+        <button mat-raised-button color="primary" class="button-form" (click)="toggle()">Назад</button>
+        <button mat-raised-button color="primary"class="button-form-send">Отправить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="request">
+  <div class="request-container">
+    <div class="request-title">
+      Форма заполнения
+      <hr class="hr-shadow">
+    </div>
+
+    <mat-stepper #stepper>
+      <mat-step>
+        <form>
+          <ng-template matStepLabel>Личные данные</ng-template>
+          
+          <div class="request-form">
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите фамилию</mat-label>
+              <input matInput placeholder="Фамилия" required>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите имя</mat-label>
+              <input matInput placeholder="Имя" required>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field width-form-field">
+              <mat-label>Введите персональный код</mat-label>
+              <input matInput placeholder="Персональный код" type="text"
+                 maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
+            </mat-form-field>
+  
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите дату рождения</mat-label>
+              <input matInput [matDatepicker]="picker" required>
+              <mat-hint  matListItemLine>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Выберите пол</mat-label>
+              <mat-select [ngModelOptions]="{standalone: true}" required>
+                <mat-option [value]="true">
+                  Мужчина
+                </mat-option>
+                <mat-option [value]="false">
+                  Женщина
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
+  
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите адрес</mat-label>
+              <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+          </div>
+            <button mat-raised-button color="primary"  class="button-form" matStepperNext>Далее</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <form>
+          <ng-template matStepLabel>Страхование</ng-template>
+          
+          <mat-form-field appearance="fill" class="popup-label">
+            <mat-label>Выберите тип страхового запроса</mat-label>
+            <mat-select>
+              <mat-option>
+                
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        
+          <mat-form-field class="example-full-width"  class="popup-label">
+            <mat-label>Введите общую сумму страховых взносов</mat-label>
+            <input matInput type="number" placeholder="0">
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width"  class="popup-label">
+            <mat-label>Коэффициент страхового запроса</mat-label>
+            <input matInput placeholder="50"  disabled>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width"  class="popup-label">
+            <mat-label>Страховые выплаты</mat-label>
+            <input matInput placeholder=""  disabled>
+          </mat-form-field>
+
+          <section class="example-section">
+            <mat-checkbox class="example-margin" color="primary">Разрешие обрабатывать пользовательские данные</mat-checkbox>
+          </section>
+
+          <div>
+            <button mat-raised-button color="primary" matStepperPrevious>Назад</button>
+            <button mat-raised-button color="primary">Отправить</button>
+          </div>
+
+        </form>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div> -->

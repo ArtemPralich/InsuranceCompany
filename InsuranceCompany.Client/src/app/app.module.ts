@@ -39,6 +39,7 @@ import { InsuredPersonsComponent } from './pages/insurance-pages/insured-persons
 import { InsuranceBankDataComponent } from './pages/insurance-pages/insurance-bank-data/insurance-bank-data.component';
 import { InsuranceDocumentsComponent } from './pages/insurance-pages/insurance-documents/insurance-documents.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
+import { RequestComponent } from './pages/request/request.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { RegistrationComponent } from './pages/registration/registration.compone
     InsuredPersonsComponent,
     InsuranceBankDataComponent,
     InsuranceDocumentsComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RequestComponent
   ],
   imports: [
     BrowserModule,

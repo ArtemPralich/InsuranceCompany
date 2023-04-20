@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { saveAs } from 'file-saver';
+import { Document } from "../pages/insurance-pages/insurance-documents/insurance-documents.component";
 
 @Injectable()
 export class AuthService {
@@ -63,4 +64,9 @@ export class AuthService {
           saveAs(blob, filename);
         });
       }
+
+      // public downloadFiles():Observable<Document[]> {
+      //   const url = 'https://localhost:7046/Document/GetPDF/';
+      //   return this.http.get<Document[]>(`${url}`);
+      // }
 }
