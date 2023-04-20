@@ -62,7 +62,7 @@ import { DocumentTemplatesComponent } from './pages/document-templates/document-
     InsuranceBankDataComponent,
     InsuranceDocumentsComponent,
     RegistrationComponent,
-    DocumentTemplatesComponent
+    DocumentTemplatesComponent,
     RegistrationComponent,
     RequestComponent
   ],
