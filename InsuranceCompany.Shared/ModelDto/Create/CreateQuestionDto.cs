@@ -17,6 +17,6 @@ namespace InsuranceCompany.Shared.ModelDto.Create
         public Guid? QuestionTypeId { get; set; }
         public Guid? SyrveyId { get; set; }
 
-        public virtual ICollection<CreateAnswerDto> Answers { get; } = new List<CreateAnswerDto>();
+        public List<CreateAnswerDto> Answers { get; set; } = new List<CreateAnswerDto>();
     }
 }

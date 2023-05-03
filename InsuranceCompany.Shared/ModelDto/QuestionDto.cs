@@ -20,7 +20,7 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public virtual ICollection<AnswerValueDto> AnswerValues { get; set; } = new List<AnswerValueDto>();
 
-        public virtual ICollection<Answer> Answers { get; } = new List<Answer>();
+        public virtual List<AnswerDto> Answers { get; } = new List<AnswerDto>();
 
 
         public virtual QuestionTypeDto? QuestionType { get; set; }

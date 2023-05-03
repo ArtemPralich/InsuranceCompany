@@ -31,7 +31,14 @@
 </div>
 
 <mat-tab-group animationDuration="0ms" class="insuranse-part">
-  <mat-tab label="Застраховынные лица">
+  
+  <mat-tab label="Страховые опросы">
+    <app-insurance-suraveys *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest">
+
+    </app-insurance-suraveys>
+  </mat-tab>
+  
+  <mat-tab label="Застрахованные лица">
     <app-insured-persons *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest">
 
     </app-insured-persons>
@@ -43,11 +50,6 @@
       </app-insurance-client-info>
     </mat-tab>
 
-    <mat-tab label="Страховые опросы">
-      <app-insurance-suraveys *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest">
-
-      </app-insurance-suraveys>
-    </mat-tab>
 
   
     

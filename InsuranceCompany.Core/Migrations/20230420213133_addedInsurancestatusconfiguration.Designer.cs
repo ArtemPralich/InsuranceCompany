@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230420213133_addedInsurancestatusconfiguration")]
+    partial class addedInsurancestatusconfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,41 +215,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC07497406FD");
 
                     b.ToTable("InsuranceRate", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("71718911-3be9-4921-eb0f-08db30f1069a"),
-                            BaseCoefficient = 30m,
-                            CountPaymentsInYear = (short)12,
-                            CountYears = (short)5,
-                            IsFamily = false,
-                            IsOldman = true,
-                            IsPersonal = false,
-                            Title = "Пенсионный страховой запрос с ежемесечной оплатой"
-                        },
-                        new
-                        {
-                            Id = new Guid("5a0d244c-9a62-4b9d-eb10-08db30f1069b"),
-                            BaseCoefficient = 30m,
-                            CountPaymentsInYear = (short)4,
-                            CountYears = (short)5,
-                            IsFamily = false,
-                            IsOldman = true,
-                            IsPersonal = false,
-                            Title = "Пенсионный страховой запрос с ежесезонной оплатой"
-                        },
-                        new
-                        {
-                            Id = new Guid("dafe171c-3f15-4d88-eb11-08db30f1069a"),
-                            BaseCoefficient = 30m,
-                            CountPaymentsInYear = (short)1,
-                            CountYears = (short)5,
-                            IsFamily = false,
-                            IsOldman = true,
-                            IsPersonal = false,
-                            Title = "Пенсионный страховой запрос с оплатой раз в год"
-                        });
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
@@ -356,14 +324,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC073B40440C");
 
                     b.ToTable("InsuranceSurvey", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f61ccc36-5ede-4769-3083-08db39c03b5b"),
-                            Description = "О состоянии здоровья",
-                            Title = "Состояние здоровья"
-                        });
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceTypeSurvey", b =>
@@ -709,22 +669,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "93692f6e-a2a9-4377-b54c-8eaf73cb62b0",
-                            ConcurrencyStamp = "99e5e22f-06d4-4d0b-88ca-56c6a60aba75",
+                            Id = "e960e09d-f4ff-4229-b37d-10c5c87e864b",
+                            ConcurrencyStamp = "6322bd33-9c4f-4ff4-8be6-0ef2bbc61f07",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "30b342cb-d36f-4d33-84e2-98f5d8696397",
-                            ConcurrencyStamp = "f0c317b4-7e74-4b7d-812a-c4c80745789d",
+                            Id = "c6aa8b3d-a36b-476b-98e5-e97882d3cc1e",
+                            ConcurrencyStamp = "38fc6279-885b-476a-8e80-630ee78ad75e",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "60332123-c836-4544-bbb8-5d7907a653da",
-                            ConcurrencyStamp = "d2866650-97aa-4134-b501-dcdee971edbb",
+                            Id = "aea84485-1f29-4706-b4cc-abd19e2fc8e8",
+                            ConcurrencyStamp = "33ab5614-98ea-4c30-b490-77b8fa225224",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
