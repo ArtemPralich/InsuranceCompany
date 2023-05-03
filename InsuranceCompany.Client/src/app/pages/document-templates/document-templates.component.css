@@ -1,0 +1,98 @@
+.container {
+    margin: 0px 70px;
+}
+
+.header {
+    background: #324e88;
+    height: 90px;
+    position: relative; 
+} 
+
+.header-line {
+    padding-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-title {
+    color:#fff;
+    font-size: 30px;
+    text-align: center;
+    padding: 25px 0px;
+}
+
+.line-items {
+    display: flex;
+    color: #324e88;
+    font-weight: 100;
+    font-size: 14px;
+}
+
+.button-header {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.button-header:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.line-item {
+    display: flex;
+    margin-right: 50px;
+    align-items: center;
+}
+
+.buttons {
+    border: 0;
+    background-color: #324e88;
+    text-align: center;
+    color: #fff;
+    width: 120px;
+    height: 40px;
+    outline: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.buttons:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.button-back {
+    opacity: .65;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+
+.addForm {
+    display: flex;
+    justify-content: center;
+}
+
+.editor {
+    background-color: rgb(237,238,240);
+    min-height: 100vh;
+}
+
+.editor-cont {
+    min-height: calc(100vh - 150px);
+    padding: 30px 50px;
+    box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
+    background-color: #fff;
+    text-align: center;
+    margin: 0px 100px;
+}
+
+.template-select {
+    width: 400px;
+    padding-bottom: 40px;
+}
+
+.ngxEditor__wrapper {
+    text-align: start;
+}

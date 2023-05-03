@@ -40,6 +40,11 @@
   margin-right: 10px;
 }
 
+.button-plus:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+}
+
 .count-item {
   font-weight: 600;
   font-size: 18px;

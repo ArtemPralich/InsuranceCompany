@@ -46,6 +46,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgxEditorModule } from 'ngx-editor';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
+import { RoomClientComponent } from './pages/room-client/room-client.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DocumentTemplatesComponent } from './pages/document-templates/document-
     RegistrationComponent,
     DocumentTemplatesComponent,
     RegistrationComponent,
-    RequestComponent
+    RequestComponent,
+    RoomClientComponent
   ],
   imports: [
     BrowserModule,

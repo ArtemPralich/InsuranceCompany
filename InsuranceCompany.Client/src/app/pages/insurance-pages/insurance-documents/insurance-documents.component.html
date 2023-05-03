@@ -2,8 +2,6 @@
     <div mat-subheader>Документы</div>
     <mat-list-item *ngFor="let document of documents" (click)="GetFiles()">
       <mat-icon matListItemIcon>picture_as_pdf</mat-icon>
-      <!-- <mat-icon matListItemIcon>folder</mat-icon> -->
       <div matListItemTitle class="mat-mdc-list-item-icon"><a class="item-doc" href="{{document.url}}" download>{{document.name}}</a></div>
     </mat-list-item>
-    <!-- <mat-divider></mat-divider> -->
 </mat-list>

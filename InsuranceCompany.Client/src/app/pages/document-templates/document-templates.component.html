@@ -1,22 +1,62 @@
-<p>
-    <mat-form-field appearance="fill">
-        <mat-label>Favorite food</mat-label>
-        <mat-select [(value)]="selected">
-        <mat-option *ngFor="let template of templates" [value]="template">
-            {{template.title}}
-        </mat-option>
-        </mat-select>
-        
-    </mat-form-field>
+<div class="editor">
+    <div class="header">
+        <div class="container">
+            <div class="header-title">
+                Редактор документов
+            </div>
+        </div>
+    </div>
 
-    <button mat-button (click)="save()">Save</button>
-</p>
-<div class="ngxEditor__wrapper" *ngIf="editor">
-    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-    <ngx-editor
-        [editor]="editor"
-        [(ngModel)]="selected.text"
-        [disabled]="false"
-        [placeholder]="'Type here...'"
-    ></ngx-editor>
+    <div class="container">
+        <div class="editor-cont">
+            <div class="header-line">
+                <div class="line-items">
+                    <div class="line-item" *ngIf="!addTemp">
+                        <input type="image" src="assets/pictures/add_circle_blue.svg" class="button-header" (click)="addTemplate()">
+                        <div>Добавить шаблон документа</div>
+                    </div>
+        
+                    <div class="line-item" *ngIf="!addTemp">
+                        <input type="image" src="assets/pictures/delete.svg" class="button-header">
+                        <div>Удалить шаблон документа</div>
+                    </div>
+                </div>
+        
+                <button class="buttons" (click)="save()">Сохранить</button>
+            </div>
+
+            <div *ngIf="!addTemp">
+                <mat-form-field appearance="fill" class="template-select">
+                    <mat-label>Шаблон</mat-label>
+                    <mat-select [(value)]="selected">
+                    <mat-option *ngFor="let template of templates" [value]="template">
+                        {{template.title}}
+                    </mat-option>
+                    </mat-select>
+                    
+                </mat-form-field>
+            </div>
+
+            <div class="addForm" *ngIf="addTemp">
+                <div>
+                    <mat-form-field appearance="fill" class="template-select">
+                        <mat-label>Введите наименование шаблона</mat-label>
+                        <input matInput placeholder="Наименование" [(ngModel)]="selected.title" required>
+                    </mat-form-field>
+                </div>
+
+                <button class="buttons button-back" (click)="backAdd()">Отмена</button>
+            </div>
+
+            <div class="ngxEditor__wrapper" *ngIf="editor">
+                <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                <ngx-editor
+                    [editor]="editor"
+                    [(ngModel)]="selected.text"
+                    [disabled]="false"
+                    [placeholder]="'Ввод текста...'"
+                ></ngx-editor>
+            </div>
+        </div>
+    </div>
 </div>

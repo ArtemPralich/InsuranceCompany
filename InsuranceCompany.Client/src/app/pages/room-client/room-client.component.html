@@ -1,0 +1,93 @@
+<div class="form-container">
+    <div class="container">
+        <div class="form-title">
+            Личный кабинет
+        </div>
+
+        <div class="room-container">
+            <div class="menu-line">
+                <ul class="menu">
+                    <li class="menu-item first-item" (click)="toggleTrue()">Личная информация</li>
+                    <li class="menu-item" (click)="toggleFalse()">Документы</li>
+                </ul>
+                <button mat-raised-button class="exit">ВЫЙТИ</button>
+            </div>
+            <div class="content">
+                <div *ngIf="condition">
+                    <div class="form-line">
+                        <div class="content-title">Личная информация</div>
+
+                        <button *ngIf="isDisabled" mat-raised-button color="primary" class="button-form" (click)="enableInput()">Редактировать профиль</button>
+
+                        <div *ngIf="!isDisabled">
+                            <button mat-raised-button  class="button-form" (click)="enableInputTrue()">Отмена</button>
+                            <button mat-raised-button color="primary" class="button-form" >Сохранить</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                          <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Введите фамилию</mat-label>
+                            <input matInput placeholder="Фамилия" required [disabled]="isDisabled">
+                          </mat-form-field>
+                  
+                          <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Введите имя</mat-label>
+                            <input matInput placeholder="Имя" required [disabled]="isDisabled">
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field appearance="fill" class="margin-form-field width-form-field">
+                            <mat-label>Введите персональный код</mat-label>
+                            <input matInput placeholder="Персональный код" type="text"
+                               maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required [disabled]="isDisabled">
+                          </mat-form-field>
+                  
+                          <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Введите дату рождения</mat-label>
+                            <input matInput [matDatepicker]="picker" required [disabled]="isDisabled">
+                            <mat-hint  matListItemLine>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Выберите пол</mat-label>
+                            <mat-select [ngModelOptions]="{standalone: true}" required [disabled]="isDisabled">
+                              <mat-option [value]="true">
+                                Мужчина
+                              </mat-option>
+                              <mat-option [value]="false">
+                                Женщина
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field> 
+                  
+                          <mat-form-field appearance="fill" class="margin-form-field">
+                            <mat-label>Введите адрес</mat-label>
+                            <input matInput placeholder="Адрес" required [disabled]="isDisabled">
+                          </mat-form-field>
+                        </div>
+
+                        <ul class="links" *ngIf="!isDisabled">
+                            <li class="link">Редактировать почту</li>
+                            <li class="link">Редактировать пароль</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div *ngIf="!condition">
+                    <div class="content-title">Документы</div>
+                    <mat-list>
+                        <mat-list-item *ngFor="let document of documents" (click)="GetFiles()">
+                            <mat-icon matListItemIcon>picture_as_pdf</mat-icon>
+                            <div matListItemTitle class="mat-mdc-list-item-icon"><a class="item-doc" href="{{document.url}}" download>{{document.name}}</a></div>
+                          </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

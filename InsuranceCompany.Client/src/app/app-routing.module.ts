@@ -8,6 +8,7 @@ import { MainComponent } from './pages/main/main.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 import { RequestComponent } from './pages/request/request.component';
+import { RoomClientComponent } from './pages/room-client/room-client.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'documents', component: DocumentTemplatesComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'request', component: RequestComponent},
+  { path: 'room-client', component: RoomClientComponent},
   { path: '**', component: NotFoundComponent},];
 
 @NgModule({

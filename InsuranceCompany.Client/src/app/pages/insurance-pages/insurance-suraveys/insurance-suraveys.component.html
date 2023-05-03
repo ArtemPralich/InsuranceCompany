@@ -43,4 +43,72 @@
             </div>
         </mat-expansion-panel>
     </mat-accordion>
+
+    <div class="container-question">
+        <div class="text-question">Какой Артём?</div>
+        <div>
+            <div>
+                <mat-checkbox color="primary" class="example-margin">Красивый</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox color="primary" class="example-margin">Умный</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox color="primary" class="example-margin">Любимый</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox color="primary" class="example-margin">Самый лучший</mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="container-question">
+        <div class="text-question">Насколько вы любите Артёма?</div>
+        <div>
+            <div>
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"> 
+                    <div>
+                        <mat-radio-button class="example-radio-button" >
+                            Сильно
+                        </mat-radio-button>
+                    </div>
+                    <div>
+                        <mat-radio-button class="example-radio-button" >
+                            Максимально
+                        </mat-radio-button>
+                    </div>
+                    <div>
+                        <mat-radio-button class="example-radio-button" >
+                            Очень
+                        </mat-radio-button>
+                    </div>
+                    <div>
+                        <mat-radio-button class="example-radio-button" >
+                            Максимально сильно
+                        </mat-radio-button>
+                    </div>
+                </mat-radio-group>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-question">
+        <div>
+            <form class="example-form">                    
+                <mat-form-field class="example-full-width">
+                  <textarea matInput placeholder="Answer"></textarea>
+                </mat-form-field>
+              </form>
+        </div>
+    </div>
+    
+    <div class="container-question">
+        <div>
+            <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input matInput #message maxlength="256" placeholder="Answer">
+                </mat-form-field>
+              </form>
+        </div>
+    </div>
+
 </div>

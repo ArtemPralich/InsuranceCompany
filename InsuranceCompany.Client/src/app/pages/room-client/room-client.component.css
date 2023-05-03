@@ -1,0 +1,126 @@
+.form-container {
+    background: linear-gradient(to bottom, #89aacc, rgb(237,238,240) 50%);
+    min-height: 100vh;
+}
+
+.container {
+    margin: 0px 100px;
+}
+
+.form-title {
+    color: #1b376f;
+    font-size: 35px;
+    font-weight: bold;
+    padding: 25px 0px;
+}
+
+.room-container {
+    min-height: 80vh;
+    box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+}
+
+.menu-line {
+    background-color: #324e88;
+    min-height: 80vh;
+    border-radius: 10px 0px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-item {
+    display: block;
+    color: #fff;
+    background: #324e88;
+    list-style: none;
+    font-weight: 600;
+    padding: 15px 30px;
+    border-bottom: 1px solid #fff;
+    transition: color 0.2s linear;
+}
+
+.menu-item:hover {
+    background-color: #1b376f;
+}
+
+.first-item {
+    border-top-left-radius: 10px;
+}
+
+.exit {
+    width: 180px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.content {
+    padding: 15px 30px;
+    flex: 1;
+}
+
+.mat-mdc-list-item-icon {
+    color: rgba(0, 0, 0, 0.54);
+    text-decoration: none;
+}
+
+.item-doc {
+    color: black;
+    text-decoration: none;
+    transition: color 0.2s linear;
+}
+
+.item-doc:hover {
+    color: #89aacc;
+}
+
+.content-title {
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.margin-form-field{
+    margin-right: 20px;
+    width: 300px;
+    padding-top: 10px;
+}
+
+.form-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-form {
+    padding: 20px 20px;
+    margin-left: 20px;
+    font-size: 16px;
+    opacity: .7;
+}
+
+.link {
+    color: #365ca8;
+    cursor: pointer;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}

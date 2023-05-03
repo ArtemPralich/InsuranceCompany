@@ -21,7 +21,7 @@
     transition: all 0.2s ease-in-out;
 }
 .save-button:hover {
-    transform: translateX(5px); /* смещаем кнопку на 5 пикселей вправо */
+    transform: translateX(5px); 
     background-color: #202020;
 }
 

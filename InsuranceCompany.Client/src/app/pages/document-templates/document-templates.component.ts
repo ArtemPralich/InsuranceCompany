@@ -13,28 +13,53 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
   html = '<b> qwe<b>';
   templates: Template[];
   selected: Template= new Template("");;
+  addTemp: boolean=false;
 
   constructor(public documentService: DocumentService, ) 
   {}
 
   ngOnInit(): void {
     this.editor = new Editor();
+    this.getAllTemplates();
+  }
 
+  ngOnDestroy(): void {
+    this.editor?.destroy();
+  }
+
+  getAllTemplates() {
     this.documentService.GetAllTemplates().subscribe(res => {
       this.templates = res;
       console.log(this.templates);
     });
   }
 
-  ngOnDestroy(): void {
-    this.editor?.destroy();
-  }
   save(): void{
-    console.log(this.selected);
-    this.documentService.UpdateTemplate(this.selected).subscribe((data)=>{
-    },
-    error=>{
-      alert("Creare kind failed")
-    });
+    if(this.addTemp) {
+      this.documentService.CreateTemplate(this.selected).subscribe((data)=>{        
+        this.selected.text = "";
+      },
+      error=>{
+        alert("Ошибка сохранения!")
+      });
+    }
+    else {
+      this.documentService.UpdateTemplate(this.selected).subscribe((data)=>{
+        this.selected.text = "";
+      },
+      error=>{
+        alert("Ошибка сохранения!")
+      });
+    }
+    this.backAdd();
+    this.getAllTemplates();
+  }
+
+  addTemplate(): void {
+    this.addTemp = true;
+  }
+
+  backAdd(): void {
+    this.addTemp = false;
   }
 }
