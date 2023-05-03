@@ -13,13 +13,15 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
   html = '<b> qwe<b>';
   templates: Template[];
   selected: Template= new Template("");;
-
+  editorConfig = {
+    bypassHTML: true
+  };
   constructor(public documentService: DocumentService, ) 
   {}
 
   ngOnInit(): void {
     this.editor = new Editor();
-
+    
     this.documentService.GetAllTemplates().subscribe(res => {
       this.templates = res;
       console.log(this.templates);

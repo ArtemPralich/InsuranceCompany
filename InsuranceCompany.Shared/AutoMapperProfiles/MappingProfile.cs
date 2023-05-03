@@ -27,6 +27,10 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
                 .ForMember(dest => dest.InsuranceRequest, opt => opt.Ignore());
             CreateMap<InsuredPersonDto, InsuredPerson>().ReverseMap();
 
+            CreateMap<AnswerDto, Answer>();
+            CreateMap<AnswerDto, Answer>().ReverseMap();
+
+
             CreateMap<InsuranceSurvey, InsuranceSurveyDto>()
                 .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.QuestionSurveys.Select(i => i.Question).ToList()));
             //CreateMap<InsuranceSurveyDto, InsuranceSurvey>();

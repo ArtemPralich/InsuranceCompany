@@ -15,6 +15,7 @@
     <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
     <ngx-editor
         [editor]="editor"
+        [options]="editorConfig"
         [(ngModel)]="selected.text"
         [disabled]="false"
         [placeholder]="'Type here...'"
