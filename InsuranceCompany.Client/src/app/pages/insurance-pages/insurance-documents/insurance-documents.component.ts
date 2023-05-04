@@ -1,16 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/service/AuthService';
+import { Component, Input, OnInit } from '@angular/core';
+import { Document } from 'src/app/models/Document';
+import { InsuranceRequest } from 'src/app/models/InsuranceRequest';
+import { DocumentService } from 'src/app/service/DocumentService';
 
 
-export class Document {
-  name: string;
-  url: string;
 
-  constructor(name: string, url: string) {
-    this.name = name;
-    this.url = url;
-  }
-}
 
 @Component({
   selector: 'app-insurance-documents',
@@ -18,25 +12,17 @@ export class Document {
   styleUrls: ['./insurance-documents.component.css']
 })
 export class InsuranceDocumentsComponent {
-  constructor(public auth: AuthService) {}
-
+  constructor(public documentService: DocumentService) {}
+  @Input() insuranceRequest:  InsuranceRequest;
   // documents: Document[] = [];
-  documents: Document[] = [
-    {
-      name: 'привет.pdf',
-      url: "assets/doc/привет.pdf",
-    },
-    {
-      name: 'hi.pdf',
-      url: "assets/doc/hi.pdf",
-    },
-  ];
+
 
   // ngOnInit(){
   //   this.GetFiles();
   // }
 
-  GetFiles(){
-    this.auth.downloadFile();
+  public GetFile(document:Document){
+    console.log(this.insuranceRequest)
+    this.documentService.GetFileById(document.id, document.title);
   }
 }

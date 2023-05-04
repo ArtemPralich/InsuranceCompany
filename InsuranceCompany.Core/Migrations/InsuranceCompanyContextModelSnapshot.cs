@@ -180,6 +180,34 @@ namespace InsuranceCompany.Core.Migrations
                     b.ToTable("ClientaChildren");
                 });
 
+            modelBuilder.Entity("InsuranceCompany.Core.Document", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("InsuranceRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TemplateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK__Document__3214EC070045678D");
+
+                    b.HasIndex("InsuranceRequestId");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("Document", (string)null);
+                });
+
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
                 {
                     b.Property<Guid>("Id")
@@ -212,41 +240,27 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC07497406FD");
 
                     b.ToTable("InsuranceRate", (string)null);
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("71718911-3be9-4921-eb0f-08db30f1069a"),
-                            BaseCoefficient = 30m,
-                            CountPaymentsInYear = (short)12,
-                            CountYears = (short)5,
-                            IsFamily = false,
-                            IsOldman = true,
-                            IsPersonal = false,
-                            Title = "Пенсионный страховой запрос с ежемесечной оплатой"
-                        },
-                        new
-                        {
-                            Id = new Guid("5a0d244c-9a62-4b9d-eb10-08db30f1069b"),
-                            BaseCoefficient = 30m,
-                            CountPaymentsInYear = (short)4,
-                            CountYears = (short)5,
-                            IsFamily = false,
-                            IsOldman = true,
-                            IsPersonal = false,
-                            Title = "Пенсионный страховой запрос с ежесезонной оплатой"
-                        },
-                        new
-                        {
-                            Id = new Guid("dafe171c-3f15-4d88-eb11-08db30f1069a"),
-                            BaseCoefficient = 30m,
-                            CountPaymentsInYear = (short)1,
-                            CountYears = (short)5,
-                            IsFamily = false,
-                            IsOldman = true,
-                            IsPersonal = false,
-                            Title = "Пенсионный страховой запрос с оплатой раз в год"
-                        });
+            modelBuilder.Entity("InsuranceCompany.Core.InsuranceRateTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("InsuranceRateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TemplateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InsuranceRateId");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("InsuranceRateTemplate");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
@@ -314,26 +328,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC07B4801EDD");
 
                     b.ToTable("InsuranceStatus", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("988a1903-d7b0-442b-809e-4fafbe76b941"),
-                            Color = "#ffeed0",
-                            Status = "Создано"
-                        },
-                        new
-                        {
-                            Id = new Guid("8cd43f71-1d6a-4a45-8974-6a4d9f6749ed"),
-                            Color = "#a0fa5e",
-                            Status = "Подписано"
-                        },
-                        new
-                        {
-                            Id = new Guid("b74a9704-ff2c-4992-80b5-f22905091835"),
-                            Color = "#d0f5ff",
-                            Status = "Заполнено"
-                        });
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceSurvey", b =>
@@ -356,14 +350,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC073B40440C");
 
                     b.ToTable("InsuranceSurvey", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("f61ccc36-5ede-4769-3083-08db39c03b5b"),
-                            Description = "О состоянии здоровья",
-                            Title = "Состояние здоровья"
-                        });
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceTypeSurvey", b =>
@@ -705,29 +691,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "93692f6e-a2a9-4377-b54c-8eaf73cb62b0",
-                            ConcurrencyStamp = "99e5e22f-06d4-4d0b-88ca-56c6a60aba75",
-                            Name = "Agent",
-                            NormalizedName = "AGENT"
-                        },
-                        new
-                        {
-                            Id = "30b342cb-d36f-4d33-84e2-98f5d8696397",
-                            ConcurrencyStamp = "f0c317b4-7e74-4b7d-812a-c4c80745789d",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "60332123-c836-4544-bbb8-5d7907a653da",
-                            ConcurrencyStamp = "d2866650-97aa-4134-b501-dcdee971edbb",
-                            Name = "Client",
-                            NormalizedName = "CLIENT"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -888,6 +851,42 @@ namespace InsuranceCompany.Core.Migrations
                     b.Navigation("Child");
 
                     b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.Document", b =>
+                {
+                    b.HasOne("InsuranceCompany.Core.InsuranceRequest", "InsuranceRequest")
+                        .WithMany("Documents")
+                        .HasForeignKey("InsuranceRequestId")
+                        .HasConstraintName("FK__Insurance__Document__2F10007B");
+
+                    b.HasOne("InsuranceCompany.Core.Models.Template", "Template")
+                        .WithMany("Documents")
+                        .HasForeignKey("TemplateId")
+                        .HasConstraintName("FK__Template__Document__5CD6CB2B");
+
+                    b.Navigation("InsuranceRequest");
+
+                    b.Navigation("Template");
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.InsuranceRateTemplate", b =>
+                {
+                    b.HasOne("InsuranceCompany.Core.InsuranceRate", "InsuranceRate")
+                        .WithMany("InsuranceRateTemplates")
+                        .HasForeignKey("InsuranceRateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InsuranceCompany.Core.Models.Template", "Template")
+                        .WithMany("InsuranceRateTemplates")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InsuranceRate");
+
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
@@ -1087,6 +1086,8 @@ namespace InsuranceCompany.Core.Migrations
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
                 {
+                    b.Navigation("InsuranceRateTemplates");
+
                     b.Navigation("InsuranceRequests");
 
                     b.Navigation("InsuranceTypeSurveys");
@@ -1095,6 +1096,8 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
                 {
                     b.Navigation("AnswerValues");
+
+                    b.Navigation("Documents");
 
                     b.Navigation("InsuredPersons");
                 });
@@ -1109,6 +1112,13 @@ namespace InsuranceCompany.Core.Migrations
                     b.Navigation("InsuranceTypeSurveys");
 
                     b.Navigation("QuestionSurveys");
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.Models.Template", b =>
+                {
+                    b.Navigation("Documents");
+
+                    b.Navigation("InsuranceRateTemplates");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Position", b =>

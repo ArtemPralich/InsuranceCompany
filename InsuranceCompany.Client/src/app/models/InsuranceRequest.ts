@@ -3,6 +3,7 @@ import { Client } from 'src/app/models/Client';
 import { InsuranceRate } from 'src/app/models/InsuranceRate';
 import { InsuredPerson } from 'src/app/models/InsuredPerson';
 import { AnswerValues } from 'src/app/models/AnswerValue';
+import { Document } from './Document';
 
 export class InsuranceRequest {
     id : string;
@@ -18,6 +19,7 @@ export class InsuranceRequest {
     insuranceRate: InsuranceRate;
     insuredPersons: InsuredPerson[];
     answerValues: AnswerValues[];
+    documents: Document[];
 
 
     constructor(id: string, dateOfStart: Date, dateOfEnd: Date, agentId: string, 

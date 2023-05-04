@@ -24,6 +24,7 @@ public partial class InsuranceRequest
     public decimal? Coefficient { get; set; }
     public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
     public virtual ICollection<InsuredPerson> InsuredPersons { get; } = new List<InsuredPerson>();
+    public virtual ICollection<Document> Documents { get; } = new List<Document>();
     public virtual InsuranceRate? InsuranceRate { get; set; }
     public virtual InsuranceStatus? InsuranceStatus { get; set; }
 }

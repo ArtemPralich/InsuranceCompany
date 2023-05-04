@@ -32,8 +32,11 @@ namespace InsuranceCompany.Infrastructure.Repositories
                     .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
                         .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.QuestionType)
                 .Include(i => i.InsuranceRate)
+                    .ThenInclude(i => i.InsuranceRateTemplates).ThenInclude(i => i.Template)
+                .Include(i => i.InsuranceRate)
                     .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
                         .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.Answers)
+                .Include(i => i.Documents)
                 .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).Include(i => i.AnswerValues).FirstOrDefault();
         }
 

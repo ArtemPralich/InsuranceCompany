@@ -17,9 +17,16 @@ export class DocumentService {
         return this.http.get<Template[]>(`${this.pathBase}`);
     }
 
-    public GetClientById(id:string):Observable<Client>{
+    public GetFileById(id:string, filename:string){
 
-        return this.http.get<Client>(`${this.pathBase}`+ "/" + id);
+        return this.http.get(`${this.pathBase}`+ "/GetPDF?id=" + id, { responseType: 'blob' }).subscribe((blob: Blob) => {
+            saveAs(blob, filename);
+          });
+    }
+
+    public GeneratePdf(insuredRequestId:string):Observable<any>{
+
+        return this.http.post<any>(`${this.pathBase}`+ "/CreateDocuments?id=" + insuredRequestId, insuredRequestId);
     }
 
     public CreateTemplate(template : Template):Observable<Template> { 

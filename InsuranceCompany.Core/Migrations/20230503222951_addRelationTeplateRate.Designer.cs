@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    [Migration("20230420213133_addedInsurancestatusconfiguration")]
-    partial class addedInsurancestatusconfiguration
+    [Migration("20230503222951_addRelationTeplateRate")]
+    partial class addRelationTeplateRate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,6 +183,34 @@ namespace InsuranceCompany.Core.Migrations
                     b.ToTable("ClientaChildren");
                 });
 
+            modelBuilder.Entity("InsuranceCompany.Core.Document", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("InsuranceRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("TemplateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id")
+                        .HasName("PK__Document__3214EC070045678D");
+
+                    b.HasIndex("InsuranceRequestId");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("Document", (string)null);
+                });
+
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
                 {
                     b.Property<Guid>("Id")
@@ -215,6 +243,27 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC07497406FD");
 
                     b.ToTable("InsuranceRate", (string)null);
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.InsuranceRateTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("InsuranceRateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TemplateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InsuranceRateId");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("InsuranceRateTemplate");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
@@ -282,26 +331,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC07B4801EDD");
 
                     b.ToTable("InsuranceStatus", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("988a1903-d7b0-442b-809e-4fafbe76b941"),
-                            Color = "#ffeed0",
-                            Status = "Создано"
-                        },
-                        new
-                        {
-                            Id = new Guid("8cd43f71-1d6a-4a45-8974-6a4d9f6749ed"),
-                            Color = "#a0fa5e",
-                            Status = "Подписано"
-                        },
-                        new
-                        {
-                            Id = new Guid("b74a9704-ff2c-4992-80b5-f22905091835"),
-                            Color = "#d0f5ff",
-                            Status = "Заполнено"
-                        });
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceSurvey", b =>
@@ -665,29 +694,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "e960e09d-f4ff-4229-b37d-10c5c87e864b",
-                            ConcurrencyStamp = "6322bd33-9c4f-4ff4-8be6-0ef2bbc61f07",
-                            Name = "Agent",
-                            NormalizedName = "AGENT"
-                        },
-                        new
-                        {
-                            Id = "c6aa8b3d-a36b-476b-98e5-e97882d3cc1e",
-                            ConcurrencyStamp = "38fc6279-885b-476a-8e80-630ee78ad75e",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "aea84485-1f29-4706-b4cc-abd19e2fc8e8",
-                            ConcurrencyStamp = "33ab5614-98ea-4c30-b490-77b8fa225224",
-                            Name = "Client",
-                            NormalizedName = "CLIENT"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -848,6 +854,42 @@ namespace InsuranceCompany.Core.Migrations
                     b.Navigation("Child");
 
                     b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.Document", b =>
+                {
+                    b.HasOne("InsuranceCompany.Core.InsuranceRequest", "InsuranceRequest")
+                        .WithMany("Documents")
+                        .HasForeignKey("InsuranceRequestId")
+                        .HasConstraintName("FK__Insurance__Document__2F10007B");
+
+                    b.HasOne("InsuranceCompany.Core.Models.Template", "Template")
+                        .WithMany("Documents")
+                        .HasForeignKey("TemplateId")
+                        .HasConstraintName("FK__Template__Document__5CD6CB2B");
+
+                    b.Navigation("InsuranceRequest");
+
+                    b.Navigation("Template");
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.InsuranceRateTemplate", b =>
+                {
+                    b.HasOne("InsuranceCompany.Core.InsuranceRate", "InsuranceRate")
+                        .WithMany("InsuranceRateTemplates")
+                        .HasForeignKey("InsuranceRateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("InsuranceCompany.Core.Models.Template", "Template")
+                        .WithMany("InsuranceRateTemplates")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("InsuranceRate");
+
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
@@ -1047,6 +1089,8 @@ namespace InsuranceCompany.Core.Migrations
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
                 {
+                    b.Navigation("InsuranceRateTemplates");
+
                     b.Navigation("InsuranceRequests");
 
                     b.Navigation("InsuranceTypeSurveys");
@@ -1055,6 +1099,8 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
                 {
                     b.Navigation("AnswerValues");
+
+                    b.Navigation("Documents");
 
                     b.Navigation("InsuredPersons");
                 });
@@ -1069,6 +1115,13 @@ namespace InsuranceCompany.Core.Migrations
                     b.Navigation("InsuranceTypeSurveys");
 
                     b.Navigation("QuestionSurveys");
+                });
+
+            modelBuilder.Entity("InsuranceCompany.Core.Models.Template", b =>
+                {
+                    b.Navigation("Documents");
+
+                    b.Navigation("InsuranceRateTemplates");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Position", b =>

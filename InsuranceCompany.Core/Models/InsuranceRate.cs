@@ -18,4 +18,5 @@ public partial class InsuranceRate
     public bool? IsPersonal { get; set; }
     public virtual ICollection<InsuranceRequest> InsuranceRequests { get; } = new List<InsuranceRequest>();
     public virtual ICollection<InsuranceTypeSurvey> InsuranceTypeSurveys { get; } = new List<InsuranceTypeSurvey>();
+    public virtual ICollection<InsuranceRateTemplate> InsuranceRateTemplates { get; set; } = new List<InsuranceRateTemplate>();
 }

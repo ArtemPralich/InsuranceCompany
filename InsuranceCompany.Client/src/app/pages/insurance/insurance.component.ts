@@ -4,6 +4,7 @@ import { InsuranceRequest } from 'src/app/models/InsuranceRequest';
 import { ActivatedRoute } from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DocumentService } from 'src/app/service/DocumentService';
 
 @Component({
   selector: 'app-insurance',
@@ -26,7 +27,8 @@ export class InsuranceComponent implements OnInit  {
   isLinear = false;
 
 
-  constructor(public insuranceRequestService: InsuranceRequestService, private route: ActivatedRoute, private _formBuilder: FormBuilder){
+  constructor(public insuranceRequestService: InsuranceRequestService, private route: ActivatedRoute, 
+    private _formBuilder: FormBuilder, public documentService: DocumentService){
       
   }
 
@@ -48,5 +50,9 @@ export class InsuranceComponent implements OnInit  {
     this.insuranceRequestService.UpdateInsuranceRequest(this.insuranceRequest).subscribe(res => {
       console.log("updated");
     });
+  }
+
+  documentGeneration(){
+    this.documentService.GeneratePdf(this.insuranceRequest.id).subscribe();
   }
 }
