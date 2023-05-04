@@ -21,31 +21,42 @@
                         <div>Удалить шаблон документа</div>
                     </div>
                 </div>
-        
-                <button class="buttons" (click)="save()">Сохранить</button>
-            </div>
-
-            <div *ngIf="!addTemp">
-                <mat-form-field appearance="fill" class="template-select">
-                    <mat-label>Шаблон</mat-label>
-                    <mat-select [(value)]="selected">
-                    <mat-option *ngFor="let template of templates" [value]="template">
-                        {{template.title}}
-                    </mat-option>
-                    </mat-select>
-                    
-                </mat-form-field>
-            </div>
-
-            <div class="addForm" *ngIf="addTemp">
+                
                 <div>
+                    <button *ngIf="addTemp" class="buttons button-back" (click)="backAdd()">Отмена</button>
+                    <button class="buttons" (click)="save()">Сохранить</button>
+                </div>
+            </div>
+            <div class="line-choice">
+                <div *ngIf="!addTemp">
                     <mat-form-field appearance="fill" class="template-select">
-                        <mat-label>Введите наименование шаблона</mat-label>
-                        <input matInput placeholder="Наименование" [(ngModel)]="selected.title" required>
+                        <mat-label>Шаблон</mat-label>
+                        <mat-select [(ngModel)]="selectedItem" [(value)]="selected">
+                        <mat-option *ngFor="let template of templates" [value]="template">
+                            {{template.title}}
+                        </mat-option>
+                        </mat-select>
+                        
                     </mat-form-field>
                 </div>
+    
+                <div class="addForm" *ngIf="addTemp">
+                    <div>
+                        <mat-form-field appearance="fill" class="template-select">
+                            <mat-label>Введите наименование шаблона</mat-label>
+                            <input matInput placeholder="Наименование" [(ngModel)]="selected.title" required>
+                        </mat-form-field>
+                    </div>
+                </div>
 
-                <button class="buttons button-back" (click)="backAdd()">Отмена</button>
+                <div>
+                    <mat-form-field *ngIf="selectedItem" appearance="fill" class="template-select">
+                        <mat-label>Тип страхового запроса</mat-label>
+                        <mat-select [(value)]="selectedInsuranceRate" multiple>
+                          <mat-option *ngFor="let rate of insuranceRates" [value]="rate">{{rate.title}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
             </div>
 
             <div class="ngxEditor__wrapper" *ngIf="editor">

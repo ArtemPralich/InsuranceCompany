@@ -65,8 +65,7 @@
 
 .button-back {
     opacity: .65;
-    margin-left: 30px;
-    margin-top: 10px;
+    margin-right: 30px;
 }
 
 .addForm {
@@ -91,8 +90,15 @@
 .template-select {
     width: 400px;
     padding-bottom: 40px;
+    margin: 0px 30px;
 }
 
 .ngxEditor__wrapper {
     text-align: start;
+}
+
+.line-choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

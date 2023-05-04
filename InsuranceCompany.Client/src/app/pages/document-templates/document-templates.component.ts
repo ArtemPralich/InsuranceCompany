@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Editor } from 'ngx-editor';
+import { InsuranceRate } from 'src/app/models/InsuranceRate';
 import { Template } from 'src/app/models/Template';
 import { DocumentService } from 'src/app/service/DocumentService';
+import { InsuranceRateService } from 'src/app/service/InsuranceRateService';
 
 @Component({
   selector: 'app-document-templates',
@@ -17,13 +20,20 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
     bypassHTML: true
   };
   addTemp: boolean=false;
+  insuranceRates: InsuranceRate[] = [];
+  selectedInsuranceRate: InsuranceRate[] = [];
+  selectedItem: boolean=false;
 
-  constructor(public documentService: DocumentService, ) 
+  constructor(public documentService: DocumentService, public insuranceRateService: InsuranceRateService,) 
   {}
 
   ngOnInit(): void {
     this.editor = new Editor();
     this.getAllTemplates();
+
+    this.insuranceRateService.GetAllInsuranceRequests().subscribe(res => {
+      this.insuranceRates = res;
+    });
   }
 
   ngOnDestroy(): void {
@@ -60,9 +70,11 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
 
     addTemplate(): void {
         this.addTemp = true;
+        this.selectedItem = true;
     }
 
     backAdd(): void {
         this.addTemp = false;
+        this.selectedItem = false;
     }
 }
