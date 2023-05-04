@@ -2,10 +2,12 @@
   <div class="container">
     <div class="header-line">
       <div class="left-items">
-        <a class="left-item reference-item">Reference ID: 81785</a>
+        <input type="image" src="assets/pictures/arrow_back.svg" class="button-back" (click)="navigateToUrl()">
+
+        <a class="left-item reference-item">Личный код:  {{insuranceRequest.mainClient.personalCode}}</a>
         <a class="left-item draft-item">
-          <mat-icon class="circle-icon">
-          </mat-icon>Draft</a>
+          <mat-icon [style.background-color]="insuranceRequest.insuranceStatus.color" class="circle-icon">
+          </mat-icon>{{insuranceRequest.insuranceStatus.status}}</a>
         <a class="left-item">a minute ago</a>
         <a class="left-item" href="aaa">View aaaaa</a>
         <a class="left-item" href="aaa"><img class="img-left-item img-help" src="assets/pictures/help.svg">Help</a>
@@ -18,13 +20,13 @@
     </div>
 
     <div class="header-title">
-      Test test
+      {{insuranceRequest.mainClient.surname}} {{insuranceRequest.mainClient.name}}
     </div>
 
     <div class="center-items">
       <a class="center-item">Tel: +375292917093</a>
       <a class="center-item">Email: natasha@gmail.com</a>
-      <a class="center-item">Unit-linked Life Insurance PLUS</a>
+      <a class="center-item">{{insuranceRequest.insuranceRate.title}}</a>
       <a class="left-item" href="aaa">Change</a>
     </div>
   </div>

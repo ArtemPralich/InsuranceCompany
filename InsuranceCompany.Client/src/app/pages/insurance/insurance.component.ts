@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InsuranceRequestService } from 'src/app/service/InsuranceRequestService';
 import { InsuranceRequest } from 'src/app/models/InsuranceRequest';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DocumentService } from 'src/app/service/DocumentService';
@@ -28,7 +28,7 @@ export class InsuranceComponent implements OnInit  {
 
 
   constructor(public insuranceRequestService: InsuranceRequestService, private route: ActivatedRoute, 
-    private _formBuilder: FormBuilder, public documentService: DocumentService){
+    private _formBuilder: FormBuilder, public documentService: DocumentService, private router: Router){
       
   }
 
@@ -54,5 +54,9 @@ export class InsuranceComponent implements OnInit  {
 
   documentGeneration(){
     this.documentService.GeneratePdf(this.insuranceRequest.id).subscribe();
+  }
+
+  navigateToUrl() {
+    this.router.navigateByUrl('insurances');
   }
 }
