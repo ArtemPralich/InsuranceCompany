@@ -1,5 +1,6 @@
 import { InsuranceSurvey } from "./InsuranceSurvey";
 import { QuestionType } from "./QuestionType";
+import { Answer } from "./Answer";
 
 export class Question {
     id : string;
@@ -8,7 +9,7 @@ export class Question {
     questionTypeId : string;
     insuranceSurvey : InsuranceSurvey;
     questionType :  QuestionType;
-    answer :  string[];
+    answers :  Answer[];
 
     constructor(id: string, insuranceSurveyId : string,
     insuranceRateId : string,insuranceSurvey : InsuranceSurvey) {

@@ -32,7 +32,7 @@ namespace InsuranceCompany.Controllers
         }
 
         [HttpPost("CreateQuestion", Name = "CreateQuestion")]
-        public IActionResult CreateQuestion(CreateQuestionDto questionDto)
+        public IActionResult CreateQuestion([FromBody] CreateQuestionDto questionDto)
         {
             var question = _mapper.Map<Question>(questionDto);
 

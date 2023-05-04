@@ -13,6 +13,9 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
   html = '<b> qwe<b>';
   templates: Template[];
   selected: Template= new Template("");;
+  editorConfig = {
+    bypassHTML: true
+  };
   addTemp: boolean=false;
 
   constructor(public documentService: DocumentService, ) 
@@ -34,32 +37,32 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
     });
   }
 
-  save(): void{
-    if(this.addTemp) {
-      this.documentService.CreateTemplate(this.selected).subscribe((data)=>{        
-        this.selected.text = "";
-      },
-      error=>{
-        alert("Ошибка сохранения!")
-      });
+    save(): void {
+        if (this.addTemp) {
+            this.documentService.CreateTemplate(this.selected).subscribe((data) => {
+                this.selected.text = "";
+            },
+                error => {
+                    alert("Ошибка сохранения!")
+                });
+        }
+        else {
+            this.documentService.UpdateTemplate(this.selected).subscribe((data) => {
+                this.selected.text = "";
+            },
+                error => {
+                    alert("Ошибка сохранения!")
+                });
+        }
+        this.backAdd();
+        this.getAllTemplates();
     }
-    else {
-      this.documentService.UpdateTemplate(this.selected).subscribe((data)=>{
-        this.selected.text = "";
-      },
-      error=>{
-        alert("Ошибка сохранения!")
-      });
+
+    addTemplate(): void {
+        this.addTemp = true;
     }
-    this.backAdd();
-    this.getAllTemplates();
-  }
 
-  addTemplate(): void {
-    this.addTemp = true;
-  }
-
-  backAdd(): void {
-    this.addTemp = false;
-  }
+    backAdd(): void {
+        this.addTemp = false;
+    }
 }

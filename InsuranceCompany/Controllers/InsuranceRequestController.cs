@@ -129,6 +129,14 @@ namespace InsuranceCompany.Controllers
             }
 
             var newPersons = _mapper.Map<List<InsuredPerson>>(insuredPersonForCreate);
+
+            foreach (var person in newPersons)
+            {
+                if (person != null)
+                {
+                    person.InsuranceRequestId = insuranceRequestDto.Id;
+                }
+            }
             _repositoryManager.InsuredPerson.UpdateRange(insuredPersonForUpdate);
             _repositoryManager.InsuredPerson.CreateRange(newPersons);
             _repositoryManager.InsuredPerson.DeleteRange(insuredPersonForDelete);

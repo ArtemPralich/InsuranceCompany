@@ -6,6 +6,7 @@ namespace InsuranceCompany.Core;
 
 public partial class Answer
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     public string? QuestionAnswer { get; set; }

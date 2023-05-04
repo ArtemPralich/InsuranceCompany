@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230503210442_addDocumentssы")]
+    partial class addDocumentssы
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -240,27 +243,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasName("PK__Insuranc__3214EC07497406FD");
 
                     b.ToTable("InsuranceRate", (string)null);
-                });
-
-            modelBuilder.Entity("InsuranceCompany.Core.InsuranceRateTemplate", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("InsuranceRateId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("TemplateId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InsuranceRateId");
-
-                    b.HasIndex("TemplateId");
-
-                    b.ToTable("InsuranceRateTemplate");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
@@ -870,25 +852,6 @@ namespace InsuranceCompany.Core.Migrations
                     b.Navigation("Template");
                 });
 
-            modelBuilder.Entity("InsuranceCompany.Core.InsuranceRateTemplate", b =>
-                {
-                    b.HasOne("InsuranceCompany.Core.InsuranceRate", "InsuranceRate")
-                        .WithMany("InsuranceRateTemplates")
-                        .HasForeignKey("InsuranceRateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("InsuranceCompany.Core.Models.Template", "Template")
-                        .WithMany("InsuranceRateTemplates")
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("InsuranceRate");
-
-                    b.Navigation("Template");
-                });
-
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRequest", b =>
                 {
                     b.HasOne("InsuranceCompany.Core.Agent", "Agent")
@@ -1086,8 +1049,6 @@ namespace InsuranceCompany.Core.Migrations
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
                 {
-                    b.Navigation("InsuranceRateTemplates");
-
                     b.Navigation("InsuranceRequests");
 
                     b.Navigation("InsuranceTypeSurveys");
@@ -1117,8 +1078,6 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.Models.Template", b =>
                 {
                     b.Navigation("Documents");
-
-                    b.Navigation("InsuranceRateTemplates");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Position", b =>

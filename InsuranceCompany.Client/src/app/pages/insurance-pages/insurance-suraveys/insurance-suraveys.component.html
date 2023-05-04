@@ -13,21 +13,36 @@
             <div *ngFor="let question of item.insuranceSurvey.questions">
                 <label id="example-radio-group-label">{{question.text}}</label>
                 <div *ngIf="question.questionType.text=='checkbox'">
-                    <mat-checkbox color="primary" class="example-margin">Check me!</mat-checkbox>
+                    <div *ngFor="let answer of insuranceRequest.answerValues">
+                        <div class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
+                            <mat-checkbox color="primary" class="example-margin" [(ngModel)]="answer.value" 
+                                [ngModelOptions]="{standalone: true}">Check me!</mat-checkbox>
+                        </div>
+                    </div>
+
                 </div>
                 <div *ngIf="question.questionType.text=='radiobutton'">
-                    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"> 
-                    <mat-radio-button class="example-radio-button" *ngFor="let ans of question.answer" [value]="ans">
-                        {{ans}} 123
-                    </mat-radio-button>
-                    </mat-radio-group>
+                    <div *ngFor="let answer of insuranceRequest.answerValues">
+                        <div *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
+                            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="answer.value"
+                                    [ngModelOptions]="{standalone: true}"> 
+                                <mat-radio-button class="example-radio-button" *ngFor="let ans of question.answers" [value]="ans.questionAnswer" >
+                                    {{ans.questionAnswer}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
                 </div>
                 <div *ngIf="question.questionType.text=='textarea'">
-                    <form class="example-form">                    
-                        <mat-form-field class="example-full-width">
-                          <textarea matInput placeholder="Answer"></textarea>
-                        </mat-form-field>
-                      </form>
+                    <div *ngFor="let answer of insuranceRequest.answerValues">
+                        <form class="example-form">                    
+                            <mat-form-field class="example-full-width">
+                                <textarea matInput placeholder="Answer"
+                                    [(ngModel)]="answer.value" 
+                                    [ngModelOptions]="{standalone: true}"></textarea>
+                            </mat-form-field>
+                        </form>
+                    </div>
                 </div>
                 <div *ngIf="question.questionType.text=='input'" >
                     <div *ngFor="let answer of insuranceRequest.answerValues">

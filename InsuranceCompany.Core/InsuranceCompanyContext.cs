@@ -2,6 +2,7 @@
 using InsuranceCompany.Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace InsuranceCompany.Core;
 
@@ -27,6 +28,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
     public virtual DbSet<Client> Clients { get; set; }
 
     public virtual DbSet<ClientaChild> ClientaChildren { get; set; }
+    public virtual DbSet<Document> Documents { get; set; }
 
     public virtual DbSet<InsuranceRate> InsuranceRates { get; set; }
 
@@ -58,12 +60,16 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
          => optionsBuilder
-        .UseSqlServer("Server=LAPTOP-U48V0IAA\\SQLEXPRESS;Database=InsuranceCompany1;Trusted_Connection=True;TrustServerCertificate=True;");
+        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany1;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        //modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        //modelBuilder.ApplyConfiguration(new InsuranceStatusConfiguration());
+        //modelBuilder.ApplyConfiguration(new InsuranceRateConfiguration());
+        //modelBuilder.ApplyConfiguration(new InsuranceSurveyConfiguration());
+        //modelBuilder.ApplyConfiguration(new InsuranceTypeSurveyConfiguration());
 
         modelBuilder.Entity<Agent>(entity =>
         {
@@ -92,7 +98,6 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
             entity.ToTable("Answer");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.QuestionAnswer)
                 .HasMaxLength(1024)
                 .IsUnicode(false)
@@ -167,6 +172,22 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
             entity.ToTable("InsuranceRate");
 
             entity.Property(x => x.Id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<Document>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Document__3214EC070045678D");
+
+            entity.ToTable("Document");
+            entity.Property(x => x.Id).ValueGeneratedOnAdd();
+            
+            entity.HasOne(d => d.InsuranceRequest).WithMany(p => p.Documents)
+                .HasForeignKey(d => d.InsuranceRequestId)
+                .HasConstraintName("FK__Insurance__Document__2F10007B");
+
+            entity.HasOne(d => d.Template).WithMany(p => p.Documents)
+                .HasForeignKey(d => d.TemplateId)
+                .HasConstraintName("FK__Template__Document__5CD6CB2B");
         });
 
         modelBuilder.Entity<InsuranceRequest>(entity =>

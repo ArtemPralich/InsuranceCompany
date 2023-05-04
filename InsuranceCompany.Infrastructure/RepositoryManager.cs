@@ -24,11 +24,23 @@ namespace InsuranceCompany.Infrastructure
         private QuestionSurveyRepository _questionSurvey;
         private InsuredPersonRepository _insuredPerson;
         private TemplateRepository _template;
+        private DocumentRepository _documentRepository;
 
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }
+
+        public DocumentRepository Document
+        {
+            get
+            {
+                if (_documentRepository == null)
+                    _documentRepository = new DocumentRepository(_repositoryContext);
+                return _documentRepository;
+            }
+        }
+
         public IGenericRepository<Agent> Agent
         {
             get

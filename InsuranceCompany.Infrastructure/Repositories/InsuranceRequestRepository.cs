@@ -17,18 +17,26 @@ namespace InsuranceCompany.Infrastructure.Repositories
 
         public IEnumerable<InsuranceRequest> GetAll(bool trackChanges)
         {
-            return FindAll(trackChanges).Include(i => i.InsuranceStatus).Include(i => i.InsuranceRate)
-                .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
-                .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.QuestionType)
+            return FindAll(trackChanges).Include(i => i.InsuranceStatus)
+                .Include(i => i.InsuranceRate)
+                    .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
+                        .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.QuestionType)
                 .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).ToList();
         }
 
         public InsuranceRequest GetById(Guid Id, bool trackChanges)
         {
-            return FindByCondition(x => x.Id == Id,
-                trackChanges).Include(i => i.InsuranceStatus).Include(i => i.InsuranceRate)
-                .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
-                .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.QuestionType)
+            return FindByCondition(x => x.Id == Id, trackChanges)
+                .Include(i => i.InsuranceStatus)
+                .Include(i => i.InsuranceRate)
+                    .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
+                        .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.QuestionType)
+                .Include(i => i.InsuranceRate)
+                    .ThenInclude(i => i.InsuranceRateTemplates).ThenInclude(i => i.Template)
+                .Include(i => i.InsuranceRate)
+                    .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
+                        .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.Answers)
+                .Include(i => i.Documents)
                 .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).Include(i => i.AnswerValues).FirstOrDefault();
         }
 

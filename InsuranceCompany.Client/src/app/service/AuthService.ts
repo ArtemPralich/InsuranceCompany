@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { saveAs } from 'file-saver';
-import { Document } from "../pages/insurance-pages/insurance-documents/insurance-documents.component";
 
 @Injectable()
 export class AuthService {
