@@ -17,7 +17,7 @@
                     </div>
         
                     <div class="line-item" *ngIf="!addTemp">
-                        <input type="image" src="assets/pictures/delete.svg" class="button-header">
+                        <input type="image" src="assets/pictures/delete.svg" class="button-header" (click)="deleteTemplate()">
                         <div>Удалить шаблон документа</div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div *ngIf="!addTemp">
                     <mat-form-field appearance="fill" class="template-select">
                         <mat-label>Шаблон</mat-label>
-                        <mat-select [(ngModel)]="selectedItem" [(value)]="selected">
+                        <mat-select [(ngModel)]="selectedItem" [(value)]="selected" (selectionChange)="onSelectionChange()">
                         <mat-option *ngFor="let template of templates" [value]="template">
                             {{template.title}}
                         </mat-option>

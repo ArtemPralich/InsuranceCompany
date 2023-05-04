@@ -11,119 +11,74 @@
                 </mat-panel-description> -->
             </mat-expansion-panel-header>
             <div *ngFor="let question of item.insuranceSurvey.questions">
-                <label id="example-radio-group-label">{{question.text}}</label>
                 <div *ngIf="question.questionType.text=='checkbox'">
-                    <div *ngFor="let answer of insuranceRequest.answerValues">
-                        <div class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
-                            <mat-checkbox color="primary" class="example-margin" [(ngModel)]="answer.value" 
-                                [ngModelOptions]="{standalone: true}">Check me!</mat-checkbox>
+                    <div class="container-question">
+                        <div class="text-question">{{question.text}}</div>
+                        <div>
+                            <div *ngFor="let answer of insuranceRequest.answerValues">
+                                <div class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
+                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="answer.value" 
+                                        [ngModelOptions]="{standalone: true}">Check me!</mat-checkbox>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
                 <div *ngIf="question.questionType.text=='radiobutton'">
-                    <div *ngFor="let answer of insuranceRequest.answerValues">
-                        <div *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
-                            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="answer.value"
-                                    [ngModelOptions]="{standalone: true}"> 
-                                <mat-radio-button class="example-radio-button" *ngFor="let ans of question.answers" [value]="ans.questionAnswer" >
-                                    {{ans.questionAnswer}}
-                                </mat-radio-button>
-                            </mat-radio-group>
+                    <div class="container-question">
+                        <div class="text-question">{{question.text}}</div>
+                        <div>
+                            <div>
+                                <div *ngFor="let answer of insuranceRequest.answerValues">
+                                    <div *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
+                                        <mat-radio-group 
+                                            aria-labelledby="example-radio-group-label"
+                                            class="example-radio-group" 
+                                            [(ngModel)]="answer.value"
+                                            [ngModelOptions]="{standalone: true}"> 
+                                            <div>
+                                                <mat-radio-button class="example-radio-button" *ngFor="let ans of question.answers" [value]="ans.questionAnswer" >
+                                                    {{ans.questionAnswer}}
+                                                </mat-radio-button>
+                                            </div>
+                                        </mat-radio-group>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div *ngIf="question.questionType.text=='textarea'">
-                    <div *ngFor="let answer of insuranceRequest.answerValues">
-                        <form class="example-form">                    
-                            <mat-form-field class="example-full-width">
-                                <textarea matInput placeholder="Answer"
-                                    [(ngModel)]="answer.value" 
-                                    [ngModelOptions]="{standalone: true}"></textarea>
-                            </mat-form-field>
-                        </form>
+                    <div class="container-question">
+                        
+                        <div class="text-question">{{question.text}}</div>
+                        <div *ngFor="let answer of insuranceRequest.answerValues">
+                            <form class="example-form">                    
+                                <mat-form-field class="example-full-width">
+                                    <textarea matInput placeholder="Answer"
+                                        [(ngModel)]="answer.value" 
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                </mat-form-field>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div *ngIf="question.questionType.text=='input'" >
-                    <div *ngFor="let answer of insuranceRequest.answerValues">
-                        <form class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
-                            <mat-form-field class="example-full-width">
-                              <input matInput #message maxlength="256" placeholder="Answer" 
-                                [(ngModel)]="answer.value" 
-                                [ngModelOptions]="{standalone: true}">
-                            </mat-form-field>
-                          </form>
+                    <div class="container-question">
+                        
+                        <div class="text-question">{{question.text}}</div>
+                        <div *ngFor="let answer of insuranceRequest.answerValues">
+                            <form class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput #message maxlength="256" placeholder="Answer" 
+                                    [(ngModel)]="answer.value" 
+                                    [ngModelOptions]="{standalone: true}">
+                                </mat-form-field>
+                              </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </mat-expansion-panel>
     </mat-accordion>
-
-    <div class="container-question">
-        <div class="text-question">Какой Артём?</div>
-        <div>
-            <div>
-                <mat-checkbox color="primary" class="example-margin">Красивый</mat-checkbox>
-            </div>
-            <div>
-                <mat-checkbox color="primary" class="example-margin">Умный</mat-checkbox>
-            </div>
-            <div>
-                <mat-checkbox color="primary" class="example-margin">Любимый</mat-checkbox>
-            </div>
-            <div>
-                <mat-checkbox color="primary" class="example-margin">Самый лучший</mat-checkbox>
-            </div>
-        </div>
-    </div>
-    <div class="container-question">
-        <div class="text-question">Насколько вы любите Артёма?</div>
-        <div>
-            <div>
-                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"> 
-                    <div>
-                        <mat-radio-button class="example-radio-button" >
-                            Сильно
-                        </mat-radio-button>
-                    </div>
-                    <div>
-                        <mat-radio-button class="example-radio-button" >
-                            Максимально
-                        </mat-radio-button>
-                    </div>
-                    <div>
-                        <mat-radio-button class="example-radio-button" >
-                            Очень
-                        </mat-radio-button>
-                    </div>
-                    <div>
-                        <mat-radio-button class="example-radio-button" >
-                            Максимально сильно
-                        </mat-radio-button>
-                    </div>
-                </mat-radio-group>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-question">
-        <div>
-            <form class="example-form">                    
-                <mat-form-field class="example-full-width">
-                  <textarea matInput placeholder="Answer"></textarea>
-                </mat-form-field>
-              </form>
-        </div>
-    </div>
-    
-    <div class="container-question">
-        <div>
-            <form class="example-form">
-                <mat-form-field class="example-full-width">
-                  <input matInput #message maxlength="256" placeholder="Answer">
-                </mat-form-field>
-              </form>
-        </div>
-    </div>
-
 </div>

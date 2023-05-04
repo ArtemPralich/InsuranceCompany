@@ -40,8 +40,7 @@ export class DocumentService {
         return this.http.put<any>(`${this.pathBase}`, body, { headers });
     }
 
-    public DeleteClient(id: string):Observable<any>{
-
-        return this.http.delete<any>(`${this.pathBase}/${id}`);
+    public DeleteTeplate(templateId : string):Observable<any>{
+        return this.http.delete<any>(`${this.pathBase}?id=${templateId}`);
     }
 }

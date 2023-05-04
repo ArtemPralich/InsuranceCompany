@@ -108,14 +108,19 @@ namespace InsuranceCompany.Controllers
         [HttpGet(Name = "GetTemplate")]
         public IActionResult Get()
         {
-            var clients = _repositoryManager.Template.GetAll(false).ToList();
-            return Ok(clients);
+            var templates = _repositoryManager.Template.GetAll(false).ToList();
+            var templatesDro = _mapper.Map<List<TemplateDto>>(templates);
+            return Ok(templatesDro);
         }
 
         [HttpPost(Name = "CreateTemplate")]
-        public IActionResult Create(CreateTemplate insuranceRateDto)
+        public IActionResult Create([FromBody]CreateTemplate insuranceRateDto)
         {
             var template = _mapper.Map<Template>(insuranceRateDto);
+            foreach (var rate in insuranceRateDto.InsuranceRates)
+            {
+                template.InsuranceRateTemplates.Add(new InsuranceRateTemplate { InsuranceRateId = rate });
+            }
             template.Text = template.Text.Replace("&lt;", "<");
             template.Text = template.Text.Replace("&gt;", ">");
             _repositoryManager.Template.Create(template);
@@ -128,25 +133,37 @@ namespace InsuranceCompany.Controllers
         {
 
             var template = _repositoryManager.Template.GetById(templateDto.Id, true);
+            List<InsuranceRateTemplate> insuranceRateTemplatesForAdd = new List<InsuranceRateTemplate>();
+            List<InsuranceRateTemplate> insuranceRateTemplatesForDelete = new List<InsuranceRateTemplate>();
+            foreach (var rate in templateDto.InsuranceRates)
+            {
+                if(template.InsuranceRateTemplates.FirstOrDefault(t => t.Id == rate) == null)
+                {
+                    insuranceRateTemplatesForAdd.Add(new InsuranceRateTemplate() { TemplateId = template.Id, InsuranceRateId = rate });
+                }
+            }
+
+            insuranceRateTemplatesForDelete = template.InsuranceRateTemplates.Where(t => !templateDto.InsuranceRates.Contains(t.TemplateId)).ToList();
+
             _mapper.Map(templateDto, template);
             template.Text = template.Text.Replace("&lt;", "<");
             template.Text = template.Text.Replace("&gt;", ">");
             _repositoryManager.Template.Update(template);
+            _repositoryManager.InsuranceRateTemplate.DeleteRange(insuranceRateTemplatesForDelete);
+            _repositoryManager.InsuranceRateTemplate.CreateRange(insuranceRateTemplatesForAdd);
+            
             _repositoryManager.Save();
             return NoContent();
         }
 
-        public class ViewModel
+        [HttpDelete(Name = "DeleteTemplate")]
+        public IActionResult Delete(Guid id)
         {
-            public int Cost { get; set; }
+
+            var template = _repositoryManager.Template.GetById(id, true);
+            _repositoryManager.Template.Delete(template);
+            _repositoryManager.Save();
+            return NoContent();
         }
-    }
-
-    public class InsuranceRequestHtmlTemplate
-    {
-        public InsuranceRequest Model { get; set; }
-        public int Cost { get; set; }
-
-        public string Html { get; set; }
     }
 }

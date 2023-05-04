@@ -1,5 +1,6 @@
 ﻿using InsuranceCompany.Core;
 using InsuranceCompany.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,13 @@ namespace InsuranceCompany.Infrastructure.Repositories
 
         public IEnumerable<Template> GetAll(bool trackChanges)
         {
-            return FindAll(trackChanges).ToList();
+            return FindAll(trackChanges).Include(t => t.InsuranceRateTemplates).ToList();
         }
 
         public Template GetById(Guid Id, bool trackChanges)
         {
             return FindByCondition(x => x.Id == Id,
-                trackChanges).FirstOrDefault();
+                trackChanges).Include(t => t.InsuranceRateTemplates).FirstOrDefault();
         }
     }
 }

@@ -25,12 +25,21 @@ namespace InsuranceCompany.Infrastructure
         private InsuredPersonRepository _insuredPerson;
         private TemplateRepository _template;
         private DocumentRepository _documentRepository;
+        private InsuranceRateTemplateRepository _insuranceRateTemplateRepository;
 
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
             _repositoryContext = repositoryContext;
         }
-
+        public InsuranceRateTemplateRepository InsuranceRateTemplate
+        {
+            get
+            {
+                if (_insuranceRateTemplateRepository == null)
+                    _insuranceRateTemplateRepository = new InsuranceRateTemplateRepository(_repositoryContext);
+                return _insuranceRateTemplateRepository;
+            }
+        }
         public DocumentRepository Document
         {
             get

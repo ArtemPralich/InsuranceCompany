@@ -44,6 +44,9 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
 
             CreateMap<InsuranceTypeSurveyDto, InsuranceTypeSurvey>().ReverseMap();
 
+            CreateMap<Template, TemplateDto>()
+                .ForMember(dest => dest.InsuranceRates, opt => opt.MapFrom(src => src.InsuranceRateTemplates.Select(i => i.InsuranceRateId).Distinct().ToList()));
+
             CreateMap<InsuranceRateDto, InsuranceRate>()
                 .ForMember(dest => dest.InsuranceTypeSurveys, opt => opt.Ignore());
             CreateMap<InsuranceRateDto, InsuranceRate>().ReverseMap();

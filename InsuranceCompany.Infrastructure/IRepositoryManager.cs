@@ -23,6 +23,7 @@ namespace InsuranceCompany.Infrastructure
         InsuredPersonRepository InsuredPerson { get; }
         TemplateRepository Template { get; }
         DocumentRepository Document { get; }
+        InsuranceRateTemplateRepository InsuranceRateTemplate { get; }
         public QuestionSurveyRepository QuestionSurvey { get; }
     }
 }

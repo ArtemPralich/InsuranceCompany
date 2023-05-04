@@ -11,5 +11,7 @@ namespace InsuranceCompany.Shared.ModelDto.Create
         public string? Text { get; set; }
 
         public string? Title { get; set; }
+
+        public virtual ICollection<Guid> InsuranceRates { get; set; } = new List<Guid>();
     }
 }
