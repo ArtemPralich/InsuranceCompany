@@ -20,6 +20,7 @@ export class InsuranceRequest {
     insuredPersons: InsuredPerson[];
     answerValues: AnswerValues[];
     documents: Document[];
+    isReadyDocuments: boolean;
 
 
     constructor(id: string, dateOfStart: Date, dateOfEnd: Date, agentId: string, 

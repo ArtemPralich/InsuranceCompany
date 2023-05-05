@@ -10,7 +10,7 @@
       <input type="password" name="" placeholder="Пароль" (click)="this.login()">
       <input type="submit" name="" value="Войти">
       <a href="#" class="forgot-link">Забыли пароль?</a>
-      <a href="#" class="forgot-link">Регистрация</a>
+      <a href="#" [routerLink]="['/registration']" class="forgot-link">Регистрация</a>
     </form>
   </div>
 </div>

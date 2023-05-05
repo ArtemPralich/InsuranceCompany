@@ -24,7 +24,8 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public decimal Cost { get; set; }
         public Guid? InsuranceStatusId { get; set; }
-
+        
+        public bool IsReadyDocuments { get; set; }
         public virtual Agent? Agent { get; set; }
 
         public virtual ICollection<AnswerValueDto> AnswerValues { get; } = new List<AnswerValueDto>();

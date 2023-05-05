@@ -31,6 +31,13 @@ export class SurveyEditorComponent  implements OnInit {
   openDialogQuestion() {
     const dialogRef = this.dialog.open(DialogCreateQuestionPopup,  {
       data: this.selectedSurvey});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log(this.selectedSurvey)
+        this.selectedSurvey.questions.push(result);
+      }
+    });
   }
 
   openDialogSurvey() {
@@ -63,8 +70,8 @@ export class DialogCreateQuestionPopup {
   }
 
   create(){
-    this.selectedSurvey.questions.push(this.addQuestion);
-    console.log(this.selectedSurvey);
+    console.log(this.addQuestion);
+    this.dialogRef.close(this.addQuestion);
   }
 }
 

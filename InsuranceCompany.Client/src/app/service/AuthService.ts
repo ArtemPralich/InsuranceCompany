@@ -51,6 +51,7 @@ export class AuthService {
           }), { headers:myHeaders,observe: 'response'} );
 
     }
+    
     register(user: any):Observable<HttpResponse<string>>{
       return this.http.post<string>(`https://localhost:7046/api/authentication/`, user , { observe: 'response'});
       

@@ -61,19 +61,20 @@ namespace InsuranceCompany.Controllers
         [Route("CreateDocuments")]
         public async Task<ActionResult> GeneratePDFs(Guid id)
         {
-            var insurance = _repositoryManager.InsuranceRequest.GetById(id, false);
+            var insurance = _repositoryManager.InsuranceRequest.GetById(id, true);
             List<Template> templates = new List<Template>();
             if(insurance != null && insurance.InsuranceRate != null)
             {
                 templates = insurance.InsuranceRate.InsuranceRateTemplates.Select(x => x.Template).ToList();
             }
-            var engine = new RazorLightEngineBuilder()
-                .UseEmbeddedResourcesProject(typeof(InsuranceRequestDto))
-                .UseMemoryCachingProvider()
-                .Build();
             var mainInsuredPerson = insurance.InsuredPersons.FirstOrDefault(ip => ip.IsMainInsuredPerson);
             foreach(var template in templates)
             {
+                var engine = new RazorLightEngineBuilder()
+                    .UseEmbeddedResourcesProject(typeof(InsuranceRequestDto))
+                    .UseMemoryCachingProvider()
+                    .Build();
+
                 string result = await engine.CompileRenderStringAsync("templateKey", template.Text, insurance);
 
                 MemoryStream memoryStream = new MemoryStream();
@@ -98,8 +99,9 @@ namespace InsuranceCompany.Controllers
                 // Сохраняем файл на диск
                 System.IO.File.WriteAllBytes(Path.Combine(filePath, fileName), fileBytes);
             }
+            insurance.IsReadyDocuments = true;
+            _repositoryManager.InsuranceRequest.Update(insurance);
             _repositoryManager.Save();
-
 
             return Ok();
         }
@@ -133,26 +135,30 @@ namespace InsuranceCompany.Controllers
         {
 
             var template = _repositoryManager.Template.GetById(templateDto.Id, true);
-            List<InsuranceRateTemplate> insuranceRateTemplatesForAdd = new List<InsuranceRateTemplate>();
-            List<InsuranceRateTemplate> insuranceRateTemplatesForDelete = new List<InsuranceRateTemplate>();
-            foreach (var rate in templateDto.InsuranceRates)
+            if(template != null)
             {
-                if(template.InsuranceRateTemplates.FirstOrDefault(t => t.Id == rate) == null)
+                List<InsuranceRateTemplate> insuranceRateTemplatesForAdd = new List<InsuranceRateTemplate>();
+                List<InsuranceRateTemplate> insuranceRateTemplatesForDelete = new List<InsuranceRateTemplate>();
+                foreach (var rate in templateDto.InsuranceRates)
                 {
-                    insuranceRateTemplatesForAdd.Add(new InsuranceRateTemplate() { TemplateId = template.Id, InsuranceRateId = rate });
+                    if(template.InsuranceRateTemplates.FirstOrDefault(t => t.Id == rate) == null)
+                    {
+                        insuranceRateTemplatesForAdd.Add(new InsuranceRateTemplate() { TemplateId = template.Id, InsuranceRateId = rate });
+                    }
                 }
-            }
 
-            insuranceRateTemplatesForDelete = template.InsuranceRateTemplates.Where(t => !templateDto.InsuranceRates.Contains(t.TemplateId)).ToList();
+                insuranceRateTemplatesForDelete = template.InsuranceRateTemplates.Where(t => !templateDto.InsuranceRates.Contains(t.TemplateId)).ToList();
 
-            _mapper.Map(templateDto, template);
-            template.Text = template.Text.Replace("&lt;", "<");
-            template.Text = template.Text.Replace("&gt;", ">");
-            _repositoryManager.Template.Update(template);
-            _repositoryManager.InsuranceRateTemplate.DeleteRange(insuranceRateTemplatesForDelete);
-            _repositoryManager.InsuranceRateTemplate.CreateRange(insuranceRateTemplatesForAdd);
+                _mapper.Map(templateDto, template);
+                template.Text = template.Text.Replace("&lt;", "<");
+                template.Text = template.Text.Replace("&gt;", ">");
+                _repositoryManager.Template.Update(template);
+                _repositoryManager.InsuranceRateTemplate.DeleteRange(insuranceRateTemplatesForDelete);
+                _repositoryManager.InsuranceRateTemplate.CreateRange(insuranceRateTemplatesForAdd);
             
-            _repositoryManager.Save();
+                _repositoryManager.Save();
+
+            }
             return NoContent();
         }
 
@@ -161,8 +167,11 @@ namespace InsuranceCompany.Controllers
         {
 
             var template = _repositoryManager.Template.GetById(id, true);
-            _repositoryManager.Template.Delete(template);
-            _repositoryManager.Save();
+            if (template != null)
+            {
+                _repositoryManager.Template.Delete(template);
+                _repositoryManager.Save();
+            }
             return NoContent();
         }
     }

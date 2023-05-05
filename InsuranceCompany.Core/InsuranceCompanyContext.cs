@@ -60,12 +60,12 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
          => optionsBuilder
-        .UseSqlServer("Server=LAPTOP-U48V0IAA\\SQLEXPRESS;Database=InsuranceCompany1;Trusted_Connection=True;TrustServerCertificate=True;");
+        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany1;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        //modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
         //modelBuilder.ApplyConfiguration(new InsuranceStatusConfiguration());
         //modelBuilder.ApplyConfiguration(new InsuranceRateConfiguration());
         //modelBuilder.ApplyConfiguration(new InsuranceSurveyConfiguration());

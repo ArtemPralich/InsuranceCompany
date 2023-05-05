@@ -70,4 +70,4 @@
 
 <button class="save-button" (click)="save()">Сохранить</button>
 
-<button class="documents-button" (click)="documentGeneration()">Сгенерировать документы</button>
+<button class="documents-button" *ngIf="!insuranceRequest.isReadyDocuments" (click)="documentGeneration()">Сгенерировать документы</button>

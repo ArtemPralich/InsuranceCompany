@@ -18,7 +18,30 @@ namespace InsuranceCompany.Controllers
             _userManager = userManager;
             _authManager = authManager;
         }
-
+        [HttpPost]
+        [Route("RegisterClient")]
+        public async Task<IActionResult> RegisterClient([FromBody] RegistrationClientDto userForRegistration)
+        {
+            //var user = _mapper.Map<User>(userForRegistration); 
+            var user = new User()
+            {
+                FirstName = "",
+                LastName = "",
+                Email = userForRegistration.Email,
+                UserName = userForRegistration.UserName,
+            };
+            var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.TryAddModelError(error.Code, error.Description);
+                }
+                return BadRequest(ModelState);
+            }
+            await _userManager.AddToRolesAsync(user, new List<string>() { "Client" } );
+            return StatusCode(201);
+        }
         [HttpPost]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {

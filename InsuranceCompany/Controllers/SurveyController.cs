@@ -28,7 +28,8 @@ namespace InsuranceCompany.Controllers
         public IActionResult Get()
         {
             var insuranceRequests = _repositoryManager.InsuranceSurvey.GetAll(false);
-            return Ok(insuranceRequests);
+            var insuranceRequestsDto = _mapper.Map<List<InsuranceSurveyDto>>(insuranceRequests);
+            return Ok(insuranceRequestsDto);
         }
 
         [HttpPost("CreateQuestion", Name = "CreateQuestion")]
