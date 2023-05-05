@@ -5,8 +5,8 @@ export class InsuranceSurvey {
     title : string;
     description : string;
     questions : Question[];
-
-    constructor(id: string, status: string, color: string) {
-        this.id = id;
+    
+    constructor(title: string) {
+        this.title = title;
     }
 }

@@ -9,6 +9,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 import { RequestComponent } from './pages/request/request.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
+import { SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'request', component: RequestComponent},
   { path: 'room-client', component: RoomClientComponent},
+  { path: 'survey-editor', component: SurveyEditorComponent},
   { path: '**', component: NotFoundComponent},];
 
 @NgModule({

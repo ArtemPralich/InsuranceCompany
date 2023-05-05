@@ -1,0 +1,27 @@
+<div class="editor">
+    <div class="header">
+        <div class="header-title">
+            Редактор опросов
+        </div>
+    </div>
+
+    <div class="survey-container">
+        <div class="menu-line">
+            <ul class="menu">
+                <li class="menu-item" *ngFor="let survey of insuranceSurveys" [value]="survey" (click)="choiceSurvey(survey)">
+                    {{survey.title}}
+                </li>
+            </ul>
+            <button mat-raised-button class="exit" (click)="openDialogSurvey()">Добавить опрос</button>
+        </div>
+
+        <diV class="editor-container">
+            <div class="editor-title">{{selectedSurvey.title}}</div>
+
+            <div class="line-item">
+                <input type="image" src="assets/pictures/add_circle_blue.svg" class="button-add" (click)="openDialogQuestion()">
+                <div>Добавить вопрос</div>
+            </div>
+        </diV>
+    </div>
+</div>

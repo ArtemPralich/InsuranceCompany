@@ -65,7 +65,7 @@ export class InsuranceListComponent implements OnInit {
 }
 
 
-@Component({
+@Component({ 
   selector: 'CreateInsurancePopup',
   templateUrl: 'CreateInsurancePopup.html',
   styleUrls: ['./insurance-list.component.css']

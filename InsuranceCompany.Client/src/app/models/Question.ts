@@ -11,9 +11,7 @@ export class Question {
     questionType :  QuestionType;
     answers :  Answer[];
 
-    constructor(id: string, insuranceSurveyId : string,
-    insuranceRateId : string,insuranceSurvey : InsuranceSurvey) {
-        
-        this.id = id;
+    constructor(text: string) {
+        this.text = text;
     }
 }

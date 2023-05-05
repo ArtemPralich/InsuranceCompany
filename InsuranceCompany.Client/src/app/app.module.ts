@@ -19,6 +19,7 @@ import { ClientService } from './service/ClientService';
 import { DocumentService } from './service/DocumentService';
 import { InsuranceRequestService } from './service/InsuranceRequestService';
 import { InsuranceRateService } from './service/InsuranceRateService';
+import { SurveyService } from './service/SurveyService';
 import { HttpClientModule } from '@angular/common/http';
 import { InsuranceListComponent } from './pages/insurance-list/insurance-list.component';
 import { MatTableModule } from '@angular/material/table'
@@ -47,6 +48,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { NgxEditorModule } from 'ngx-editor';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
+import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,10 @@ import { RoomClientComponent } from './pages/room-client/room-client.component';
     DocumentTemplatesComponent,
     RegistrationComponent,
     RequestComponent,
-    RoomClientComponent
+    RoomClientComponent,
+    SurveyEditorComponent,
+    DialogCreateQuestionPopup,
+    DialogCreateSurveyPopup
   ],
   imports: [
     BrowserModule,
@@ -101,6 +106,7 @@ import { RoomClientComponent } from './pages/room-client/room-client.component';
     InsuranceRequestService,
     InsuranceRateService,
     DocumentService,
+    SurveyService,
   ],
   bootstrap: [AppComponent],
   schemas: [

@@ -1,0 +1,13 @@
+<div class="popup-content">
+    <h4>Добавить опрос</h4>
+
+    <mat-form-field class="example-full-width"  class="popup-label">
+        <mat-label>Введите наименование опроса</mat-label>
+        <input matInput placeholder="Опрос" [(ngModel)]="addSurvey.title" required>
+    </mat-form-field>
+    
+    <div class="div-right">
+      <button mat-button (click)= "close()">Отмена</button>
+      <button mat-button color="primary" (click)="create()">Создать</button>
+    </div>
+  </div>
