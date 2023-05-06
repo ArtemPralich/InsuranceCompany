@@ -49,6 +49,8 @@ import { NgxEditorModule } from 'ngx-editor';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
 import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,8 @@ import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorCompone
     MatTreeModule,
     MatExpansionModule,
     MatRadioModule,
-    NgxEditorModule
+    NgxEditorModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthService,
@@ -106,7 +109,7 @@ import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorCompone
     InsuranceRequestService,
     InsuranceRateService,
     DocumentService,
-    SurveyService,
+    SurveyService
   ],
   bootstrap: [AppComponent],
   schemas: [

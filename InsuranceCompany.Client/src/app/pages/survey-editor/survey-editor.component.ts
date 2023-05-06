@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { InsuranceSurvey } from 'src/app/models/InsuranceSurvey';
 import { Question } from 'src/app/models/Question';
 import { SurveyService } from 'src/app/service/SurveyService';
@@ -14,7 +15,7 @@ export class SurveyEditorComponent  implements OnInit {
   selectedSurvey: InsuranceSurvey = new InsuranceSurvey("");
   questionSurveys: Question[] = [];
 
-  constructor(public insuranceSurveyService: SurveyService, public dialog: MatDialog,) 
+  constructor(public insuranceSurveyService: SurveyService, public dialog: MatDialog, private toastr: ToastrService) 
   {}
 
   ngOnInit(): void {
@@ -25,6 +26,7 @@ export class SurveyEditorComponent  implements OnInit {
     this.insuranceSurveyService.GetAllInsuranceSurveys().subscribe(res => {
       this.insuranceSurveys = res;
       this.selectedSurvey = this.insuranceSurveys[0];
+      this.toastr.info('Запрос выполнен успешно!', 'Успешно');
     });
   }
 
@@ -84,7 +86,7 @@ export class DialogCreateQuestionPopup {
 export class DialogCreateSurveyPopup {
   addSurvey: InsuranceSurvey = new InsuranceSurvey("");
 
-  constructor(public insuranceSurveyService: SurveyService, public dialogRef: MatDialogRef<DialogCreateSurveyPopup>) 
+  constructor(public insuranceSurveyService: SurveyService, public dialogRef: MatDialogRef<DialogCreateSurveyPopup>, private toastr: ToastrService) 
   {}
 
   close(){
@@ -96,7 +98,7 @@ export class DialogCreateSurveyPopup {
       this.close();
     },
         error => {
-            alert("Ошибка сохранения!")
+          alert("Ошибка сохранения!")
       });
   }
 }

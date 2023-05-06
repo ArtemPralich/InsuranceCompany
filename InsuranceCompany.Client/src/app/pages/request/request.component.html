@@ -54,7 +54,7 @@
     </div>
 
     <div class="request-form" *ngIf="!condition">
-      <mat-form-field appearance="fill" class="popup-label">
+      <mat-form-field appearance="fill" class="example-full-width">
         <mat-label>Выберите тип страхового запроса</mat-label>
         <mat-select [(value)]="selectedInsuranceRate">
           <mat-option *ngFor="let rate of insuranceRates" [value]="rate">
@@ -63,17 +63,17 @@
         </mat-select>
       </mat-form-field>
     
-      <mat-form-field class="example-full-width"  class="popup-label">
+      <mat-form-field appearance="fill" class="example-full-width">
         <mat-label>Введите общую сумму страховых взносов</mat-label>
         <input matInput type="number" placeholder="0" [(ngModel)]="insuranceAmount">
       </mat-form-field>
 
-      <mat-form-field class="example-full-width"  class="popup-label">
+      <mat-form-field appearance="fill" class="example-full-width">
         <mat-label>Коэффициент страхового запроса</mat-label>
         <input matInput placeholder="50" [value]="selectedInsuranceRate?.baseCoefficient || ''" disabled>
       </mat-form-field>
 
-      <mat-form-field class="example-full-width"  class="popup-label">
+      <mat-form-field appearance="fill" class="example-full-width">
         <mat-label>Страховые выплаты</mat-label>
         <input matInput placeholder="" [value]="insuranceAmount * (selectedInsuranceRate?.baseCoefficient || 0)" disabled>
       </mat-form-field>
