@@ -1,39 +1,32 @@
 <div class="content">
   <mat-stepper orientation="vertical" #stepper>
     <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup" class="content" *ngFor="let person of insuranceRequest.insuredPersons">
+      <form [formGroup]="firstFormGroup" *ngFor="let person of insuranceRequest.insuredPersons">
         <div *ngIf="person.isMainInsuredPerson">
-          <ng-template matStepLabel>Заполните информацию о клиенте</ng-template>
-            <p>
-              <mat-form-field appearance="fill" class="margin-form-field">
-                <mat-label>Введите имя</mat-label>
-                <input matInput placeholder="Имя" [(ngModel)]="person.client.name" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-            
+          <ng-template matStepLabel>Личные данные</ng-template>
+            <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите фамилию</mat-label>
-                <input matInput placeholder="Фамилия"  [(ngModel)]="person.client.surname" [ngModelOptions]="{standalone: true}">
+                <input matInput placeholder="Фамилия"  [(ngModel)]="person.client.surname" [ngModelOptions]="{standalone: true}" required>
               </mat-form-field>
-            </p>
-            <p>
-              <mat-form-field appearance="fill" class="margin-form-field width-form-field-300">
-                <mat-label>Введите персональный код</mat-label>
-                <input matInput placeholder="Персональный код" type="text" [(ngModel)]="person.client.personalCode" 
-                [ngModelOptions]="{standalone: true}" maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()">
+
+              <mat-form-field appearance="fill" class="margin-form-field">
+                <mat-label>Введите имя</mat-label>
+                <input matInput placeholder="Имя" [(ngModel)]="person.client.name" [ngModelOptions]="{standalone: true}" required>
               </mat-form-field>
-              
+            </div>
+            <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите дату рождения</mat-label>
-                <input matInput [matDatepicker]="picker"  [(ngModel)]="person.client.dateOfBirth" [ngModelOptions]="{standalone: true}">
+                <input matInput [matDatepicker]="picker"  [(ngModel)]="person.client.dateOfBirth" [ngModelOptions]="{standalone: true}" required>
                 <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                 <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
-            </p>
-            <p>
+
               <mat-form-field appearance="fill" class="margin-form-field">
-                <mat-label>Выберите тип страхового запроса</mat-label>
-                <mat-select [(ngModel)]="person.client.gender" [ngModelOptions]="{standalone: true}">
+                <mat-label>Выберите пол</mat-label>
+                <mat-select [(ngModel)]="person.client.gender" [ngModelOptions]="{standalone: true}" required>
                   <mat-option [value]="true">
                     Мужчина
                   </mat-option>
@@ -42,39 +35,47 @@
                     Женщина
                   </mat-option>
                 </mat-select>
-              </mat-form-field>    
-              
-              <mat-form-field appearance="fill" class="margin-form-field">
-                <mat-label>Введите номер телефона</mat-label>
-                <span matPrefix>+375 &nbsp;</span>
-                <input type="tel" matInput placeholder="29 291-70-93" required>
               </mat-form-field>
-            </p>
+            </div>
+            <div>
+              <mat-form-field appearance="fill" class="margin-form-field">
+                <mat-label>Введите персональный код</mat-label>
+                <input matInput placeholder="Персональный код" type="text" [(ngModel)]="person.client.personalCode" 
+                [ngModelOptions]="{standalone: true}" maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
+              </mat-form-field>
+            </div>
         </div>
       </form>
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Fill out your address</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                  required>
-        </mat-form-field>
+        <ng-template matStepLabel>Контактная информация</ng-template>
+
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <mat-form-field appearance="fill" class="margin-form-field">
+            <mat-label>Введите номер телефона</mat-label>
+            <span matPrefix>+375 &nbsp;</span>
+            <input type="tel" matInput placeholder="29 291-70-93" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="margin-form-field">
+            <mat-label>Введите адрес</mat-label>
+            <input matInput formControlName="secondCtrl" placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20"
+                    required>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field appearance="fill" class="margin-form-field">
+            <mat-label>Введите адрес электронной почты</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" placeholder="insurance@gmail.com">
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Ошибка ввода
+            </mat-error>
+          </mat-form-field>
         </div>
       </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
     </mat-step>
   </mat-stepper>
 </div>

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import {FormBuilder, Validators} from '@angular/forms';
+import { InsuranceRequest } from 'src/app/models/InsuranceRequest';
 
 @Component({
   selector: 'app-insurance-bank-data',
@@ -8,13 +9,19 @@ import {FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./insurance-bank-data.component.css']
 })
 export class InsuranceBankDataComponent {
+  @Input() insuranceRequest:  InsuranceRequest;
+  selectedBank: string;
+  banks: string[] = ['Беларусбанк', 'Белагропромбанк', 'Приорбанк', 'Сбер Банк', 'Банк ВТБ', 'Банк БЕЛВЭБ'];
+
   firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+    firstCtrl: ['', Validators.required]
   });
   secondFormGroup = this._formBuilder.group({
     secondCtrl: ['', Validators.required],
   });
-  isLinear = false;
+  thirdFormGroup = this._formBuilder.group({
+    thirdCtrl: ['', Validators.required],
+  });
 
   constructor(private _formBuilder: FormBuilder) {}
 }

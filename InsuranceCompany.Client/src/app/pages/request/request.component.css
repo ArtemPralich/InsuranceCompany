@@ -6,6 +6,8 @@
 }
 
 .example-full-width {
+    margin-left: 20px;
+    margin-right: 20px;
     width: 600px;
 }
 
@@ -22,7 +24,7 @@
     padding: 50px 50px 80px 50px;
     position: relative;
     box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
-    border-radius: 100px 100px 100px 100px;
+    border-radius: 100px;
     margin: 30px;
     background-color: #fff;
     text-align: center;
@@ -52,10 +54,6 @@
     padding-top: 30px;
 }
 
-.request-info-user {
-    padding-top: 50px;
-}
-
 .buttons-form {
     display: inline;
 }
@@ -78,9 +76,10 @@
     opacity: 1;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 839.5px) {
     .request-container {
-        height: 750px;
+        height: 800px;
+        width: auto;
     }
 
     .example-full-width {
@@ -89,15 +88,77 @@
 }
 
 @media (max-width: 700px) {
-    .request-container {
-        height: 750px;
+    .request-title {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 570px) {
+    .request-title {
+        font-size: 30px;
     }
 
     .example-full-width {
-        width: 400px;
+        width: 300px;
     }
 
+    .request-container {
+        padding: 30px 10px 20px 10px;
+        border-radius: 50px;
+    }
+
+    .request-form {
+        padding-top: 0px;
+    }
+}
+
+@media (max-width: 420px) {
     .request-title {
-        font-size: 40px;
+        font-size: 20px;
+    }
+
+    .example-full-width {
+        width: 250px;
+        font-size: 12px;
+    }
+
+    .margin-form-field{
+        width: 250px;
+        font-size: 12px;
+    }
+
+    .example-margin {
+        font-size: 12px;
+    }
+
+    .button-form {
+        padding: 10px 30px;
+        font-size: 14px;
+    }
+    
+    .button-form-send {
+        padding: 10px 30px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 340px) {
+    .request-title {
+        font-size: 18px;
+    }
+
+    .example-full-width {
+        width: 200px;
+        font-size: 10px;
+    }
+
+    .margin-form-field{
+        width: 200px;
+        font-size: 10px;
+    }
+
+    .request-container {
+        margin: 10px;
+        padding: 30px 5px 20px 5px;
     }
 }

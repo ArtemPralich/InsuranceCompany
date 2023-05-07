@@ -80,6 +80,8 @@ export class DialogElementsExampleDialog {
   checked = false;
   insuranceAmount: number;
   insuranceRequest : CreateInsuranceRequestDto;
+  selectedItem: boolean=false;
+  checkItem: boolean=false;
 
   constructor(public insuranceRateService: InsuranceRateService, public dialogRef: MatDialogRef<DialogElementsExampleDialog>,
     public insuranceRequestService: InsuranceRequestService, private router: Router) 

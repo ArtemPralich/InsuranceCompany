@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Editor } from 'ngx-editor';
+import { ToastrService } from 'ngx-toastr';
 import { InsuranceRate } from 'src/app/models/InsuranceRate';
 import { Template } from 'src/app/models/Template';
 import { DocumentService } from 'src/app/service/DocumentService';
@@ -24,7 +25,7 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
   selectedInsuranceRate: InsuranceRate[] = [];
   selectedItem: boolean=false;
 
-  constructor(public documentService: DocumentService, public insuranceRateService: InsuranceRateService,) 
+  constructor(public documentService: DocumentService, public insuranceRateService: InsuranceRateService, private toastr: ToastrService) 
   {}
 
   ngOnInit(): void {
@@ -54,18 +55,20 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
           this.documentService.CreateTemplate(this.selected).subscribe((data) => {
             this.selected.text = "";
             this.getAllTemplates();
+            this.toastr.success('Успешно сохранено', 'Успешно!');
           },
               error => {
-                  alert("Ошибка сохранения!")
+                this.toastr.error('Ошибка сохранения', 'Ошибка!');
               });
       }
       else {
           this.documentService.UpdateTemplate(this.selected).subscribe((data) => {
             this.selected.text = "";
             this.getAllTemplates();
+            this.toastr.success('Успешно сохранено', 'Успешно!');
           },
               error => {
-                  alert("Ошибка сохранения!")
+                this.toastr.error('Ошибка сохранения', 'Ошибка!');
               });
       }
       this.backAdd();
@@ -87,9 +90,10 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
         this.selected.text = "";
         this.selectedItem = false;
         this.getAllTemplates();
+        this.toastr.success('Успешно удалено', 'Успешно!');
     },
         error => {
-            alert("Ошибка удаления!")
+          this.toastr.error('Ошибка удаления', 'Ошибка!');
         });
     }
 

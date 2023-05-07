@@ -5,7 +5,7 @@
       <hr class="hr-shadow">
     </div>
 
-    <div class="request-form" class="request-info-user" *ngIf="condition">
+    <div class="request-form" *ngIf="condition">
       <div>
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите фамилию</mat-label>
@@ -18,12 +18,6 @@
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field appearance="fill" class="margin-form-field width-form-field">
-          <mat-label>Введите персональный код</mat-label>
-          <input matInput placeholder="Персональный код" type="text"
-             maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
-        </mat-form-field>
-
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите дату рождения</mat-label>
           <input matInput [matDatepicker]="picker" required>
@@ -31,8 +25,7 @@
           <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-      </div>
-      <div>
+
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Выберите пол</mat-label>
           <mat-select [ngModelOptions]="{standalone: true}" required>
@@ -43,11 +36,25 @@
               Женщина
             </mat-option>
           </mat-select>
-        </mat-form-field> 
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="margin-form-field width-form-field">
+          <mat-label>Введите персональный код</mat-label>
+          <input matInput placeholder="Персональный код" type="text"
+             maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
+        </mat-form-field>
 
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите адрес</mat-label>
-          <input matInput placeholder="Адрес" required>
+          <input matInput  placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20" required>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="margin-form-field">
+          <mat-label>Введите номер телефона</mat-label>
+          <span matPrefix>+375 &nbsp;</span>
+          <input type="tel" matInput placeholder="29 291-70-93" required>
         </mat-form-field>
       </div>
         <button mat-raised-button color="primary" class="button-form" (click)="toggle()">Далее</button>

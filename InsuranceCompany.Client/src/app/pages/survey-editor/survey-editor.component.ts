@@ -26,7 +26,6 @@ export class SurveyEditorComponent  implements OnInit {
     this.insuranceSurveyService.GetAllInsuranceSurveys().subscribe(res => {
       this.insuranceSurveys = res;
       this.selectedSurvey = this.insuranceSurveys[0];
-      this.toastr.info('Запрос выполнен успешно!', 'Успешно');
     });
   }
 
@@ -96,9 +95,10 @@ export class DialogCreateSurveyPopup {
   create(){
     this.insuranceSurveyService.CreateSurvey(this.addSurvey).subscribe((data) => {
       this.close();
+      this.toastr.success('Успешно добавлено', 'Успешно!');
     },
         error => {
-          alert("Ошибка сохранения!")
+          this.toastr.error('Ошибка добавления', 'Ошибка!');
       });
   }
 }
