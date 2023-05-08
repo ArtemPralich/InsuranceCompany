@@ -48,6 +48,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { NgxEditorModule } from 'ngx-editor';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent, DialogCreateAnswerPopup } from './pages/survey-editor/survey-editor.component';
 import { QuestionTypeService } from './service/QuestionTypeService';
 
@@ -100,7 +102,8 @@ import { QuestionTypeService } from './service/QuestionTypeService';
     MatTreeModule,
     MatExpansionModule,
     MatRadioModule,
-    NgxEditorModule
+    NgxEditorModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthService,
@@ -109,7 +112,6 @@ import { QuestionTypeService } from './service/QuestionTypeService';
     InsuranceRateService,
     DocumentService,
     SurveyService,
-    QuestionTypeService,
   ],
   bootstrap: [AppComponent],
   schemas: [

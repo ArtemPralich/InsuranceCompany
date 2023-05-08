@@ -1,8 +1,10 @@
-.mat-horizontal-stepper-header-container{
-    display: none !important;
+.margin-form-field{
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 300px;
+    padding-top: 10px;
 }
 
-.mat-horizontal-stepper-header-container{
-    display: none !important;
-    height: 0px !important;
+.content{
+    margin-top: 20px;
 }

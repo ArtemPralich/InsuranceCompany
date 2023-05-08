@@ -1,11 +1,10 @@
 .margin-form-field{
-    margin-left: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 300px;
+    padding-top: 10px;
 }
 
 .content{
     margin-top: 40px;
-}
-
-.width-form-field-300{
-    width: 300px;
 }

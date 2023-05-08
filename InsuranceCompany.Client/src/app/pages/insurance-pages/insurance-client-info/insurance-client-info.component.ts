@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 })
 export class InsuranceClientInfoComponent {
   @Input() insuranceRequest:  InsuranceRequest;
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
 
   firstFormGroup = this._formBuilder.group({

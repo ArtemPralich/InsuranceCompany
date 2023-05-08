@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {FormBuilder, Validators} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DocumentService } from 'src/app/service/DocumentService';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-insurance',
@@ -28,7 +29,7 @@ export class InsuranceComponent implements OnInit  {
 
 
   constructor(public insuranceRequestService: InsuranceRequestService, private route: ActivatedRoute, 
-    private _formBuilder: FormBuilder, public documentService: DocumentService, private router: Router){
+    private _formBuilder: FormBuilder, public documentService: DocumentService, private router: Router, private toastr: ToastrService){
       
   }
 
@@ -49,6 +50,10 @@ export class InsuranceComponent implements OnInit  {
   save(){
     this.insuranceRequestService.UpdateInsuranceRequest(this.insuranceRequest).subscribe(res => {
       console.log("updated");
+      this.toastr.success('Успешно сохранено', 'Успешно!');
+    },
+    error => {
+      this.toastr.error('Ошибка сохранения', 'Ошибка!');
     });
   }
 

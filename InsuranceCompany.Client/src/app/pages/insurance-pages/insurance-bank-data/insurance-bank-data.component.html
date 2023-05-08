@@ -1,38 +1,45 @@
-<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-  </button>
-  <mat-stepper [linear]="isLinear" #stepper>
+<div class="content">
+  <mat-stepper orientation="vertical" #stepper>
     <mat-step [stepControl]="firstFormGroup">
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
         <div>
-          <button mat-button matStepperNext>Next</button>
+          <ng-template matStepLabel>Наименование банка</ng-template>
+            <div>
+              <mat-form-field appearance="fill" class="margin-form-field">
+                <mat-label>Выберите банк</mat-label>
+                <mat-select [(value)]="selectedBank">
+                  <mat-option *ngFor="let bank of banks" [value]="bank">
+                    {{bank}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+
+    <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-        </mat-form-field>
+        <ng-template matStepLabel>Данные карты</ng-template>
+
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <mat-form-field appearance="fill" class="margin-form-field">
+            <mat-label>Введите номер карты</mat-label>
+            <input type="text" maxlength="16" pattern="[0-9]{16}" matInput placeholder="1234123412341234" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="margin-form-field">
+            <mat-label>Введите срок действия карты</mat-label>
+            <input type="text" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" matInput placeholder="12/25" required>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="fill" class="margin-form-field">
+            <mat-label>Введите код безопасности карты</mat-label>
+            <input type="text" maxlength="3" pattern="[0-9]{3}" matInput placeholder="123" required>
+          </mat-form-field>
         </div>
       </form>
-    </mat-step>
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
     </mat-step>
   </mat-stepper>
+</div>

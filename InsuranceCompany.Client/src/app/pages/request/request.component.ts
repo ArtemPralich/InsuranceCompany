@@ -6,6 +6,7 @@ import { InsuranceRateService } from 'src/app/service/InsuranceRateService';
 import { InsuranceRequestService } from 'src/app/service/InsuranceRequestService';
 import { DialogElementsExampleDialog } from '../insurance-list/insurance-list.component';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-request',
@@ -20,7 +21,7 @@ export class RequestComponent {
   insuranceRequest : CreateInsuranceRequestDto;
 
   constructor(public insuranceRateService: InsuranceRateService, 
-    public insuranceRequestService: InsuranceRequestService) 
+    public insuranceRequestService: InsuranceRequestService, private toastr: ToastrService) 
   {}
 
   ngOnInit() {
@@ -46,9 +47,10 @@ export class RequestComponent {
     this.insuranceRequestService.CreateInsuranceRequest(this.insuranceRequest).subscribe((data)=>{
       // this.dialogRef.close();
       // this.router.navigateByUrl('/insurance/' + data);
+      this.toastr.success('Успешно отправлено', 'Успешно!');
     },
     error=>{
-      alert("Произошла ошибка!");
+      this.toastr.error('Ошибка отправки', 'Ошибка!');
     });
   }
 }
