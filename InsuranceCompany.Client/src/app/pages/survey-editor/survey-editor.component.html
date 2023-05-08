@@ -17,10 +17,36 @@
 
         <diV class="editor-container">
             <div class="editor-title">{{selectedSurvey.title}}</div>
+            <div>
+                <mat-form-field appearance="fill" class="template-select">
+                    <mat-label>Тип страхового запроса</mat-label>
+                    <mat-select [(value)]="selectedInsuranceRate" [compareWith]="compareRates" multiple>
+                        <mat-option *ngFor="let rate of insuranceRates" [value]="rate">{{rate.title}}</mat-option>
+                      </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div *ngFor="let question of selectedSurvey.questions">
+                <div class="container-question">
+                    <div class="text-question">{{question.text}}</div>
+                    <mat-selection-list color="primary" #answers [(ngModel)]="question.selectedAnswersForDelete">
+                        <mat-list-option color="primary" *ngFor="let answer of question.answers" [value]="answer">
+                          {{answer.questionAnswer}}
+                        </mat-list-option>
+                    </mat-selection-list> 
+                    <div class="example-button-row div-right">
+                        <button class="delete-button" mat-raised-button color="primary" (click)="openDialogCreateAnswer(question)">Добавить</button>
+                        <button class="delete-button" mat-raised-button [disabled]="answers.selectedOptions.selected.length == 0" (click)="deleteAnswers(question)" color="primary">Удалить</button>
+                    </div>
+                </div>
+            </div>
 
             <div class="line-item">
                 <input type="image" src="assets/pictures/add_circle_blue.svg" class="button-add" (click)="openDialogQuestion()">
                 <div>Добавить вопрос</div>
+            </div>
+            <div class="div-right">
+                <button class="delete-button" mat-raised-button color="primary" (click)="updateSurvey()">Сохранить изменения</button>
             </div>
         </diV>
     </div>

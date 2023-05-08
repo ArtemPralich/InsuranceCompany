@@ -17,13 +17,21 @@ namespace InsuranceCompany.Infrastructure.Repositories
 
         public IEnumerable<InsuranceSurvey> GetAll(bool trackChanges)
         {
-            return FindAll(trackChanges).Include(i => i.QuestionSurveys).ThenInclude(i => i.Question).ToList();
+            return FindAll(trackChanges)
+                .Include(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceRate)
+                .Include(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.Answers).ToList();
         }
 
         public InsuranceSurvey GetById(Guid Id, bool trackChanges)
         {
             return FindByCondition(x => x.Id == Id,
                 trackChanges).FirstOrDefault();
+        }
+
+        public InsuranceSurvey GetByForUpdateId(Guid Id, bool trackChanges)
+        {
+            return FindByCondition(x => x.Id == Id,
+                trackChanges).Include(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.Answers).FirstOrDefault();
         }
     }
 }

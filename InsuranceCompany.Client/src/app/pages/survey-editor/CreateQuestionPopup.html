@@ -2,10 +2,19 @@
     <h4>Добавить вопрос</h4>
 
     <mat-form-field class="example-full-width"  class="popup-label">
-        <mat-label>Введите наименование вопроса</mat-label>
+        <mat-label>Выберите тип вопроса</mat-label>
         <input matInput placeholder="Вопрос" [(ngModel)]="addQuestion.text" required>
     </mat-form-field>
-    
+
+    <mat-form-field appearance="fill" class="popup-label">
+      <mat-label>Выберите тип страхового запроса</mat-label>
+      <mat-select [(value)]="selectedQuestionTypes">
+        <mat-option *ngFor="let type of questionTypes" [value]="type">
+          {{type.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <div class="div-right">
       <button mat-button (click)= "close()">Отмена</button>
       <button mat-button color="primary" (click)="create()" >Создать</button>

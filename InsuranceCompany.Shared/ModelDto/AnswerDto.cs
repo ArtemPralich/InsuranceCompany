@@ -12,5 +12,6 @@ namespace InsuranceCompany.Shared.ModelDto
         public Guid Id { get; set; }
 
         public string? QuestionAnswer { get; set; }
+        public Guid? QuestionId { get; set; }
     }
 }

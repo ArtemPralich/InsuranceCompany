@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InsuranceCompany.Shared.ModelDto
+namespace InsuranceCompany.Shared.ModelDto.Update
 {
-    public class InsuranceSurveyDto
+    public class UpdateInsuranceSurveyDto
     {
         public Guid Id { get; set; }
 
@@ -15,7 +15,7 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public string? Description { get; set; }
 
-       public virtual ICollection<QuestionDto> Questions { get; } = new List<QuestionDto>();
-       public virtual ICollection<InsuranceRateDto> InsuranceRates { get; } = new List<InsuranceRateDto>();
+        public virtual ICollection<InsuranceRate> InsuranceRates { get; } = new List<InsuranceRate>();
+        public virtual ICollection<QuestionDto> Questions { get; } = new List<QuestionDto>();
     }
 }

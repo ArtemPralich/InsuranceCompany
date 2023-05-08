@@ -32,8 +32,11 @@ namespace InsuranceCompany.Shared.AutoMapperProfiles
 
 
             CreateMap<InsuranceSurvey, InsuranceSurveyDto>()
-                .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.QuestionSurveys.Select(i => i.Question).ToList()));
+                .ForMember(dest => dest.Questions, opt => opt.MapFrom(src => src.QuestionSurveys.Select(i => i.Question).ToList()))
+                .ForMember(dest => dest.InsuranceRates, opt => opt.MapFrom(src => src.InsuranceTypeSurveys.Select(i => i.InsuranceRate).ToList()));
             //CreateMap<InsuranceSurveyDto, InsuranceSurvey>();
+
+            CreateMap<UpdateInsuranceSurveyDto, InsuranceSurvey>();
 
             CreateMap<InsuranceRequestDto, InsuranceRequest>()
                 .ForMember(dest => dest.InsuranceRate,opt => opt.Ignore())

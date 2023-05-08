@@ -78,3 +78,21 @@
     transform: translateY(-5px);
     transition: 0.3s;
 }
+
+.container-question {
+    border: 2px solid #92a2c3;
+    box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+
+.text-question {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.delete-button{
+    margin-right: 5px;
+}

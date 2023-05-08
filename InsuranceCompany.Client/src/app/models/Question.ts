@@ -10,8 +10,11 @@ export class Question {
     insuranceSurvey : InsuranceSurvey;
     questionType :  QuestionType;
     answers :  Answer[];
+    selectedAnswersForDelete: Answer[] = [];
 
     constructor(text: string) {
         this.text = text;
+        this.answers = [];
+        this.selectedAnswersForDelete = [];
     }
 }

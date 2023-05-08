@@ -48,7 +48,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { NgxEditorModule } from 'ngx-editor';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
-import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
+import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent, DialogCreateAnswerPopup } from './pages/survey-editor/survey-editor.component';
+import { QuestionTypeService } from './service/QuestionTypeService';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorCompone
     RoomClientComponent,
     SurveyEditorComponent,
     DialogCreateQuestionPopup,
-    DialogCreateSurveyPopup
+    DialogCreateSurveyPopup,
+    DialogCreateAnswerPopup,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +109,7 @@ import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorCompone
     InsuranceRateService,
     DocumentService,
     SurveyService,
+    QuestionTypeService,
   ],
   bootstrap: [AppComponent],
   schemas: [
