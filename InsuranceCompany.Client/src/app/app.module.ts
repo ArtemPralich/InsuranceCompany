@@ -52,6 +52,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
 import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent, DialogCreateAnswerPopup } from './pages/survey-editor/survey-editor.component';
 import { QuestionTypeService } from './service/QuestionTypeService';
+import { NotAccessComponent } from './pages/not-access/not-access.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { QuestionTypeService } from './service/QuestionTypeService';
     DialogCreateQuestionPopup,
     DialogCreateSurveyPopup,
     DialogCreateAnswerPopup,
+    NotAccessComponent,
   ],
   imports: [
     BrowserModule,

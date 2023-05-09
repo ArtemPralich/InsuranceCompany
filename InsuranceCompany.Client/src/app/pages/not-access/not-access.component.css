@@ -1,4 +1,4 @@
-.not-found {
+.not-access {
     background-color: #c8d4ec;
     min-height: 100vh;
     color: #324e88;
@@ -13,18 +13,18 @@
     height: 100%;
 }
 
-.not-found-title {
+.not-access-title {
     font-size: 80px;
     font-weight: bold;
     font-family: 'Alkatra', cursive;
     
 }
 
-.not-found-text {
+.not-access-text {
     width: 500px;
     font-size: 30px;
 }
 
 .big-img {
-    width: 700px;
+    width: 600px;
 }

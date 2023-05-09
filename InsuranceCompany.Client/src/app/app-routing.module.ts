@@ -10,6 +10,7 @@ import { DocumentTemplatesComponent } from './pages/document-templates/document-
 import { RequestComponent } from './pages/request/request.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
 import { SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
+import { NotAccessComponent } from './pages/not-access/not-access.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
@@ -21,6 +22,8 @@ const routes: Routes = [
   { path: 'request', component: RequestComponent},
   { path: 'room-client', component: RoomClientComponent},
   { path: 'survey-editor', component: SurveyEditorComponent},
+  { path: 'not-found', component: NotFoundComponent},
+  { path: 'not-access', component: NotAccessComponent},
   { path: '**', component: NotFoundComponent},];
 
 @NgModule({
