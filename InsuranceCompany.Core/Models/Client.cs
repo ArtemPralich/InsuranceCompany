@@ -17,4 +17,5 @@ public partial class Client
     public virtual ICollection<ClientaChild> ClientaChildren { get; } = new List<ClientaChild>();
     public virtual ICollection<InsuredPerson> InsuredPersons { get; } = new List<InsuredPerson>();
     public virtual ICollection<PositionClient> PositionClients { get; } = new List<PositionClient>();
+    public virtual ICollection<User> Users { get; } = new List<User>();
 }

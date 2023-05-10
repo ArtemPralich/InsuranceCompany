@@ -20,7 +20,7 @@ import { DocumentService } from './service/DocumentService';
 import { InsuranceRequestService } from './service/InsuranceRequestService';
 import { InsuranceRateService } from './service/InsuranceRateService';
 import { SurveyService } from './service/SurveyService';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { InsuranceListComponent } from './pages/insurance-list/insurance-list.component';
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'; 
@@ -52,6 +52,9 @@ import { ToastrService } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
 import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent, DialogCreateAnswerPopup } from './pages/survey-editor/survey-editor.component';
 import { QuestionTypeService } from './service/QuestionTypeService';
+import { AuthGuard } from './guards/auth.guard';
+import { AgentAuthGuard } from './guards/agentAuth.guard';
+import { AuthenticationInterceptor } from './interceptor/AuthenticationInterceptor';
 
 @NgModule({
   declarations: [
@@ -112,6 +115,9 @@ import { QuestionTypeService } from './service/QuestionTypeService';
     InsuranceRateService,
     DocumentService,
     SurveyService,
+    AuthGuard,
+    AgentAuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true,},
   ],
   bootstrap: [AppComponent],
   schemas: [

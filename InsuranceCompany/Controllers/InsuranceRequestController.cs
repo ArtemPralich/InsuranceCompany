@@ -5,6 +5,7 @@ using InsuranceCompany.Infrastructure;
 using InsuranceCompany.Shared.ModelDto;
 using InsuranceCompany.Shared.ModelDto.Create;
 using InsuranceCompany.Shared.ModelDto.Update;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -40,6 +41,7 @@ namespace InsuranceCompany.Controllers
         }
 
         [HttpGet("{id}", Name = "GetInsuranceRequestById")]
+        [Authorize]
         public IActionResult GetById(Guid id)
         {
             var insuranceRequest = _repositoryManager.InsuranceRequest.GetById(id, false);

@@ -13,5 +13,6 @@ namespace InsuranceCompany.Shared.ModelDto
         public string UserName { get; set; }
         [Required(ErrorMessage = "Password name is required")]
         public string Password { get; set; }
+
     }
 }

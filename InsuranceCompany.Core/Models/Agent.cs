@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.ComponentModel.DataAnnotations.Schema;
+using InsuranceCompany.Core.Models;
 
 namespace InsuranceCompany.Core;
 
@@ -21,6 +22,6 @@ public partial class Agent
     public Guid? PositionId { get; set; }
 
     public virtual ICollection<InsuranceRequest> InsuranceRequests { get; } = new List<InsuranceRequest>();
-
+    public virtual ICollection<User> Users { get; } = new List<User>();
     public virtual Position? Position { get; set; }
 }

@@ -20,7 +20,11 @@
             <a class="menu-item block" href="@">ГЛАВНАЯ4</a>
           </div>
         </div>
-        <button mat-raised-button>Basic</button>
+        <div class="white-label">
+          <span [routerLink]="['/login']" >Авторизация</span>
+          <span>/</span>
+          <span [routerLink]="['/registration']">Регистрация</span>
+        </div>
       </div>
     </div>
   </div>

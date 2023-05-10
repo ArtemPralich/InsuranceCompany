@@ -6,9 +6,9 @@
       <div class="title-form">
         Авторизация
       </div>
-      <input type="text" name="" placeholder="Почта">
-      <input type="password" name="" placeholder="Пароль" (click)="this.login()">
-      <input type="submit" name="" value="Войти">
+      <input type="text" name="" placeholder="Почта" [(ngModel)]="client.email" [ngModelOptions]="{standalone: true}">
+      <input type="password" name="" placeholder="Пароль"[(ngModel)]="client.password" [ngModelOptions]="{standalone: true}">
+      <input type="submit" name="" value="Войти" (click)="this.login()">
       <a href="#" class="forgot-link">Забыли пароль?</a>
       <a href="#" [routerLink]="['/registration']" class="forgot-link">Регистрация</a>
     </form>

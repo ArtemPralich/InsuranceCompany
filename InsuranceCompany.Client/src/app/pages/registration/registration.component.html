@@ -6,11 +6,11 @@
         <div class="title-form">
           Регистрация
         </div>
-        <input type="text" name="" placeholder="Имя пользователя">
-        <input type="text" name="" placeholder="Почта">
-        <input type="password" name="" placeholder="Пароль">
-        <input type="password" name="" placeholder="Повторить пароль">
-        <input type="submit" name="" value="Зарегистрироваться">
+        <input type="text" name=""  [(ngModel)]="client.userName" [ngModelOptions]="{standalone: true}" placeholder="Имя пользователя">
+        <input type="text" name=""  [(ngModel)]="client.email" [ngModelOptions]="{standalone: true}" placeholder="Почта">
+        <input type="password" name=""  [(ngModel)]="client.password" [ngModelOptions]="{standalone: true}" placeholder="Пароль">
+        <input type="password" name=""  [(ngModel)]="client.confirmPassword" [ngModelOptions]="{standalone: true}" placeholder="Повторить пароль">
+        <input type="submit" name="" (click)="registration()" value="Зарегистрироваться">
       </form>
     </div>
   </div>

@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230509124852_addRelationUseragentandclient")]
+    partial class addRelationUseragentandclient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -709,21 +712,21 @@ namespace InsuranceCompany.Core.Migrations
                         new
                         {
                             Id = "441fcfea-e79f-49b8-af3a-467f2a16f1fc",
-                            ConcurrencyStamp = "b9b25e2f-6f43-4469-8ff0-bcdc5edc5727",
+                            ConcurrencyStamp = "9399a8f6-ca85-4172-8a04-d153f75764bc",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
                             Id = "aa30174a-40e9-40cc-a660-f123ff11fa04",
-                            ConcurrencyStamp = "502bfacc-f773-4649-acb0-2d04f7f02f80",
+                            ConcurrencyStamp = "f3cdea15-5694-4f03-8e5c-561394b48bbc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "7cae6025-c9d0-40bd-b780-372485e90ce0",
-                            ConcurrencyStamp = "884d886f-2848-4cae-974b-3fdc080a8992",
+                            ConcurrencyStamp = "99b1d1f1-0d07-472d-8078-804720612a25",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

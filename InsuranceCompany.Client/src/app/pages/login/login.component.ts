@@ -5,6 +5,7 @@ import { ClientService } from 'src/app/service/ClientService';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ActivatedRoute, Router} from '@angular/router';
 import { Client } from 'src/app/models/Client';
+import { RegistrationClient } from 'src/app/models/auth/RegistrationClient';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { Client } from 'src/app/models/Client';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  clients: Client[] = [];
+  client = new RegistrationClient();
+  
   hide = true;
   title = 'InsuranceCompany.Client';
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -25,31 +27,30 @@ export class LoginComponent {
   }
   login(){
     console.log("eqeweq");
-    this.auth.login().subscribe((res)=> {
+    this.auth.login(this.client.email, this.client.password).subscribe((res)=> {
+        console.log(res);
       
-        const header = res.headers.get('roles');
-        const token = (<any>res).body.token; 
+        //const header = res.headers.get('roles');
+        //console.log(header)
+        const token = (<any>res).body.token;
+
+        const header = (<any>res).body.role; 
         localStorage.setItem("jwt", token);
         var a = new Date();
+        localStorage.setItem("date",`${(new Date()).getTime()}`);
+        console.log(header)
         if(header !== null){
           localStorage.setItem("role", header);
+          if(header == "Client")
+            this.router.navigateByUrl("/room-client");
+          else if(header == "Agent")
+            this.router.navigateByUrl("/insurances");
+          else if(header == "Administrator")
+            this.router.navigateByUrl("/documents");
         }
-        localStorage.setItem("date",`${(new Date()).getTime()}`);
-
-        this.router.navigate(["/"]);
     }, error =>{
         this.statusAuth = false;
     });
     
-    (<HTMLInputElement>document.getElementById("password")).value = "";
   }    
-  downloadFile(){
-    this.auth.downloadFile();
-  }
-
-  GetClients(){
-    this.clientService.GetAllClients().subscribe(res => {
-      this.clients = res;
-    });;
-  }
 }

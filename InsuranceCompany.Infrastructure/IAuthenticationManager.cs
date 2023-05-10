@@ -11,5 +11,7 @@ namespace InsuranceCompany.Infrastructure
     {
         Task<bool> ValidateUser(UserForAuthenticationDto userForAuth);
         Task<string> CreateToken();
+        Task<ICollection<string>> GetRoles(string user);
+
     }
 }

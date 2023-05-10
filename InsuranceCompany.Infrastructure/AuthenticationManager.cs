@@ -25,9 +25,16 @@ namespace InsuranceCompany.Infrastructure
         }
         public async Task<bool> ValidateUser(UserForAuthenticationDto userForAuth)
         {   
-            _user = await _userManager.FindByNameAsync(userForAuth.UserName);
+            _user = await _userManager.FindByEmailAsync(userForAuth.UserName);
             return (_user != null && await _userManager.CheckPasswordAsync(_user, userForAuth.Password));
         }
+
+        public async Task<ICollection<string>> GetRoles(string user)
+        {
+            _user = await _userManager.FindByEmailAsync(user);
+            return await _userManager.GetRolesAsync(_user);
+        }
+
         public async Task<string> CreateToken()
         {
             var signingCredentials = GetSigningCredentials();

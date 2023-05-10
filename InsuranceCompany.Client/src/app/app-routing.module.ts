@@ -10,18 +10,21 @@ import { DocumentTemplatesComponent } from './pages/document-templates/document-
 import { RequestComponent } from './pages/request/request.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
 import { SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
-
+import { AuthGuard } from './guards/auth.guard';
+import { AgentAuthGuard } from './guards/agentAuth.guard';
+import { AdminAuthGuard } from './guards/adminAuth.guard';
 const routes: Routes = [
   { path: '', component: MainComponent},
   { path: 'login', component: LoginComponent},
   { path: 'insurances', component: InsuranceListComponent},
-  { path: 'insurance/:id', component: InsuranceComponent,},
-  { path: 'documents', component: DocumentTemplatesComponent},
+  { path: 'insurance/:id', component: InsuranceComponent},
+  { path: 'documents', component: DocumentTemplatesComponent, canActivate: [AdminAuthGuard]},
   { path: 'registration', component: RegistrationComponent},
-  { path: 'request', component: RequestComponent},
-  { path: 'room-client', component: RoomClientComponent},
-  { path: 'survey-editor', component: SurveyEditorComponent},
-  { path: '**', component: NotFoundComponent},];
+  { path: 'request', component: RequestComponent, canActivate: [AuthGuard]},
+  { path: 'room-client', component: RoomClientComponent, canActivate: [AuthGuard]},
+  { path: 'survey-editor', component: SurveyEditorComponent, canActivate: [AdminAuthGuard]},
+  { path: '**', component: NotFoundComponent},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

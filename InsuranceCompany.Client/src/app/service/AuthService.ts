@@ -36,7 +36,7 @@ export class AuthService {
       }
     }
 
-    login(): Observable<HttpResponse<string>>{ 
+    login(userName1: string, password1: string): Observable<HttpResponse<string>>{ 
       const myHeaders = new HttpHeaders({
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
@@ -46,14 +46,14 @@ export class AuthService {
         });
       return this.http.post<string>(`https://localhost:7046/api/authentication/login`, 
           JSON.stringify({
-              userName: (<HTMLInputElement>document.getElementById("username")).value,
-              password: (<HTMLInputElement>document.getElementById("password")).value
+              userName: userName1,
+              password: password1
           }), { headers:myHeaders,observe: 'response'} );
 
     }
     
     register(user: any):Observable<HttpResponse<string>>{
-      return this.http.post<string>(`https://localhost:7046/api/authentication/`, user , { observe: 'response'});
+      return this.http.post<string>(`https://localhost:7046/api/authentication/RegisterClient`, user , { observe: 'response'});
       
     }  
     

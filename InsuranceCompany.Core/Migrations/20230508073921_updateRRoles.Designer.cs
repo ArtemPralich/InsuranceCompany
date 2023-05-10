@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230508073921_updateRRoles")]
+    partial class updateRRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -432,12 +435,6 @@ namespace InsuranceCompany.Core.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("AgentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -491,10 +488,6 @@ namespace InsuranceCompany.Core.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AgentId");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -708,22 +701,22 @@ namespace InsuranceCompany.Core.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "441fcfea-e79f-49b8-af3a-467f2a16f1fc",
-                            ConcurrencyStamp = "b9b25e2f-6f43-4469-8ff0-bcdc5edc5727",
+                            Id = "94b43fba-5ea8-4f97-98a6-c6a8357b6d75",
+                            ConcurrencyStamp = "a6bb7686-6de9-4ec7-b651-6997c862f4be",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
-                            Id = "aa30174a-40e9-40cc-a660-f123ff11fa04",
-                            ConcurrencyStamp = "502bfacc-f773-4649-acb0-2d04f7f02f80",
+                            Id = "fa2a729b-2a03-4b53-aba8-802b4af4f648",
+                            ConcurrencyStamp = "b0d38392-28a7-42ed-b744-db4f455baca5",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "7cae6025-c9d0-40bd-b780-372485e90ce0",
-                            ConcurrencyStamp = "884d886f-2848-4cae-974b-3fdc080a8992",
+                            Id = "a0c36768-8ce1-4c64-ab84-376b543e078b",
+                            ConcurrencyStamp = "4dfac839-de7b-4d44-acef-8a06e1574842",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -985,21 +978,6 @@ namespace InsuranceCompany.Core.Migrations
                     b.Navigation("InsuranceRequest");
                 });
 
-            modelBuilder.Entity("InsuranceCompany.Core.Models.User", b =>
-                {
-                    b.HasOne("InsuranceCompany.Core.Agent", "Agent")
-                        .WithMany("Users")
-                        .HasForeignKey("AgentId");
-
-                    b.HasOne("InsuranceCompany.Core.Client", "Client")
-                        .WithMany("Users")
-                        .HasForeignKey("ClientId");
-
-                    b.Navigation("Agent");
-
-                    b.Navigation("Client");
-                });
-
             modelBuilder.Entity("InsuranceCompany.Core.PositionClient", b =>
                 {
                     b.HasOne("InsuranceCompany.Core.Client", "Client")
@@ -1119,8 +1097,6 @@ namespace InsuranceCompany.Core.Migrations
             modelBuilder.Entity("InsuranceCompany.Core.Agent", b =>
                 {
                     b.Navigation("InsuranceRequests");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.Child", b =>
@@ -1135,8 +1111,6 @@ namespace InsuranceCompany.Core.Migrations
                     b.Navigation("InsuredPersons");
 
                     b.Navigation("PositionClients");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("InsuranceCompany.Core.InsuranceRate", b =>
