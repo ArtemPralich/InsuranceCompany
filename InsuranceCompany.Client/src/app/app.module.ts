@@ -55,6 +55,8 @@ import { QuestionTypeService } from './service/QuestionTypeService';
 import { AuthGuard } from './guards/auth.guard';
 import { AgentAuthGuard } from './guards/agentAuth.guard';
 import { AuthenticationInterceptor } from './interceptor/AuthenticationInterceptor';
+import { NotAccessComponent } from './pages/not-access/not-access.component';
+import { RegistationEmployeeComponent } from './pages/registation-employee/registation-employee.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +81,8 @@ import { AuthenticationInterceptor } from './interceptor/AuthenticationIntercept
     DialogCreateQuestionPopup,
     DialogCreateSurveyPopup,
     DialogCreateAnswerPopup,
+    NotAccessComponent,
+    RegistationEmployeeComponent,
   ],
   imports: [
     BrowserModule,

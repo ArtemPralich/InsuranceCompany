@@ -10,6 +10,9 @@ import { DocumentTemplatesComponent } from './pages/document-templates/document-
 import { RequestComponent } from './pages/request/request.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
 import { SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
+import { NotAccessComponent } from './pages/not-access/not-access.component';
+import { RegistationEmployeeComponent } from './pages/registation-employee/registation-employee.component';
+
 import { AuthGuard } from './guards/auth.guard';
 import { AgentAuthGuard } from './guards/agentAuth.guard';
 import { AdminAuthGuard } from './guards/adminAuth.guard';
@@ -20,6 +23,9 @@ const routes: Routes = [
   { path: 'insurance/:id', component: InsuranceComponent},
   { path: 'documents', component: DocumentTemplatesComponent, canActivate: [AdminAuthGuard]},
   { path: 'registration', component: RegistrationComponent},
+  { path: 'not-found', component: NotFoundComponent},
+  { path: 'not-access', component: NotAccessComponent},
+  { path: 'registration-employee', component: RegistationEmployeeComponent},
   { path: 'request', component: RequestComponent, canActivate: [AuthGuard]},
   { path: 'room-client', component: RoomClientComponent, canActivate: [AuthGuard]},
   { path: 'survey-editor', component: SurveyEditorComponent, canActivate: [AdminAuthGuard]},
