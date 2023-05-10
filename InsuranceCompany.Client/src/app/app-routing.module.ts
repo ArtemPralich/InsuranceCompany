@@ -11,6 +11,7 @@ import { RequestComponent } from './pages/request/request.component';
 import { RoomClientComponent } from './pages/room-client/room-client.component';
 import { SurveyEditorComponent } from './pages/survey-editor/survey-editor.component';
 import { NotAccessComponent } from './pages/not-access/not-access.component';
+import { RegistationEmployeeComponent } from './pages/registation-employee/registation-employee.component';
 
 const routes: Routes = [
   { path: '', component: MainComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'survey-editor', component: SurveyEditorComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'not-access', component: NotAccessComponent},
+  { path: 'registration-employee', component: RegistationEmployeeComponent},
   { path: '**', component: NotFoundComponent},];
 
 @NgModule({
