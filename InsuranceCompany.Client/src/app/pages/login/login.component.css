@@ -1,17 +1,17 @@
 .form-container {
   background: linear-gradient(to left, #324e88, #7da0c4, #aecae3);
-  height: 100vh;
+  min-height: 100vh;
+  padding: 0px 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .form-auth {
   width: 300px;
   padding: 90px 50px;
-  position: absolute;
   box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
   border-radius: 0% 100px 0% 100px;
-  top: 50%;
-  left: 60%;
-  transform: translateY(-50%);
   background-color: #fff;
   text-align: center;
 }
@@ -87,12 +87,6 @@
   background-color: #89aacc;
 }
 
-@media (max-width: 1300px) {
-  .big-img {
-    margin-left: 30px;
-  }
-}
-
 @media (max-width: 1200px) {
   .big-img {
     width: 600px;
@@ -107,10 +101,6 @@
     margin-top: 100px;
     margin-left: 10px;
   }
-
-  .form-auth {
-    left: 55%;
-  }
 }
 
 @media (max-width: 1000px) {
@@ -123,11 +113,16 @@
     position: relative;
     margin: 0 auto;
   }
+
+  .form-container {
+    padding: 0px;
+  }
 }
 
 @media (max-width: 430px) {
   .form-auth {
     padding: 50px 20px;
+    border-radius: 0% 70px 0% 70px;
   }
 }
 
@@ -154,45 +149,3 @@
     height: 80px;
   }
 }
-
-
-
-
-
-
-
-/* .example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-}
-  
-.example-full-width {
-    width: 100%;
-}
-
-.example-container mat-form-field + mat-form-field {
-    margin-left: 8px;
-  }
-  
-  .example-right-align {
-    text-align: right;
-  }
-  
-  input.example-right-align::-webkit-outer-spin-button,
-  input.example-right-align::-webkit-inner-spin-button {
-    display: none;
-  }
-  
-  input.example-right-align {
-    -moz-appearance: textfield;
-  }
-
-  .example-button-row button,
-.example-button-row a {
-  margin-right: 8px;
-}
-
-.example-disabled {
-  display: inline-block;
-} */

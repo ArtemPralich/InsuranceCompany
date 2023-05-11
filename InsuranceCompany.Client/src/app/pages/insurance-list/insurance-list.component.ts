@@ -14,6 +14,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Client } from 'src/app/models/Client';
 import {PageEvent} from '@angular/material/paginator';
+import { AuthService } from 'src/app/service/AuthService';
 
 @Component({
   selector: 'app-insurance-list',
@@ -29,8 +30,7 @@ export class InsuranceListComponent implements OnInit {
   length:number = 0;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public insuranceRequestService: InsuranceRequestService, public dialog: MatDialog, 
-    private router: Router){
+  constructor(public insuranceRequestService: InsuranceRequestService, public dialog: MatDialog, private router: Router, public auth: AuthService){
       
   }
   ngAfterViewInit() {
@@ -61,6 +61,10 @@ export class InsuranceListComponent implements OnInit {
       console.log(this.length)
       console.log(this.insuranceRequests);
     });
+  }
+
+  logout(): void {
+    this.auth.logout();
   }
 }
 

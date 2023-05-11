@@ -1,157 +1,158 @@
 .form-container {
-    background: linear-gradient(to left, #324e88, #7da0c4, #aecae3);
-    height: 100vh;
-  }
-  
-  .form-auth {
-    width: 300px;
-    padding: 90px 50px;
-    position: absolute;
-    box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
-    border-radius: 0% 100px 0% 100px;
-    top: 50%;
-    left: 60%;
-    transform: translateY(-50%);
-    background-color: #fff;
-    text-align: center;
-  }
-  
+  background: linear-gradient(to left, #324e88, #7da0c4, #aecae3);
+  min-height: 100vh;
+  padding: 0px 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.form-auth {
+  width: 300px;
+  padding: 90px 50px;
+  box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
+  border-radius: 0% 100px 0% 100px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.big-img {
+  width: 650px;
+  margin-top: 50px;
+  margin-left: 90px;
+}
+
+.user-img {
+  width: 100px;
+  height: 100px;
+}
+
+.title-form {
+  font-size: 28px;
+  font-weight: 100;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.forgot-link {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #bababa;
+  font-weight: 700;
+  text-decoration: none;
+  transition: .25;
+  font-family: sans-serif;
+}
+
+.forgot-link:hover {
+  color: #838383;
+}
+
+.form-auth input[type = "text"], .form-auth input[type="password"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  font-size: 16px;
+  border: none;
+  border-bottom: 2px solid #89aacc;
+  padding: 14px 15px;
+  width: 200px;
+  outline: none;
+  transition: 0.25s;
+}
+
+.form-auth input[type = "text"]:focus, .form-auth input[type="password"]:focus {
+  width: 250px;
+  border-color: #324e88;
+}
+
+.form-auth input[type = "submit"] {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #89aacc;
+  width: 230px;
+  height: 30px;
+  outline: none;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.form-auth input[type = "submit"]:hover {
+  background-color: #89aacc;
+}
+
+.passwordsMatch {
+  color:#ff3636;
+  font-size: 12px;
+  margin-top: -20px;
+}
+
+@media (max-width: 1200px) {
   .big-img {
-    width: 650px;
-    margin-top: 50px;
-    margin-left: 90px;
+    width: 600px;
+    margin-top: 80px;
+    margin-left: 10px;
   }
-  
-  .user-img {
-    width: 100px;
-    height: 100px;
+}
+
+@media (max-width: 1100px) {
+  .big-img {
+    width: 550px;
+    margin-top: 100px;
+    margin-left: 10px;
   }
-  
-  .title-form {
-    font-size: 28px;
-    font-weight: 100;
-    margin-top: 10px;
-    margin-bottom: 20px;
+}
+
+@media (max-width: 1000px) {
+  .big-img {
+    display: none;
   }
-  
-  .forgot-link {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 14px;
-    color: #bababa;
-    font-weight: 700;
-    text-decoration: none;
-    transition: .25;
-    font-family: sans-serif;
+
+  .form-auth {
+    left: 0;
+    position: relative;
+    margin: 0 auto;
   }
-  
-  .forgot-link:hover {
-    color: #838383;
+
+  .form-container {
+    padding: 0px;
   }
-  
-  .form-auth input[type = "text"], .form-auth input[type="password"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #89aacc;
-    padding: 14px 15px;
-    width: 200px;
-    outline: none;
-    transition: 0.25s;
+}
+
+@media (max-width: 430px) {
+  .form-auth {
+    padding: 50px 20px;
+    border-radius: 0% 70px 0% 70px;
   }
-  
-  .form-auth input[type = "text"]:focus, .form-auth input[type="password"]:focus {
+}
+
+@media (max-width: 370px) {
+  .form-auth {
     width: 250px;
-    border-color: #324e88;
+    padding: 50px 10px;
   }
-  
+
+  .form-auth input[type = "text"], .form-auth input[type="password"] {
+    width: 170px;
+  }
+
+  .form-auth input[type = "text"]:focus, .form-auth input[type="password"]:focus {
+    width: 190px;
+  }
+
   .form-auth input[type = "submit"] {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #89aacc;
-    width: 230px;
-    height: 30px;
-    outline: none;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer;
+    width: 200px;
   }
-  
-  .form-auth input[type = "submit"]:hover {
-    background-color: #89aacc;
+
+  .user-img {
+    width: 80px;
+    height: 80px;
   }
-  
-  @media (max-width: 1300px) {
-    .big-img {
-      margin-left: 30px;
-    }
-  }
-  
-  @media (max-width: 1200px) {
-    .big-img {
-      width: 600px;
-      margin-top: 80px;
-      margin-left: 10px;
-    }
-  }
-  
-  @media (max-width: 1100px) {
-    .big-img {
-      width: 550px;
-      margin-top: 100px;
-      margin-left: 10px;
-    }
-  
-    .form-auth {
-      left: 55%;
-    }
-  }
-  
-  @media (max-width: 1000px) {
-    .big-img {
-      display: none;
-    }
-  
-    .form-auth {
-      left: 0;
-      position: relative;
-      margin: 0 auto;
-    }
-  }
-  
-  @media (max-width: 430px) {
-    .form-auth {
-      padding: 50px 20px;
-    }
-  }
-  
-  @media (max-width: 370px) {
-    .form-auth {
-      width: 250px;
-      padding: 50px 10px;
-    }
-  
-    .form-auth input[type = "text"], .form-auth input[type="password"] {
-      width: 170px;
-    }
-  
-    .form-auth input[type = "text"]:focus, .form-auth input[type="password"]:focus {
-      width: 190px;
-    }
-  
-    .form-auth input[type = "submit"] {
-      width: 200px;
-    }
-  
-    .user-img {
-      width: 80px;
-      height: 80px;
-    }
-  }
+}
   

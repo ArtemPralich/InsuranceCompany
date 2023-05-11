@@ -47,7 +47,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import { NgxEditorModule } from 'ngx-editor';
 import { DocumentTemplatesComponent } from './pages/document-templates/document-templates.component';
-import { RoomClientComponent } from './pages/room-client/room-client.component';
+import { DialogChangePasswordPopup, DialogChangeEmailPopup, RoomClientComponent } from './pages/room-client/room-client.component';
 import { ToastrService } from 'ngx-toastr';
 import { ToastrModule } from 'ngx-toastr';
 import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorComponent, DialogCreateAnswerPopup } from './pages/survey-editor/survey-editor.component';
@@ -83,6 +83,8 @@ import { RegistationEmployeeComponent } from './pages/registation-employee/regis
     DialogCreateAnswerPopup,
     NotAccessComponent,
     RegistationEmployeeComponent,
+    DialogChangeEmailPopup,
+    DialogChangePasswordPopup,
   ],
   imports: [
     BrowserModule,

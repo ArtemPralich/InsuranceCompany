@@ -9,28 +9,40 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/ro
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
-  client = new RegistrationClient()
+  client = new RegistrationClient();
+  passwordsMatch: boolean = true;
   constructor(public auth: AuthService, private router: Router){
       
   }
 
   registration(){
-    console.log(this.client);
-    this.auth.register(this.client).subscribe((res)=> {
-        console.log(res);
-        //const header = res.headers.get('roles');
-        
-        const header = (<any>res).body.role;
-        const token = (<any>res).body.token; 
-        localStorage.setItem("jwt", token);
-        var a = new Date();
-        if(header !== null){
-          localStorage.setItem("role", header);
-        }
-        localStorage.setItem("date",`${(new Date()).getTime()}`);
-        
-        this.router.navigateByUrl("/room-client");
-    }, error =>{
-    });
+    this.onConfirmPasswordChange();
+    if(this.passwordsMatch) {
+      console.log(this.client);
+      this.auth.register(this.client).subscribe((res)=> {
+          console.log(res);
+          //const header = res.headers.get('roles');
+          
+          const header = (<any>res).body.role;
+          const token = (<any>res).body.token; 
+          localStorage.setItem("jwt", token);
+          var a = new Date();
+          if(header !== null){
+            localStorage.setItem("role", header);
+          }
+          localStorage.setItem("date",`${(new Date()).getTime()}`);
+          
+          this.router.navigateByUrl("/room-client");
+      }, error =>{
+      });
+    }
+  }
+
+  onConfirmPasswordChange() {
+    if (this.client.password !== this.client.confirmPassword) {
+      this.passwordsMatch = false;
+    } else {
+      this.passwordsMatch = true;
+    }
   }
 }
