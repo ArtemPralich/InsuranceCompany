@@ -1,19 +1,34 @@
 <div class="form-container">
     <div class="container">
-        <div class="form-title">
-            Личный кабинет
+      <div class="form-title">
+        Личный кабинет
+      </div>
+
+        <div class="menu-phone">
+          <input type="image" src="assets/pictures/menu-outline.svg" class="button-menu" (click)="toggleClass()">
+          <button mat-raised-button class="exit-phone" (click)="logout()">ВЫЙТИ</button>
+        </div>
+
+        <div class="menu-line-ph disp">
+          <ul class="menu">
+              <li class="menu-item" (click)="toggleOne()">Личная информация</li>
+              <li class="menu-item" (click)="toggleTwo()">Страховые запросы</li>
+              <li class="menu-item" (click)="toggleThree()">Документы</li>
+          </ul>
         </div>
 
         <div class="room-container">
             <div class="menu-line">
                 <ul class="menu">
-                    <li class="menu-item first-item" (click)="toggleTrue()">Личная информация</li>
-                    <li class="menu-item" (click)="toggleFalse()">Документы</li>
+                    <li class="menu-item first-item" (click)="toggleOne()">Личная информация</li>
+                    <li class="menu-item" (click)="toggleTwo()">Страховые запросы</li>
+                    <li class="menu-item" (click)="toggleThree()">Документы</li>
                 </ul>
-                <button mat-raised-button class="exit">ВЫЙТИ</button>
+                <button mat-raised-button class="exit" (click)="logout()">ВЫЙТИ</button>
             </div>
+
             <div class="content">
-                <div *ngIf="condition">
+                <div *ngIf="condition === 1">
                     <div class="form-line">
                         <div class="content-title">Личная информация</div>
 
@@ -21,7 +36,7 @@
 
                         <div *ngIf="!isDisabled">
                             <button mat-raised-button  class="button-form" (click)="enableInputTrue()">Отмена</button>
-                            <button mat-raised-button color="primary" class="button-form" >Сохранить</button>
+                            <button mat-raised-button color="primary" class="button-form" (click)="save()">Сохранить</button>
                         </div>
                     </div>
 
@@ -29,24 +44,24 @@
                         <div>
                           <mat-form-field appearance="fill" class="margin-form-field">
                             <mat-label>Введите фамилию</mat-label>
-                            <input matInput placeholder="Фамилия" required [disabled]="isDisabled">
+                            <input matInput placeholder="Фамилия" [(ngModel)]="client.surname" [ngModelOptions]="{standalone: true}" required [disabled]="isDisabled">
                           </mat-form-field>
                   
                           <mat-form-field appearance="fill" class="margin-form-field">
                             <mat-label>Введите имя</mat-label>
-                            <input matInput placeholder="Имя" required [disabled]="isDisabled">
+                            <input matInput placeholder="Имя" [(ngModel)]="client.name" [ngModelOptions]="{standalone: true}" required [disabled]="isDisabled">
                           </mat-form-field>
                         </div>
                         <div>
                           <mat-form-field appearance="fill" class="margin-form-field width-form-field">
                             <mat-label>Введите персональный код</mat-label>
-                            <input matInput placeholder="Персональный код" type="text"
+                            <input matInput placeholder="Персональный код" [(ngModel)]="client.personalCode" [ngModelOptions]="{standalone: true}" type="text"
                                maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required [disabled]="isDisabled">
                           </mat-form-field>
                   
                           <mat-form-field appearance="fill" class="margin-form-field">
                             <mat-label>Введите дату рождения</mat-label>
-                            <input matInput [matDatepicker]="picker" required [disabled]="isDisabled">
+                            <input matInput [matDatepicker]="picker" [(ngModel)]="client.dateOfBirth" [ngModelOptions]="{standalone: true}" required [disabled]="isDisabled">
                             <mat-hint  matListItemLine>MM/DD/YYYY</mat-hint>
                             <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
@@ -55,7 +70,7 @@
                         <div>
                           <mat-form-field appearance="fill" class="margin-form-field">
                             <mat-label>Выберите пол</mat-label>
-                            <mat-select [ngModelOptions]="{standalone: true}" required [disabled]="isDisabled">
+                            <mat-select [(ngModel)]="client.gender" [ngModelOptions]="{standalone: true}" required [disabled]="isDisabled">
                               <mat-option [value]="true">
                                 Мужчина
                               </mat-option>
@@ -80,13 +95,21 @@
                         </div>
 
                         <ul class="links" *ngIf="!isDisabled">
-                            <li class="link">Редактировать почту</li>
-                            <li class="link">Редактировать пароль</li>
+                            <li class="link" (click)="openDialogChangeEmail()">Редактировать почту</li>
+                            <li class="link" (click)="openDialogChangePassword()">Редактировать пароль</li>
                         </ul>
                     </div>
-
                 </div>
-                <div *ngIf="!condition">
+
+                <div *ngIf="condition === 2">
+                  <div class="form-line">
+                    <div class="content-title">Страховые запросы</div>
+
+                    <button mat-raised-button color="primary" class="button-form" (click)="sendRequest()">Отправить запрос</button>
+                </div>
+                </div>
+
+                <div *ngIf="condition === 3">
                     <div class="content-title">Документы</div>
                     <mat-list>
                         <mat-list-item *ngFor="let document of documents" (click)="GetFiles()">

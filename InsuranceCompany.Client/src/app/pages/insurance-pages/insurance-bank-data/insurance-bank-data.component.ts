@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import {FormBuilder, Validators} from '@angular/forms';
 import { InsuranceRequest } from 'src/app/models/InsuranceRequest';
+import { InsuranceStatus } from 'src/app/models/InsuranceStatus';
 
 @Component({
   selector: 'app-insurance-bank-data',
@@ -11,6 +12,7 @@ import { InsuranceRequest } from 'src/app/models/InsuranceRequest';
 export class InsuranceBankDataComponent {
   @Input() insuranceRequest:  InsuranceRequest;
   selectedBank: string;
+  insuranceStatus: InsuranceStatus = new InsuranceStatus();
   banks: string[] = ['Беларусбанк', 'Белагропромбанк', 'Приорбанк', 'Сбер Банк', 'Банк ВТБ', 'Банк БЕЛВЭБ'];
 
   firstFormGroup = this._formBuilder.group({

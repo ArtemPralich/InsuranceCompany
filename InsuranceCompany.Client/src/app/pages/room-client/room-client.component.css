@@ -85,7 +85,6 @@
 .content-title {
     font-size: 20px;
     font-weight: 600;
-    padding-bottom: 20px;
 }
 
 .margin-form-field{
@@ -98,10 +97,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .button-form {
-    padding: 20px 20px;
+    padding: 20px 30px;
     margin-left: 20px;
     font-size: 16px;
     opacity: .7;
@@ -123,4 +123,118 @@
     flex-direction: column;
     margin: 0;
     padding: 0;
+}
+
+.passwordsMatch {
+    color:#ff3636;
+    font-size: 12px;
+    margin-top: -20px;
+}
+
+.menu-phone {
+    height: 60px;
+    background-color: #324e88;
+    border-radius: 10px 10px 0px 0px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-menu {
+    width: 40px;
+    margin: 10px;
+}
+
+.exit-phone {
+    width: 180px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+.disp {
+    display: none;
+}
+
+.menu-line-ph {
+    background-color: #324e88;
+    text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .container {
+        margin: 0px 50px;
+    }
+}
+
+@media (max-width: 910px) {
+    .menu-phone {
+        display: flex;
+    }
+
+    .room-container {
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    .menu-line {
+        display: none;
+    }
+
+    .content {
+        text-align: center;
+    }
+}
+
+@media (max-width: 680px) {
+    .form-line {
+        display: block;
+    }
+
+    .content-title {
+        padding-bottom: 20px;
+    }    
+
+    .margin-form-field{
+        margin-right: 0px;
+    }
+
+    .button-form {
+        padding: 20px;
+        margin-left: 10px;
+    }
+
+    .form-title {
+        font-size: 25px;
+        padding: 15px 0px;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        margin: 0px 20px;
+    }
+
+    .content {
+        padding: 15px 10px;
+    }
+
+    .exit-phone {
+        width: 100px;
+    }
+}
+
+@media (max-width: 390px) {
+    .margin-form-field{
+        width: 200px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 310px) {
+    .container {
+        margin: 0px 10px;
+    }
+
+    .button-form {
+        margin-bottom: 10px;
+    }
 }

@@ -8,6 +8,7 @@ import {Observable} from 'rxjs';
 
 import {map, startWith} from 'rxjs/operators';
 
+import { InsuranceStatus } from 'src/app/models/InsuranceStatus';
 @Component({
   selector: 'app-insurance-client-info',
   templateUrl: './insurance-client-info.component.html',
@@ -26,6 +27,7 @@ export class InsuranceClientInfoComponent implements OnInit {
   }
   
   clients: Client[] = [];
+  insuranceStatus: InsuranceStatus = new InsuranceStatus();
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   ngOnInit(){

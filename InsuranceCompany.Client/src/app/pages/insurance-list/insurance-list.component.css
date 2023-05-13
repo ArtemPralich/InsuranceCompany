@@ -45,15 +45,19 @@
   transition: 0.3s;
 }
 
+.exit-text{
+  margin-right: 50px;
+}
+
 .count-item {
   font-weight: 600;
   font-size: 18px;
 }
 
 .custom-table {
-    width: 80% !important;
-    margin: 0 auto;
-  }
+  width: 80% !important;
+  margin: 0 auto;
+}
 
   .circle-icon {
     background-color: #42a5f5; /* цвет фона */

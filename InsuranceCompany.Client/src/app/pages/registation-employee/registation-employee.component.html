@@ -11,8 +11,10 @@
         <input type="text" name="" placeholder="Персональный код">
         <input type="text" name="" placeholder="Номер телефона">
         <input type="text" name="" placeholder="Почта">
-        <input type="password" name="" placeholder="Пароль">
-        <input type="submit" name="" value="Зарегистрироваться">
+        <input type="password" name=""  [(ngModel)]="employee.password" [ngModelOptions]="{standalone: true}" placeholder="Пароль">
+        <input type="password" name=""  [(ngModel)]="employee.confirmPassword" [ngModelOptions]="{standalone: true}" placeholder="Повторить пароль">
+        <div *ngIf="!passwordsMatch" class="passwordsMatch">Неверный пароль!</div>
+        <input type="submit" name="" (click)="registration()"  value="Зарегистрироваться">
       </form>
     </div>
   </div>

@@ -19,16 +19,16 @@ import { AdminAuthGuard } from './guards/adminAuth.guard';
 const routes: Routes = [
   { path: '', component: MainComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'insurances', component: InsuranceListComponent},
-  { path: 'insurance/:id', component: InsuranceComponent},
+  { path: 'insurances', component: InsuranceListComponent, },
+  { path: 'insurance/:id', component: InsuranceComponent, },
   { path: 'documents', component: DocumentTemplatesComponent, canActivate: [AdminAuthGuard]},
   { path: 'registration', component: RegistrationComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'not-access', component: NotAccessComponent},
-  { path: 'registration-employee', component: RegistationEmployeeComponent},
+  { path: 'registration-employee', component: RegistationEmployeeComponent, canActivate: [AdminAuthGuard]},
   { path: 'request', component: RequestComponent, canActivate: [AuthGuard]},
   { path: 'room-client', component: RoomClientComponent, canActivate: [AuthGuard]},
-  { path: 'survey-editor', component: SurveyEditorComponent, canActivate: [AdminAuthGuard]},
+  { path: 'survey-editor', component: SurveyEditorComponent},
   { path: '**', component: NotFoundComponent},
 ];
 
