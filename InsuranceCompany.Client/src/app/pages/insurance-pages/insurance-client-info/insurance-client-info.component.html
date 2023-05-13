@@ -38,42 +38,117 @@
               </mat-form-field>
             </div>
             <div>
-              <mat-form-field appearance="fill" class="margin-form-field">
-                <mat-label>Введите персональный код</mat-label>
+              <!-- <mat-form-field appearance="fill" class="margin-form-field">
                 <input matInput placeholder="Персональный код" type="text" [(ngModel)]="person.client.personalCode" 
                 [ngModelOptions]="{standalone: true}" maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
-              </mat-form-field>
+              </mat-form-field> -->
+
+                <mat-form-field class="margin-form-field" appearance="fill">
+                  <mat-label>Введите персональный код</mat-label>
+                  <input type="text"
+                         placeholder="Персональный код"
+                         aria-label="Number"
+                         matInput
+                         oninput="this.value = this.value.toUpperCase()"
+                         maxlength="9" pattern="[A-Za-z]{2}\d{7}"
+                         [(ngModel)]="person.client.personalCode"
+                         [formControl]="myControl"
+                         [matAutocomplete]="auto"
+                         >
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onBMOptionSelected()">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option.personalCode">
+                      {{option.personalCode}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
             </div>
         </div>
       </form>
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Контактная информация</ng-template>
-
-        <div>
-          <mat-form-field appearance="fill" class="margin-form-field">
-            <mat-label>Введите номер телефона</mat-label>
-            <span matPrefix>+375 &nbsp;</span>
-            <input type="tel" matInput placeholder="29 291-70-93" required>
-          </mat-form-field>
+      <form [formGroup]="secondFormGroup" *ngFor="let person of insuranceRequest.insuredPersons" >
+        <div  *ngIf="person.isMainInsuredPerson">
+          <ng-template matStepLabel>Контактная информация</ng-template>
   
-          <mat-form-field appearance="fill" class="margin-form-field">
-            <mat-label>Введите адрес</mat-label>
-            <input matInput formControlName="secondCtrl" placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20"
-                    required>
-          </mat-form-field>
-        </div>
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите номер телефона</mat-label>
+              <span matPrefix>+375 &nbsp;</span>
+              <input type="tel" matInput placeholder="29 291-70-93" [(ngModel)]="person.client.phoneNumber" [ngModelOptions]="{standalone: true}"required>
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите адрес</mat-label>
+              <input matInput formControlName="secondCtrl" placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20" [(ngModel)]="person.client.address" 
+                      required>
+            </mat-form-field>
+          </div>
+  
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите адрес электронной почты</mat-label>
+              <input type="email" matInput [formControl]="emailFormControl" [(ngModel)]="person.client.email" placeholder="insurance@gmail.com">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Ошибка ввода
+              </mat-error>
+            </mat-form-field>
+          </div>
 
-        <div>
-          <mat-form-field appearance="fill" class="margin-form-field">
-            <mat-label>Введите адрес электронной почты</mat-label>
-            <input type="email" matInput [formControl]="emailFormControl" placeholder="insurance@gmail.com">
-            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-              Ошибка ввода
-            </mat-error>
-          </mat-form-field>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup" >
+        <div  >
+          <ng-template matStepLabel>Информация по страхованию</ng-template>
+  
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Желаемые бенефиты</mat-label>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.benefits" (input)="onInputBenefits()" [ngModelOptions]="{standalone: true}"required>
+            </mat-form-field>
+            
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Количество выплат в год</mat-label>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.insuranceRate.countPaymentsInYear" [ngModelOptions]="{standalone: true}" disabled required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Количество лет</mat-label>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.insuranceRate.countYears" [ngModelOptions]="{standalone: true}" disabled required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Общая сумма взносов</mat-label>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.cost" [ngModelOptions]="{standalone: true}" required>
+            </mat-form-field>
+            
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Базовый взнос</mat-label>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.basePayment" (input)="onInputBasePayment()" [ngModelOptions]="{standalone: true}"required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Единичный взнос</mat-label>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.unitPayment" [ngModelOptions]="{standalone: true}" disabled required>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Начало действия договора </mat-label>
+              <input matInput [matDatepicker]="picker1"  [(ngModel)]="insuranceRequest.dateOfStart" 
+                  (ngModelChange)="onInputDateOfStart()" [ngModelOptions]="{standalone: true}" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker1" ></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Конец действия договора </mat-label>
+              <input matInput [matDatepicker]="picker2"  [(ngModel)]="insuranceRequest.dateOfEnd" disabled  [ngModelOptions]="{standalone: true}" required>
+              <mat-datepicker-toggle matIconSuffix [for]="picker2" ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
         </div>
       </form>
     </mat-step>

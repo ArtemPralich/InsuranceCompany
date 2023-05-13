@@ -19,6 +19,7 @@ namespace InsuranceCompany.Shared.ModelDto.Update
         public decimal? BasePayment { get; set; }
         public decimal? UnitPayment { get; set; }
         public decimal? Coefficient { get; set; }
+        public decimal? Benefits { get; set; }
         public virtual ICollection<UpdateAnswerValuesDto> AnswerValues { get; } = new List<UpdateAnswerValuesDto>();
         public virtual ICollection<UpdateInsuredPersonDto> InsuredPersons { get; } = new List<UpdateInsuredPersonDto>();
     }

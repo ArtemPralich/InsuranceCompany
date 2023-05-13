@@ -26,12 +26,18 @@ namespace InsuranceCompany.Core.Configuration
                 Color = "#a0fa5e",
                 Status = "Подписано",
             },
-           new InsuranceStatus
+            new InsuranceStatus
+            {
+                Id = new Guid("75e6ce8f-74fc-43ba-8b11-ca02724b7f8d"),
+                Color = "#EDD1F8",
+                Status = "Создано клиентом",
+            },
+            new InsuranceStatus
             {
                 Id = new Guid("B74A9704-FF2C-4992-80B5-F22905091835"),
                 Color = "#d0f5ff",
                 Status = "Заполнено",
-            }); ;
+            }); 
         }
     }
 }

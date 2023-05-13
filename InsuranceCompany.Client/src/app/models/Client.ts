@@ -5,6 +5,9 @@ export class Client {
     gender : boolean;
     dateOfBirth : Date;
     personalCode: string;
+    address: string;
+    phoneNumber: string;
+    email: string;
     // ClientaChildren { get; } = new List<ClientaChild>();
     // PositionClients { get; } = new List<PositionClient>();
   

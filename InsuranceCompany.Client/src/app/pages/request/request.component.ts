@@ -4,9 +4,11 @@ import { CreateClientDto } from 'src/app/models/createModels/CreateClientDto';
 import { CreateInsuranceRequestDto } from 'src/app/models/createModels/CreateInsuranceRequestDto';
 import { InsuranceRateService } from 'src/app/service/InsuranceRateService';
 import { InsuranceRequestService } from 'src/app/service/InsuranceRequestService';
+import { ClientService } from 'src/app/service/ClientService';
 import { DialogElementsExampleDialog } from '../insurance-list/insurance-list.component';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Client } from 'src/app/models/Client';
 
 @Component({
   selector: 'app-request',
@@ -17,16 +19,20 @@ export class RequestComponent {
   condition: boolean=true;
   insuranceRates: InsuranceRate[] = [];
   selectedInsuranceRate: InsuranceRate;
+  clientInfo: Client;
   insuranceAmount: number;
   insuranceRequest : CreateInsuranceRequestDto;
 
-  constructor(public insuranceRateService: InsuranceRateService, 
+  constructor(public insuranceRateService: InsuranceRateService, public clientService: ClientService,
     public insuranceRequestService: InsuranceRequestService, private toastr: ToastrService) 
   {}
 
   ngOnInit() {
     this.insuranceRateService.GetAllInsuranceRequests().subscribe(res => {
       this.insuranceRates = res;
+    });
+    this.clientService.GetClientPrivateInfo().subscribe(res => {
+      this.clientInfo = res;
     });
   }
      
@@ -44,7 +50,7 @@ export class RequestComponent {
     this.insuranceRequest.client.PersonalCode = "";
 
 
-    this.insuranceRequestService.CreateInsuranceRequest(this.insuranceRequest).subscribe((data)=>{
+    this.insuranceRequestService.CreateInsuranceRequestByClient(this.insuranceRequest).subscribe((data)=>{
       // this.dialogRef.close();
       // this.router.navigateByUrl('/insurance/' + data);
       this.toastr.success('Успешно отправлено', 'Успешно!');

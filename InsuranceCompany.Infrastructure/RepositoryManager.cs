@@ -27,6 +27,7 @@ namespace InsuranceCompany.Infrastructure
         private DocumentRepository _documentRepository;
         private InsuranceRateTemplateRepository _insuranceRateTemplateRepository;
         private AnswerRepository _answerRepository;
+        private EmailRepository _emailRepository;
 
         public RepositoryManager(InsuranceCompanyContext repositoryContext)
         {
@@ -177,6 +178,16 @@ namespace InsuranceCompany.Infrastructure
                 if (_answerRepository == null)
                     _answerRepository = new AnswerRepository(_repositoryContext);
                 return _answerRepository;
+            }
+        }
+
+        public EmailRepository Email
+        {
+            get
+            {
+                if (_emailRepository == null)
+                    _emailRepository = new EmailRepository();
+                return _emailRepository;
             }
         }
 

@@ -24,6 +24,11 @@ export class InsuranceRequestService {
 
         return this.http.post<string>(`${this.pathBase}`, insuranceRequest);
     }
+    
+    public CreateInsuranceRequestByClient(insuranceRequest : CreateInsuranceRequestDto):Observable<string> { 
+
+        return this.http.post<string>(`${this.pathBase}/CreateByClient`, insuranceRequest);
+    }
 
     public UpdateInsuranceRequest(insuranceRequest : InsuranceRequest):Observable<any>{
 

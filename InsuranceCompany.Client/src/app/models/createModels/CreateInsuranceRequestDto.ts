@@ -2,6 +2,7 @@ import { CreateClientDto } from 'src/app/models/createModels/CreateClientDto';
 import { Client } from 'src/app/models/Client';
 
 export class CreateInsuranceRequestDto {
+    id: string;
     dateOfStart : Date;
     dateOfEnd : Date;
     agentId : string;

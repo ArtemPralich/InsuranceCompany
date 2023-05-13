@@ -4,6 +4,9 @@ export class CreateClientDto {
     PersonalCode : string;
     Gender : boolean;
     DateOfBirth : Date;
+    address: string;
+    phoneNumber: string;
+    email: string;
   
     constructor() {
 

@@ -13,5 +13,7 @@ namespace InsuranceCompany.Shared.ModelDto
         public string? Status { get; set; }
 
         public string? Color { get; set; }
+        public bool? IsDisabledForms { get; set; }
+        public bool? IsDisabledDocuments { get; set; }
     }
 }

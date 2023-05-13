@@ -20,6 +20,7 @@ namespace InsuranceCompany.Shared.ModelDto.Create
         public decimal? BasePayment { get; set; }
         public decimal? UnitPayment { get; set; }
         public decimal? Coefficient { get; set; }
+        public decimal? Benefits { get; set; }
         public virtual CreateClientDto Client { get; set; }
     }
 }

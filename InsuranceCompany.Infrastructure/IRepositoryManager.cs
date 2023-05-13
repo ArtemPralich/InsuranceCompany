@@ -26,5 +26,6 @@ namespace InsuranceCompany.Infrastructure
         InsuranceRateTemplateRepository InsuranceRateTemplate { get; }
         public QuestionSurveyRepository QuestionSurvey { get; }
         AnswerRepository Answer { get; }
+        EmailRepository Email { get; }
     }
 }

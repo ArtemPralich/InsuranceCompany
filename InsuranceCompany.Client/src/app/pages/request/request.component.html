@@ -9,12 +9,12 @@
       <div>
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите фамилию</mat-label>
-          <input matInput placeholder="Фамилия" required>
+          <input matInput placeholder="Фамилия" [(ngModel)]="clientInfo.surname" disabled required>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите имя</mat-label>
-          <input matInput placeholder="Имя" required>
+          <input matInput placeholder="Имя" [(ngModel)]="clientInfo.name" disabled required>
         </mat-form-field>
       </div>
       <div>
@@ -22,13 +22,13 @@
           <mat-label>Введите дату рождения</mat-label>
           <input matInput [matDatepicker]="picker" required>
           <mat-hint  matListItemLine>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matIconSuffix [for]="picker" [(ngModel)]="clientInfo.dateOfBirth" ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Выберите пол</mat-label>
-          <mat-select [ngModelOptions]="{standalone: true}" required>
+          <mat-select [ngModelOptions]="{standalone: true}"  [(ngModel)]="clientInfo.gender" required>
             <mat-option [value]="true">
               Мужчина
             </mat-option>

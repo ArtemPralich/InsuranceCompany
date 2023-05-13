@@ -4,6 +4,7 @@ using InsuranceCompany.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InsuranceCompany.Core.Migrations
 {
     [DbContext(typeof(InsuranceCompanyContext))]
-    partial class InsuranceCompanyContextModelSnapshot : ModelSnapshot
+    [Migration("20230512131625_updatestatusessss")]
+    partial class updatestatusessss
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -137,15 +140,8 @@ namespace InsuranceCompany.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("Gender")
                         .HasColumnType("bit");
@@ -155,9 +151,6 @@ namespace InsuranceCompany.Core.Migrations
 
                     b.Property<string>("PersonalCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
@@ -284,9 +277,6 @@ namespace InsuranceCompany.Core.Migrations
 
                     b.Property<decimal?>("BasePayment")
                         .HasColumnType("money");
-
-                    b.Property<decimal?>("Benefits")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("Coefficient")
                         .HasColumnType("decimal(18,2)");
@@ -728,21 +718,21 @@ namespace InsuranceCompany.Core.Migrations
                         new
                         {
                             Id = "441fcfea-e79f-49b8-af3a-467f2a16f1fc",
-                            ConcurrencyStamp = "a25463fe-46a0-4856-a339-2a3170ea3f14",
+                            ConcurrencyStamp = "0b023b8e-afd5-4d72-94cf-12917ac7366a",
                             Name = "Agent",
                             NormalizedName = "AGENT"
                         },
                         new
                         {
                             Id = "aa30174a-40e9-40cc-a660-f123ff11fa04",
-                            ConcurrencyStamp = "70a022d9-49a4-4e4d-974d-f90b3e15c459",
+                            ConcurrencyStamp = "5a3fdd21-01a4-4541-9ae8-b59e117e00aa",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = "7cae6025-c9d0-40bd-b780-372485e90ce0",
-                            ConcurrencyStamp = "a8d52017-9bf9-47b3-a06a-a9ef9aec8090",
+                            ConcurrencyStamp = "b454c07c-0f8d-4914-a597-0494315d907d",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });

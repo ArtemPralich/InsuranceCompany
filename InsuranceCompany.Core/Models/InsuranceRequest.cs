@@ -21,6 +21,7 @@ public partial class InsuranceRequest
     public decimal Cost { get; set; }
     public decimal? BasePayment { get; set; }
     public decimal? UnitPayment { get; set; }
+    public decimal? Benefits { get; set; }
     public decimal? Coefficient { get; set; }
     public bool IsReadyDocuments { get; set; }
     public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();

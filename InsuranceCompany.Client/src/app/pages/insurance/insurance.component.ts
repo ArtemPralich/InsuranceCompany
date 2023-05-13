@@ -43,6 +43,8 @@ export class InsuranceComponent implements OnInit  {
 
     this.insuranceRequestService.GetInsuranceRequestById(id).subscribe(res => {
       this.insuranceRequest = res;
+      this.insuranceRequest.dateOfStart = new Date(res.dateOfStart);
+      this.insuranceRequest.dateOfEnd = new Date(res.dateOfEnd);
       console.log(this.insuranceRequest);
     });
   }

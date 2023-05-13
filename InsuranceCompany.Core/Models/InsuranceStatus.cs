@@ -10,6 +10,8 @@ public partial class InsuranceStatus
     public string? Status { get; set; }
 
     public string? Color { get; set; }
+    public bool? IsDisabledForms { get; set; }
+    public bool? IsDisabledDocuments{ get; set; }
 
     public virtual ICollection<InsuranceRequest> InsuranceRequests { get; } = new List<InsuranceRequest>();
 }

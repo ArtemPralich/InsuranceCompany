@@ -16,6 +16,9 @@ export class InsuranceRequest {
     insuranceStatus: InsuranceStatus;
     cost: number;
     сoefficient: number;
+    benefits: number;
+    basePayment: number;
+    unitPayment: number;
     insuranceRate: InsuranceRate;
     insuredPersons: InsuredPerson[];
     answerValues: AnswerValues[];

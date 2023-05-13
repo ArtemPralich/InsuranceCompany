@@ -18,11 +18,14 @@ namespace InsuranceCompany.Shared.ModelDto
 
 
         public Guid? AgentId { get; set; }
+        public decimal Cost { get; set; }
+        public decimal? BasePayment { get; set; }
+        public decimal? UnitPayment { get; set; }
+        public decimal? Benefits { get; set; }
 
 
         public Guid? InsuranceRateId { get; set; }
 
-        public decimal Cost { get; set; }
         public Guid? InsuranceStatusId { get; set; }
         
         public bool IsReadyDocuments { get; set; }

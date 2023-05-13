@@ -16,7 +16,7 @@ export class ClientService {
         return this.http.get<Client[]>(`${this.pathBase}`);
     }
 
-    public GetClientPrivateInfo(id:string):Observable<Client>{
+    public GetClientPrivateInfo():Observable<Client>{
 
         return this.http.get<Client>(`${this.pathBase}`+ "/GetClientPrivateInfo");
     }
