@@ -26,7 +26,6 @@ export class LoginComponent {
       
   }
   login(){
-    console.log("eqeweq");
     this.auth.login(this.client.email, this.client.password).subscribe((res)=> {
         console.log(res);
       

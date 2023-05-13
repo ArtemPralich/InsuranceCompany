@@ -7,18 +7,18 @@
             <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите фамилию</mat-label>
-                <input matInput placeholder="Фамилия"  [(ngModel)]="person.client.surname" [ngModelOptions]="{standalone: true}" required>
+                <input matInput placeholder="Фамилия" [(ngModel)]="person.client.surname" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
               </mat-form-field>
 
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите имя</mat-label>
-                <input matInput placeholder="Имя" [(ngModel)]="person.client.name" [ngModelOptions]="{standalone: true}" required>
+                <input matInput placeholder="Имя" [(ngModel)]="person.client.name" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите дату рождения</mat-label>
-                <input matInput [matDatepicker]="picker"  [(ngModel)]="person.client.dateOfBirth" [ngModelOptions]="{standalone: true}" required>
+                <input matInput [matDatepicker]="picker"  [(ngModel)]="person.client.dateOfBirth" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
                 <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                 <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -26,7 +26,7 @@
 
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Выберите пол</mat-label>
-                <mat-select [(ngModel)]="person.client.gender" [ngModelOptions]="{standalone: true}" required>
+                <mat-select [(ngModel)]="person.client.gender" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
                   <mat-option [value]="true">
                     Мужчина
                   </mat-option>
@@ -41,7 +41,7 @@
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите персональный код</mat-label>
                 <input matInput placeholder="Персональный код" type="text" [(ngModel)]="person.client.personalCode" 
-                [ngModelOptions]="{standalone: true}" maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
+                [ngModelOptions]="{standalone: true}" maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required [disabled]="insuranceStatus.IsDisabledForms">
               </mat-form-field>
             </div>
         </div>
@@ -56,20 +56,19 @@
           <mat-form-field appearance="fill" class="margin-form-field">
             <mat-label>Введите номер телефона</mat-label>
             <span matPrefix>+375 &nbsp;</span>
-            <input type="tel" matInput placeholder="29 291-70-93" required>
+            <input type="tel" matInput placeholder="29 291-70-93" required [disabled]="insuranceStatus.IsDisabledForms">
           </mat-form-field>
   
           <mat-form-field appearance="fill" class="margin-form-field">
             <mat-label>Введите адрес</mat-label>
-            <input matInput formControlName="secondCtrl" placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20"
-                    required>
+            <input matInput formControlName="secondCtrl"  placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20" required [disabled]="insuranceStatus.IsDisabledForms">
           </mat-form-field>
         </div>
 
         <div>
           <mat-form-field appearance="fill" class="margin-form-field">
             <mat-label>Введите адрес электронной почты</mat-label>
-            <input type="email" matInput [formControl]="emailFormControl" placeholder="insurance@gmail.com">
+            <input type="email" matInput [formControl]="emailFormControl" placeholder="insurance@gmail.com" [disabled]="insuranceStatus.IsDisabledForms">
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
               Ошибка ввода
             </mat-error>

@@ -19,8 +19,8 @@ import { AdminAuthGuard } from './guards/adminAuth.guard';
 const routes: Routes = [
   { path: '', component: MainComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'insurances', component: InsuranceListComponent, canActivate: [AgentAuthGuard]},
-  { path: 'insurance/:id', component: InsuranceComponent, canActivate: [AgentAuthGuard]},
+  { path: 'insurances', component: InsuranceListComponent, },
+  { path: 'insurance/:id', component: InsuranceComponent, },
   { path: 'documents', component: DocumentTemplatesComponent, canActivate: [AdminAuthGuard]},
   { path: 'registration', component: RegistrationComponent},
   { path: 'not-found', component: NotFoundComponent},

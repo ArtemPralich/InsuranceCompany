@@ -4,6 +4,19 @@
         Личный кабинет
       </div>
 
+        <div class="menu-phone">
+          <input type="image" src="assets/pictures/menu-outline.svg" class="button-menu" (click)="toggleClass()">
+          <button mat-raised-button class="exit-phone" (click)="logout()">ВЫЙТИ</button>
+        </div>
+
+        <div class="menu-line-ph disp">
+          <ul class="menu">
+              <li class="menu-item" (click)="toggleOne()">Личная информация</li>
+              <li class="menu-item" (click)="toggleTwo()">Страховые запросы</li>
+              <li class="menu-item" (click)="toggleThree()">Документы</li>
+          </ul>
+        </div>
+
         <div class="room-container">
             <div class="menu-line">
                 <ul class="menu">
@@ -13,6 +26,7 @@
                 </ul>
                 <button mat-raised-button class="exit" (click)="logout()">ВЫЙТИ</button>
             </div>
+
             <div class="content">
                 <div *ngIf="condition === 1">
                     <div class="form-line">

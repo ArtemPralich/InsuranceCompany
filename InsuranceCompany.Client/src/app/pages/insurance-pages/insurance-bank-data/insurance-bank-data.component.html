@@ -7,7 +7,7 @@
             <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Выберите банк</mat-label>
-                <mat-select [(value)]="selectedBank">
+                <mat-select [(value)]="selectedBank" [disabled]="insuranceStatus.IsDisabledForms">
                   <mat-option *ngFor="let bank of banks" [value]="bank">
                     {{bank}}
                   </mat-option>
@@ -25,18 +25,18 @@
         <div>
           <mat-form-field appearance="fill" class="margin-form-field">
             <mat-label>Введите номер карты</mat-label>
-            <input type="text" maxlength="16" pattern="[0-9]{16}" matInput placeholder="1234123412341234" required>
+            <input type="text" maxlength="16" pattern="[0-9]{16}" matInput placeholder="1234123412341234" required [disabled]="insuranceStatus.IsDisabledForms">
           </mat-form-field>
 
           <mat-form-field appearance="fill" class="margin-form-field">
             <mat-label>Введите срок действия карты</mat-label>
-            <input type="text" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" matInput placeholder="12/25" required>
+            <input type="text" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" matInput placeholder="12/25" required [disabled]="insuranceStatus.IsDisabledForms">
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="fill" class="margin-form-field">
             <mat-label>Введите код безопасности карты</mat-label>
-            <input type="text" maxlength="3" pattern="[0-9]{3}" matInput placeholder="123" required>
+            <input type="text" maxlength="3" pattern="[0-9]{3}" matInput placeholder="123" required [disabled]="insuranceStatus.IsDisabledForms">
           </mat-form-field>
         </div>
       </form>

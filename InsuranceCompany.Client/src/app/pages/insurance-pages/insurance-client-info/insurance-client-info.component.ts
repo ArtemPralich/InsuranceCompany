@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import { InsuranceRequest } from 'src/app/models/InsuranceRequest';
 import { FormControl } from '@angular/forms';
+import { InsuranceStatus } from 'src/app/models/InsuranceStatus';
 @Component({
   selector: 'app-insurance-client-info',
   templateUrl: './insurance-client-info.component.html',
@@ -9,6 +10,7 @@ import { FormControl } from '@angular/forms';
 })
 export class InsuranceClientInfoComponent {
   @Input() insuranceRequest:  InsuranceRequest;
+  insuranceStatus: InsuranceStatus = new InsuranceStatus();
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class RoomClientComponent {
   isDisabled = true;
   client: Client = new Client();
 
-  constructor(public dialog: MatDialog, private router: Router, public auth: AuthService, public clientService: ClientService, private toastr: ToastrService) {}
+  constructor(public dialog: MatDialog, private router: Router, public auth: AuthService, public clientService: ClientService, private toastr: ToastrService, private el: ElementRef) {}
 
   documents: Document[] = [
     {
@@ -86,6 +86,15 @@ export class RoomClientComponent {
     dialogRef.afterClosed().subscribe(result => {
       
     });
+  }
+
+  toggleClass() {
+    const element = this.el.nativeElement.querySelector('.menu-line-ph');
+    if (element.classList.contains('disp')) {
+      element.classList.remove('disp');
+    } else {
+      element.classList.add('disp');
+    }
   }
 
   logout(): void {
