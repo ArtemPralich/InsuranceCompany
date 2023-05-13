@@ -28,3 +28,92 @@
 .big-img {
     width: 600px;
 }
+
+@media (max-width: 1300px) {
+    .container {
+        padding: 0px 50px;
+    }
+
+    .big-img {
+        width: 500px;
+    }
+
+    .not-access-title {
+        font-size: 70px;
+    }    
+
+    .not-access-text {
+        width: 400px;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .container {
+        padding: 0px 20px;
+    }
+
+    .big-img {
+        width: 400px;
+    }
+
+    .not-access-title {
+        font-size: 60px;
+    }    
+
+    .not-access-text {
+        width: 300px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .container {
+        display: block;
+        text-align: center;
+    }
+
+    .not-access-text {
+        margin: 0 auto;
+    }
+
+    .big-img {
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 450px) {
+    .container {
+        padding: 0px;
+    }
+
+    .big-img {
+        width: 300px;
+        padding-top: 130px;
+    }
+
+    .not-access-title {
+        font-size: 50px;
+    }
+
+    .not-access-text {
+        width: 250px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 300px) {
+    .big-img {
+        width: 250px;
+        padding-top: 150px;
+    }
+
+    .not-access-title {
+        font-size: 35px;
+    }
+
+    .not-access-text {
+        width: 220px;
+        font-size: 16px;
+    }
+}
