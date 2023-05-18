@@ -10,3 +10,5 @@ SELECT TOP (1000) [Id]
       ,[IsDisabledDocuments]
       ,[IsDisabledForms]
   FROM [InsuranceCompany1].[dbo].[InsuranceStatus]
+
+  Insert into [InsuranceCompany1].[dbo].[InsuranceStatus] ([Id],[Color], [Status], IsDisabledForms) values ('8CD43F71-1D6A-4A45-8974-6A4D9F6749ED','#a0fa5e','Подписано', 1)

@@ -115,6 +115,7 @@ export class DialogElementsExampleDialog {
     this.insuranceRequest.client.Name = "";
     this.insuranceRequest.client.Surname = "";
     this.insuranceRequest.client.PersonalCode = "";
+    this.insuranceRequest.client.address = "";
 
 
     this.insuranceRequestService.CreateInsuranceRequest(this.insuranceRequest).subscribe((data)=>{
