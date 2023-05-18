@@ -1,5 +1,4 @@
-﻿using InsuranceCompany.MobileClient.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +10,15 @@ using Xamarin.Forms.Xaml;
 namespace InsuranceCompany.MobileClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class DropdownMenuPage : ContentPage
     {
-        public LoginPage()
+        public DropdownMenuPage()
         {
             InitializeComponent();
-            BindingContext = new LoginViewModel() { Navigation = this.Navigation, ThisPage = new NavigationPage(this) };
+        }
+        private void OnBackgroundTapped(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
         }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -58,6 +59,20 @@ namespace InsuranceCompany.Controllers
             }
 
             return Ok(insuranceRequestsDto);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Client")]
+        [Route("GetClientInsurances")]
+        public async Task<IActionResult> GetClientInsurances()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var insuredPeople = _repositoryManager.InsuredPerson.FindByCondition(p => p.ClientId == user.ClientId && p.IsMainInsuredPerson, false).Distinct().ToList();
+            var ids = insuredPeople.Select(p => p.InsuranceRequestId).ToList();
+            var requests = _repositoryManager.InsuranceRequest.FindByCondition(r => ids.Contains(r.Id), false)
+                .Include(i => i.InsuranceRate).Include(i => i.InsuranceStatus).Include(i => i.Documents).Include(i => i.InsuredPersons).ThenInclude(p => p.Client).ToList();
+
+            return Ok(requests);
         }
 
         [HttpGet("Validate", Name = "Validate")]
@@ -198,24 +213,27 @@ namespace InsuranceCompany.Controllers
                 _repositoryManager.Email.SendEmailMessage(newUser.Email, "Ваш пароль", "Мы генерировали для вас новый пароль: " + password);
             }
             _repositoryManager.InsuranceRequest.Update(request);
+            _repositoryManager.Save();
             return NoContent();
         }
 
         [HttpPut("MoveToApprove", Name = "MoveToApprove")]
-        public IActionResult MoveToApprove(Guid id)
+        public IActionResult MoveToApprove([FromBody] Guid id)
         {
             var request = _repositoryManager.InsuranceRequest.GetById(id, true);
             request.InsuranceStatusId = new Guid("8CD43F71-1D6A-4A45-8974-6A4D9F6749ED");
             _repositoryManager.InsuranceRequest.Update(request);
+            _repositoryManager.Save();
             return NoContent();
         }
-
-        [HttpPut("MoveToErrorState", Name = "MoveToErrorState")]
-        public IActionResult MoveToErrorState(Guid id)
+        [HttpGet("MoveToErrorState/{id}", Name = "MoveToErrorState")]
+        public IActionResult MoveToErrorState( Guid id)
         {
             var request = _repositoryManager.InsuranceRequest.GetById(id, true);
             request.InsuranceStatusId = new Guid("9EAC0D43-CEB1-404C-85E2-D7C9303DFCD8");
             _repositoryManager.InsuranceRequest.Update(request);
+            _repositoryManager.Document.DeleteRange(request.Documents.ToList());
+            _repositoryManager.Save();
             return NoContent();
         }
 

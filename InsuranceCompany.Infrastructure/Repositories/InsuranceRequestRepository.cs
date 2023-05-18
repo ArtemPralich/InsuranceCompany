@@ -18,9 +18,6 @@ namespace InsuranceCompany.Infrastructure.Repositories
         public IEnumerable<InsuranceRequest> GetAll(bool trackChanges)
         {
             return FindAll(trackChanges).Include(i => i.InsuranceStatus)
-                .Include(i => i.InsuranceRate)
-                    .ThenInclude(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceSurvey)
-                        .ThenInclude(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.QuestionType)
                 .Include(i => i.InsuredPersons).ThenInclude(i => i.Client).ToList();
         }
 

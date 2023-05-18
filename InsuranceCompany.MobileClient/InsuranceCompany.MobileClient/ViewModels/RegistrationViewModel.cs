@@ -3,22 +3,19 @@ using InsuranceCompany.MobileClient.Services;
 using InsuranceCompany.MobileClient.Views;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace InsuranceCompany.MobileClient.ViewModels
 {
-    public class LoginViewModel : INotifyPropertyChanged
+
+    public class RegistrationViewModel
     {
         public INavigation Navigation { get; set; }
-        public NavigationPage ThisPage { get; set; }
         AuthService authService = new AuthService();
         User user;
-
         public string Email
         {
             get { return user.Email; }
@@ -28,7 +25,15 @@ namespace InsuranceCompany.MobileClient.ViewModels
                 OnPropertyChanged("Email");
             }
         }
-
+        public string UserName
+        {
+            get { return user.UserName; }
+            set
+            {
+                user.Email = value;
+                OnPropertyChanged("UserName");
+            }
+        }
         public string Password
         {
             get { return user.Password; }
@@ -39,34 +44,28 @@ namespace InsuranceCompany.MobileClient.ViewModels
             }
         }
 
-        public ICommand SignInCommand { protected set; get; }
-        public ICommand GoToRegistrationCommand { protected set; get; }
-
-        public LoginViewModel()
+        private string _confirmPassword { get; set; }
+        public string ConfirmPassword
         {
-            user = new User() { Email = "", Password = ""};
-            SignInCommand = new Command(async () => await SignIn());
-            GoToRegistrationCommand = new Command(GoToRegistration);
-
-        }
-
-        private async Task SignIn()
-        {
-            var a = await authService.Login(user);
-            if (a != null)
+            get { return _confirmPassword; }
+            set
             {
-                App.Current.Properties.Add("token", a.Token);
-                App.Current.Properties.Add("role", a.Role);
-
-                Application.Current.MainPage.Navigation.PushAsync(new InsurancesPage());
+                _confirmPassword = value;
+                OnPropertyChanged("ConfirmPassword");
             }
         }
 
-        private void GoToRegistration()
-        {
-            Application.Current.MainPage.Navigation.PushAsync(new RegistationPage());
-        }
+        public ICommand GoToLoginCommand { protected set; get; }
 
+        public RegistrationViewModel()
+        {
+            user = new User() { Email = "", Password = "" };
+            GoToLoginCommand = new Command(GoToLogin);
+        }
+        private void GoToLogin()
+        {
+            Application.Current.MainPage.Navigation.PopAsync();
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName)

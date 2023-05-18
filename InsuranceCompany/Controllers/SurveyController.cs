@@ -108,13 +108,13 @@ namespace InsuranceCompany.Controllers
             List<InsuranceTypeSurvey> insuranceRateTemplatesForDelete = new List<InsuranceTypeSurvey>();
             foreach (var rate in insuranceSurveyDto.InsuranceRates)
             {
-                if (survey.InsuranceTypeSurveys.FirstOrDefault(t => t.Id == rate.Id) == null)
+                if (survey.InsuranceTypeSurveys.FirstOrDefault(t => t.InsuranceRateId == rate.Id) == null)
                 {
                     insuranceRateTemplatesForAdd.Add(new InsuranceTypeSurvey() { InsuranceSurveyId = survey.Id, InsuranceRateId = rate.Id });
                 }
             }
 
-            insuranceRateTemplatesForDelete = survey.InsuranceTypeSurveys.Where(t => !insuranceSurveyDto.InsuranceRates.Select(x=>x.Id).ToList().Contains(t.InsuranceSurveyId  ?? Guid.Empty)).ToList();
+            insuranceRateTemplatesForDelete = survey.InsuranceTypeSurveys.Where(t => !insuranceSurveyDto.InsuranceRates.Select(x=>x.Id).ToList().Contains(t.InsuranceRateId  ?? Guid.Empty)).ToList();
 
 
             var answersForCreating = _mapper.Map<List<Answer>>(answersForCreatingDto);

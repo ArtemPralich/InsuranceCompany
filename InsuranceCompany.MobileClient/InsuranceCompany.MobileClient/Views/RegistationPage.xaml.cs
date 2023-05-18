@@ -11,12 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace InsuranceCompany.MobileClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LoginPage : ContentPage
+    public partial class RegistationPage : ContentPage
     {
-        public LoginPage()
+        public RegistationPage()
         {
+
             InitializeComponent();
-            BindingContext = new LoginViewModel() { Navigation = this.Navigation, ThisPage = new NavigationPage(this) };
+            BindingContext = new RegistrationViewModel() { Navigation = this.Navigation };
         }
     }
 }
