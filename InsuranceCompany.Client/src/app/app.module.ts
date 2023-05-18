@@ -121,6 +121,7 @@ import { RegistationEmployeeComponent } from './pages/registation-employee/regis
     InsuranceRateService,
     DocumentService,
     SurveyService,
+    QuestionTypeService,
     AuthGuard,
     AgentAuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true,},
