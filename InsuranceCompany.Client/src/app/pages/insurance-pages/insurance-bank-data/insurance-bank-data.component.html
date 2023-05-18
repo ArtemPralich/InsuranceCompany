@@ -1,13 +1,13 @@
 <div class="content">
   <mat-stepper orientation="vertical" #stepper>
     <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <div>
+      <form [formGroup]="firstFormGroup" *ngFor="let person of insuranceRequest.insuredPersons">
+        <div *ngIf="person.isMainInsuredPerson">
           <ng-template matStepLabel>Наименование банка</ng-template>
             <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Выберите банк</mat-label>
-                <mat-select [(value)]="selectedBank" [disabled]="insuranceStatus.IsDisabledForms">
+                <mat-select [(value)]="selectedBank" [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
                   <mat-option *ngFor="let bank of banks" [value]="bank">
                     {{bank}}
                   </mat-option>
@@ -19,25 +19,27 @@
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Данные карты</ng-template>
+      <form [formGroup]="secondFormGroup" *ngFor="let person of insuranceRequest.insuredPersons" >
+        <div  *ngIf="person.isMainInsuredPerson">
+          <ng-template matStepLabel>Данные карты</ng-template>
 
-        <div>
-          <mat-form-field appearance="fill" class="margin-form-field">
-            <mat-label>Введите номер карты</mat-label>
-            <input type="text" maxlength="16" pattern="[0-9]{16}" matInput placeholder="1234123412341234" required [disabled]="insuranceStatus.IsDisabledForms">
-          </mat-form-field>
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите номер карты</mat-label>
+              <input type="text" maxlength="16" pattern="[0-9]{16}" matInput placeholder="1234123412341234" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
+            </mat-form-field>
 
-          <mat-form-field appearance="fill" class="margin-form-field">
-            <mat-label>Введите срок действия карты</mat-label>
-            <input type="text" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" matInput placeholder="12/25" required [disabled]="insuranceStatus.IsDisabledForms">
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field appearance="fill" class="margin-form-field">
-            <mat-label>Введите код безопасности карты</mat-label>
-            <input type="text" maxlength="3" pattern="[0-9]{3}" matInput placeholder="123" required [disabled]="insuranceStatus.IsDisabledForms">
-          </mat-form-field>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите срок действия карты</mat-label>
+              <input type="text" maxlength="5" pattern="[0-9]{2}/[0-9]{2}" matInput placeholder="12/25" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill" class="margin-form-field">
+              <mat-label>Введите код безопасности карты</mat-label>
+              <input type="text" maxlength="3" pattern="[0-9]{3}" matInput placeholder="123" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
+            </mat-form-field>
+          </div>
         </div>
       </form>
     </mat-step>

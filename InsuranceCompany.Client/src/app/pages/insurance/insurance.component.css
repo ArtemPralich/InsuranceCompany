@@ -106,11 +106,12 @@
     background-color: #89aacc;
     text-align: center;
     color: #fff;
-    width: 100px;
+    width: 120px;
     height: 35px;
     outline: none;
     border-radius: 24px;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .button-sign:hover {
@@ -128,7 +129,7 @@
     outline: none;
     transition: 0.25s;
     cursor: pointer;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .button-dup:hover {

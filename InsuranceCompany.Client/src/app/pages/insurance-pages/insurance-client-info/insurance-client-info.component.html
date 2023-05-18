@@ -7,18 +7,18 @@
             <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите фамилию</mat-label>
-                <input matInput placeholder="Фамилия" [(ngModel)]="person.client.surname" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
+                <input matInput placeholder="Фамилия" [(ngModel)]="person.client.surname" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
               </mat-form-field>
 
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите имя</mat-label>
-                <input matInput placeholder="Имя" [(ngModel)]="person.client.name" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
+                <input matInput placeholder="Имя" [(ngModel)]="person.client.name" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Введите дату рождения</mat-label>
-                <input matInput [matDatepicker]="picker"  [(ngModel)]="person.client.dateOfBirth" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
+                <input matInput [matDatepicker]="picker"  [(ngModel)]="person.client.dateOfBirth" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
                 <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
                 <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -26,7 +26,7 @@
 
               <mat-form-field appearance="fill" class="margin-form-field">
                 <mat-label>Выберите пол</mat-label>
-                <mat-select [(ngModel)]="person.client.gender" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceStatus.IsDisabledForms">
+                <mat-select [(ngModel)]="person.client.gender" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
                   <mat-option [value]="true">
                     Мужчина
                   </mat-option>
@@ -54,6 +54,7 @@
                          [(ngModel)]="person.client.personalCode"
                          [formControl]="myControl"
                          [matAutocomplete]="auto"
+                         [disabled]="insuranceRequest.insuranceStatus.isDisabledForms"
                          >
                   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onBMOptionSelected()">
                     <mat-option *ngFor="let option of filteredOptions | async" [value]="option.personalCode">
@@ -75,20 +76,19 @@
             <mat-form-field appearance="fill" class="margin-form-field">
               <mat-label>Введите номер телефона</mat-label>
               <span matPrefix>+375 &nbsp;</span>
-              <input type="tel" matInput placeholder="29 291-70-93" [(ngModel)]="person.client.phoneNumber" [ngModelOptions]="{standalone: true}"required>
+              <input type="tel" matInput placeholder="29 291-70-93" [(ngModel)]="person.client.phoneNumber" [ngModelOptions]="{standalone: true}"required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
             </mat-form-field>
     
             <mat-form-field appearance="fill" class="margin-form-field">
               <mat-label>Введите адрес</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20" [(ngModel)]="person.client.address" 
-                      required>
+              <input matInput formControlName="secondCtrl" placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20" [(ngModel)]="person.client.address" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
             </mat-form-field>
           </div>
   
           <div>
             <mat-form-field appearance="fill" class="margin-form-field">
               <mat-label>Введите адрес электронной почты</mat-label>
-              <input type="email" matInput [formControl]="emailFormControl" [(ngModel)]="person.client.email" placeholder="insurance@gmail.com">
+              <input type="email" matInput [formControl]="emailFormControl" [(ngModel)]="person.client.email" placeholder="insurance@gmail.com" [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
               <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Ошибка ввода
               </mat-error>
@@ -106,7 +106,7 @@
           <div>
             <mat-form-field appearance="fill" class="margin-form-field">
               <mat-label>Желаемые бенефиты</mat-label>
-              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.benefits" (input)="onInputBenefits()" [ngModelOptions]="{standalone: true}"required>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.benefits" (input)="onInputBenefits()" [ngModelOptions]="{standalone: true}"required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
             </mat-form-field>
             
             <mat-form-field appearance="fill" class="margin-form-field">
@@ -121,12 +121,12 @@
 
             <mat-form-field appearance="fill" class="margin-form-field">
               <mat-label>Общая сумма взносов</mat-label>
-              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.cost" [ngModelOptions]="{standalone: true}" required>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.cost" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
             </mat-form-field>
             
             <mat-form-field appearance="fill" class="margin-form-field">
               <mat-label>Базовый взнос</mat-label>
-              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.basePayment" (input)="onInputBasePayment()" [ngModelOptions]="{standalone: true}"required>
+              <input matInput placeholder="0" [(ngModel)]="insuranceRequest.basePayment" (input)="onInputBasePayment()" [ngModelOptions]="{standalone: true}"required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
             </mat-form-field>
 
             <mat-form-field appearance="fill" class="margin-form-field">
@@ -137,7 +137,7 @@
             <mat-form-field appearance="fill" class="margin-form-field">
               <mat-label>Начало действия договора </mat-label>
               <input matInput [matDatepicker]="picker1"  [(ngModel)]="insuranceRequest.dateOfStart" 
-                  (ngModelChange)="onInputDateOfStart()" [ngModelOptions]="{standalone: true}" required>
+                  (ngModelChange)="onInputDateOfStart()" [ngModelOptions]="{standalone: true}" required [disabled]="insuranceRequest.insuranceStatus.isDisabledForms">
               <mat-datepicker-toggle matIconSuffix [for]="picker1" ></mat-datepicker-toggle>
               <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>

@@ -10,6 +10,22 @@ export class InsuranceRequestService {
 
     constructor(private http:HttpClient){}
 
+    public MoveToSign(insuranceRequest : InsuranceRequest):Observable<InsuranceRequest>{
+
+        return this.http.get<InsuranceRequest>(`${this.pathBase}`+ "/MoveToSign/" + insuranceRequest.id);
+    }
+
+    public MoveToApprove(insuranceRequest : InsuranceRequest):Observable<InsuranceRequest>{
+
+        return this.http.get<InsuranceRequest>(`${this.pathBase}`+ "/MoveToApprove/" + insuranceRequest.id);
+    }
+
+    public MoveToErrorState(insuranceRequest : InsuranceRequest):Observable<InsuranceRequest>{
+
+        return this.http.get<InsuranceRequest>(`${this.pathBase}`+ "/MoveToErrorState/" + insuranceRequest.id);
+    }
+
+
     public GetAllInsuranceRequests():Observable<InsuranceRequest[]> {
         
         return this.http.get<InsuranceRequest[]>(`${this.pathBase}`);

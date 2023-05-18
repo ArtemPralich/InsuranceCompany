@@ -15,7 +15,7 @@ import { InsuranceStatus } from 'src/app/models/InsuranceStatus';
   styleUrls: ['./insurance-client-info.component.css']
 })
 export class InsuranceClientInfoComponent implements OnInit {
-  @Input() insuranceRequest:  InsuranceRequest;
+  @Input() insuranceRequest: InsuranceRequest;
 
   myControl = new FormControl('');
   filteredOptions: Observable<Client[]>;
