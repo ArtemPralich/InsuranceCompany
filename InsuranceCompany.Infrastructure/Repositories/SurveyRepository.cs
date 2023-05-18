@@ -31,7 +31,7 @@ namespace InsuranceCompany.Infrastructure.Repositories
         public InsuranceSurvey GetByForUpdateId(Guid Id, bool trackChanges)
         {
             return FindByCondition(x => x.Id == Id,
-                trackChanges).Include(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.Answers).FirstOrDefault();
+                trackChanges).Include(i => i.InsuranceTypeSurveys).Include(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.Answers).FirstOrDefault();
         }
     }
 }

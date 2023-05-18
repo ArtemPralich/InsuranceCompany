@@ -24,5 +24,10 @@ namespace InsuranceCompany.Infrastructure.Repositories
         {
             return FindByCondition(x => x.Id == Id, trackChanges).FirstOrDefault();
         }
+
+        public void DeleteRange(List<Document> documents)
+        {
+            RepositoryContext.Documents.RemoveRange(documents);
+        }
     }
 }

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             BackgroundColor="#40C4DFE6"
+             x:Class="InsuranceCompany.MobileClient.Views.DropdownMenuPage"
+             Padding="0">
+    <ContentPage.Content>
+        <AbsoluteLayout BackgroundColor="Transparent"
+                        Padding="0"
+                        Margin="0"
+                        HorizontalOptions="Fill"
+                        VerticalOptions="Fill">
+            <BoxView BackgroundColor="Transparent"
+                     AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+                     AbsoluteLayout.LayoutFlags="All">
+                <BoxView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackgroundTapped"/>
+                </BoxView.GestureRecognizers>
+            </BoxView>
+            <!-- Здесь разместите элементы вашей страницы -->
+            <StackLayout BackgroundColor="White"
+                         WidthRequest="250"
+                         HeightRequest="1000"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Center"
+                         Padding="20 ,20, 0, 0">
+                <Label Text="Меню" FontSize="20" HorizontalOptions="Center"></Label>
+                <Label Text="Выйти"></Label>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

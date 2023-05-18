@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class InsuranceComponent implements OnInit  {
   insuranceRequest:  InsuranceRequest;
+  sign: boolean = false;
   parentProp = 'Hello, child!';
 
   firstFormGroup = this._formBuilder.group({
@@ -34,7 +35,10 @@ export class InsuranceComponent implements OnInit  {
   }
 
   ngOnInit(){
+    this.dataLoad();
+  }
 
+  dataLoad(){
     let id:string = "";
     this.route.params.subscribe(
       params => {
@@ -59,11 +63,46 @@ export class InsuranceComponent implements OnInit  {
     });
   }
 
+  moveToSign(){
+    this.insuranceRequestService.MoveToSign(this.insuranceRequest).subscribe(res => {
+      this.toastr.success('Успешно подписано', 'Успешно!');
+      this.toggleSign();
+      this.dataLoad();
+    },
+    error => {
+      this.toastr.error('Ошибка подписи', 'Ошибка!');
+    });
+  }
+
+  moveToApprove(){
+    this.insuranceRequestService.MoveToApprove(this.insuranceRequest).subscribe(res => {
+      this.toastr.success('Успешно подтверждено', 'Успешно!');
+      this.dataLoad();
+    },
+    error => {
+      this.toastr.error('Ошибка подтверждения', 'Ошибка!');
+    });
+  }
+
+  moveToErrorState(){
+    this.insuranceRequestService.MoveToErrorState(this.insuranceRequest).subscribe(res => {
+      this.toastr.success('Успешно отменено', 'Успешно!');
+      this.dataLoad();
+    },
+    error => {
+      this.toastr.error('Ошибка отмены', 'Ошибка!');
+    });
+  }
+
   documentGeneration(){
     this.documentService.GeneratePdf(this.insuranceRequest.id).subscribe();
   }
 
   navigateToUrl() {
     this.router.navigateByUrl('insurances');
+  }
+
+  toggleSign() {
+    this.sign = true;
   }
 }

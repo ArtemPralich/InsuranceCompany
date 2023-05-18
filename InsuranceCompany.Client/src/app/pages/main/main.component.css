@@ -107,6 +107,28 @@ button {
     font-family: 'Open Sans', sans-serif;     
 }
 
+.button-enter {
+    background: none;
+    text-align: center;
+    color: #fff;
+    border: 2px solid #fff;
+    width: 130px;
+    height: 40px;
+    border-radius: 24px;
+    cursor: pointer;
+}
+
+.button-enter:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+
+.img-enter {
+    width: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
 .cards-container {
     display: flex;
     justify-content: space-between; 

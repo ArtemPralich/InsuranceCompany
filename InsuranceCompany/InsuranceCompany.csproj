@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
 
 	  <PreserveCompilationContext>true</PreserveCompilationContext>
+
+	  <Platforms>AnyCPU;ARM32</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

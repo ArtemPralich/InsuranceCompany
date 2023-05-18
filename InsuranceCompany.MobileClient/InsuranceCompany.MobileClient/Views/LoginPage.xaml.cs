@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InsuranceCompany.MobileClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace InsuranceCompany.MobileClient.Views
         public LoginPage()
         {
             InitializeComponent();
+            BindingContext = new LoginViewModel() { Navigation = this.Navigation, ThisPage = new NavigationPage(this) };
         }
     }
 }

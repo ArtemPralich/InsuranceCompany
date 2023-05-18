@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:converters="clr-namespace:InsuranceCompany.MobileClient.Converter" 
+             xmlns:local="clr-namespace:InsuranceCompany.MobileClient.Views"
+             x:Class="InsuranceCompany.MobileClient.Views.InsurancesPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToRotationConverter x:Key="BoolToRotationConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <RelativeLayout>
+                <BoxView
+                BackgroundColor="#07575B"
+                WidthRequest="200"
+                HeightRequest="200"
+                CornerRadius="200"
+                RelativeLayout.YConstraint="-100"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                    Property=Width,
+                                                                    Factor=1,
+                                                                    Constant=-100}" />
+                <Grid
+                      RelativeLayout.YConstraint="10"
+                      RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                    Property=Width,
+                                                                    Factor=1,
+                                                                    Constant=-55}">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleMenuCommand}"/>
+                    </Grid.GestureRecognizers>
+                    <BoxView Color="White" CornerRadius="1" HeightRequest="5" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <BoxView Color="White" CornerRadius="1" HeightRequest="5" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,20,0,0" />
+                    <BoxView Color="White" CornerRadius="1" HeightRequest="5" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,40,0,0" />
+                </Grid>
+                <Label Margin="20, 25, 0,0" Text="Ваши страховые" FontSize="25" TextColor="#003B46">
+                </Label>
+                <Label Margin="20, 50, 0,0" Text="запросы" FontSize="25" TextColor="#003B46">
+                </Label>
+            </RelativeLayout>
+            <BoxView Color="#C4DFE6" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="0,5,0,0" />
+            <CollectionView ItemsSource="{Binding InsuranceRequests}" SelectionMode="None">
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <StackLayout>
+                            <StackLayout Padding="20,5,5,5"  HeightRequest="{Binding Height}" BackgroundColor="Transparent" Orientation="Horizontal">
+                                <StackLayout>
+                                    <Label Text="{Binding Item.InsuranceRate.Title}" TextColor="#123524" FontSize="20" Margin="0,20,0,0" />
+                                    <StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Item.DateOfStart, StringFormat='{0:d}'}" FontSize="17"  TextColor="#123524"/>
+                                            <Label Text=" - " FontSize="17" />
+                                            <Label Text="{Binding Item.DateOfEnd, StringFormat='{0:d}'}" FontSize="17" TextColor="#123524"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" Padding="0,0,20,0" HorizontalOptions="Start" IsVisible="{Binding IsOpen}" >
+
+                                            <Frame BackgroundColor="Transparent" BorderColor="Black" WidthRequest="23" HeightRequest="21" CornerRadius="10" Padding="0,0,0,0">
+                                                <Grid>
+                                                    <BoxView BackgroundColor="Black" WidthRequest="2" HeightRequest="2" />
+                                                    <BoxView BackgroundColor="{Binding Item.InsuranceStatus.Color}" Margin="0,0,0,0"/>
+                                                </Grid>
+                                            </Frame>
+                                            <Label Text="{Binding Item.InsuranceStatus.Status}" FontSize="17" TextColor="#123524"/>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            
+                                <StackLayout VerticalOptions="Center">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding ItemTappedCommand}" CommandParameter="{Binding}" />
+                                    </StackLayout.GestureRecognizers>
+                                    <Image Source="rightarrow.png">
+                                        <Image.Rotation>
+                                            <Binding Path="IsOpen" Converter="{StaticResource BoolToRotationConverter}" />
+                                        </Image.Rotation>
+                                    </Image>
+                                </StackLayout>
+                            </StackLayout>
+                            <BoxView Color="LightGray" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="0,5,0,0" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
