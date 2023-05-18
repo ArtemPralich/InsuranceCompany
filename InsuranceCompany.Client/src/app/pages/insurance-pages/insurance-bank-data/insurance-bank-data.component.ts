@@ -12,7 +12,6 @@ import { InsuranceStatus } from 'src/app/models/InsuranceStatus';
 export class InsuranceBankDataComponent {
   @Input() insuranceRequest:  InsuranceRequest;
   selectedBank: string;
-  insuranceStatus: InsuranceStatus = new InsuranceStatus();
   banks: string[] = ['Беларусбанк', 'Белагропромбанк', 'Приорбанк', 'Сбер Банк', 'Банк ВТБ', 'Банк БЕЛВЭБ'];
 
   firstFormGroup = this._formBuilder.group({

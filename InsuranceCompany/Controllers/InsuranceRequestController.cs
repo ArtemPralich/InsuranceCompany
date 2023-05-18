@@ -24,7 +24,7 @@ namespace InsuranceCompany.Controllers
         private readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
 
-        public InsuranceRequestController(ILogger<InsuranceRequestController> logger, IRepositoryManager repositoryManager, 
+        public InsuranceRequestController(ILogger<InsuranceRequestController> logger, IRepositoryManager repositoryManager,
             IMapper mapper, UserManager<User> userManager)
         {
             _logger = logger;
@@ -33,7 +33,7 @@ namespace InsuranceCompany.Controllers
             _userManager = userManager;
         }
 
-        
+
         [HttpGet(Name = "GetInsuranceRequest")]
         public IActionResult Get()
         {
@@ -49,9 +49,9 @@ namespace InsuranceCompany.Controllers
         {
             var insuranceRequest = _repositoryManager.InsuranceRequest.GetById(id, false);
             var insuranceRequestsDto = _mapper.Map<InsuranceRequestDto>(insuranceRequest);
-            foreach(var ins in insuranceRequestsDto.InsuranceRate.InsuranceTypeSurveys)
+            foreach (var ins in insuranceRequestsDto.InsuranceRate.InsuranceTypeSurveys)
             {
-                foreach(var question in ins.InsuranceSurvey.Questions)
+                foreach (var question in ins.InsuranceSurvey.Questions)
                 {
                     question.AnswerValues = question.AnswerValues.Where(q => q.InsuranceRequestId == insuranceRequest.Id).ToList();
                 }
@@ -64,11 +64,11 @@ namespace InsuranceCompany.Controllers
         public IActionResult Validate(Guid id)
         {
             var insuranceRequest = _repositoryManager.InsuranceRequest.GetById(id, false);
-            if(insuranceRequest == null)
+            if (insuranceRequest == null)
             {
-                ModelState.TryAddModelError("request","Страховой запрос не сохранен");
+                ModelState.TryAddModelError("request", "Страховой запрос не сохранен");
             }
-            if(ModelState.ErrorCount > 0)
+            if (ModelState.ErrorCount > 0)
             {
                 return BadRequest(ModelState);
             }
@@ -90,7 +90,7 @@ namespace InsuranceCompany.Controllers
 
             var insRate = _repositoryManager.InsuranceRate.GetById(insuranceRequestDto.InsuranceRateId ?? Guid.NewGuid(), false);
             var rates = insRate.InsuranceTypeSurveys.ToList();
-            foreach(var rate in rates)
+            foreach (var rate in rates)
             {
                 foreach (var questionSurvey in rate.InsuranceSurvey.QuestionSurveys)
                 {
@@ -146,14 +146,14 @@ namespace InsuranceCompany.Controllers
             return Ok(insuranceRequest.Id);
         }
 
-        [HttpPut("MoveToSign", Name = "MoveToSign")]
+        [HttpGet("MoveToSign/{id}", Name = "MoveToSign")]
         public async Task<IActionResult> MoveToSign(Guid id)
         {
             var request = _repositoryManager.InsuranceRequest.GetById(id, true);
-            request.InsuranceStatusId = new Guid("B74A9704-FF2C-4992-80B5-F22905091835");
+            request.InsuranceStatusId = new Guid("8CD43F71-1D6A-4A45-8974-6A4D9F6749ED");
             var client = request.InsuredPersons.Where(ip => ip.IsMainInsuredPerson).FirstOrDefault();
             var user = _userManager.Users.Where(u => u.ClientId == client.ClientId).FirstOrDefault();
-            if(user == null)
+            if (user == null)
             {
                 var newUser = new User()
                 {
@@ -198,24 +198,27 @@ namespace InsuranceCompany.Controllers
                 _repositoryManager.Email.SendEmailMessage(newUser.Email, "Ваш пароль", "Мы генерировали для вас новый пароль: " + password);
             }
             _repositoryManager.InsuranceRequest.Update(request);
+            _repositoryManager.Save();
             return NoContent();
         }
 
-        [HttpPut("MoveToApprove", Name = "MoveToApprove")]
+        [HttpGet("MoveToApprove/{id}", Name = "MoveToApprove")]
         public IActionResult MoveToApprove(Guid id)
         {
             var request = _repositoryManager.InsuranceRequest.GetById(id, true);
-            request.InsuranceStatusId = new Guid("8CD43F71-1D6A-4A45-8974-6A4D9F6749ED");
+            request.InsuranceStatusId = new Guid("B74A9704-FF2C-4992-80B5-F22905091835");
             _repositoryManager.InsuranceRequest.Update(request);
+            _repositoryManager.Save();
             return NoContent();
         }
 
-        [HttpPut("MoveToErrorState", Name = "MoveToErrorState")]
+        [HttpGet("MoveToErrorState/{id}", Name = "MoveToErrorState")]
         public IActionResult MoveToErrorState(Guid id)
         {
             var request = _repositoryManager.InsuranceRequest.GetById(id, true);
             request.InsuranceStatusId = new Guid("9EAC0D43-CEB1-404C-85E2-D7C9303DFCD8");
             _repositoryManager.InsuranceRequest.Update(request);
+            _repositoryManager.Save();
             return NoContent();
         }
 
