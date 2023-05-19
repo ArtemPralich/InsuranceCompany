@@ -7,7 +7,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="popup-label">
-      <mat-label>Выберите тип страхового запроса</mat-label>
+      <mat-label>Выберите тип вопроса</mat-label>
       <mat-select [(value)]="selectedQuestionTypes">
         <mat-option *ngFor="let type of questionTypes" [value]="type">
           {{type.text}}

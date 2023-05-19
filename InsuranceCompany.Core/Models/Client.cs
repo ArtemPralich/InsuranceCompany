@@ -14,7 +14,7 @@ public partial class Client
     public string PersonalCode { get; set; }
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
-    public string Address { get; set; }
+    public string? Address { get; set; }
     public bool? Gender { get; set; }
     public DateTime? DateOfBirth { get; set; }
     public virtual ICollection<ClientaChild> ClientaChildren { get; } = new List<ClientaChild>();

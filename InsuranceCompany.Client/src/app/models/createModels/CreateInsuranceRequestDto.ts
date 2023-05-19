@@ -13,8 +13,10 @@ export class CreateInsuranceRequestDto {
     basePayment: number;
     unitPayment: number;
     сoefficient: number;
+    benefits: number;
 
     constructor() 
     {
+        this.cost = 0;
     }
 }

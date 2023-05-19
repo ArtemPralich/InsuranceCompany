@@ -20,15 +20,15 @@
       <div>
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите дату рождения</mat-label>
-          <input matInput [matDatepicker]="picker" required>
+          <input matInput [matDatepicker]="picker" [(ngModel)]="clientInfo.dateOfBirth" [ngModelOptions]="{standalone: true}" disabled required>
           <mat-hint  matListItemLine>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker" [(ngModel)]="clientInfo.dateOfBirth" ></mat-datepicker-toggle>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"  ></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Выберите пол</mat-label>
-          <mat-select [ngModelOptions]="{standalone: true}"  [(ngModel)]="clientInfo.gender" required>
+          <mat-select [ngModelOptions]="{standalone: true}"  disabled [(ngModel)]="clientInfo.gender" required>
             <mat-option [value]="true">
               Мужчина
             </mat-option>
@@ -41,20 +41,20 @@
       <div>
         <mat-form-field appearance="fill" class="margin-form-field width-form-field">
           <mat-label>Введите персональный код</mat-label>
-          <input matInput placeholder="Персональный код" type="text"
+          <input matInput placeholder="Персональный код" type="text" [ngModelOptions]="{standalone: true}"  disabled [(ngModel)]="clientInfo.personalCode"
              maxlength="9" pattern="[A-Za-z]{2}\d{7}" oninput="this.value = this.value.toUpperCase()" required>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите адрес</mat-label>
-          <input matInput  placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20" required>
+          <input matInput [ngModelOptions]="{standalone: true}"  [(ngModel)]="clientInfo.address" disabled  placeholder="г. Полоцк, ул. Зыгина, д. 7, кв. 20" required>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field appearance="fill" class="margin-form-field">
           <mat-label>Введите номер телефона</mat-label>
           <span matPrefix>+375 &nbsp;</span>
-          <input type="tel" matInput placeholder="29 291-70-93" required>
+          <input type="tel" matInput placeholder="29 291-70-93" [ngModelOptions]="{standalone: true}"  disabled [(ngModel)]="clientInfo.phoneNumber" required>
         </mat-form-field>
       </div>
         <button mat-raised-button color="primary" class="button-form" (click)="toggle()">Далее</button>
