@@ -30,7 +30,8 @@ namespace InsuranceCompany.Controllers
             //var user = _mapper.Map<User>(userForRegistration); 
             var client = new Client()
             {
-                PersonalCode = ""
+                PersonalCode = "",
+                Address = ""
             };
             _repositoryManager.Client.Create(client);
             var user = new User()

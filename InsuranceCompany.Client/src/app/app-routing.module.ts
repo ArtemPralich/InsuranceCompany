@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'insurances', component: InsuranceListComponent, },
   { path: 'insurance/:id', component: InsuranceComponent, },
-  { path: 'documents', component: DocumentTemplatesComponent, canActivate: [AdminAuthGuard]},
+  { path: 'documents', component: DocumentTemplatesComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'not-access', component: NotAccessComponent},

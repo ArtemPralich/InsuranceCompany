@@ -45,6 +45,15 @@ export class InsuranceListComponent implements OnInit {
     this.dialog.open(DialogElementsExampleDialog);
   }
 
+  calculateSum(): number {
+    let sum = 0;
+    for (let obj of this.insuranceRequests) {
+      console.log(obj.cost)
+      sum += obj.cost;
+    }
+    return sum;
+  }
+
   pageEvent: PageEvent;
 
   handlePageEvent(e: PageEvent) {

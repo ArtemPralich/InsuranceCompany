@@ -47,7 +47,7 @@ namespace InsuranceCompany.Controllers
 
                 var response = new FileStreamResult(fileStream, "application/pdf"); // Создать ответ HTTP с потоком файла и MIME типом "application/pdf"
 
-                response.FileDownloadName = "file.Title"; // Название файла для скачивания
+                response.FileDownloadName = "file.pdf"; // Название файла для скачивания
 
                 return response;
             }

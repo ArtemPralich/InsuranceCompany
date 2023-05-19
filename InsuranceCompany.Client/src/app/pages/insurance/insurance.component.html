@@ -4,7 +4,7 @@
       <div class="left-items">
         <input type="image" src="assets/pictures/arrow_back.svg" class="button-back" (click)="navigateToUrl()">
 
-        <a class="left-item reference-item">Личный код:  {{insuranceRequest.mainClient.personalCode}}</a>
+        <a class="left-item reference-item">Личный код:</a>
         <a class="left-item draft-item">
           <mat-icon [style.background-color]="insuranceRequest.insuranceStatus.color" class="circle-icon">
           </mat-icon>{{insuranceRequest.insuranceStatus.status}}</a>
