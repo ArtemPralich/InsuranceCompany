@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'not-access', component: NotAccessComponent},
-  { path: 'registration-employee', component: RegistationEmployeeComponent, canActivate: [AdminAuthGuard]},
+  { path: 'registration-employee', component: RegistationEmployeeComponent,},
   { path: 'request', component: RequestComponent, canActivate: [AuthGuard]},
   { path: 'room-client', component: RoomClientComponent, canActivate: [AuthGuard]},
   { path: 'survey-editor', component: SurveyEditorComponent},

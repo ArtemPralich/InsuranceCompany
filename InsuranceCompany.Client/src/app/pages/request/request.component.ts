@@ -48,6 +48,7 @@ export class RequestComponent {
     this.insuranceRequest.client.Name = "";
     this.insuranceRequest.client.Surname = "";
     this.insuranceRequest.client.PersonalCode = "";
+    this.insuranceRequest.client.address = "";
 
 
     this.insuranceRequestService.CreateInsuranceRequestByClient(this.insuranceRequest).subscribe((data)=>{
