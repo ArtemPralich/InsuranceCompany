@@ -82,7 +82,7 @@
                   
                           <mat-form-field appearance="fill" class="margin-form-field">
                             <mat-label>Введите адрес</mat-label>
-                            <input matInput placeholder="Адрес" required [disabled]="isDisabled">
+                            <input matInput placeholder="Адрес" required  [(ngModel)]="client.address" [ngModelOptions]="{standalone: true}"  [disabled]="isDisabled">
                           </mat-form-field>
                         </div>
 
@@ -90,7 +90,7 @@
                           <mat-form-field appearance="fill" class="margin-form-field">
                             <mat-label>Введите номер телефона</mat-label>
                             <span matPrefix>+375 &nbsp;</span>
-                            <input type="tel" matInput placeholder="29 291-70-93" required [disabled]="isDisabled">
+                            <input type="tel" matInput placeholder="29 291-70-93" [(ngModel)]="client.phoneNumber" [ngModelOptions]="{standalone: true}" required [disabled]="isDisabled">
                           </mat-form-field>
                         </div>
 

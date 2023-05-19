@@ -21,7 +21,7 @@ export class RequestComponent {
   selectedInsuranceRate: InsuranceRate;
   clientInfo: Client;
   insuranceAmount: number;
-  insuranceRequest : CreateInsuranceRequestDto;
+  insuranceRequest : CreateInsuranceRequestDto = new CreateInsuranceRequestDto();
 
   constructor(public insuranceRateService: InsuranceRateService, public clientService: ClientService,
     public insuranceRequestService: InsuranceRequestService, private toastr: ToastrService) 
@@ -43,12 +43,13 @@ export class RequestComponent {
   send(): void {
     console.log(this.selectedInsuranceRate.id);
     this.insuranceRequest = new CreateInsuranceRequestDto();
+    this.insuranceRequest.cost = this.insuranceAmount;
     this.insuranceRequest.insuranceRateId = this.selectedInsuranceRate.id;
     this.insuranceRequest.client = new CreateClientDto();
     this.insuranceRequest.client.Name = "";
     this.insuranceRequest.client.Surname = "";
     this.insuranceRequest.client.PersonalCode = "";
-    this.insuranceRequest.client.address = "";
+    this.insuranceRequest.benefits =  this.insuranceRequest.cost * (this.selectedInsuranceRate?.baseCoefficient || 0)
 
 
     this.insuranceRequestService.CreateInsuranceRequestByClient(this.insuranceRequest).subscribe((data)=>{

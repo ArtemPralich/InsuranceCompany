@@ -131,11 +131,11 @@ namespace InsuranceCompany.Controllers
             var insuranceRequest = _mapper.Map<InsuranceRequest>(insuranceRequestDto);
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var client = _repositoryManager.Client.GetById(user.ClientId ?? Guid.Empty, true);
-            _mapper.Map(insuranceRequestDto.Client, client);
+            //_mapper.Map(insuranceRequestDto.Client, client);
             insuranceRequest.InsuredPersons.Add(new Core.Models.InsuredPerson()
             {
                 InsuranceRequest = insuranceRequest,
-                ClientId = client.Id,
+                Client = client,
                 IsMainInsuredPerson = true
             });
             insuranceRequest.InsuranceStatus = _repositoryManager.InsuranceStatus.GetByStatus("Создано клиентом", true);
