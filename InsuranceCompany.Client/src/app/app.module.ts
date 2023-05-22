@@ -57,6 +57,7 @@ import { AgentAuthGuard } from './guards/agentAuth.guard';
 import { AuthenticationInterceptor } from './interceptor/AuthenticationInterceptor';
 import { NotAccessComponent } from './pages/not-access/not-access.component';
 import { RegistationEmployeeComponent } from './pages/registation-employee/registation-employee.component';
+import { RoomAdminComponent } from './pages/room-admin/room-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -86,7 +87,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     RegistationEmployeeComponent,
     DialogChangeEmailPopup,
     DialogChangePasswordPopup,
-    
+    RoomAdminComponent,
   ],
   imports: [
     BrowserModule,

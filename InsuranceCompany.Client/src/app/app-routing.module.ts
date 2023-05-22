@@ -16,6 +16,7 @@ import { RegistationEmployeeComponent } from './pages/registation-employee/regis
 import { AuthGuard } from './guards/auth.guard';
 import { AgentAuthGuard } from './guards/agentAuth.guard';
 import { AdminAuthGuard } from './guards/adminAuth.guard';
+import { RoomAdminComponent } from './pages/room-admin/room-admin.component';
 const routes: Routes = [
   { path: '', component: MainComponent},
   { path: 'login', component: LoginComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'registration-employee', component: RegistationEmployeeComponent,},
   { path: 'request', component: RequestComponent, canActivate: [AuthGuard]},
   { path: 'room-client', component: RoomClientComponent, canActivate: [AuthGuard]},
+  { path: 'room-admin', component: RoomAdminComponent},
   { path: 'survey-editor', component: SurveyEditorComponent},
   { path: '**', component: NotFoundComponent},
 ];
