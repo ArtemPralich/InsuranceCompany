@@ -1,5 +1,5 @@
 <div class="header">
-  <div class="container">
+  <div class="container" *ngIf="insuranceRequest">
     <div class="header-line">
       <div class="left-items">
         <input type="image" src="assets/pictures/arrow_back.svg" class="button-back" (click)="navigateToUrl()">
@@ -68,4 +68,4 @@
 
 <button class="save-button" (click)="save()">Сохранить</button>
 
-<button class="documents-button" *ngIf="!insuranceRequest.isReadyDocuments" (click)="documentGeneration()">Сгенерировать документы</button>
+<button class="documents-button" *ngIf="insuranceRequest && !insuranceRequest.isReadyDocuments" (click)="documentGeneration()">Сгенерировать документы</button>

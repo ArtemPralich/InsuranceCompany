@@ -4,5 +4,6 @@ export class QuestionType {
     constructor(id: string) {
         
         this.id = id;
+        this.text = "";
     }
 }

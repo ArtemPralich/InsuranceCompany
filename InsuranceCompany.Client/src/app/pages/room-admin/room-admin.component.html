@@ -1,0 +1,15 @@
+<div class="form-administrator">
+    <div class="form-container">
+      <form class="form-admin">
+        <img class="user-img" src="assets/pictures/user.png">
+        <div class="title-form">
+          Панель администратора
+        </div>
+        <button class="button-enter" [routerLink]="['/registration-employee']"><img src="assets/pictures/reg-emp.svg" class="img-enter">Регистрация сотрудника</button>
+        <button class="button-enter" [routerLink]="['/documents']"><img src="assets/pictures/document.svg" class="img-enter">Редактор документов</button>
+        <button class="button-enter" [routerLink]="['/survey-editor']"><img src="assets/pictures/survey.svg" class="img-enter">Редактор опросов</button>
+        <button class="button-enter button-exit"  (click)="logout()"><img src="assets/pictures/logout-dark.svg" class="img-enter">Выйти</button>
+      </form>
+      <img class="big-img" src="assets/pictures/admin.png">
+    </div>
+  </div>

@@ -1,0 +1,145 @@
+.form-container {
+    background: linear-gradient(to left, #324e88, #7da0c4, #aecae3);
+    min-height: 100vh;
+    padding: 0px 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+  
+.form-admin {
+    width: 300px;
+    padding: 50px 50px;
+    box-shadow: -15px 53px 68px -9px rgba(0, 0, 0, 0, 0.75);
+    border-radius: 0% 100px 0% 100px;
+    background-color: #fff;
+    text-align: center;
+}
+  
+.big-img {
+    width: 650px;
+}
+  
+.user-img {
+    width: 90px;
+    height: 90px;
+}
+  
+.title-form {
+    font-size: 28px;
+    font-weight: 100;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.button-enter {
+    background: none;
+    text-align: center;
+    color: #324e88;
+    border: 2px solid #324e88;
+    width: 250px;
+    height: 40px;
+    border-radius: 24px;
+    cursor: pointer;
+    margin: 15px auto;
+    font-size: 16px;
+}
+
+.button-enter:hover {
+    background-color: #d3dff4;
+    width: 260px;
+    transition: 0.25s;
+}
+
+.img-enter {
+    width: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.button-exit {
+    margin-top: 70px;
+    width: 150px;
+    border: 2px solid #7da0c4;
+}
+
+.button-exit:hover {
+    background-color: #d3dff4;
+    width: 160px;
+    transition: 0.25s;
+}
+
+@media (max-width: 1200px) {
+    .big-img {
+      width: 600px;
+    }
+}
+  
+@media (max-width: 1100px) {
+    .big-img {
+      width: 550px;
+    }
+}
+  
+@media (max-width: 1000px) {
+    .big-img {
+      display: none;
+    }
+  
+    .form-admin {
+      left: 0;
+      position: relative;
+      margin: 0 auto;
+    }
+  
+    .form-container {
+      padding: 0px;
+    }
+}
+  
+@media (max-width: 430px) {
+    .form-admin {
+      padding: 50px 20px;
+      border-radius: 0% 70px 0% 70px;
+    }
+
+    .button-enter {
+        width: 230px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .button-exit {
+        width: 130px;
+    }
+}
+  
+@media (max-width: 370px) {
+    .form-admin {
+      width: 250px;
+      padding: 50px 10px;
+    }
+  
+    .user-img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .button-enter {
+        width: 200px;
+        height: 40px;
+        font-size: 12px;
+    }
+
+    .button-exit {
+        width: 100px;
+    }
+
+    .title-form {
+        font-size: 24px;
+    }
+
+    .form-container {
+        padding: 0px 10px;
+    }
+}

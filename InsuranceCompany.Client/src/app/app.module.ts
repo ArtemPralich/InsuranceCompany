@@ -57,6 +57,7 @@ import { AgentAuthGuard } from './guards/agentAuth.guard';
 import { AuthenticationInterceptor } from './interceptor/AuthenticationInterceptor';
 import { NotAccessComponent } from './pages/not-access/not-access.component';
 import { RegistationEmployeeComponent } from './pages/registation-employee/registation-employee.component';
+import { RoomAdminComponent } from './pages/room-admin/room-admin.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { RegistationEmployeeComponent } from './pages/registation-employee/regis
     RegistationEmployeeComponent,
     DialogChangeEmailPopup,
     DialogChangePasswordPopup,
+    RoomAdminComponent,
   ],
   imports: [
     BrowserModule,
