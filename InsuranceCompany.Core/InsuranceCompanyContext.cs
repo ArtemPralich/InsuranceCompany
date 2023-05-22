@@ -60,7 +60,7 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
          => optionsBuilder
-        .UseSqlServer("Server=LAPTOP-U48V0IAA\\SQLEXPRESS;Database=InsuranceCompany1;Trusted_Connection=True;TrustServerCertificate=True;");
+        .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=InsuranceCompany1;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -77,7 +77,6 @@ public partial class InsuranceCompanyContext : IdentityDbContext<User>
 
             entity.ToTable("Agent");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
             entity.Property(e => e.DateOfStart).HasColumnType("datetime");
             entity.Property(e => e.Name)

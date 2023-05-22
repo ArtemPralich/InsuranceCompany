@@ -5,11 +5,14 @@ using InsuranceCompany.Infrastructure;
 using InsuranceCompany.Shared.ModelDto;
 using InsuranceCompany.Shared.ModelDto.Create;
 using InsuranceCompany.Shared.ModelDto.Update;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RazorLight;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -218,11 +221,52 @@ namespace InsuranceCompany.Controllers
         }
 
         [HttpGet("MoveToApprove/{id}", Name = "MoveToApprove")]
-        public IActionResult MoveToApprove(Guid id)
+        public async Task<IActionResult> MoveToApprove(Guid id)
         {
             var request = _repositoryManager.InsuranceRequest.GetById(id, true);
             request.InsuranceStatusId = new Guid("B74A9704-FF2C-4992-80B5-F22905091835");
             _repositoryManager.InsuranceRequest.Update(request);
+
+            var insurance = _repositoryManager.InsuranceRequest.GetById(id, true);
+            List<Template> templates = new List<Template>();
+            if (insurance != null && insurance.InsuranceRate != null)
+            {
+                templates = insurance.InsuranceRate.InsuranceRateTemplates.Select(x => x.Template).ToList();
+            }
+            var mainInsuredPerson = insurance.InsuredPersons.FirstOrDefault(ip => ip.IsMainInsuredPerson);
+            foreach (var template in templates)
+            {
+                var engine = new RazorLightEngineBuilder()
+                    .UseEmbeddedResourcesProject(typeof(InsuranceRequestDto))
+                    .UseMemoryCachingProvider()
+                    .Build();
+
+                string result = await engine.CompileRenderStringAsync("templateKey", template.Text, insurance);
+
+                MemoryStream memoryStream = new MemoryStream();
+                iTextSharp.text.Document document = new iTextSharp.text.Document();
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                document.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, new StringReader(result));
+                document.Close();
+
+                byte[] bytes = memoryStream.ToArray();
+                memoryStream.Close();
+
+                byte[] fileBytes = bytes;
+                string fileName = $"{template.Title}_{mainInsuredPerson.Client.PersonalCode ?? "notFound"}.pdf";
+                string filePath = AppDomain.CurrentDomain.BaseDirectory + $"\\{mainInsuredPerson.Client.PersonalCode ?? "notFound"}\\";
+                if (!Directory.Exists(filePath))
+                {
+                    Directory.CreateDirectory(filePath);
+                }
+                _repositoryManager.Document.Create(new Core.Document() { InsuranceRequestId = insurance.Id, TemplateId = template.Id, Title = fileName, Path = filePath });
+                // Сохраняем файл на диск
+                System.IO.File.WriteAllBytes(Path.Combine(filePath, fileName), fileBytes);
+            }
+            insurance.IsReadyDocuments = true;
+            _repositoryManager.InsuranceRequest.Update(insurance);
             _repositoryManager.Save();
             return NoContent();
         }

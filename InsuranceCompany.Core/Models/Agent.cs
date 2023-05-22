@@ -8,6 +8,8 @@ namespace InsuranceCompany.Core;
 
 public partial class Agent
 {
+
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
 
     public string? Name { get; set; }

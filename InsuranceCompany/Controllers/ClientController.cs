@@ -39,6 +39,77 @@ namespace InsuranceCompany.Controllers
 
             return Ok(client);
         }
+        [HttpGet]
+        [Route("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            string password = "";
+            {
+                Random random = new Random();
+                bool containsNumber = false;
+
+                while (!containsNumber || password.Length < 16)
+                {
+                    password = "";
+                    containsNumber = false;
+
+                    for (int i = 0; i < 16; i++)
+                    {
+                        char c = (char)random.Next(33, 127); // генерируем случайный символ из ASCII таблицы
+                        password += c;
+
+                        if (char.IsNumber(c))
+                        {
+                            containsNumber = true;
+                        }
+                    }
+                }
+            }
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _userManager.ResetPasswordAsync(user, token, password);
+                if (result.Succeeded)
+                {
+                    _repositoryManager.Email.SendEmailMessage(email, "Ваш пароль", "Мы генерировали для вас новый пароль: " + password);
+                    return NoContent();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Client")]
+        [Route("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword(string password)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _userManager.ResetPasswordAsync(user, token, password);
+                if (result.Succeeded)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         [HttpPost(Name = "CreateClient"), Authorize]
         public IActionResult Create(Client client)

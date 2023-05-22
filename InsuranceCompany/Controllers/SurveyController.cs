@@ -127,7 +127,8 @@ namespace InsuranceCompany.Controllers
             _repositoryManager.QuestionSurvey.DeleteRange(questionForDeleting);
             _repositoryManager.QuestionSurvey.CreateRange(questionSurvey);
             _repositoryManager.InsuranceSurvey.Update(survey);
-            _repositoryManager.Answer.CreateRange(answersForCreating);
+            //_repositoryManager.Save();
+            //_repositoryManager.Answer.CreateRange(answersForCreating);
             _repositoryManager.Answer.DeleteRange(answerForDeleting);
             _repositoryManager.InsuranceTypeSurvey.DeleteRange(insuranceRateTemplatesForDelete);
             _repositoryManager.InsuranceTypeSurvey.CreateRange(insuranceRateTemplatesForAdd);

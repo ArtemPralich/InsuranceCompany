@@ -10,16 +10,16 @@ namespace InsuranceCompany.MobileClient
         public App()
         {
             InitializeComponent();
-            if (App.Current.Properties.TryGetValue("token", out object buff))
-            {
+            //if (App.Current.Properties.TryGetValue("token", out object buff))
+            //{
             
-                InsurancesPage myPage = new InsurancesPage();
-                NavigationPage.SetHasNavigationBar(myPage, false);
-                var navigationPage = new NavigationPage(myPage);
-                NavigationPage.SetHasNavigationBar(navigationPage, false);
-                MainPage = navigationPage;
-            }
-            else
+            //    InsurancesPage myPage = new InsurancesPage();
+            //    NavigationPage.SetHasNavigationBar(myPage, false);
+            //    var navigationPage = new NavigationPage(myPage);
+            //    NavigationPage.SetHasNavigationBar(navigationPage, false);
+            //    MainPage = navigationPage;
+            //}
+            //else
             {
 
                 LoginPage myPage = new LoginPage();

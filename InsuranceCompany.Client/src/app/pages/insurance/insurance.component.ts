@@ -27,7 +27,7 @@ export class InsuranceComponent implements OnInit  {
     thirdCtrl: ['', Validators.required],
   });
   isLinear = false;
-
+  public requestIsProcess: boolean = false;
 
   constructor(public insuranceRequestService: InsuranceRequestService, private route: ActivatedRoute, 
     private _formBuilder: FormBuilder, public documentService: DocumentService, private router: Router, private toastr: ToastrService){
@@ -44,12 +44,16 @@ export class InsuranceComponent implements OnInit  {
       params => {
           id = params['id'];
       });
-
+    this.requestIsProcess = true;
     this.insuranceRequestService.GetInsuranceRequestById(id).subscribe(res => {
       this.insuranceRequest = res;
       this.insuranceRequest.dateOfStart = new Date(res.dateOfStart);
       this.insuranceRequest.dateOfEnd = new Date(res.dateOfEnd);
       console.log(this.insuranceRequest);
+      this.requestIsProcess = false;
+    }, error =>{
+      
+      this.requestIsProcess = false;
     });
   }
 
@@ -64,10 +68,12 @@ export class InsuranceComponent implements OnInit  {
   }
 
   moveToSign(){
+    this.requestIsProcess = true;
     this.insuranceRequestService.MoveToSign(this.insuranceRequest).subscribe(res => {
       this.toastr.success('Успешно подписано', 'Успешно!');
       this.toggleSign();
       this.dataLoad();
+      
     },
     error => {
       this.toastr.error('Ошибка подписи', 'Ошибка!');
@@ -75,6 +81,7 @@ export class InsuranceComponent implements OnInit  {
   }
 
   moveToApprove(){
+    this.requestIsProcess = true;
     this.insuranceRequestService.MoveToApprove(this.insuranceRequest).subscribe(res => {
       this.toastr.success('Успешно подтверждено', 'Успешно!');
       this.dataLoad();
@@ -85,6 +92,8 @@ export class InsuranceComponent implements OnInit  {
   }
 
   moveToErrorState(){
+    
+    this.requestIsProcess = true;
     this.insuranceRequestService.MoveToErrorState(this.insuranceRequest).subscribe(res => {
       this.toastr.success('Успешно отменено', 'Успешно!');
       this.dataLoad();
