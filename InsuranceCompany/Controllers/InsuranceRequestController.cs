@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using RazorLight;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace InsuranceCompany.Controllers
@@ -85,6 +86,30 @@ namespace InsuranceCompany.Controllers
             if (insuranceRequest == null)
             {
                 ModelState.TryAddModelError("request", "Страховой запрос не сохранен");
+            }
+            else
+            {
+                var mainClient = insuranceRequest.InsuredPersons.Where(p => p.IsMainInsuredPerson).FirstOrDefault();
+                bool isValidEmail = Regex.IsMatch(mainClient.Client.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+                if (!isValidEmail)
+                {
+
+                    ModelState.TryAddModelError("InsuredPerson", "Некоректный email");
+                }
+
+
+                string pattern = "[A-Za-z]{2}\\d{7}";
+                bool isMatch = Regex.IsMatch(mainClient.Client.PersonalCode, pattern);
+
+
+                if (string.IsNullOrWhiteSpace(mainClient.Client.Name)){
+
+                    ModelState.TryAddModelError("InsuredPerson", "Некоректное имя");
+                }
+                if (string.IsNullOrWhiteSpace(mainClient.Client.Surname)){
+
+                    ModelState.TryAddModelError("InsuredPerson", "Некоректная фамилия");
+                }
             }
             if (ModelState.ErrorCount > 0)
             {

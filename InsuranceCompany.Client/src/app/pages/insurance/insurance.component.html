@@ -59,7 +59,7 @@
     </app-insurance-bank-data>
   </mat-tab>
 
-  <mat-tab label="Документы">
+  <mat-tab label="Документы" *ngIf="insuranceRequest.insuranceStatus.isDisabledForms">
     <app-insurance-documents  *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest">
       
     </app-insurance-documents>
@@ -68,7 +68,7 @@
 
 <button class="save-button" (click)="save()">Сохранить</button>
 
-<!-- <button class="documents-button" *ngIf="insuranceRequest && !insuranceRequest.isReadyDocuments" (click)="documentGeneration()">Сгенерировать документы</button> -->
+<button class="documents-button" *ngIf="insuranceRequest" (click)="validation()">Валидация</button>
 
 <div class="mat-spinner-overlay" *ngIf="requestIsProcess">
   <mat-spinner></mat-spinner>

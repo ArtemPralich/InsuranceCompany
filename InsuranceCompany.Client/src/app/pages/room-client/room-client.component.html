@@ -104,17 +104,31 @@
                 <div *ngIf="condition === 2">
                   <div class="form-line">
                     <div class="content-title">Страховые запросы</div>
-
+                      
                     <button mat-raised-button color="primary" class="button-form" (click)="sendRequest()">Отправить запрос</button>
-                </div>
+                  </div>
+                  <mat-accordion *ngFor="let item of client.insuranceRequests">
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                    (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{item.insuranceRate.title}}
+                            </mat-panel-title>
+                            <!-- <mat-panel-description>
+                                Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                            </mat-panel-description> -->
+                        </mat-expansion-panel-header>
+                        
+                    </mat-expansion-panel>
+                  </mat-accordion>
                 </div>
 
                 <div *ngIf="condition === 3">
                     <div class="content-title">Документы</div>
                     <mat-list>
-                        <mat-list-item *ngFor="let document of documents" (click)="GetFiles()">
+                        <mat-list-item *ngFor="let document of documents"  (click)="GetFile(document)">
                             <mat-icon matListItemIcon>picture_as_pdf</mat-icon>
-                            <div matListItemTitle class="mat-mdc-list-item-icon"><a class="item-doc" href="{{document.url}}" download>{{document.name}}</a></div>
+                            <div matListItemTitle class="mat-mdc-list-item-icon"><a class="item-doc" href="{{document.path}}" download>{{document.title}}</a></div>
                           </mat-list-item>
                     </mat-list>
                 </div>

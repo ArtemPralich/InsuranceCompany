@@ -111,6 +111,18 @@ export class InsuranceComponent implements OnInit  {
     this.router.navigateByUrl('insurances');
   }
 
+  validation() {
+    this.requestIsProcess = true;
+    this.insuranceRequestService.Validate(this.insuranceRequest.id).subscribe(res => {
+      this.toastr.success('Успешно отменено', 'Успешно!');
+      this.requestIsProcess = false;
+    },
+    error => {
+      this.toastr.error('Проверьте данные', 'Найдены ошибки!');
+      this.requestIsProcess = false;
+    });
+  }
+
   toggleSign() {
     this.sign = true;
   }

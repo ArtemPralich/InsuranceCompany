@@ -4,6 +4,8 @@ import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { saveAs } from 'file-saver';
 import { Client } from "../models/Client";
+import { PrivateClientInfo } from "../models/PrivateClientInfo";
+
 
 @Injectable()
 export class ClientService {
@@ -16,9 +18,9 @@ export class ClientService {
         return this.http.get<Client[]>(`${this.pathBase}`);
     }
 
-    public GetClientPrivateInfo():Observable<Client>{
+    public GetClientPrivateInfo():Observable<PrivateClientInfo>{
 
-        return this.http.get<Client>(`${this.pathBase}`+ "/GetClientPrivateInfo");
+        return this.http.get<PrivateClientInfo>(`${this.pathBase}`+ "/GetClientPrivateInfo");
     }
 
     public CreateClient(client : Client):Observable<Client> { 

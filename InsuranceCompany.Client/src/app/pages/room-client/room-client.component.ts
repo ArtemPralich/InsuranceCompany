@@ -4,18 +4,12 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Client } from 'src/app/models/Client';
+import { Document } from 'src/app/models/Document';
+import { PrivateClientInfo } from 'src/app/models/PrivateClientInfo';
 import { AuthService } from 'src/app/service/AuthService';
 import { ClientService } from 'src/app/service/ClientService';
+import { DocumentService } from 'src/app/service/DocumentService';
 
-export class Document {
-  name: string;
-  url: string;
-
-  constructor(name: string, url: string) {
-    this.name = name;
-    this.url = url;
-  }
-}
 
 
 @Component({
@@ -24,22 +18,16 @@ export class Document {
   styleUrls: ['./room-client.component.css']
 })
 export class RoomClientComponent {
+  panelOpenState = false;
   condition: number = 1;
   isDisabled = true;
-  client: Client = new Client();
+  client: PrivateClientInfo = new PrivateClientInfo();
 
-  constructor(public dialog: MatDialog, private router: Router, public auth: AuthService, public clientService: ClientService, private toastr: ToastrService, private el: ElementRef) {}
+  constructor(public dialog: MatDialog, private router: Router, public documentService: DocumentService,  
+    public auth: AuthService, public clientService: ClientService, 
+    private toastr: ToastrService, private el: ElementRef) {}
 
-  documents: Document[] = [
-    {
-      name: 'привет.pdf',
-      url: "assets/doc/привет.pdf",
-    },
-    {
-      name: 'hi.pdf',
-      url: "assets/doc/hi.pdf",
-    },
-  ];
+  documents: Document[] = [];
 
   ngOnInit(){
     this.getClientInfo();
@@ -48,6 +36,7 @@ export class RoomClientComponent {
   getClientInfo() {
     this.clientService.GetClientPrivateInfo().subscribe(res => {
       this.client = res;
+      this.documents = this.client.insuranceRequests.flatMap(item => item.documents);
       console.log(this.client);
     });
   }
@@ -101,8 +90,8 @@ export class RoomClientComponent {
     this.auth.logout();
   }
 
-  GetFiles(){
-    this.auth.downloadFile();
+  public GetFile(document:Document){
+    this.documentService.GetFileById(document.id, document.title);
   }
 
   toggleOne(): void {

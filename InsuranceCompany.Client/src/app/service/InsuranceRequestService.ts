@@ -25,6 +25,10 @@ export class InsuranceRequestService {
         return this.http.get<InsuranceRequest>(`${this.pathBase}`+ "/MoveToErrorState/" + insuranceRequest.id);
     }
 
+    public Validate(id:string):Observable<any[]> {
+        
+        return this.http.get<any[]>(`${this.pathBase}`+ "/Validate?id=" + id);
+    }
 
     public GetAllInsuranceRequests():Observable<InsuranceRequest[]> {
         
