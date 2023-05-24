@@ -1,4 +1,5 @@
 ﻿using InsuranceCompany.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,12 @@ namespace InsuranceCompany.Infrastructure.Repositories
         {
             return FindByCondition(x => x.Id == Id,
                 trackChanges).FirstOrDefault();
+        }
+
+        public Client GetPrivateInfoById(Guid Id, bool trackChanges)
+        {
+            return FindByCondition(x => x.Id == Id, trackChanges)
+                .Include(i => i.InsuredPersons).ThenInclude(i => i.InsuranceRequest).ThenInclude(i => i.Documents).FirstOrDefault();
         }
     }
 }

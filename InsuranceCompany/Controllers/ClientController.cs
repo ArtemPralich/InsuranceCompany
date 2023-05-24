@@ -1,9 +1,11 @@
 using InsuranceCompany.Core;
 using InsuranceCompany.Core.Models;
 using InsuranceCompany.Infrastructure;
+using InsuranceCompany.Shared.ModelDto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace InsuranceCompany.Controllers
 {
@@ -14,7 +16,8 @@ namespace InsuranceCompany.Controllers
         private readonly ILogger<ClientController> _logger;
         private readonly UserManager<User> _userManager;
         private readonly IRepositoryManager _repositoryManager;
-        public ClientController(ILogger<ClientController> logger, IRepositoryManager repositoryManager, UserManager<User> userManager)
+        public ClientController(ILogger<ClientController> logger, IRepositoryManager repositoryManager, 
+            UserManager<User> userManager)
         {
             _logger = logger;
             _repositoryManager = repositoryManager;
@@ -36,8 +39,28 @@ namespace InsuranceCompany.Controllers
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var client = _repositoryManager.Client.GetById(user.ClientId ?? Guid.Empty, false);
+            var insuredPerson = _repositoryManager.InsuredPerson
+                .FindByCondition(i => i.ClientId == user.ClientId && i.IsMainInsuredPerson, false)
+                .Include(i => i.InsuranceRequest).ThenInclude(i => i.InsuranceStatus)
+                .Include(i => i.InsuranceRequest).ThenInclude(i => i.InsuranceRate)
+                .Include(i => i.InsuranceRequest).ThenInclude(i => i.Documents).ToList();
 
-            return Ok(client);
+            //client.InsuredPersons = insuredPerson;
+            var clientDto = new PrivateClientInfo()
+            {
+                Id = client.Id,
+                Name = client.Name,
+                Surname = client.Surname,
+                PersonalCode = client.PersonalCode,
+                PhoneNumber = client.PhoneNumber,
+                Email = client.Email,
+                Address = client.Address,
+                Gender = client.Gender,
+                DateOfBirth = client.DateOfBirth,
+                InsuranceRequests = insuredPerson.Select(i => i.InsuranceRequest).ToList()
+            };
+
+            return Ok(clientDto);
         }
         [HttpGet]
         [Route("ResetPassword")]
@@ -89,16 +112,58 @@ namespace InsuranceCompany.Controllers
         [HttpPost]
         [Authorize(Roles = "Client")]
         [Route("UpdatePassword")]
-        public async Task<IActionResult> UpdatePassword(string password)
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordDto passwordDto)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user != null)
             {
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var result = await _userManager.ResetPasswordAsync(user, token, password);
+                if (await _userManager.CheckPasswordAsync(user, passwordDto.OldPassword))
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var result = await _userManager.ResetPasswordAsync(user, token, passwordDto.Password);
+                    if (result.Succeeded)
+                    {
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
+                }
+                else
+                {
+                    return BadRequest("Неверный пароль");
+                }
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Client")]
+        [Route("UpdateEmail")]
+        public async Task<IActionResult> UpdateEmail(string email)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (user != null)
+            {
+                var token = await _userManager.GenerateChangeEmailTokenAsync(user, email);
+                var result = await _userManager.ChangeEmailAsync(user, email, token);
+
                 if (result.Succeeded)
                 {
-                    return NoContent();
+                    user.UserName = email;
+                    var result1 = await _userManager.UpdateAsync(user);
+                    if (result1.Succeeded)
+                    {
+                        return NoContent();
+                    }
+                    else
+                    {
+                        return BadRequest();
+                    }
                 }
                 else
                 {
