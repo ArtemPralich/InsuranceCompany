@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ActivatedRoute, Router} from '@angular/router';
 import { Client } from 'src/app/models/Client';
 import { RegistrationClient } from 'src/app/models/auth/RegistrationClient';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -21,8 +23,7 @@ export class LoginComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   public statusAuth: boolean = true;
 
-  constructor(private http:HttpClient, private router: Router, public auth: AuthService, 
-    public clientService: ClientService){
+  constructor(public dialog: MatDialog,private http:HttpClient, private router: Router, public auth: AuthService, public clientService: ClientService){
       
   }
   login(){
@@ -45,11 +46,45 @@ export class LoginComponent {
           else if(header == "Agent")
             this.router.navigateByUrl("/insurances");
           else if(header == "Administrator")
-            this.router.navigateByUrl("/documents");
+            this.router.navigateByUrl("/room-admin");
         }
     }, error =>{
         this.statusAuth = false;
     });
     
-  }    
+  } 
+  
+  openDialogResetPassword(){
+    const dialogRef = this.dialog.open(DialogResetPasswordPopup);
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+  }
+}
+
+@Component({
+  selector: 'ResetPassword',
+  templateUrl: 'ResetPassword.html',
+  styleUrls: ['./login.component.css']
+})
+export class DialogResetPasswordPopup {
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  client: Client = new Client();
+
+  constructor(private router: Router, public auth: AuthService, public dialogRef: MatDialogRef<DialogResetPasswordPopup>, public clientService: ClientService, private toastr: ToastrService) {}
+  
+  close(){
+    this.dialogRef.close();
+  }
+
+  restore(){
+    this.clientService.GetClientResetPassword(this.client.email).subscribe(res => {
+      this.toastr.success('Пароль отправлен на почту', 'Успешно!');
+      this.close()
+    },
+    error => {
+      this.toastr.error('Пользователь не найден', 'Ошибка!');
+    });
+  }
 }

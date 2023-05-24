@@ -4,7 +4,7 @@
       <div class="left-items">
         <input type="image" src="assets/pictures/arrow_back.svg" class="button-back" (click)="navigateToUrl()">
 
-        <a class="left-item reference-item">Личный код:</a>
+        <a class="left-item">Личный код: {{insuranceRequest.mainClient.personalCode}}</a>
         <a class="left-item draft-item" >
           <mat-icon  [style.background-color]="insuranceRequest.insuranceStatus.color" class="circle-icon">
           </mat-icon>{{insuranceRequest.insuranceStatus.status}}</a>
@@ -17,8 +17,8 @@
         <button class="button-dup"><img class="img-left-item" src="assets/pictures/duplicate.svg">Duplicate</button>
         <button *ngIf="!insuranceRequest.insuranceStatus.isDisabledForms" class="button-sign" (click)="moveToApprove()">Подтвердить</button>
         
-        <button class="button-sign" *ngIf="insuranceRequest.insuranceStatus.isDisabledForms && !sign" (click)="moveToErrorState()">Отмена</button>
-        <button class="button-sign" *ngIf="insuranceRequest.insuranceStatus.isDisabledForms && !sign" (click)="moveToSign()">Подписать</button>
+        <button class="button-sign" *ngIf="insuranceRequest.insuranceStatus.isDisabledForms && insuranceRequest.insuranceStatus.status !== 'Подписано'" (click)="moveToErrorState()">Отмена</button>
+        <button class="button-sign" *ngIf="insuranceRequest.insuranceStatus.isDisabledForms && insuranceRequest.insuranceStatus.status !== 'Подписано'" (click)="moveToSign()">Подписать</button>
       </div>
     </div>
 
@@ -27,8 +27,8 @@
     </div>
 
     <div class="center-items">
-      <a class="center-item">Tel: +375292917093</a>
-      <a class="center-item">Email: natasha@gmail.com</a>
+      <a class="center-item">Тел.: +375{{insuranceRequest.mainClient.phoneNumber}}</a>
+      <a class="center-item">Почта: {{insuranceRequest.mainClient.email}}</a>
       <a class="center-item">{{insuranceRequest.insuranceRate.title}}</a>
       <a class="left-item" href="aaa">Change</a>
     </div>

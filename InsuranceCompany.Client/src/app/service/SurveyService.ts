@@ -42,6 +42,6 @@ export class SurveyService {
 
     public DeleteInsuranceSurvey(id: string):Observable<any>{
 
-        return this.http.delete<any>(`${this.pathBase}/${id}`);
+        return this.http.delete<any>(`${this.pathBase}?insuranceStatusId=` + id);
     }
 }

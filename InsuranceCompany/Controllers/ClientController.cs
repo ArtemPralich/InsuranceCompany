@@ -12,11 +12,11 @@ namespace InsuranceCompany.Controllers
     [ApiController]
     [Route("[controller]")]
     public class ClientController : ControllerBase
-    {    
+    {
         private readonly ILogger<ClientController> _logger;
         private readonly UserManager<User> _userManager;
         private readonly IRepositoryManager _repositoryManager;
-        public ClientController(ILogger<ClientController> logger, IRepositoryManager repositoryManager, 
+        public ClientController(ILogger<ClientController> logger, IRepositoryManager repositoryManager,
             UserManager<User> userManager)
         {
             _logger = logger;
@@ -112,7 +112,7 @@ namespace InsuranceCompany.Controllers
         [HttpPost]
         [Authorize(Roles = "Client")]
         [Route("UpdatePassword")]
-        public async Task<IActionResult> UpdatePassword(UpdatePasswordDto passwordDto)
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdatePasswordDto passwordDto)
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user != null)
