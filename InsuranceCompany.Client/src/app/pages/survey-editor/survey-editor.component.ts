@@ -68,6 +68,17 @@ export class SurveyEditorComponent  implements OnInit {
     });
   }
 
+  deleteSurvey(){
+    console.log(this.selectedSurvey);
+    this.insuranceSurveyService.DeleteInsuranceSurvey(this.selectedSurvey.id).subscribe((data) => {
+      this.toastr.success('Успешно удалено', 'Успешно!');
+      this.loadSurveys();
+    },
+        error => {
+          this.toastr.error('Ошибка удаления', 'Ошибка!');
+      });
+  }
+
   deleteAnswers(question: Question) {
     console.log(question.selectedAnswersForDelete);
     const filteredAnswers = question.answers.filter(answer => !question.selectedAnswersForDelete.includes(answer));

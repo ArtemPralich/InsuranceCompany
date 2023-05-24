@@ -16,8 +16,17 @@
         </div>
 
         <diV class="editor-container">
-            <div class="editor-title">{{selectedSurvey.title}}</div>
-            <div>
+            <div class="line-survey">
+                <div class="editor-title">{{selectedSurvey.title}}</div>
+
+                <div class="line-item">
+                    <input type="image" src="assets/pictures/delete.svg" class="button-header" (click)="deleteSurvey()">
+                    <div>Удалить опрос</div>
+                </div>
+            </div>
+           
+            
+            <div class="select">
                 <mat-form-field appearance="fill" class="template-select">
                     <mat-label>Тип страхового запроса</mat-label>
                     <mat-select [(value)]="selectedInsuranceRate" [compareWith]="compareRates" multiple>
@@ -28,7 +37,10 @@
 
             <div *ngFor="let question of selectedSurvey.questions">
                 <div class="container-question">
-                    <div class="text-question">{{question.text}}</div>
+                    <div class="line-survey">
+                        <div class="text-question">{{question.text}}</div>
+                        <input type="image" src="assets/pictures/delete.svg" class="button-header">
+                    </div>
                     <mat-selection-list color="primary" #answers [(ngModel)]="question.selectedAnswersForDelete">
                         <mat-list-option color="primary" *ngFor="let answer of question.answers" [value]="answer">
                           {{answer.questionAnswer}}

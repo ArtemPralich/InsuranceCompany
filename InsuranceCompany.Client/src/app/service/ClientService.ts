@@ -26,6 +26,16 @@ export class ClientService {
         return this.http.get<Client>(`${this.pathBase}`+ "/ResetPassword?email=" + email);
     }
 
+    public UpdateEmail(email: string):Observable<Client>{
+
+        return this.http.post<Client>(`${this.pathBase}`+ "/UpdateEmail?email=" + email, email);
+    }
+
+    public UpdatePassword(password: string, oldPassword: string):Observable<Client>{
+
+        return this.http.post<Client>(`${this.pathBase}`+ "/UpdatePassword", { password, oldPassword } );
+    }
+
     public CreateClient(client : Client):Observable<Client> { 
 
         return this.http.post<Client>(`${this.pathBase}`, client);

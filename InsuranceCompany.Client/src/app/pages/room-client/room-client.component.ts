@@ -1,6 +1,6 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Client } from 'src/app/models/Client';
@@ -53,9 +53,9 @@ export class RoomClientComponent {
   }
 
   save(){
-    // if(this.client.dateOfBirth.getHours() === 0){
-    //   console.log(this.client.dateOfBirth);
-    //   this.client.dateOfBirth.setHours(23);
+    // if(this.client.dateOfBirth.getDate()){
+    //    console.log(this.client.dateOfBirth);
+    //    this.client.dateOfBirth.setHours(23);
     // }
 
     this.clientService.UpdateClient(this.client).subscribe(res => {
@@ -133,16 +133,23 @@ export class RoomClientComponent {
   styleUrls: ['./room-client.component.css']
 })
 export class DialogChangeEmailPopup {
+  email: string;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
-  constructor(private router: Router, public auth: AuthService, public dialogRef: MatDialogRef<DialogChangeEmailPopup>) {}
+  constructor(private router: Router, public auth: AuthService, public dialogRef: MatDialogRef<DialogChangeEmailPopup>, public clientService: ClientService, private toastr: ToastrService) {}
   
   close(){
     this.dialogRef.close();
   }
 
-  create(){
-    
+  save(){
+    this.clientService.UpdateEmail(this.email).subscribe(res => {
+      this.toastr.success('Успешно сохранено', 'Успешно!');
+      this.close()
+    },
+    error => {
+      this.toastr.error('Ошибка сохранения', 'Ошибка!');
+    });
   }
 }
 
@@ -154,17 +161,27 @@ export class DialogChangeEmailPopup {
 export class DialogChangePasswordPopup {
   newPassword: string;
   confirmPassword: string;
+  oldPassword: string;
   passwordsMatch: boolean = true;
 
-  constructor(private router: Router, public auth: AuthService, public dialogRef: MatDialogRef<DialogChangePasswordPopup>) {}
+  constructor(private router: Router, public auth: AuthService, public dialogRef: MatDialogRef<DialogChangePasswordPopup>, public clientService: ClientService, private toastr: ToastrService) {}
   
   close(){
     this.dialogRef.close();
   }
 
-  create(){
+  save(){
     this.onConfirmPasswordChange();
 
+    if(this.passwordsMatch){
+      this.clientService.UpdatePassword(this.newPassword, this.oldPassword).subscribe(res => {
+        this.toastr.success('Успешно сохранено', 'Успешно!');
+        this.close()
+      },
+      error => {
+        this.toastr.error('Ошибка сохранения', 'Ошибка!');
+      });
+    }
   }
 
   onConfirmPasswordChange() {

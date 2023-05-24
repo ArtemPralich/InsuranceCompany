@@ -63,12 +63,6 @@
     flex: 1;
 }
 
-.line-item {
-    display: flex;
-    margin-right: 50px;
-    align-items: center;
-}
-
 .button-add {
     width: 40px;
     margin-right: 10px;
@@ -95,4 +89,35 @@
 
 .delete-button{
     margin-right: 5px;
+}
+
+.template-select {
+    width: 400px;
+    padding-bottom: 40px;
+    margin-top: 10px;
+}
+
+.select {
+    display: flex;
+    justify-content: center;
+}
+
+.line-survey {
+    display: flex;
+    justify-content: space-between;
+}
+
+.line-item {
+    display: flex;
+    align-items: center;
+}
+
+.button-header {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.button-header:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
 }
