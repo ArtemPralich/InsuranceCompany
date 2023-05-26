@@ -110,15 +110,66 @@
                   <mat-accordion *ngFor="let item of client.insuranceRequests">
                     <mat-expansion-panel (opened)="panelOpenState = true"
                     (closed)="panelOpenState = false">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
+                        <mat-expansion-panel-header class="header-panel">
+                            <mat-panel-title class="line-title">
                                 {{item.insuranceRate.title}}
+                                <div class="status">
+                                  <mat-icon [style.background-color]="item.insuranceStatus.color" class="circle-icon"></mat-icon>
+                                    {{item.insuranceStatus.status}}
+                                </div>
                             </mat-panel-title>
+                            
                             <!-- <mat-panel-description>
                                 Currently I am {{panelOpenState ? 'open' : 'closed'}}
                             </mat-panel-description> -->
                         </mat-expansion-panel-header>
-                        
+                        <div class="container-panel">
+
+                          <div class="line-panel">
+                            <div class="item-panel">
+                              <div>Желаемые бенефиты</div>
+                              <div class="item-value">{{item.benefits}} byn</div>
+                            </div>
+                            <div class="item-panel">
+                              <div>Общая сумма взносов</div>
+                              <div class="item-value">{{item.cost}} byn</div>
+                            </div>
+                          </div>
+
+                          <div class="line-panel">
+                            <div class="item-panel">
+                              <div>Базовый взнос</div>
+                              <div class="item-value">{{item.basePayment}} byn</div>
+                            </div>
+                            <div class="item-panel">
+                              <div>Единичный взнос</div>
+                              <div class="item-value">{{item.unitPayment}} byn</div>
+                            </div>
+                          </div>
+
+                          <div class="line-panel">
+                            <div class="item-panel">
+                              <div>Количество выплат в год</div>
+                              <div class="item-value">{{item.insuranceRate.countPaymentsInYear}}</div>
+                            </div>
+                            <div class="item-panel">
+                              <div>Количество лет</div>
+                              <div class="item-value">{{item.insuranceRate.countYears}}</div>
+                            </div>
+                          </div>
+
+                          <div class="line-panel">
+                            <div class="item-panel">
+                              <div>Начало действия договора</div>
+                              <div class="item-value">{{item.dateOfStart | date: 'dd-MM-yyyy' }}</div>
+                            </div>
+                            <div class="item-panel">
+                              <div>Конец действия договора</div>
+                              <div class="item-value">{{item.dateOfEnd | date: 'dd-MM-yyyy' }}</div>
+                            </div>
+                          </div>
+
+                        </div>
                     </mat-expansion-panel>
                   </mat-accordion>
                 </div>
