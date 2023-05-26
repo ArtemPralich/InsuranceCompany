@@ -106,6 +106,11 @@ export class SurveyEditorComponent  implements OnInit {
       this.loadSurveys();
     });
   }
+  
+  deleteQuestion(question: Question, survey: InsuranceSurvey) {
+    const index = survey.questions.indexOf(question);
+    survey.questions.splice(index, 1);
+  }
 
   choiceSurvey(survey: InsuranceSurvey) {
     this.selectedInsuranceRate = [];

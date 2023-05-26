@@ -46,5 +46,25 @@ namespace InsuranceCompany.MobileClient.Services
             return JsonSerializer.Deserialize<AuthentificatedUser>(
                 await response.Content.ReadAsStringAsync(), options);
         }
+
+        public async Task<AuthentificatedUser> Regitration(RegistrationUser user)
+        {
+
+            user.UserName = user.Email;
+            HttpClientHandler clientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+
+            HttpClient client = new HttpClient(clientHandler);
+            var response = await client.PostAsync(Url + "RegisterClient", new StringContent(
+                    JsonSerializer.Serialize(user),
+                    Encoding.UTF8, "application/json"));
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+
+            return JsonSerializer.Deserialize<AuthentificatedUser>(
+                await response.Content.ReadAsStringAsync(), options);
+        }
     }
 }

@@ -15,7 +15,8 @@ namespace InsuranceCompany.Shared.ModelDto
 
         public string? Description { get; set; }
 
-       public virtual ICollection<QuestionDto> Questions { get; } = new List<QuestionDto>();
+        public bool? IsDeactivated { get; set; }
+        public virtual ICollection<QuestionDto> Questions { get; } = new List<QuestionDto>();
        public virtual ICollection<InsuranceRateDto> InsuranceRates { get; } = new List<InsuranceRateDto>();
     }
 }

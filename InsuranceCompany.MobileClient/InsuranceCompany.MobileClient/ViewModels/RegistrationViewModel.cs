@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -15,7 +16,7 @@ namespace InsuranceCompany.MobileClient.ViewModels
     {
         public INavigation Navigation { get; set; }
         AuthService authService = new AuthService();
-        User user;
+        RegistrationUser user;
         public string Email
         {
             get { return user.Email; }
@@ -50,17 +51,31 @@ namespace InsuranceCompany.MobileClient.ViewModels
             get { return _confirmPassword; }
             set
             {
-                _confirmPassword = value;
+                user.ConfirmPassword = value;
                 OnPropertyChanged("ConfirmPassword");
             }
         }
 
         public ICommand GoToLoginCommand { protected set; get; }
+        public ICommand RegitrationCommand { protected set; get; }
 
         public RegistrationViewModel()
         {
-            user = new User() { Email = "", Password = "" };
+            user = new RegistrationUser() { Email = "", Password = "", ConfirmPassword = "", UserName = "" };
             GoToLoginCommand = new Command(GoToLogin);
+            RegitrationCommand = new Command( async () => await Registration());
+        }
+        private async Task Registration()
+        {
+            var a = await authService.Regitration(user);
+            if (a != null)
+            {
+                App.Current.Properties.Add("token", a.Token);
+                App.Current.Properties.Add("role", "Client");
+                App.Current.SavePropertiesAsync();
+
+                Application.Current.MainPage.Navigation.PushAsync(new InsurancesPage());
+            }
         }
         private void GoToLogin()
         {

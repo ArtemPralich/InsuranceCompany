@@ -1,7 +1,7 @@
 <div class="content">
     <mat-accordion *ngFor="let item of insuranceRequest.insuranceRate.insuranceTypeSurveys">
         <mat-expansion-panel (opened)="panelOpenState = true"
-         (closed)="panelOpenState = false">
+         (closed)="panelOpenState = false" *ngIf="item.insuranceSurvey.isDeactivated == undefined || item.insuranceSurvey.isDeactivated == false">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{item.insuranceSurvey.title}}

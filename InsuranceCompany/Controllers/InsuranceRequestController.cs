@@ -90,7 +90,7 @@ namespace InsuranceCompany.Controllers
             else
             {
                 var mainClient = insuranceRequest.InsuredPersons.Where(p => p.IsMainInsuredPerson).FirstOrDefault();
-                bool isValidEmail = Regex.IsMatch(mainClient.Client.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+                bool isValidEmail = Regex.IsMatch(mainClient.Client.Email ?? "", @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
                 if (!isValidEmail)
                 {
 
@@ -99,7 +99,7 @@ namespace InsuranceCompany.Controllers
 
 
                 string pattern = "[A-Za-z]{2}\\d{7}";
-                bool isMatch = Regex.IsMatch(mainClient.Client.PersonalCode, pattern);
+                bool isMatch = Regex.IsMatch(mainClient.Client.PersonalCode ?? "", pattern);
 
 
                 if (string.IsNullOrWhiteSpace(mainClient.Client.Name)){
@@ -135,6 +135,10 @@ namespace InsuranceCompany.Controllers
             var rates = insRate.InsuranceTypeSurveys.ToList();
             foreach (var rate in rates)
             {
+                if (rate.InsuranceSurvey.IsDeactivated ?? false)
+                {
+                    continue;
+                }
                 foreach (var questionSurvey in rate.InsuranceSurvey.QuestionSurveys)
                 {
                     insuranceRequest.AnswerValues.Add(new AnswerValue()
@@ -172,6 +176,10 @@ namespace InsuranceCompany.Controllers
             var rates = insRate.InsuranceTypeSurveys.ToList();
             foreach (var rate in rates)
             {
+                if (rate.InsuranceSurvey.IsDeactivated ?? false)
+                {
+                    continue;
+                }
                 foreach (var questionSurvey in rate.InsuranceSurvey.QuestionSurveys)
                 {
                     insuranceRequest.AnswerValues.Add(new AnswerValue()

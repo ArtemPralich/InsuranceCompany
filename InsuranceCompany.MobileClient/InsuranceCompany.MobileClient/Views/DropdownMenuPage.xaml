@@ -25,7 +25,11 @@
                          VerticalOptions="Center"
                          Padding="20 ,20, 0, 0">
                 <Label Text="Меню" FontSize="20" HorizontalOptions="Center"></Label>
-                <Label Text="Выйти"></Label>
+                <Label Text="Выйти">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding  LogOutCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

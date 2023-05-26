@@ -39,7 +39,7 @@
                 <div class="container-question">
                     <div class="line-survey">
                         <div class="text-question">{{question.text}}</div>
-                        <input type="image" src="assets/pictures/delete.svg" class="button-header">
+                        <input type="image" src="assets/pictures/delete.svg" (click)="deleteQuestion(question, selectedSurvey)" class="button-header">
                     </div>
                     <mat-selection-list color="primary" #answers [(ngModel)]="question.selectedAnswersForDelete">
                         <mat-list-option color="primary" *ngFor="let answer of question.answers" [value]="answer">

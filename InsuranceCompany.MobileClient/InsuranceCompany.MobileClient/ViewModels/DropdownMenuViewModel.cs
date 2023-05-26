@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InsuranceCompany.MobileClient.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -10,24 +11,24 @@ namespace InsuranceCompany.MobileClient.ViewModels
 {
     public class DropdownMenuViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<string> MenuItems { get; set; }
-        public ICommand MenuItemSelectedCommand { get; set; }
+        public INavigation Navigation { get; set; }
+        public ICommand LogOutCommand { get; set; }
 
+        public InsurancesViewModel insurancesViewModel { get; set; }
         public DropdownMenuViewModel()
         {
-            MenuItems = new ObservableCollection<string>
-            {
-                "Menu Item 1",
-                "Menu Item 2",
-                "Menu Item 3"
-            };
-
-            MenuItemSelectedCommand = new Command<string>(OnMenuItemSelected);
+            LogOutCommand = new Command(OnMenuItemSelected);
         }
-
-        private void OnMenuItemSelected(string selectedItem)
+        private void OnMenuItemSelected()
         {
-            // Обработка выбранного пункта меню
+            App.Current.Properties.Remove("token");
+            App.Current.Properties.Remove("role");
+            App.Current.SavePropertiesAsync();
+            LoginPage myPage = new LoginPage();
+            NavigationPage.SetHasNavigationBar(myPage, false);
+            var navigationPage = new NavigationPage(myPage);
+            NavigationPage.SetHasNavigationBar(navigationPage, false);
+            App.Current.MainPage = navigationPage;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

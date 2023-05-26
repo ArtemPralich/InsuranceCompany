@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -55,8 +56,28 @@ namespace InsuranceCompany.MobileClient.ViewModels
             var a = await authService.Login(user);
             if (a != null)
             {
+                if (App.Current.Properties.TryGetValue("token", out object buff))
+                {
+                    if (buff != null)
+                    {
+
+                        App.Current.Properties.Remove("token"); 
+                    }
+                }
+                if (App.Current.Properties.TryGetValue("role", out object buff1))
+                {
+                    if (buff1 != null)
+                    {
+
+                        App.Current.Properties.Remove("role");
+                    }
+                }
+
+                App.Current.SavePropertiesAsync();
                 App.Current.Properties.Add("token", a.Token);
                 App.Current.Properties.Add("role", a.Role);
+
+                App.Current.SavePropertiesAsync();
 
                 Application.Current.MainPage.Navigation.PushAsync(new InsurancesPage());
             }

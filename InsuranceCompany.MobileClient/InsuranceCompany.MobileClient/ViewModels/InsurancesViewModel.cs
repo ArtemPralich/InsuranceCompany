@@ -71,6 +71,7 @@ namespace InsuranceCompany.MobileClient.ViewModels
             insuranceRequestService = new InsuranceRequestService();
             ItemTappedCommand = new Command<ListItem>(OnItemTapped);
             ToggleMenuCommand = new Command(ToggleMenu);
+            PopCommand = new Command(Pop);
             MenuWidthRequest = 250;
         }
         public async Task GetClientInsurances()
@@ -110,16 +111,23 @@ namespace InsuranceCompany.MobileClient.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
+
+        public ICommand PopCommand { get; private set; }
+        private void Pop()
+        {
+            Application.Current.MainPage.Navigation.PopAsync();
+        }
+
         public ICommand ItemTappedCommand { get; private set; }
         private void OnItemTapped(ListItem item)
         {
             if (item.IsOpen)
             {
-                item.Height -= 60;
+                item.Height -= 90;
             }
             else
             {
-                item.Height += 60;
+                item.Height += 90;
             }
             item.IsOpen = !item.IsOpen;
         }

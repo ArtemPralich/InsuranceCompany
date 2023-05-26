@@ -6,6 +6,7 @@ export class InsuranceRate {
     unitPayment : number;
     countPaymentsInYear : number;
     countYears : number;
+    isFamily :boolean;
     cost: number;
     baseCoefficient: number;
     insuranceTypeSurveys: InsuranceTypeSurvey[];
@@ -19,5 +20,6 @@ export class InsuranceRate {
         this.countYears = countYears;
         this.cost = cost;
         this.baseCoefficient = baseCoefficient;
+        this.isFamily = false;
     }
 }
