@@ -11,22 +11,22 @@ using Xamarin.Forms.Xaml;
 namespace InsuranceCompany.MobileClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DropdownMenuPage : ContentPage
+    public partial class ForgotPasswordPage : ContentPage
     {
-        public InsurancesViewModel insurancesViewModel { get; set; }
-        private DropdownMenuViewModel viewModel { get; set; }
-        public DropdownMenuPage()
+        private ForgotPasswordViewModel viewModel { get; set; }
+        public ForgotPasswordPage()
         {
             InitializeComponent();
-            viewModel = new DropdownMenuViewModel() 
-            { 
+            viewModel = new ForgotPasswordViewModel()
+            {
                 Navigation = this.Navigation
             };
             BindingContext = viewModel;
         }
         private void OnBackgroundTapped(object sender, EventArgs e)
         {
-            Navigation.PopModalAsync();
+            Navigation.PopModalAsync(false);
         }
     }
+    
 }

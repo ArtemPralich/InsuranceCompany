@@ -7,6 +7,7 @@ using InsuranceCompany.Shared.ModelDto.Create;
 using InsuranceCompany.Shared.ModelDto.Update;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace InsuranceCompany.Controllers
 {
@@ -29,7 +30,8 @@ namespace InsuranceCompany.Controllers
         [HttpGet(Name = "GetInsuranceSurvey")]
         public IActionResult Get()
         {
-            var insuranceRequests = _repositoryManager.InsuranceSurvey.GetAll(false);
+            var insuranceRequests = _repositoryManager.InsuranceSurvey.FindByCondition(i => !(i.IsDeactivated ?? false),false).Include(i => i.InsuranceTypeSurveys).ThenInclude(i => i.InsuranceRate)
+                .Include(i => i.QuestionSurveys).ThenInclude(i => i.Question).ThenInclude(i => i.Answers).ToList();
             var insuranceRequestsDto = _mapper.Map<List<InsuranceSurveyDto>>(insuranceRequests);
             return Ok(insuranceRequestsDto);
         }
@@ -143,10 +145,12 @@ namespace InsuranceCompany.Controllers
 
             if (insuranceSurvey == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _repositoryManager.InsuranceSurvey.Delete(insuranceSurvey);
+            insuranceSurvey.IsDeactivated = true;
+
+            _repositoryManager.InsuranceSurvey.Update(insuranceSurvey);
             _repositoryManager.Save();
             return NoContent();
         }

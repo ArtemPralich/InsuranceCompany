@@ -71,6 +71,7 @@ namespace InsuranceCompany.MobileClient.ViewModels
             insuranceRequestService = new InsuranceRequestService();
             ItemTappedCommand = new Command<ListItem>(OnItemTapped);
             ToggleMenuCommand = new Command(ToggleMenu);
+            PopCommand = new Command(Pop);
             MenuWidthRequest = 250;
         }
         public async Task GetClientInsurances()
@@ -79,20 +80,6 @@ namespace InsuranceCompany.MobileClient.ViewModels
             var insuranceRequests = new ObservableCollection<InsuranceRequest>(await insuranceRequestService.GetClientInsurances());
             foreach(var ins in insuranceRequests)
             {
-                insuranceRequestsList.Add(new ListItem()
-                {
-                    Item = ins,
-                    Height = 100,
-                    IsOpen = false,
-                    ItemTappedCommand = new Command<ListItem>(OnItemTapped)
-                });
-                insuranceRequestsList.Add(new ListItem()
-                {
-                    Item = ins,
-                    Height = 100,
-                    IsOpen = false,
-                    ItemTappedCommand = new Command<ListItem>(OnItemTapped)
-                });
                 insuranceRequestsList.Add(new ListItem()
                 {
                     Item = ins,
@@ -110,16 +97,23 @@ namespace InsuranceCompany.MobileClient.ViewModels
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
+
+        public ICommand PopCommand { get; private set; }
+        private void Pop()
+        {
+            Application.Current.MainPage.Navigation.PopAsync();
+        }
+
         public ICommand ItemTappedCommand { get; private set; }
         private void OnItemTapped(ListItem item)
         {
             if (item.IsOpen)
             {
-                item.Height -= 60;
+                item.Height -= 90;
             }
             else
             {
-                item.Height += 60;
+                item.Height += 90;
             }
             item.IsOpen = !item.IsOpen;
         }
@@ -155,7 +149,7 @@ namespace InsuranceCompany.MobileClient.ViewModels
             IsMenuVisible = !IsMenuVisible;
             DropdownMenuPage overlayPage = new DropdownMenuPage();
             //overlayPage.BackgroundColor = Color.Transparent;
-            Navigation.PushModalAsync(overlayPage);
+            Navigation.PushModalAsync(overlayPage, false);
         }
     }
 }

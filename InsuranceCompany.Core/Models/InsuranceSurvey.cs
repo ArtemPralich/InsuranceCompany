@@ -12,6 +12,7 @@ public partial class InsuranceSurvey
     public string? Title { get; set; }
 
     public string? Description { get; set; }
+    public bool? IsDeactivated { get; set; }
 
     public virtual ICollection<InsuranceTypeSurvey> InsuranceTypeSurveys { get; } = new List<InsuranceTypeSurvey>();
     public virtual ICollection<QuestionSurvey> QuestionSurveys { get; } = new List<QuestionSurvey>();

@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:InsuranceCompany.MobileClient.Converter" 
+             x:Class="InsuranceCompany.MobileClient.Views.DocumentPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BoolToRotationConverter x:Key="BoolToRotationConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <RelativeLayout>
+                <BoxView
+                BackgroundColor="#07575B"
+                WidthRequest="200"
+                HeightRequest="200"
+                CornerRadius="200"
+                RelativeLayout.YConstraint="-100"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                    Property=Width,
+                                                                    Factor=1,
+                                                                    Constant=-100}" />
+                <Grid
+                      RelativeLayout.YConstraint="10"
+                      RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                    Property=Width,
+                                                                    Factor=1,
+                                                                    Constant=-55}">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ToggleMenuCommand}"/>
+                    </Grid.GestureRecognizers>
+                    <BoxView Color="White" CornerRadius="1" HeightRequest="5" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <BoxView Color="White" CornerRadius="1" HeightRequest="5" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,20,0,0" />
+                    <BoxView Color="White" CornerRadius="1" HeightRequest="5" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center" Margin="0,40,0,0" />
+                </Grid>
+                <Label Margin="20, 25, 0,0" Text="Ваши страховые" FontSize="25" TextColor="#003B46">
+                </Label>
+                <Label Margin="20, 50, 0,0" Text="документы" FontSize="25" TextColor="#003B46">
+                </Label>
+            </RelativeLayout>
+            <BoxView Color="#C4DFE6" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="0,5,0,0" />
+            <CollectionView ItemsSource="{Binding InsuranceDocuments}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnStackLayoutTapped" CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="picture_as_pdf.png"></Image>
+                            <Label Margin="0, 10, 0, 0" FontSize="18" TextColor="Black" Text="{Binding Title}"></Label>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -28,8 +28,8 @@ namespace InsuranceCompany.MobileClient.Models
 
         public InsuranceRate InsuranceRate { get; set; }
         public InsuranceStatus InsuranceStatus { get; set; }
-        public virtual ICollection<InsuredPerson> InsuredPersons { get; } = new List<InsuredPerson>();
-        public virtual ICollection<Document> Documents { get; } = new List<Document>();
+        public virtual ICollection<InsuredPerson> InsuredPersons { get; set; } = new List<InsuredPerson>();
+        public virtual ICollection<Document> Documents { get; set; } = new List<Document>();
         public Client MainClient { get; set; }
     }
 }

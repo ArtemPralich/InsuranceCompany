@@ -25,7 +25,21 @@
                          VerticalOptions="Center"
                          Padding="20 ,20, 0, 0">
                 <Label Text="Меню" FontSize="20" HorizontalOptions="Center"></Label>
-                <Label Text="Выйти"></Label>
+                <Label Text="Страховые запросы">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding  GoToInsurancesCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Документы">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding  GoToDocumentsCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label Text="Выйти">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding  LogOutCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>

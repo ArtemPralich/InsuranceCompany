@@ -47,7 +47,7 @@
 
     </app-insurance-suraveys>
   </mat-tab>
-  <mat-tab label="Застрахованные лица">
+  <mat-tab label="Застрахованные лица" *ngIf="insuranceRequest.insuranceRate.isFamily">
     <app-insured-persons *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest">
 
     </app-insured-persons>
@@ -68,7 +68,7 @@
 
 <button class="save-button" (click)="save()">Сохранить</button>
 
-<button class="documents-button" *ngIf="insuranceRequest" (click)="validation()">Валидация</button>
+<button class="documents-button" *ngIf="insuranceRequest" (click)="validation()">Валидировать</button>
 
 <div class="mat-spinner-overlay" *ngIf="requestIsProcess">
   <mat-spinner></mat-spinner>

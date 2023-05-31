@@ -4,34 +4,45 @@
               NavigationPage.HasNavigationBar="False"
              x:Class="InsuranceCompany.MobileClient.Views.RegistationPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label  Margin="30,100,30,0" x:Name="logoText" FontSize="30" Text="Страховая компания " TextColor="Black" />
-            <Label  Margin="30,0,30, 0" x:Name="logo" FontSize="60" Text="Health" TextColor="#4B0082" />
-            <StackLayout Margin="30,20,30,200" Padding="5,5,5,5" >
-                
-                <Label x:Name="emailLabel" FontSize="Small" Text="Введите email" TextColor="#C0C0C0" />
-                <Entry x:Name="emailEntry" Text="{Binding Email}" Placeholder = "Email"/>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout>
+                    <Label  Margin="30,100,30,0" x:Name="logoText" FontSize="30" Text="Страховая компания " TextColor="Black" />
+                    <Label  Margin="30,0,30, 0" x:Name="logo" FontSize="60" Text="Health" TextColor="#4B0082" />
+                    <StackLayout Margin="30,20,30,200" Padding="5,5,5,5" >
 
-                <Label x:Name="personalCodeLabel" FontSize="Small" Text="Введите BM паспорта" TextColor="#C0C0C0" />
-                <Entry x:Name="personalCodeEntry" Text="{Binding UsetName}" Placeholder = "BM2324567"/>
+                        <Label x:Name="emailLabel" FontSize="Small" Text="Введите email" TextColor="#C0C0C0" />
+                        <Entry x:Name="emailEntry" Text="{Binding Email}" Placeholder = "Email"/>
 
-                <Label x:Name="passwordLabel" FontSize="Small" Text="Введите пароль" TextColor="#C0C0C0"/>
-                <Entry x:Name="passwordEntry" Placeholder = "Пароль" Text="{Binding Password}" IsPassword ="True" />
+                        <Label x:Name="personalCodeLabel" FontSize="Small" Text="Введите BM паспорта" TextColor="#C0C0C0" />
+                        <Entry x:Name="personalCodeEntry" Text="{Binding UsetName}" Placeholder = "BM2324567"/>
 
-                <Label x:Name="confirmPasswordLabel" FontSize="Small" Text="Подтвердите пароль" TextColor="#C0C0C0"/>
-                <Entry x:Name="confirmPasswordEntry" Placeholder = "Подтвердите пароль" Text="{Binding ConfirmPassword}" IsPassword ="True" />
-                
-                <Button x:Name="send" Text="Зарегестрироваться" HorizontalOptions="Center"  Margin="0,10,0,0"
-                            FontSize="Small"  BackgroundColor="#6A5ACD" 
+                        <Label x:Name="passwordLabel" FontSize="Small" Text="Введите пароль" TextColor="#C0C0C0"/>
+                        <Entry x:Name="passwordEntry" Placeholder = "Пароль" Text="{Binding Password}" IsPassword ="True" />
+
+                        <Label x:Name="confirmPasswordLabel" FontSize="Small" Text="Подтвердите пароль" TextColor="#C0C0C0"/>
+                        <Entry x:Name="confirmPasswordEntry" Placeholder = "Подтвердите пароль" Text="{Binding ConfirmPassword}" IsPassword ="True" />
+                        <Label x:Name="incorrectData" FontSize="Small" Text="Некорректные данные" TextColor="#bf0603" IsVisible="{Binding IsIncorrectly}" />
+
+                        <Button x:Name="send" Text="Зарегестрироваться" HorizontalOptions="Center"  Margin="0,10,0,0"
+                            FontSize="Small"  BackgroundColor="#6A5ACD" Command="{Binding RegitrationCommand}"
                             TextColor="White" HeightRequest="40" Padding="10,0,10,0"/>
 
-                <Label x:Name="registration" Margin="0,30,0,0" HorizontalOptions="Center" FontSize="18" Text="Авторизация" TextColor="#C0C0C0">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding GoToLoginCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-                
+                        <Label x:Name="registration" Margin="0,15,0,0" HorizontalOptions="Center" FontSize="18" Text="Авторизация" TextColor="#C0C0C0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToLoginCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+            <Frame IsVisible="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="Gray" Opacity="0.5">
+
+            </Frame>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="Red"
+                AbsoluteLayout.LayoutBounds="0.5, 0.5, 50, 50"
+                AbsoluteLayout.LayoutFlags="PositionProportional" />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
