@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RegistrationClient } from 'src/app/models/auth/RegistrationClient';
 import { AuthService } from 'src/app/service/AuthService';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +12,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/ro
 export class RegistrationComponent {
   client = new RegistrationClient();
   passwordsMatch: boolean = true;
-  constructor(public auth: AuthService, private router: Router){
+  constructor(public auth: AuthService, private router: Router, private toastr: ToastrService){
       
   }
 
@@ -33,7 +34,9 @@ export class RegistrationComponent {
           localStorage.setItem("date",`${(new Date()).getTime()}`);
           
           this.router.navigateByUrl("/room-client");
+          this.toastr.success('Регистрация прошла успешно', 'Успешно!');
       }, error =>{
+        this.toastr.error('Ошибка регистрации', 'Ошибка!');
       });
     }
   }

@@ -23,7 +23,7 @@ export class LoginComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   public statusAuth: boolean = true;
 
-  constructor(public dialog: MatDialog,private http:HttpClient, private router: Router, public auth: AuthService, public clientService: ClientService){
+  constructor(public dialog: MatDialog,private http:HttpClient, private router: Router, public auth: AuthService, public clientService: ClientService, private toastr: ToastrService){
       
   }
   login(){
@@ -48,8 +48,10 @@ export class LoginComponent {
           else if(header == "Administrator")
             this.router.navigateByUrl("/room-admin");
         }
+        this.toastr.success('Авторизация прошла успешно', 'Успешно!');
     }, error =>{
         this.statusAuth = false;
+        this.toastr.error('Ошибка авторизации', 'Ошибка!');
     });
     
   } 

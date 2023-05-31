@@ -24,7 +24,7 @@ export class RequestComponent {
   insuranceRequest : CreateInsuranceRequestDto = new CreateInsuranceRequestDto();
 
   constructor(public insuranceRateService: InsuranceRateService, public clientService: ClientService,
-    public insuranceRequestService: InsuranceRequestService, private toastr: ToastrService) 
+    public insuranceRequestService: InsuranceRequestService, private toastr: ToastrService, private router: Router) 
   {}
 
   ngOnInit() {
@@ -56,6 +56,7 @@ export class RequestComponent {
       // this.dialogRef.close();
       // this.router.navigateByUrl('/insurance/' + data);
       this.toastr.success('Успешно отправлено', 'Успешно!');
+      this.router.navigateByUrl("/room-client");
     },
     error=>{
       this.toastr.error('Ошибка отправки', 'Ошибка!');

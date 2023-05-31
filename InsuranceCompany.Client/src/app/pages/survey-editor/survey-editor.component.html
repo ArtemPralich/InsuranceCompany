@@ -39,7 +39,7 @@
                 <div class="container-question">
                     <div class="line-survey">
                         <div class="text-question">{{question.text}}</div>
-                        <input type="image" src="assets/pictures/delete.svg" class="button-header">
+                        <input type="image" src="assets/pictures/delete.svg" class="button-header" (click)="deleteQuestion(question)">
                     </div>
                     <mat-selection-list color="primary" #answers [(ngModel)]="question.selectedAnswersForDelete">
                         <mat-list-option color="primary" *ngFor="let answer of question.answers" [value]="answer">
@@ -62,4 +62,8 @@
             </div>
         </diV>
     </div>
+</div>
+
+<div class="mat-spinner-overlay" *ngIf="surveyIsProcess">
+    <mat-spinner></mat-spinner>
 </div>

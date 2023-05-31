@@ -121,3 +121,21 @@
     transform: translateY(-5px);
     transition: 0.3s;
 }
+
+.mat-spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Настройте прозрачность здесь */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Установите z-index на достаточно высокое значение, чтобы спиннер был поверх остальных элементов */
+  }
+  
+  /* Стили для самого спиннера */
+  .mat-spinner-overlay mat-spinner {
+    color: white; /* Настройте цвет спиннера здесь */
+  }

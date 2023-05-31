@@ -22,6 +22,7 @@ export class SurveyEditorComponent  implements OnInit {
   selectedAnswersForDelete: Answer[] = [];
   insuranceRates: InsuranceRate[] = [];
   selectedInsuranceRate: InsuranceRate[] = [];
+  surveyIsProcess: boolean = false;
 
    constructor(public insuranceSurveyService: SurveyService, public dialog: MatDialog, public insuranceRateService: InsuranceRateService, private toastr: ToastrService) 
   {}
@@ -29,13 +30,16 @@ export class SurveyEditorComponent  implements OnInit {
   ngOnInit(): void {
     this.loadSurveys();
 
+    // this.surveyIsProcess = true;
     this.insuranceRateService.GetAllInsuranceRequests().subscribe(res => {
       this.insuranceRates = res;
-      console.log(this.insuranceRates)
+      console.log(this.insuranceRates);
+      // this.surveyIsProcess = false;
     });
   }
 
   loadSurveys() {
+    // this.surveyIsProcess = true;
     this.insuranceSurveyService.GetAllInsuranceSurveys().subscribe(res => {
       this.insuranceSurveys = res;
       
@@ -46,14 +50,21 @@ export class SurveyEditorComponent  implements OnInit {
         })
       });
       console.log(this.insuranceSurveys);
+      // this.surveyIsProcess = false;
     });
   }
 
   updateSurvey(){
+    // this.surveyIsProcess = true;
     this.selectedSurvey.insuranceRates = this.selectedInsuranceRate;
     this.insuranceSurveyService.UpdateInsuranceSurvey(this.selectedSurvey).subscribe(res => {
-      
-    });
+      this.toastr.success('Успешно сохранено', 'Успешно!');
+      // this.surveyIsProcess = false;
+    },
+        error => {
+          this.toastr.error('Ошибка сохранения', 'Ошибка!');
+          // this.surveyIsProcess = false;
+      });
   }
 
   openDialogCreateAnswer(question: Question){
@@ -66,6 +77,13 @@ export class SurveyEditorComponent  implements OnInit {
           question.answers.push(result);
         }
     });
+  }
+
+  deleteQuestion(question: Question) {
+    const index = this.selectedSurvey.questions.indexOf(question);
+    if (index > -1) {
+      this.selectedSurvey.questions.splice(index, 1);
+    }
   }
 
   deleteSurvey(){
