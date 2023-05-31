@@ -66,5 +66,24 @@ namespace InsuranceCompany.MobileClient.Services
             return JsonSerializer.Deserialize<AuthentificatedUser>(
                 await response.Content.ReadAsStringAsync(), options);
         }
+
+        public async Task<HttpStatusCode> ResetPassword(string email)
+        {
+            HttpClientHandler clientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; }
+            };
+
+            HttpClient client = new HttpClient(clientHandler);
+            if (App.Current.Properties.TryGetValue("token", out object buff))
+            {
+                if (buff != null)
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", buff.ToString());
+                }
+            }
+            var response = await client.GetAsync("https://10.0.2.2:7046/Client/ResetPassword?email=" + email);
+                return response.StatusCode;
+        }
     }
 }

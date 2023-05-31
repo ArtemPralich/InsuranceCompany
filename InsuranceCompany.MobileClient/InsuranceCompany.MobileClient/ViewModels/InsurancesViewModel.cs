@@ -87,20 +87,6 @@ namespace InsuranceCompany.MobileClient.ViewModels
                     IsOpen = false,
                     ItemTappedCommand = new Command<ListItem>(OnItemTapped)
                 });
-                insuranceRequestsList.Add(new ListItem()
-                {
-                    Item = ins,
-                    Height = 100,
-                    IsOpen = false,
-                    ItemTappedCommand = new Command<ListItem>(OnItemTapped)
-                });
-                insuranceRequestsList.Add(new ListItem()
-                {
-                    Item = ins,
-                    Height = 100,
-                    IsOpen = false,
-                    ItemTappedCommand = new Command<ListItem>(OnItemTapped)
-                });
             }
             InsuranceRequests = insuranceRequestsList;
         }
@@ -163,7 +149,7 @@ namespace InsuranceCompany.MobileClient.ViewModels
             IsMenuVisible = !IsMenuVisible;
             DropdownMenuPage overlayPage = new DropdownMenuPage();
             //overlayPage.BackgroundColor = Color.Transparent;
-            Navigation.PushModalAsync(overlayPage);
+            Navigation.PushModalAsync(overlayPage, false);
         }
     }
 }

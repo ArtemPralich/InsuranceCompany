@@ -1,22 +1,31 @@
-﻿using AutoMapper;
+﻿using AngleSharp.Dom;
+using AutoMapper;
 using InsuranceCompany.Core;
 using InsuranceCompany.Core.Models;
 using InsuranceCompany.Infrastructure;
 using InsuranceCompany.Shared.ModelDto;
 using InsuranceCompany.Shared.ModelDto.Create;
 using InsuranceCompany.Shared.ModelDto.Update;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using iTextSharp.tool.xml.html;
+using iTextSharp.tool.xml.parser;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml.pipeline.end;
+using iTextSharp.tool.xml.pipeline.html;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RazorLight;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Document = iTextSharp.text.Document;
 
 namespace InsuranceCompany.Controllers
 {
@@ -253,6 +262,46 @@ namespace InsuranceCompany.Controllers
             return NoContent();
         }
 
+        [HttpGet("TestDoc", Name = "TestDoc")]
+        public ActionResult GeneratePDF()
+        {
+            string htmlCode = "<b>Привет мир</b>";
+
+            // Создание PDF-документа
+            Document document = new Document();
+            MemoryStream memoryStream = new MemoryStream();
+            PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+            document.Open();
+
+            // Загрузка шрифта Times New Roman
+            BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font font = new Font(baseFont, 12, Font.NORMAL);
+
+            // Преобразование HTML в PDF
+            XMLWorkerFontProvider fontProvider = new XMLWorkerFontProvider();
+            fontProvider.Register("C:\\Windows\\Fonts\\times.ttf", "Times New Roman");
+            CssAppliers cssAppliers = new CssAppliersImpl(fontProvider);
+            HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
+            htmlContext.SetTagFactory(Tags.GetHtmlTagProcessorFactory());
+            ICSSResolver cssResolver = XMLWorkerHelper.GetInstance().GetDefaultCssResolver(true);
+            IPipeline pipeline = new CssResolverPipeline(cssResolver, new HtmlPipeline(htmlContext, new PdfWriterPipeline(document, writer)));
+            XMLWorker worker = new XMLWorker(pipeline, true);
+            XMLParser parser = new XMLParser(worker);
+            using (StringReader sr = new StringReader(htmlCode))
+            {
+                parser.Parse(sr);
+            }
+
+            // Закрытие документа
+            document.Close();
+
+            // Возвращение PDF-файла клиенту
+            byte[] fileBytes = memoryStream.ToArray();
+            memoryStream.Close();
+
+            return File(fileBytes, "application/pdf", "output.pdf");
+        }
+
         [HttpGet("MoveToApprove/{id}", Name = "MoveToApprove")]
         public async Task<IActionResult> MoveToApprove(Guid id)
         {
@@ -277,12 +326,12 @@ namespace InsuranceCompany.Controllers
                 string result = await engine.CompileRenderStringAsync("templateKey", template.Text, insurance);
 
                 MemoryStream memoryStream = new MemoryStream();
-                iTextSharp.text.Document document = new iTextSharp.text.Document();
-                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+                    iTextSharp.text.Document document = new iTextSharp.text.Document();
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                document.Open();
-                XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, new StringReader(result));
-                document.Close();
+                    document.Open();
+                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, new StringReader(result));
+                    document.Close();
 
                 byte[] bytes = memoryStream.ToArray();
                 memoryStream.Close();

@@ -86,18 +86,18 @@ namespace InsuranceCompany.Controllers
             }
 
             await _userManager.AddToRolesAsync(user, new List<string>() { "Agent" });
-            ICollection<string> roles = await _authManager.GetRoles(user.UserName);
-            if (roles != null)
-            {
-                Response.Headers.Add("Roles", JsonConvert.SerializeObject(roles));
-            }
+            //ICollection<string> roles = await _authManager.GetRoles(user.UserName);
+            //if (roles != null)
+            //{
+            //    Response.Headers.Add("Roles", JsonConvert.SerializeObject(roles));
+            //}
 
-            if (!await _authManager.ValidateUser(new UserForAuthenticationDto() { Password = userForRegistration.Password, UserName = userForRegistration.UserName}))
+            if (!await _authManager.ValidateUser(new UserForAuthenticationDto() { Password = userForRegistration.Password, UserName = userForRegistration.Email }))
             {
                 return Unauthorized();
             }
 
-            return Ok(new { Token = await _authManager.CreateToken(), Role = roles.FirstOrDefault() });
+            return Ok(new { Token = await _authManager.CreateToken(), Role = "Agent" });
         }
 
         [HttpPost("login")]

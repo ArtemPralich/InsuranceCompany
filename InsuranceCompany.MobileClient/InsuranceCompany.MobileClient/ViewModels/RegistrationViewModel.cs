@@ -11,8 +11,7 @@ using Xamarin.Forms;
 
 namespace InsuranceCompany.MobileClient.ViewModels
 {
-
-    public class RegistrationViewModel
+    public class RegistrationViewModel : INotifyPropertyChanged
     {
         public INavigation Navigation { get; set; }
         AuthService authService = new AuthService();
@@ -48,11 +47,33 @@ namespace InsuranceCompany.MobileClient.ViewModels
         private string _confirmPassword { get; set; }
         public string ConfirmPassword
         {
-            get { return _confirmPassword; }
+            get { return user.ConfirmPassword; }
             set
             {
                 user.ConfirmPassword = value;
                 OnPropertyChanged("ConfirmPassword");
+            }
+        }
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                _isBusy = value;
+                OnPropertyChanged("IsBusy");
+            }
+        }
+
+        private bool _isIncorrectly;
+        public bool IsIncorrectly
+        {
+            get { return _isIncorrectly; }
+            set
+            {
+                _isIncorrectly = value;
+                OnPropertyChanged("IsIncorrectly");
             }
         }
 
@@ -67,14 +88,23 @@ namespace InsuranceCompany.MobileClient.ViewModels
         }
         private async Task Registration()
         {
+            IsBusy = true;
             var a = await authService.Regitration(user);
             if (a != null)
             {
+                IsIncorrectly = true;
+                IsBusy = false;
                 App.Current.Properties.Add("token", a.Token);
                 App.Current.Properties.Add("role", "Client");
                 App.Current.SavePropertiesAsync();
 
                 Application.Current.MainPage.Navigation.PushAsync(new InsurancesPage());
+            }
+            else
+            {
+                IsIncorrectly = true;
+
+                IsBusy = false;
             }
         }
         private void GoToLogin()

@@ -13,11 +13,15 @@ namespace InsuranceCompany.MobileClient.ViewModels
     {
         public INavigation Navigation { get; set; }
         public ICommand LogOutCommand { get; set; }
+        public ICommand GoToDocumentsCommand { get; set; }
+        public ICommand GoToInsurancesCommand { get; set; }
 
         public InsurancesViewModel insurancesViewModel { get; set; }
         public DropdownMenuViewModel()
         {
             LogOutCommand = new Command(OnMenuItemSelected);
+            GoToDocumentsCommand = new Command(GoToDocuments);
+            GoToInsurancesCommand = new Command(GoToInsurances);
         }
         private void OnMenuItemSelected()
         {
@@ -25,6 +29,25 @@ namespace InsuranceCompany.MobileClient.ViewModels
             App.Current.Properties.Remove("role");
             App.Current.SavePropertiesAsync();
             LoginPage myPage = new LoginPage();
+            NavigationPage.SetHasNavigationBar(myPage, false);
+            var navigationPage = new NavigationPage(myPage);
+            NavigationPage.SetHasNavigationBar(navigationPage, false);
+            App.Current.MainPage = navigationPage;
+        }
+
+        private void GoToDocuments()
+        {
+            DocumentPage myPage = new DocumentPage();
+            NavigationPage.SetHasNavigationBar(myPage, false);
+            var navigationPage = new NavigationPage(myPage);
+            NavigationPage.SetHasNavigationBar(navigationPage, false);
+            App.Current.MainPage = navigationPage;
+        }
+
+        private void GoToInsurances()
+        {
+
+            InsurancesPage myPage = new InsurancesPage();
             NavigationPage.SetHasNavigationBar(myPage, false);
             var navigationPage = new NavigationPage(myPage);
             NavigationPage.SetHasNavigationBar(navigationPage, false);

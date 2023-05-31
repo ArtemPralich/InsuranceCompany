@@ -43,7 +43,7 @@
             </RelativeLayout>
             <BoxView Color="#C4DFE6" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="End" Margin="0,5,0,0" />
             <CollectionView ItemsSource="{Binding InsuranceRequests}" SelectionMode="None">
-                <CollectionView.ItemTemplate >
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
                             <StackLayout Padding="20,5,5,5"  HeightRequest="{Binding Height}" BackgroundColor="Transparent" Orientation="Horizontal">
