@@ -20,7 +20,22 @@ export class RegistationEmployeeComponent {
     this.onConfirmPasswordChange();
     if(this.passwordsMatch) {
       console.log(this.employee);
-      
+      this.auth.registerAgent(this.employee).subscribe((res)=> {
+        console.log(res);
+        //const header = res.headers.get('roles');
+        
+        const header = (<any>res).body.role;
+        const token = (<any>res).body.token; 
+        localStorage.setItem("jwt", token);
+        var a = new Date();
+        if(header !== null){
+          localStorage.setItem("role", header);
+        }
+        localStorage.setItem("date",`${(new Date()).getTime()}`);
+        
+        this.router.navigateByUrl("/insurances");
+    }, error =>{
+    });
     }
   }
 

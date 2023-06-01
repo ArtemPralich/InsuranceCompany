@@ -54,7 +54,10 @@ export class AuthService {
     
     register(user: any):Observable<HttpResponse<string>>{
       return this.http.post<string>(`https://localhost:7046/api/authentication/RegisterClient`, user , { observe: 'response'});
-      
+    }  
+
+    registerAgent(user: any):Observable<HttpResponse<string>>{
+      return this.http.post<string>(`https://localhost:7046/api/authentication/RegisterAgent`, user , { observe: 'response'});  
     }  
     
     downloadFile() {

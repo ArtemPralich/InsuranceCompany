@@ -22,7 +22,10 @@ namespace InsuranceCompany.Shared.ModelDto
         public decimal? BasePayment { get; set; }
         public decimal? UnitPayment { get; set; }
         public decimal? Benefits { get; set; }
-
+        public string? BankName { get; set; }
+        public string? CardAccount { get; set; }
+        public string? CardPeriod { get; set; }
+        public string? CardCode { get; set; }
 
         public Guid? InsuranceRateId { get; set; }
 

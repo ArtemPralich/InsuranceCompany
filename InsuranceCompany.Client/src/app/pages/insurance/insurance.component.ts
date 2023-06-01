@@ -6,6 +6,11 @@ import {FormBuilder, Validators} from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DocumentService } from 'src/app/service/DocumentService';
 import { ToastrService } from 'ngx-toastr';
+import { InsuranceClientInfoComponent } from '../insurance-pages/insurance-client-info/insurance-client-info.component';
+import { InsuranceSuraveysComponent } from '../insurance-pages/insurance-suraveys/insurance-suraveys.component';
+import { InsuranceBankDataComponent } from '../insurance-pages/insurance-bank-data/insurance-bank-data.component';
+import { InsuredPersonsComponent } from '../insurance-pages/insured-persons/insured-persons.component';
+import { SharedDataService } from 'src/app/service/SharedData';
 
 @Component({
   selector: 'app-insurance',
@@ -13,9 +18,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./insurance.component.css']
 })
 export class InsuranceComponent implements OnInit  {
+  showFiller = false;
   insuranceRequest:  InsuranceRequest;
   sign: boolean = false;
   parentProp = 'Hello, child!';
+  @ViewChild(InsuranceClientInfoComponent, { static: false }) childInsuranceClientInfoComponent: InsuranceClientInfoComponent;
+  @ViewChild(InsuranceSuraveysComponent, { static: false }) childInsuranceSuraveysComponent: InsuranceSuraveysComponent;
+  @ViewChild(InsuranceBankDataComponent, { static: false }) childInsuranceBankDataComponent: InsuranceBankDataComponent;
+  @ViewChild(InsuredPersonsComponent, { static: false }) childInsuredPersonsComponent: InsuredPersonsComponent;
+
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -30,7 +41,8 @@ export class InsuranceComponent implements OnInit  {
   public requestIsProcess: boolean = false;
 
   constructor(public insuranceRequestService: InsuranceRequestService, private route: ActivatedRoute, 
-    private _formBuilder: FormBuilder, public documentService: DocumentService, private router: Router, private toastr: ToastrService){
+    private _formBuilder: FormBuilder, public documentService: DocumentService, 
+    private router: Router, private toastr: ToastrService, private sharedService: SharedDataService){
       
   }
 
@@ -38,7 +50,13 @@ export class InsuranceComponent implements OnInit  {
     this.dataLoad();
   }
 
+  checkTabOnchanges(tab: string){
+
+    return this.sharedService.sharedData.some(i  => i.page == tab);
+  }
+
   dataLoad(){
+    this.sharedService.sharedData = [];
     let id:string = "";
     this.route.params.subscribe(
       params => {
@@ -51,6 +69,11 @@ export class InsuranceComponent implements OnInit  {
       this.insuranceRequest.dateOfEnd = new Date(res.dateOfEnd);
       console.log(this.insuranceRequest);
       this.requestIsProcess = false;
+      
+      this.childInsuranceClientInfoComponent.updateFieldsState(this.insuranceRequest.insuranceStatus.isDisabledForms);
+      // this.childInsuranceSuraveysComponent.updateFieldsState(this.insuranceRequest.insuranceStatus.isDisabledForms);
+      // this.childInsuranceBankDataComponent.updateFieldsState(this.insuranceRequest.insuranceStatus.isDisabledForms);
+      // this.childInsuredPersonsComponent.updateFieldsState(this.insuranceRequest.insuranceStatus.isDisabledForms);
     }, error =>{
       
       this.requestIsProcess = false;
@@ -58,8 +81,24 @@ export class InsuranceComponent implements OnInit  {
   }
 
   save(){
+    console.log(this.insuranceRequest)
+    const userTimezoneOffset = this.insuranceRequest.dateOfStart.getTimezoneOffset() * 60000;
+    if(this.insuranceRequest.dateOfStart){
+      this.insuranceRequest.dateOfStart = new Date(this.insuranceRequest.dateOfStart.getTime() - userTimezoneOffset);
+    }
+    if(this.insuranceRequest.dateOfEnd){
+      this.insuranceRequest.dateOfEnd = new Date(this.insuranceRequest.dateOfEnd.getTime() - userTimezoneOffset);
+    }
+    this.insuranceRequest.insuredPersons.forEach(value => {
+      if(value.client.dateOfBirth != undefined && value.client.dateOfBirth != null){
+        value.client.dateOfBirth = new Date(Date.parse(value.client.dateOfBirth.toString()) - userTimezoneOffset);
+      }
+    });
+
     this.insuranceRequestService.UpdateInsuranceRequest(this.insuranceRequest).subscribe(res => {
       console.log("updated");
+      
+    this.sharedService.sharedData = [];
       this.toastr.success('Успешно сохранено', 'Успешно!');
     },
     error => {
@@ -84,10 +123,25 @@ export class InsuranceComponent implements OnInit  {
     this.requestIsProcess = true;
     this.insuranceRequestService.MoveToApprove(this.insuranceRequest).subscribe(res => {
       this.toastr.success('Успешно подтверждено', 'Успешно!');
+      
+      this.requestIsProcess = false;
       this.dataLoad();
     },
     error => {
-      this.toastr.error('Ошибка подтверждения', 'Ошибка!');
+      console.log(error);
+      if (error.status == 400) {
+        // Обработка ошибки статус-кода 400
+        const responseBody = error.error;
+        
+        this.sharedService.sharedData = responseBody;
+        console.log(responseBody)
+        this.toastr.error('Введены некоректные данные', 'Ошибка!');
+      }
+      else{
+        this.toastr.error('Ошибка подтверждения', 'Ошибка!');
+      }
+      
+      this.requestIsProcess = false;
     });
   }
 

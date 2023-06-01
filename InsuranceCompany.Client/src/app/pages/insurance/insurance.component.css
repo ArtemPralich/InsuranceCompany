@@ -184,3 +184,18 @@
   .mat-spinner-overlay mat-spinner {
     color: white; /* Настройте цвет спиннера здесь */
   }
+
+  .example-sidenav {
+    padding: 20px;
+    width: 500px; 
+  }
+
+  .circle-icon-baddeg{
+    background-color: #e42802; 
+    border-radius: 50%;
+    margin-top: -8px;
+    height: 7px; 
+    width: 7px; 
+    margin-left: 1px;
+    
+  }

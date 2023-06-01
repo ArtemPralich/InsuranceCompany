@@ -20,6 +20,10 @@ namespace InsuranceCompany.Shared.ModelDto.Update
         public decimal? UnitPayment { get; set; }
         public decimal? Coefficient { get; set; }
         public decimal? Benefits { get; set; }
+        public string? BankName { get; set; }
+        public string? CardAccount { get; set; }
+        public string? CardPeriod { get; set; }
+        public string? CardCode { get; set; }
         public virtual ICollection<UpdateAnswerValuesDto> AnswerValues { get; } = new List<UpdateAnswerValuesDto>();
         public virtual ICollection<UpdateInsuredPersonDto> InsuredPersons { get; } = new List<UpdateInsuredPersonDto>();
     }

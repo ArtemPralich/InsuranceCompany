@@ -8,3 +8,7 @@
 .content{
     margin-top: 40px;
 }
+
+.invalid-field {
+    border-color: red;
+  }

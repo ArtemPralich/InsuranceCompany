@@ -72,8 +72,9 @@ namespace InsuranceCompany.Controllers
                 FirstName = userForRegistration.FirstName,
                 LastName = userForRegistration.LastName,
                 Email = userForRegistration.Email,
-                UserName = userForRegistration.UserName,
-                AgentId = agent.Id
+                UserName = userForRegistration.PersonalCode,
+                AgentId = agent.Id,
+                
             };
             var result = await _userManager.CreateAsync(user, userForRegistration.Password);
             if (!result.Succeeded)
