@@ -19,6 +19,10 @@ export class InsuranceRequest {
     benefits: number;
     basePayment: number;
     unitPayment: number;
+    bankName : string;
+    cardCode : string;
+    cardAccount : string;
+    cardPeriod : string;
     insuranceRate: InsuranceRate;
     insuredPersons: InsuredPerson[];
     answerValues: AnswerValues[];

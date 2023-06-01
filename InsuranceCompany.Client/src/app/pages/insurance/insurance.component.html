@@ -1,3 +1,4 @@
+
 <div class="header">
   <div class="container" *ngIf="insuranceRequest">
     <div class="header-line">
@@ -34,10 +35,12 @@
     </div>
   </div>
 </div>
-
 <mat-tab-group animationDuration="0ms" class="insuranse-part">
-  
   <mat-tab label="Информация о клиенте">
+    <ng-template mat-tab-label>
+      Информация о клиенте <mat-icon *ngIf="checkTabOnchanges('1')"  [style.background-color]="insuranceRequest.insuranceStatus.color" class="circle-icon-baddeg"> </mat-icon>
+    </ng-template>
+    
     <app-insurance-client-info *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest" [childProp]="parentProp" >
 
     </app-insurance-client-info>
@@ -53,7 +56,10 @@
     </app-insured-persons>
   </mat-tab>
     
-  <mat-tab label="Банковские данные">
+  <mat-tab label="Банковские данные" matBadge="1" matBadgeSize="large">
+    <ng-template mat-tab-label>
+      Банковские данные <mat-icon *ngIf="checkTabOnchanges('3')"  [style.background-color]="insuranceRequest.insuranceStatus.color" class="circle-icon-baddeg"> </mat-icon>
+    </ng-template>
     <app-insurance-bank-data *ngIf="insuranceRequest" [insuranceRequest]="insuranceRequest" [childProp]="parentProp">
 
     </app-insurance-bank-data>
@@ -65,10 +71,11 @@
     </app-insurance-documents>
   </mat-tab>
 </mat-tab-group>
+<!-- <button class="documents-button" *ngIf="insuranceRequest" (click)="drawer.toggle()">Валидировать</button> -->
 
 <button class="save-button" (click)="save()">Сохранить</button>
-
-<button class="documents-button" *ngIf="insuranceRequest" (click)="validation()">Валидировать</button>
+<!-- 
+<button class="documents-button" *ngIf="insuranceRequest" (click)="validation()">Валидировать</button> -->
 
 <div class="mat-spinner-overlay" *ngIf="requestIsProcess">
   <mat-spinner></mat-spinner>

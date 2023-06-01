@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using RazorLight;
 using System.Text;
@@ -88,45 +89,6 @@ namespace InsuranceCompany.Controllers
             return Ok(requests);
         }
 
-        [HttpGet("Validate", Name = "Validate")]
-        public IActionResult Validate(Guid id)
-        {
-            var insuranceRequest = _repositoryManager.InsuranceRequest.GetById(id, false);
-            if (insuranceRequest == null)
-            {
-                ModelState.TryAddModelError("request", "Страховой запрос не сохранен");
-            }
-            else
-            {
-                var mainClient = insuranceRequest.InsuredPersons.Where(p => p.IsMainInsuredPerson).FirstOrDefault();
-                bool isValidEmail = Regex.IsMatch(mainClient.Client.Email ?? "", @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
-                if (!isValidEmail)
-                {
-
-                    ModelState.TryAddModelError("InsuredPerson", "Некоректный email");
-                }
-
-
-                string pattern = "[A-Za-z]{2}\\d{7}";
-                bool isMatch = Regex.IsMatch(mainClient.Client.PersonalCode ?? "", pattern);
-
-
-                if (string.IsNullOrWhiteSpace(mainClient.Client.Name)){
-
-                    ModelState.TryAddModelError("InsuredPerson", "Некоректное имя");
-                }
-                if (string.IsNullOrWhiteSpace(mainClient.Client.Surname)){
-
-                    ModelState.TryAddModelError("InsuredPerson", "Некоректная фамилия");
-                }
-            }
-            if (ModelState.ErrorCount > 0)
-            {
-                return BadRequest(ModelState);
-            }
-
-            return Ok();
-        }
         [HttpPost(Name = "CreateInsuranceRequest")]
         public IActionResult Create(CreateInsuranceRequestDto insuranceRequestDto)
         {
@@ -306,6 +268,11 @@ namespace InsuranceCompany.Controllers
         public async Task<IActionResult> MoveToApprove(Guid id)
         {
             var request = _repositoryManager.InsuranceRequest.GetById(id, true);
+            var modelError = this.Validate(request);
+            if(modelError.Count > 0)
+            {
+                return BadRequest(modelError);
+            }
             request.InsuranceStatusId = new Guid("B74A9704-FF2C-4992-80B5-F22905091835");
             _repositoryManager.InsuranceRequest.Update(request);
 
@@ -444,6 +411,97 @@ namespace InsuranceCompany.Controllers
             _repositoryManager.InsuranceRequest.Delete(insuranceRequest);
             _repositoryManager.Save();
             return NoContent();
+        }
+
+        class Error
+        {
+            public string Key { get; set; }
+            public string Value { get; set; }
+            public string Page { get; set; }
+
+        }
+        private List<Error> Validate(InsuranceRequest insuranceRequest)
+        {
+            var error = new List<Error>();
+            if (insuranceRequest == null)
+            {
+                //ModelState.TryAddModelError("request", "Страховой запрос не сохранен");
+                error.Add(new Error() { Key = "", Value = "" });
+            }
+            else
+            {
+                var mainClient = insuranceRequest.InsuredPersons.Where(p => p.IsMainInsuredPerson).FirstOrDefault();
+                bool isValidEmail = Regex.IsMatch(mainClient.Client.Email ?? "", @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+                if (!isValidEmail)
+                {
+                    error.Add(new Error() { Key = "MainClient.Email", Value = "Некоректный email", Page = "1" });
+                    //ModelState.TryAddModelError("InsuredPerson", "Некоректный email");
+                }
+
+
+                string pattern = "[A-Za-z]{2}\\d{7}";
+                bool isMatch = Regex.IsMatch(mainClient.Client.PersonalCode ?? "", pattern);
+                if (!isMatch)
+                {
+                    error.Add(new Error() { Key = "MainClient.PersonalCode", Value = "Некоректный персональный код", Page = "1" });
+                }
+
+                if (string.IsNullOrWhiteSpace(mainClient.Client.Name))
+                {
+                    error.Add(new Error() { Key = "MainClient.Name", Value = "Некоректное имя", Page = "1" });
+                }
+                if (string.IsNullOrWhiteSpace(mainClient.Client.Address))
+                {
+                    error.Add(new Error() { Key = "MainClient.Address", Value = "Некоректный адрес", Page = "1" });
+                }
+                if (mainClient.Client.Gender == null)
+                {
+                    error.Add(new Error() { Key = "MainClient.Gender", Value = "Некоректный гендер", Page = "1" });
+                }
+                if (string.IsNullOrWhiteSpace(mainClient.Client.PhoneNumber))
+                {
+                    error.Add(new Error() { Key = "MainClient.PhoneNumber", Value = "Некоректный номер телефона", Page = "1" });
+                }
+                if (string.IsNullOrWhiteSpace(mainClient.Client.Surname))
+                {
+                    error.Add(new Error() { Key = "MainClient.Surname", Value = "Некоректная фамилия", Page = "1" });
+                }
+                if (mainClient.Client.DateOfBirth == null)
+                {
+                    error.Add(new Error() { Key = "MainClient.DateOfBirth", Value = "Некоректная дата рождения", Page = "1" });
+                }
+                if(insuranceRequest.Benefits == null || insuranceRequest.Benefits <= 0)
+                {
+                    error.Add(new Error() { Key = "InsuranceRequest.Benefits", Value = "Некоректные бенефиты", Page = "1" });
+                }
+
+                string pattern1 = "[0-9]{3}";
+                bool isMatch1 = Regex.IsMatch(insuranceRequest.CardCode ?? "", pattern1);
+                if (!isMatch1)
+                {
+                    error.Add(new Error() { Key = "InsuranceRequest.CardCode", Value = "Некоректный код", Page = "3" });
+                }
+
+                string pattern2 = "[0-9]{2}/[0-9]{2}";
+                bool isMatch2 = Regex.IsMatch(insuranceRequest.CardPeriod ?? "", pattern2);
+                if (!isMatch2)
+                {
+                    error.Add(new Error() { Key = "InsuranceRequest.CardPeriod", Value = "Некоректный период", Page = "3" });
+                }
+                
+                string pattern3 = "[0-9]{16}";
+                bool isMatch3 = Regex.IsMatch(insuranceRequest.CardAccount ?? "" , pattern3);
+                if (!isMatch3)
+                {
+                    error.Add(new Error() { Key = "InsuranceRequest.CardAccount", Value = "Некоректный номер карты", Page = "3" });
+                }
+
+                if (string.IsNullOrWhiteSpace(insuranceRequest.BankName))
+                {
+                    error.Add(new Error() { Key = "InsuranceRequest.BankName", Value = "Неправильно выбран банк", Page = "3" });
+                }
+            }
+            return error;
         }
     }
 }

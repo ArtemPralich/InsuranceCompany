@@ -22,6 +22,7 @@ export class Client {
 
     constructor(){
 
+        this.dateOfBirth = new Date();
     }
 }
   

@@ -6,11 +6,11 @@
         <div class="title-form">
           Регистрация сотрудника
         </div>
-        <input type="text" name="" placeholder="Фамилия">
-        <input type="text" name="" placeholder="Имя">
-        <input type="text" name="" placeholder="Персональный код">
-        <input type="text" name="" placeholder="Номер телефона">
-        <input type="text" name="" placeholder="Почта">
+        <input type="text" name="" [(ngModel)]="employee.lastName" [ngModelOptions]="{standalone: true}" placeholder="Фамилия">
+        <input type="text" name="" [(ngModel)]="employee.firstName" [ngModelOptions]="{standalone: true}" placeholder="Имя">
+        <input type="text" name="" [(ngModel)]="employee.personalCode" [ngModelOptions]="{standalone: true}" placeholder="Персональный код">
+        <input type="text" name="" [(ngModel)]="employee.phoneNumber" [ngModelOptions]="{standalone: true}" placeholder="Номер телефона">
+        <input type="text" name="" [(ngModel)]="employee.email" [ngModelOptions]="{standalone: true}"  placeholder="Почта">
         <input type="password" name=""  [(ngModel)]="employee.password" [ngModelOptions]="{standalone: true}" placeholder="Пароль">
         <input type="password" name=""  [(ngModel)]="employee.confirmPassword" [ngModelOptions]="{standalone: true}" placeholder="Повторить пароль">
         <div *ngIf="!passwordsMatch" class="passwordsMatch">Неверный пароль!</div>

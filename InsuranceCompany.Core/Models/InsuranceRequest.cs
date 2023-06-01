@@ -23,6 +23,10 @@ public partial class InsuranceRequest
     public decimal? UnitPayment { get; set; }
     public decimal? Benefits { get; set; }
     public decimal? Coefficient { get; set; }
+    public string? BankName { get; set; }
+    public string? CardAccount { get; set; }
+    public string? CardPeriod { get; set; }
+    public string? CardCode { get; set; }
     public bool IsReadyDocuments { get; set; }
     public virtual ICollection<AnswerValue> AnswerValues { get; } = new List<AnswerValue>();
     public virtual ICollection<InsuredPerson> InsuredPersons { get; } = new List<InsuredPerson>();

@@ -2,7 +2,7 @@ export class RegistrationEmployee {
     firstName : string;
     lastName : string;
     personalCode : string;
-    numberPhone: string;
+    phoneNumber: string;
     email : string;
     password : string;
     confirmPassword : string;
@@ -12,7 +12,7 @@ export class RegistrationEmployee {
         this.firstName = "";
         this.lastName = "";
         this.personalCode = "";
-        this.numberPhone = "";
+        this.phoneNumber = "";
         this.email = "";
         this.password = "";
         this.confirmPassword = "";

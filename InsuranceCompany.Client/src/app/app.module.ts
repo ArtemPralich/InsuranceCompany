@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -59,6 +59,14 @@ import { NotAccessComponent } from './pages/not-access/not-access.component';
 import { RegistationEmployeeComponent } from './pages/registation-employee/registation-employee.component';
 import { RoomAdminComponent } from './pages/room-admin/room-admin.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { DATE_PROVIDER } from './helpers/date.provider';
+import { registerLocaleData } from '@angular/common';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import localeRu from '@angular/common/locales/ru'; // Импортируйте локаль для русского языка
+import { SharedDataService } from './service/SharedData';
+import {MatBadgeModule} from '@angular/material/badge';
+
+registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [
@@ -117,6 +125,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatRadioModule,
     MatProgressSpinnerModule,
     NgxEditorModule,
+    MatBadgeModule,
+    MatSidenavModule,
     ToastrModule.forRoot(),
   ],
   providers: [
@@ -128,8 +138,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     SurveyService,
     QuestionTypeService,
     AuthGuard,
+    SharedDataService,
     AgentAuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true,},
+    { provide: LOCALE_ID, useValue: 'ru' }
   ],
   bootstrap: [AppComponent],
   schemas: [

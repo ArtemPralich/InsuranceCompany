@@ -46,6 +46,11 @@ export class RoomClientComponent {
     //    console.log(this.client.dateOfBirth);
     //    this.client.dateOfBirth.setHours(23);
     // }
+    if(this.client.dateOfBirth){
+      const userTimezoneOffset = this.client.dateOfBirth.getTimezoneOffset() * 60000;
+      this.client.dateOfBirth = new Date(this.client.dateOfBirth.getTime() - userTimezoneOffset);
+
+    }
 
     this.clientService.UpdateClient(this.client).subscribe(res => {
       this.enableInputTrue();
