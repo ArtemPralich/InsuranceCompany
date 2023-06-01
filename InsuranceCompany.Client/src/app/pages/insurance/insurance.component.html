@@ -9,13 +9,13 @@
         <a class="left-item draft-item" >
           <mat-icon  [style.background-color]="insuranceRequest.insuranceStatus.color" class="circle-icon">
           </mat-icon>{{insuranceRequest.insuranceStatus.status}}</a>
-        <a class="left-item">a minute ago</a>
-        <a class="left-item" href="aaa">View aaaaa</a>
-        <a class="left-item" href="aaa"><img class="img-left-item img-help" src="assets/pictures/help.svg">Help</a>
+        <!-- <a class="left-item">a minute ago</a> -->
+        <!-- <a class="left-item" href="aaa">View aaaaa</a> -->
+        <!-- <a class="left-item" href="aaa"><img class="img-left-item img-help" src="assets/pictures/help.svg">Help</a> -->
       </div>
 
       <div>
-        <button class="button-dup"><img class="img-left-item" src="assets/pictures/duplicate.svg">Duplicate</button>
+        <!-- <button class="button-dup"><img class="img-left-item" src="assets/pictures/duplicate.svg">Duplicate</button> -->
         <button *ngIf="!insuranceRequest.insuranceStatus.isDisabledForms" class="button-sign" (click)="moveToApprove()">Подтвердить</button>
         
         <button class="button-sign" *ngIf="insuranceRequest.insuranceStatus.isDisabledForms && insuranceRequest.insuranceStatus.status !== 'Подписано'" (click)="moveToErrorState()">Отмена</button>
@@ -31,7 +31,7 @@
       <a class="center-item">Тел.: +375{{insuranceRequest.mainClient.phoneNumber}}</a>
       <a class="center-item">Почта: {{insuranceRequest.mainClient.email}}</a>
       <a class="center-item">{{insuranceRequest.insuranceRate.title}}</a>
-      <a class="left-item" href="aaa">Change</a>
+      <!-- <a class="left-item" href="aaa">Change</a> -->
     </div>
   </div>
 </div>

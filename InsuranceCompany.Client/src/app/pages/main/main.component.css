@@ -255,13 +255,13 @@ button {
 .info-doc-img-top {
     width: 600px;
     height: auto;
-    border-radius: 0px 100px 0px 100px;
+    border-radius: 0px 90px 0px 90px;
 }
 
 .info-doc-img-bottom {
     width: 500px;
     height: auto;
-    border-radius: 0px 100px 0px 100px;
+    border-radius: 0px 90px 0px 90px;
 }
 
 .info-doc-text-right {
@@ -480,7 +480,8 @@ button {
     }
 
     .header-line {
-        justify-content: space-between;
+        /* justify-content: space-between; */
+        justify-content: end;
     } 
 
     .menu {
@@ -701,6 +702,10 @@ button {
     .point {
         width: 50%;
     }   
+
+    .contact {
+        font-size: 12px;
+    }
 }
 
 @media (max-width: 330px) {
@@ -763,7 +768,7 @@ button {
     }
 
     .contact {
-        font-size: 14px;
+        font-size: 10px;
     }
     
     .contact-icon {
