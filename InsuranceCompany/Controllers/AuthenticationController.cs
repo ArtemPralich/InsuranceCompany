@@ -101,6 +101,46 @@ namespace InsuranceCompany.Controllers
             return Ok(new { Token = await _authManager.CreateToken(), Role = "Agent" });
         }
 
+        [HttpPost]
+        [Route("RegisterAdmin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] UserForRegistrationDto userForRegistration)
+        {
+
+            //var user = _mapper.Map<User>(userForRegistration); 
+            var user = new User()
+            {
+                FirstName = userForRegistration.FirstName,
+                LastName = userForRegistration.LastName,
+                Email = userForRegistration.Email,
+                UserName = userForRegistration.PersonalCode,
+
+
+            };
+            var result = await _userManager.CreateAsync(user, userForRegistration.Password);
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.TryAddModelError(error.Code, error.Description);
+                }
+                return BadRequest(ModelState);
+            }
+
+            await _userManager.AddToRolesAsync(user, new List<string>() { "Administrator" });
+            //ICollection<string> roles = await _authManager.GetRoles(user.UserName);
+            //if (roles != null)
+            //{
+            //    Response.Headers.Add("Roles", JsonConvert.SerializeObject(roles));
+            //}
+
+            if (!await _authManager.ValidateUser(new UserForAuthenticationDto() { Password = userForRegistration.Password, UserName = userForRegistration.Email }))
+            {
+                return Unauthorized();
+            }
+
+            return Ok(new { Token = await _authManager.CreateToken(), Role = "Administrator" });
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
         {
