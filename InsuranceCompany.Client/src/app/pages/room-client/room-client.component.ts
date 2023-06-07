@@ -48,7 +48,7 @@ export class RoomClientComponent {
     // }
     if(this.client.dateOfBirth){
       const userTimezoneOffset = this.client.dateOfBirth.getTimezoneOffset() * 60000;
-      this.client.dateOfBirth = new Date(this.client.dateOfBirth.getTime() - userTimezoneOffset);
+      this.client.dateOfBirth = new Date(Date.parse(this.client.dateOfBirth.toString()) - userTimezoneOffset);
 
     }
 

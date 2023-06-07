@@ -55,7 +55,17 @@
                                             <Label Text=" - " FontSize="17" />
                                             <Label Text="{Binding Item.DateOfEnd, StringFormat='{0:d}'}" FontSize="17" TextColor="#123524"/>
                                         </StackLayout>
-                                        <CollectionView ItemsSource="{Binding Item.Documents}" SelectionMode="None" Margin="0,10,0,0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding MainClient.Surname}" FontSize="17"  TextColor="#123524"/>
+                                            <Label Text="" FontSize="17" />
+                                            <Label Text="{Binding MainClient.Name}" FontSize="17" TextColor="#123524"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding MainClient.DateOfBirth, StringFormat='{0:d}'}" FontSize="17" TextColor="#123524"/>
+                                            <Label Text="" FontSize="17" />
+                                            <Label Text="{Binding MainClient.PersonalCode}" FontSize="17"  TextColor="#123524"/>
+                                        </StackLayout>
+                                        <!--<CollectionView ItemsSource="{Binding Item.Documents}" SelectionMode="None" Margin="0,10,0,0">
                                             <CollectionView.ItemTemplate >
                                                 <DataTemplate>
                                                     <StackLayout Margin="0,10,0,0">
@@ -63,7 +73,7 @@
                                                     </StackLayout>
                                                 </DataTemplate>
                                             </CollectionView.ItemTemplate>
-                                        </CollectionView>
+                                        </CollectionView>-->
                                         <StackLayout Orientation="Horizontal" Padding="0,0,20,0" HorizontalOptions="Start" IsVisible="{Binding IsOpen}" >
 
                                             <Frame BackgroundColor="Transparent" BorderColor="Black" WidthRequest="23" HeightRequest="21" CornerRadius="10" Padding="0,0,0,0">

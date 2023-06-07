@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,6 +17,7 @@ namespace InsuranceCompany.MobileClient.ViewModels
     {
         private double _height;
         public InsuranceRequest Item { get; set; }
+        public Client MainClient { get; set; }
         public double Height
         {
             get { return _height; }
@@ -83,7 +85,8 @@ namespace InsuranceCompany.MobileClient.ViewModels
                 insuranceRequestsList.Add(new ListItem()
                 {
                     Item = ins,
-                    Height = 100,
+                    MainClient = ins.InsuredPersons.Where(i => i.IsMainInsuredPerson ?? false).FirstOrDefault()?.Client,
+                    Height = 95,
                     IsOpen = false,
                     ItemTappedCommand = new Command<ListItem>(OnItemTapped)
                 });

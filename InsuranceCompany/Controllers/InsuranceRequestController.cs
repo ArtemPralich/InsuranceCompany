@@ -235,13 +235,13 @@ namespace InsuranceCompany.Controllers
             PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
             document.Open();
 
-            // Загрузка шрифта Times New Roman
-            BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\times.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            // Загрузка шрифта Arial
+            BaseFont baseFont = BaseFont.CreateFont("C:\\Windows\\Fonts\\arial.ttf", BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
             Font font = new Font(baseFont, 12, Font.NORMAL);
 
             // Преобразование HTML в PDF
             XMLWorkerFontProvider fontProvider = new XMLWorkerFontProvider();
-            fontProvider.Register("C:\\Windows\\Fonts\\times.ttf", "Times New Roman");
+            fontProvider.Register("C:\\Windows\\Fonts\\arial.ttf", "Arial");
             CssAppliers cssAppliers = new CssAppliersImpl(fontProvider);
             HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
             htmlContext.SetTagFactory(Tags.GetHtmlTagProcessorFactory());
@@ -292,13 +292,23 @@ namespace InsuranceCompany.Controllers
 
                 string result = await engine.CompileRenderStringAsync("templateKey", template.Text, insurance);
 
-                MemoryStream memoryStream = new MemoryStream();
-                    iTextSharp.text.Document document = new iTextSharp.text.Document();
-                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+                //MemoryStream memoryStream = new MemoryStream();
+                //    iTextSharp.text.Document document = new iTextSharp.text.Document();
+                //    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                    document.Open();
-                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, new StringReader(result));
-                    document.Close();
+                //    document.Open();
+                //    XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, new StringReader(result));
+                //    document.Close();
+
+                // Создание PDF из HTML
+                var renderer = new IronPdf.HtmlToPdf();
+                var pdf = renderer.RenderHtmlAsPdf(result);
+
+                // Получение байтового массива PDF-файла
+                byte[] pdfBytes = pdf.BinaryData;
+
+                // Запись байтового массива в MemoryStream
+                MemoryStream memoryStream = new MemoryStream(pdfBytes);
 
                 byte[] bytes = memoryStream.ToArray();
                 memoryStream.Close();
