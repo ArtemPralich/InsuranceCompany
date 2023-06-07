@@ -1,5 +1,4 @@
-﻿using AngleSharp.Dom;
-using AutoMapper;
+﻿using AutoMapper;
 using InsuranceCompany.Core;
 using InsuranceCompany.Core.Models;
 using InsuranceCompany.Infrastructure;

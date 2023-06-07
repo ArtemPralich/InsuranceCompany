@@ -17,8 +17,13 @@
                         <div>
                             <div *ngFor="let answer of insuranceRequest.answerValues">
                                 <div class="example-form" *ngIf="answer.questionId == question.id && item.insuranceSurveyId == answer.insuranceSurveyId">
-                                    <mat-checkbox color="primary" class="example-margin" [(ngModel)]="answer.value" 
-                                        [ngModelOptions]="{standalone: true}" [disabled]="this.insuranceRequest.insuranceStatus.isDisabledForms">Check me!</mat-checkbox>
+                                    <span *ngFor="let ans of question.answers">
+                                        <mat-checkbox color="primary" class="example-margin"  [value]="answer.value"  
+                                            [ngModelOptions]="{standalone: true}" [disabled]="this.insuranceRequest.insuranceStatus.isDisabledForms">
+                                            {{ans.questionAnswer}}              
+                                        </mat-checkbox>                  
+                                        <br/>
+                                    </span>
                                 </div>
                             </div>
                         </div>
