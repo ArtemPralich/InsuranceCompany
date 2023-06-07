@@ -14,6 +14,9 @@ using System.Reflection;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Hosting.Server;
+using Document = iTextSharp.text.Document;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
 
 namespace InsuranceCompany.Controllers
 {
@@ -65,7 +68,8 @@ namespace InsuranceCompany.Controllers
             List<Template> templates = new List<Template>();
             if(insurance != null && insurance.InsuranceRate != null)
             {
-                templates = insurance.InsuranceRate.InsuranceRateTemplates.Select(x => x.Template).ToList();
+                templates = insurance.InsuranceRate
+                    .InsuranceRateTemplates.Select(x => x.Template).Where(t => !(t.IsDisabled ?? false)).ToList();
             }
             var mainInsuredPerson = insurance.InsuredPersons.FirstOrDefault(ip => ip.IsMainInsuredPerson);
             foreach(var template in templates)
@@ -106,6 +110,25 @@ namespace InsuranceCompany.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("TestDoc1")]
+        public ActionResult GeneratePDF()
+        {
+            string htmlCode = "<b>Привет мир</b>";
+
+            // Создание PDF из HTML
+            var renderer = new IronPdf.HtmlToPdf();
+            var pdf = renderer.RenderHtmlAsPdf(htmlCode);
+
+            // Получение байтового массива PDF-файла
+            byte[] pdfBytes = pdf.BinaryData;
+
+            // Запись байтового массива в MemoryStream
+            MemoryStream memoryStream = new MemoryStream(pdfBytes);
+
+            // Возвращение PDF-файла клиенту
+            return File(memoryStream, "application/pdf", "output.pdf");
+        }
 
         [HttpGet(Name = "GetTemplate")]
         public IActionResult Get()
@@ -169,7 +192,8 @@ namespace InsuranceCompany.Controllers
             var template = _repositoryManager.Template.GetById(id, true);
             if (template != null)
             {
-                _repositoryManager.Template.Delete(template);
+                template.IsDisabled = true;
+                _repositoryManager.Template.Update(template);
                 _repositoryManager.Save();
             }
             return NoContent();

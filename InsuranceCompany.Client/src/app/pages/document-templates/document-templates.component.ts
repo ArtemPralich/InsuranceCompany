@@ -18,7 +18,13 @@ export class DocumentTemplatesComponent implements OnInit, OnDestroy {
   templates: Template[];
   selected: Template = new Template("");
   editorConfig = {
-    bypassHTML: true
+    enableToolbar: true,
+    toolbar: [
+      ['bold', 'italic', 'underline'],
+      ['code', 'blockquote', 'link'],
+      ['unordered-list', 'ordered-list']
+    ],
+    bypassHTML: false 
   };
   addTemp: boolean=false;
   insuranceRates: InsuranceRate[] = [];

@@ -8,7 +8,7 @@ export class AdminAuthGuard {
     constructor(private router: Router, private auth : AuthService) { }
 
     canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): boolean {
-        if (this.auth.roles() != '["Administrator"]') {
+        if (this.auth.roles() != "Administrator") {
             this.router.navigateByUrl("/not-access");
             return false;
         }

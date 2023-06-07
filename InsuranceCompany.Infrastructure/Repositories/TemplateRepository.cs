@@ -18,13 +18,13 @@ namespace InsuranceCompany.Infrastructure.Repositories
 
         public IEnumerable<Template> GetAll(bool trackChanges)
         {
-            return FindAll(trackChanges).Include(t => t.InsuranceRateTemplates).ToList();
+            return FindAll(trackChanges).Include(t => t.InsuranceRateTemplates).ToList().Where(t => !(t.IsDisabled ?? false));
         }
 
         public Template GetById(Guid Id, bool trackChanges)
         {
             return FindByCondition(x => x.Id == Id,
-                trackChanges).Include(t => t.InsuranceRateTemplates).FirstOrDefault();
+                trackChanges).Include(t => t.InsuranceRateTemplates).Where(t => !(t.IsDisabled ?? false)).FirstOrDefault();
         }
     }
 }

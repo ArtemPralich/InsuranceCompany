@@ -54,6 +54,8 @@ import { DialogCreateQuestionPopup, DialogCreateSurveyPopup, SurveyEditorCompone
 import { QuestionTypeService } from './service/QuestionTypeService';
 import { AuthGuard } from './guards/auth.guard';
 import { AgentAuthGuard } from './guards/agentAuth.guard';
+
+import { AdminAuthGuard } from './guards/adminAuth.guard';
 import { AuthenticationInterceptor } from './interceptor/AuthenticationInterceptor';
 import { NotAccessComponent } from './pages/not-access/not-access.component';
 import { RegistationEmployeeComponent } from './pages/registation-employee/registation-employee.component';
@@ -140,6 +142,7 @@ registerLocaleData(localeRu, 'ru');
     AuthGuard,
     SharedDataService,
     AgentAuthGuard,
+    AdminAuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true,},
     { provide: LOCALE_ID, useValue: 'ru' }
   ],

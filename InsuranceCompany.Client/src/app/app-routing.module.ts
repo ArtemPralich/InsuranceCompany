@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'registration-employee', component: RegistationEmployeeComponent,},
   { path: 'request', component: RequestComponent, canActivate: [AuthGuard]},
   { path: 'room-client', component: RoomClientComponent, canActivate: [AuthGuard]},
-  { path: 'room-admin', component: RoomAdminComponent},
+  { path: 'room-admin', component: RoomAdminComponent, },
   { path: 'survey-editor', component: SurveyEditorComponent},
   { path: '**', component: NotFoundComponent},
 ];

@@ -84,10 +84,10 @@ export class InsuranceComponent implements OnInit  {
     console.log(this.insuranceRequest)
     const userTimezoneOffset = this.insuranceRequest.dateOfStart.getTimezoneOffset() * 60000;
     if(this.insuranceRequest.dateOfStart){
-      this.insuranceRequest.dateOfStart = new Date(this.insuranceRequest.dateOfStart.getTime() - userTimezoneOffset);
+      this.insuranceRequest.dateOfStart = new Date(Date.parse(this.insuranceRequest.dateOfStart.toString()) - userTimezoneOffset);
     }
     if(this.insuranceRequest.dateOfEnd){
-      this.insuranceRequest.dateOfEnd = new Date(this.insuranceRequest.dateOfEnd.getTime() - userTimezoneOffset);
+      this.insuranceRequest.dateOfEnd = new Date(Date.parse(this.insuranceRequest.dateOfEnd.toString()) - userTimezoneOffset);
     }
     this.insuranceRequest.insuredPersons.forEach(value => {
       if(value.client.dateOfBirth != undefined && value.client.dateOfBirth != null){
