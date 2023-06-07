@@ -9,9 +9,13 @@ export class AuthGuard {
 
     canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): boolean {
         if (!this.auth.authenticated()) {
-            this.router.navigateByUrl("/login");
-            return false;
+        this.router.navigateByUrl("/login");
+        return false;
+        }
+        else if (this.auth.roles() != 'Client') {
+        this.router.navigateByUrl("/not-access");
+        return false;
         }
         return true;
-    }
+    }    
 }

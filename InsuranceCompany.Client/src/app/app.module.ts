@@ -65,6 +65,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import localeRu from '@angular/common/locales/ru'; // Импортируйте локаль для русского языка
 import { SharedDataService } from './service/SharedData';
 import {MatBadgeModule} from '@angular/material/badge';
+import { AdminAuthGuard } from './guards/adminAuth.guard';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -140,6 +141,7 @@ registerLocaleData(localeRu, 'ru');
     AuthGuard,
     SharedDataService,
     AgentAuthGuard,
+    AdminAuthGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true,},
     { provide: LOCALE_ID, useValue: 'ru' }
   ],
