@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { RegistrationEmployee } from 'src/app/models/auth/RegistrationEmployee';
 import { AuthService } from 'src/app/service/AuthService';
 
@@ -12,7 +13,7 @@ export class RegistationEmployeeComponent {
   employee = new RegistrationEmployee();
   passwordsMatch: boolean = true;
 
-  constructor(public auth: AuthService, private router: Router){
+  constructor(public auth: AuthService, private router: Router, private toastr: ToastrService){
       
   }
 
@@ -24,17 +25,19 @@ export class RegistationEmployeeComponent {
         console.log(res);
         //const header = res.headers.get('roles');
         
-        const header = (<any>res).body.role;
-        const token = (<any>res).body.token; 
-        localStorage.setItem("jwt", token);
-        var a = new Date();
-        if(header !== null){
-          localStorage.setItem("role", header);
-        }
-        localStorage.setItem("date",`${(new Date()).getTime()}`);
+        // const header = (<any>res).body.role;
+        // const token = (<any>res).body.token; 
+        // localStorage.setItem("jwt", token);
+        // var a = new Date();
+        // if(header !== null){
+        //   localStorage.setItem("role", header);
+        // }
+        // localStorage.setItem("date",`${(new Date()).getTime()}`);
         
-        this.router.navigateByUrl("/insurances");
+        this.router.navigateByUrl("/room-admin");
+        this.toastr.success('Регистрация прошла успешно', 'Успешно!');
     }, error =>{
+      this.toastr.error('Ошибка регистрации', 'Ошибка!');
     });
     }
   }

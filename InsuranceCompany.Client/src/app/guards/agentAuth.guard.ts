@@ -8,7 +8,7 @@ export class AgentAuthGuard {
     constructor(private router: Router, private auth : AuthService) { }
 
     canActivate(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): boolean {
-        if (this.auth.roles() != '["Agent"]') {
+        if (this.auth.roles() != 'Agent') {
             this.router.navigateByUrl("/not-access");
             return false;
         }
